@@ -8,6 +8,6 @@ context('Customer', () => {
 		cy.get('.primary-action').click();
 		cy.wait(500);
 		cy.get('.custom-actions > .btn').click();
-		cy.get_field('customer_group', 'Link').should('have.value', 'All Customer Groups');
+		cy.get_field('customer_group', 'Link').should('have.value', 'All Customer Group');
 	});
 });
