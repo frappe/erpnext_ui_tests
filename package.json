@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@cypress/code-coverage": "^3",
+    "@testing-library/cypress": "^8",
+    "cypress": "^6",
+    "cypress-file-upload": "^5"
+  }
+}

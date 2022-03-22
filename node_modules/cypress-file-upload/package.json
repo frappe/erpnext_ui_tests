@@ -1,0 +1,52 @@
+{
+  "name": "cypress-file-upload",
+  "version": "5.0.8",
+  "description": "A Cypress command for file upload",
+  "main": "dist/bundle.js",
+  "engines": {
+    "node": ">=8.2.1"
+  },
+  "scripts": {
+    "build": "microbundle build -i src/index.js -f cjs --target node --strict --no-compress --no-generate-types",
+    "lint": "eslint . --ext=js",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abramenal/cypress-file-upload.git"
+  },
+  "keywords": [
+    "cypress",
+    "command",
+    "file",
+    "upload",
+    "e2e",
+    "test"
+  ],
+  "types": "./types/index.d.ts",
+  "author": "abramenal <pavel.auramenka@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abramenal/cypress-file-upload/issues"
+  },
+  "homepage": "https://github.com/abramenal/cypress-file-upload#readme",
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-es": "^4.1.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
+    "microbundle": "^0.13.0",
+    "mime": "^2.5.0",
+    "prettier": "^2.2.1"
+  },
+  "peerDependencies": {
+    "cypress": ">3.0.0"
+  }
+}
