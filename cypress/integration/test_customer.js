@@ -13,8 +13,8 @@ context('Create Customer', () => {
 		cy.location("pathname").should("eq","/app/customer/new-customer-1");
 		cy.get_field('customer_name', 'Data').type('Nidhi', {delay: 200});
 		cy.get_field('customer_type', 'Select').should('have.value', 'Company');
-		cy.get_field('customer_group', 'Link').type('All Customer Groups');
-		cy.get_field('territory', 'Link').type('All Territories');
+		cy.get_field('customer_group', 'Link').clear().type('All Customer Groups');
+		cy.get_field('territory', 'Link').clear().type('All Territories');
 		cy.get('.form-page > :nth-child(5) > .section-head > .ml-2 > .icon > .mb-1').click(); //click to expand 'Currency and Price List' section
 		cy.get_field('default_currency', 'Link').type('INR');
 		cy.wait(200);
