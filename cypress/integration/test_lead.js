@@ -7,7 +7,6 @@ context('Lead', () => {
 	it('Insert and check attributes of a Lead ', () => {
 		cy.visit(`app/lead/`);
 		cy.get('.primary-action').click();
-		cy.get('[title="status"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback').type("Lead");
 		cy.get_field('salutation', 'Link').type("Mr");
 		cy.get_field('company_name', 'Link').type("Eleanor School of Music");
 		cy.get_field('first_name', 'Link').type("Oliver");
@@ -20,6 +19,9 @@ context('Lead', () => {
 		cy.get_field('first_name', 'Link').should('have.value', 'Oliver');
 		cy.get_field('last_name', 'Link').should('have.value', 'Eleanor');
 		cy.get_field('email_id', 'Link').should('have.value', 'oliverel@gmail.com');
+        cy.get('.page-title').should('contain', 'Lead');
+        cy.get('.page-title').should('contain', 'Eleanor School of Music');
+        cy.location("pathname").should("not.be","/app/lead/new");
 		cy.remove_doc('Lead', 'CRM-LEAD-2022-00003');
 	});
 });
