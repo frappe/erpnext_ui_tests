@@ -46,8 +46,8 @@ context('Sales Invoice Creation', () => {
 		).then((d)=>{ 
 			console.log(d);
 			cy.visit('app/sales-order/'+ d.name);
-			cy.findByRole('button', {name: 'Submit'}).click();
-			cy.findByRole('button', {name: 'Yes'}).click();
+			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
+			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
 			cy.get('.page-title').should('contain', 'To Deliver and Bill');
 		});
 	});
@@ -57,11 +57,10 @@ context('Sales Invoice Creation', () => {
 		cy.click_listview_row_item(0);
 		cy.wait(1000);
 		cy.get('.form-documents > :nth-child(1) > :nth-child(1) > :nth-child(2) > .btn > .icon').click();  //Click on + icon on SO to open SI
-		cy.findByRole('button', {name: 'Save'}).click();
+		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 		cy.get('.page-title').should('contain', 'Draft');
-		cy.wait(500);
-		cy.findByRole('button', {name: 'Submit'}).click();
-		cy.findByRole('button', {name: 'Yes'}).click();
+		cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
+		cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
 		cy.get('.page-title').should('contain', 'Anaya Kapoor');
 		cy.get('.page-title').should('contain', 'Unpaid');
 		cy.get('[data-fieldname="total"]').should('contain', '₹ 2,000.00');
