@@ -55,8 +55,8 @@ context('Sales Invoice Creation', () => {
 	it('Create Sales Invoice', () => {
 		cy.visit('app/sales-order/');
 		cy.click_listview_row_item(0);
-		cy.wait(1000);
-		cy.get('.form-documents > :nth-child(1) > :nth-child(1) > :nth-child(2) > .btn > .icon').click();  //Click on + icon on SO to open SI
+		cy.findByRole('button', {name: 'Create'}).click();
+		cy.get('[data-label="Sales%20Invoice"]').click();
 		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 		cy.get('.page-title').should('contain', 'Draft');
 		cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
