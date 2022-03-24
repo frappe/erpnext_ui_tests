@@ -17,6 +17,7 @@ context('Create Customer', () => {
 		cy.findByText('Currency and Price List').click();
 		cy.get_field('default_currency', 'Link').type('INR', {delay: 200});
 		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
+		cy.wait(500);
 		cy.get('.page-title').should('contain', 'Nidhi');
 		cy.get('.page-title').should('contain', 'Enabled');
 		cy.get_field('customer_name', 'Data').should('have.value', 'Nidhi');
