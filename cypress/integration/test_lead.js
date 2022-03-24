@@ -22,6 +22,5 @@ context('Lead', () => {
         cy.get('.page-title').should('contain', 'Lead');
         cy.location("pathname").should("not.be","/app/lead/new");
         cy.get('.page-title').should('contain', 'Eleanor School of Music');
-		cy.remove_doc('Lead', 'CRM-LEAD-2022-00003');
 	});
 });
