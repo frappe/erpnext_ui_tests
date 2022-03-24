@@ -60,7 +60,9 @@ context('Sales Invoice Creation', () => {
 		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 		cy.get('.page-title').should('contain', 'Draft');
 		cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
-		cy.get('.modal-footer > .standard-actions > .btn-primary').focus().trigger('click', {force: true});
+		cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
+		cy.get('.btn-modal-close > .icon').click();
+		cy.wait(500);
 		cy.get('.page-title').should('contain', 'Anaya Kapoor');
 		cy.get('.page-title').should('contain', 'Unpaid');
 		cy.get('[data-fieldname="total"]').should('contain', '₹ 2,000.00');
