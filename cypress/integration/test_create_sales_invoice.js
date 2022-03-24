@@ -65,6 +65,5 @@ context('Sales Invoice Creation', () => {
 		cy.wait(500);
 		cy.get('.page-title').should('contain', 'Anaya Kapoor');
 		cy.get('.page-title').should('contain', 'Unpaid');
-		cy.get('[data-fieldname="total"]').should('contain', '₹ 2,000.00');
 	});
 });
