@@ -6,6 +6,7 @@ context('Supplier', () => {
 	it('Insert and verify attributes of a Supplier', () => {
 		cy.visit(`app/supplier/`);
 		cy.get('.primary-action').click();
+		cy.get('.btn-modal-close').click();
 		cy.get('.custom-actions > .btn').click();
         cy.get_field('supplier_group', 'Link').clear().type('All Supplier Groups', {delay: 200}, {force: true}).focus();
 		cy.get_field('supplier_name', 'Link').type("Medlink International Suppliers");
