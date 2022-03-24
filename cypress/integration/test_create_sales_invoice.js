@@ -29,9 +29,10 @@ context('Sales Invoice Creation', () => {
 	});
 
 	it('Create Sales Invoice via SO', () => {
+		cy.visit('app/sales-order');
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-		cy.visit('app/sales-order');
+		cy.wait(500);
 		cy.insert_doc(
 			"Sales Order",
 			{
