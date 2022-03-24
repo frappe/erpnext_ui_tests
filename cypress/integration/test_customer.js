@@ -1,5 +1,4 @@
 
-
 context('Create Customer', () => {
 	before(() => {
 		cy.login();
@@ -15,14 +14,9 @@ context('Create Customer', () => {
 		cy.get_field('customer_type', 'Select').should('have.value', 'Company');
 		cy.get_field('customer_group', 'Link').clear().type('All Customer Groups');
 		cy.get_field('territory', 'Link').clear().type('All Territories');
-		cy.get('.form-page > :nth-child(5) > .section-head > .ml-2 > .icon > .mb-1').click(); //click to expand 'Currency and Price List' section
+		cy.findByText('Currency and Price List').click();
 		cy.get_field('default_currency', 'Link').type('INR', {delay: 200});
 		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
-	});
-
-	it('Check customer form values', () => {
-		cy.visit(`app/customer`);
-		cy.click_listview_row_item(0);
 		cy.get('.page-title').should('contain', 'Nidhi');
 		cy.get('.page-title').should('contain', 'Enabled');
 		cy.get_field('customer_name', 'Data').should('have.value', 'Nidhi');
