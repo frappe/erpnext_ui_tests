@@ -13,9 +13,8 @@ context('Item', () => {
 		cy.get_field('stock_uom', 'Link').clear().type('Nos');
         cy.wait(500);
 		cy.findByRole('button', {name: 'Save'}).click();
-    });
 
-    it('Check Item attributes', () => {
+
 		cy.get('.page-title').should('contain', 'ITM-0018');
 		cy.get('.page-title').should('contain', 'Enabled');
         cy.get_field('item_name', 'Data').should('have.value','ITM-0018');
