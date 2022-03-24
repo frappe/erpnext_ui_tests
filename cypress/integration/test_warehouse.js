@@ -43,7 +43,7 @@ context('Warehouse', () => {
     });
 
     it('Check if new button works', () => {
-	cy.findByRole("+ New").trigger('click', {force: true}); 
+	cy.findByRole('button', {name: '+ New'}).click();
         cy.get_field('warehouse_name', 'Data').type("Reserve Warehouse - CT");
         cy.get_field('warehouse_name', 'Data').should('have.value', 'Reserve Warehouse - CT');
         cy.contains("Create New").trigger('click', {force: true});  
