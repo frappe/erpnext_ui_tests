@@ -30,6 +30,6 @@ context('Create Employee', () => {
         cy.get_field('date_of_joining').should('have.value','11-02-2019');
         cy.get_field('employment_type', 'Link').should('have.value','Full-time');
 		cy.location("pathname").should("not.be","/app/employee/new");
-        cy.remove_doc('Employee', 'HR-EMP-00004');
+        cy.remove_doc('Employee', 'HR-EMP-00001');
 	});
 });
