@@ -44,7 +44,7 @@ context('Warehouse', () => {
 
     it('Check if new button works', () => {
 	cy.visit(`app/warehouse/view/tree`);
-	cy.click_listview_primary_button('New');
+	cy.click_listview_primary_button('+ New');
 	cy.get_field('warehouse_name', 'Data').type('Reserve Warehouse', {delay: 200});
 	cy.contains('Create New').click();
         cy.location("pathname").should("eq","/app/warehouse/view/tree");
