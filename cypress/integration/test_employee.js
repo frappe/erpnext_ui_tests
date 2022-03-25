@@ -32,8 +32,4 @@ context('Create Employee', () => {
 		cy.location("pathname").should("not.be","/app/employee/new");
         cy.remove_doc('Employee', 'HR-EMP-00004');
 	});
-
-	after(() => {
-		cy.remove_doc('Employee', 'HR-EMP-00004');
-	});
 });
