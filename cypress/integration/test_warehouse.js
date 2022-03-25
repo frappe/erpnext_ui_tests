@@ -43,10 +43,10 @@ context('Warehouse', () => {
     });
 
     it('Check if new button works', () => {
-	cy.get('.primary-action').click(); 
-        cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close').click();
+	cy.visit(`app/warehouse/view/tree`);
+	cy.click_listview_primary_button('New');
+	cy.get_field('warehouse_name', 'Data').type('Reserve Warehouse', {delay: 200});
+	cy.contains('Create New').click();
         cy.location("pathname").should("eq","/app/warehouse/view/tree");
     });
-
-
 });
