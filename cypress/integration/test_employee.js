@@ -18,7 +18,7 @@ context('Create Employee', () => {
         cy.wait(500);
         cy.get_field('date_of_joining', 'Data').focus();
         cy.wait(500);
-        cy.get_field('date_of_joining', 'Data').focus().type("11-02-2019", {delay: 800});
+        cy.get_field('date_of_joining', 'Data').focus().type("01-02-2019", {delay: 800});
         cy.get_field('employment_type', 'Link').type("Full-time");
 		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 		cy.get('.page-title').should('contain', 'Haris Calvin');
