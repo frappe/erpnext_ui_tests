@@ -4,3 +4,4 @@
 *.swp
 tags
 erpnext_ui_tests/docs/current
+node_modules/
