@@ -12,7 +12,6 @@ context('Company', () => {
         cy.get_field('default_currency', 'Link').type('INR', {delay: 200}).focus();
 		cy.get_field('default_currency', 'Link').should('have.value', 'INR');
 		cy.findByRole('button', {name: 'Save'}).trigger('click');
-		cy.get('.page-title').should('contain', 'Vector Inc.');
 		cy.get_field('company_name', 'Data').should('have.value', 'Vector Inc.');
         cy.remove_doc('Company','Vector Inc');
 		cy.location("pathname").should("not.be","/app/company/new");
