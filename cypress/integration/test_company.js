@@ -7,7 +7,6 @@ context('Company', () => {
 		cy.visit(`app/company`);
 		cy.wait(200);
 		cy.click_listview_primary_button('Add Company');
-		cy.contains('Edit in full page').click();
 		cy.location("pathname").should("eq","/app/company/new-company-1");
 		cy.get_field('company_name', 'Data').type('Vector Inc.', {delay: 200});
         cy.get_field('default_currency', 'Link').type('INR', {delay: 200}).focus();
