@@ -30,7 +30,7 @@ context('Warehouse', () => {
         cy.get('.custom-actions > .btn').click();
         cy.get('.menu-btn-group > .btn').click();
         cy.get(':nth-child(2) > .grey-link').click(); //Check if redirects to print
-        cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close').click();
+        cy.visit(`app/warehouse/view/tree`);
         cy.location("pathname").should("eq","/app/warehouse/view/tree");
     });
 
