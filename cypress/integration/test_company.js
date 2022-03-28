@@ -14,6 +14,5 @@ context('Company', () => {
 		cy.findByRole('button', {name: 'Save'}).trigger('click');
 		cy.get_field('company_name', 'Data').should('have.value', 'Vector Inc.');
         cy.remove_doc('Company','Vector Inc');
-		cy.location("pathname").should("not.be","/app/company/new");
 	});
 });
