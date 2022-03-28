@@ -35,7 +35,7 @@ context('Warehouse', () => {
     });
 
     it('Check if refresh option in Menu button works', () => {
-	cy.visit(`app/warehouse/view/tree`);
+	    cy.visit(`app/warehouse/view/tree`);
         cy.get('.custom-actions > .btn').click();
         cy.get('.menu-btn-group > .btn').click();
         cy.get(':nth-child(4) > .grey-link').click(); //Check if redirects to unexpand tree 
@@ -43,8 +43,8 @@ context('Warehouse', () => {
     });
 
     it('Check if new button works', () => {
-	    cy.get('.primary-action').click(); 
-        cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close').click();
+        cy.findByRole('button', {name: 'New'}).trigger('click', {force: true});
+        cy.visit(`app/warehouse/view/tree`);
         cy.location("pathname").should("eq","/app/warehouse/view/tree");
     });
 });
