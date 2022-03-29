@@ -95,7 +95,7 @@ context('Chart Of Accounts', () => {
         cy.get('.custom-actions > .btn').click();
         cy.get('.menu-btn-group > .btn').click();
         cy.get(':nth-child(2) > .grey-link').click(); 
-        cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close').click();
+        cy.visit(`app/account/view/tree`);
         cy.location("pathname").should("eq","/app/account/view/tree");
         });
     
