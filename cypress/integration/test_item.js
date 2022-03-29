@@ -8,7 +8,7 @@ context('Item', () => {
 		cy.click_listview_primary_button('Add Item');
 		cy.findByRole('button', {name: /Edit in full page/}).click();
         cy.get_field('item_code', 'Data').type("ITM-0018");
-        cy.get_field('item_group', 'Link').type('All Item Groups', {force: true});
+        cy.get_field('item_group', 'Link').clear().type('All Item Groups');
 		cy.get_field('valuation_rate', 'Data').clear().type('8000');
 		cy.get_field('stock_uom', 'Link').clear().type('Nos');
         cy.wait(500);
