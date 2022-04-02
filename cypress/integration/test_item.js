@@ -4,9 +4,7 @@ context("Item", () => {
 	});
 
 	it("Create an item", () => {
-		cy.visit(`app/item/`);
-		cy.click_listview_primary_button("Add Item");
-		cy.findByRole("button", { name: /Edit in full page/ }).click();
+		cy.new_doc_view("Item");
 		cy.get_field("item_code", "Data").type("ITM-0018");
 		cy.get_field("item_group", "Link").clear().type("All Item Groups");
 		cy.get_field("valuation_rate", "Data").clear().type("8000");
