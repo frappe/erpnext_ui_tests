@@ -1,3 +1,29 @@
+const input_scan = (scan_string) => {
+	cy.get_field("scan_barcode", "Data")
+		.invoke("val", scan_string)
+		.trigger("input");
+	cy.wait(1500);
+};
+
+// assert partially supplied item attributes with actual frm object.
+const assert_items = (item_list) => {
+	cy.window()
+		.its("cur_frm")
+		.then((frm) => {
+			item_list.forEach((expected_item, idx) => {
+				const actual_item = frm.doc.items[idx];
+				for (const prop in expected_item) {
+					assert.equal(
+						expected_item[prop],
+						actual_item[prop],
+						`Expected :${JSON.stringify(expected_item, null, 2)}
+						 Actual: ${JSON.stringify(actual_item, null, 2)}`
+					);
+				}
+			});
+		});
+};
+
 context("Barcode scanning", () => {
 	before(() => {
 		cy.login();
@@ -19,99 +45,67 @@ context("Barcode scanning", () => {
 	});
 
 	it("should scan normal item", () => {
-		cy.get_field("scan_barcode", "Data").type("12399");
-		cy.wait(2000);
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[0].item_code, "ScanNormalItem");
-				assert.equal(frm.doc.items[0].qty, 1);
-			});
+		input_scan("12399");
+		assert_items([{ item_code: "ScanNormalItem", qty: 1 }]);
 
-		cy.get_field("scan_barcode", "Data").type("12399");
-		cy.wait(2000);
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[0].qty, 2);
-			});
+		input_scan("12399");
+		assert_items([{ item_code: "ScanNormalItem", qty: 2 }]);
 	});
 
 	it("should scan batched item", () => {
-		cy.get_field("scan_barcode", "Data").type("ScanBatchItem1");
-		cy.wait(2000);
+		input_scan("ScanBatchItem1");
 
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[0].item_code, "ScanBatchItem");
-				assert.equal(frm.doc.items[0].batch_no, "ScanBatchItem1");
-				assert.equal(frm.doc.items[0].qty, 1);
-			});
+		assert_items([
+			{ item_code: "ScanBatchItem", qty: 1, batch_no: "ScanBatchItem1" },
+		]);
 
-		cy.get_field("scan_barcode", "Data").type("ScanBatchItem1");
-		cy.wait(2000);
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[0].qty, 2);
-			});
+		input_scan("ScanBatchItem1");
+		assert_items([
+			{ item_code: "ScanBatchItem", qty: 2, batch_no: "ScanBatchItem1" },
+		]);
 
 		// second batch should be in second row
-		cy.get_field("scan_barcode", "Data").type("ScanBatchItem2");
-		cy.wait(2000);
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[1].item_code, "ScanBatchItem");
-				assert.equal(frm.doc.items[1].batch_no, "ScanBatchItem2");
-				assert.equal(frm.doc.items[1].qty, 1);
-			});
+		input_scan("ScanBatchItem2");
+		assert_items([
+			{ item_code: "ScanBatchItem", qty: 2, batch_no: "ScanBatchItem1" },
+			{ item_code: "ScanBatchItem", qty: 1, batch_no: "ScanBatchItem2" },
+		]);
 
-		cy.get_field("scan_barcode", "Data").type("ScanBatchItem2");
-		cy.wait(2000);
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[1].qty, 2);
-			});
+		input_scan("ScanBatchItem2");
+		assert_items([
+			{ item_code: "ScanBatchItem", qty: 2, batch_no: "ScanBatchItem1" },
+			{ item_code: "ScanBatchItem", qty: 2, batch_no: "ScanBatchItem2" },
+		]);
 	});
 
 	it("should scan serial items", () => {
-		cy.get_field("scan_barcode", "Data").type("ScanSerialItem1");
-		cy.wait(2000);
-
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[0].item_code, "ScanSerialItem");
-				assert.equal(frm.doc.items[0].serial_no, "ScanSerialItem1");
-				assert.equal(frm.doc.items[0].qty, 1);
-			});
+		input_scan("ScanSerialItem1");
+		assert_items([
+			{
+				item_code: "ScanSerialItem",
+				qty: 1,
+				serial_no: "ScanSerialItem1",
+			},
+		]);
 
 		// duplicates shouldnt do anything
-		cy.get_field("scan_barcode", "Data").type("ScanSerialItem1");
-		cy.wait(2000);
-
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[0].serial_no, "ScanSerialItem1");
-				assert.equal(frm.doc.items[0].qty, 1);
-			});
+		input_scan("ScanSerialItem1");
+		assert_items([
+			{
+				item_code: "ScanSerialItem",
+				qty: 1,
+				serial_no: "ScanSerialItem1",
+			},
+		]);
 
 		// same item serial no should get merged in same row
-		cy.get_field("scan_barcode", "Data").type("ScanSerialItem2");
-		cy.wait(2000);
-
-		cy.window()
-			.its("cur_frm")
-			.then((frm) => {
-				assert.equal(frm.doc.items[0].qty, 2);
-				assert.equal(
-					frm.doc.items[0].serial_no,
-					"ScanSerialItem1\nScanSerialItem2"
-				);
-			});
+		input_scan("ScanSerialItem2");
+		assert_items([
+			{
+				item_code: "ScanSerialItem",
+				qty: 2,
+				serial_no: "ScanSerialItem1\nScanSerialItem2",
+			},
+		]);
 	});
 });
