@@ -14,6 +14,7 @@ context('Warehouse', () => {
     it('Check if Expand Tree works', () => {
 	cy.visit(`app/warehouse/view/tree`);
         cy.get('.custom-actions > .btn').click();
+        cy.get(".tree-children").should("be.visible");
         cy.location("pathname").should("eq","/app/warehouse/view/tree");
     });
 
