@@ -9,7 +9,7 @@ context('Chart Of Accounts', () => {
 
     it('Check if Expand All works', () => {
         cy.findByRole('button', {name: 'Expand All'}).trigger('click', {force: true});
-        cy.location("pathname").should("eq","/app/account/view/tree");
+        cy.get(".tree-children").should("be.visible")
     });
 
     it('Check if Chart of Cost Center under View dropdown works', () => {
@@ -29,7 +29,7 @@ context('Chart Of Accounts', () => {
         cy.get('[data-label="Period%20Closing%20Voucher"]').click();
         cy.location("pathname").should("eq","/app/period-closing-voucher");
     });
-    
+
     it('Check if Journal Entry page visit in Create dropdown works', () => {
         cy.findByRole('button', {name: 'Create'}).trigger('click', {force: true});
         cy.get('[data-label="Journal%20Entry"]').click();
@@ -40,7 +40,7 @@ context('Chart Of Accounts', () => {
         cy.findByRole('button', {name: 'Create'}).trigger('click', {force: true});
         cy.get('[data-label="Company"]').click();
         cy.location("pathname").should("eq","/app/company/new-company-1");
-    }); 
+    });
 
     it('Check Financial Statements : Trial Balance', () => {
         cy.findByRole('button', {name: 'Financial Statements'}).trigger('click', {force: true});
@@ -94,19 +94,19 @@ context('Chart Of Accounts', () => {
     it('Check if print option in Menu button works', () => {
         cy.get('.custom-actions > .btn').click();
         cy.get('.menu-btn-group > .btn').click();
-        cy.get(':nth-child(2) > .grey-link').click(); 
+        cy.get(':nth-child(2) > .grey-link').click();
         cy.visit(`app/account/view/tree`);
         cy.location("pathname").should("eq","/app/account/view/tree");
         });
-    
+
     it('Check if refresh option in Menu button works', () => {
         cy.visit(`app/account/view/tree`);
         cy.get('.custom-actions > .btn').click();
         cy.get('.menu-btn-group > .btn').click();
-        cy.get(':nth-child(3) > .grey-link').click(); 
+        cy.get(':nth-child(3) > .grey-link').click();
         cy.location("pathname").should("eq","/app/account/view/tree");
     });
-    
+
     it('Check if Rebuild Tree option in Menu button works', () => {
         cy.get('.custom-actions > .btn').click();
         cy.get('.menu-btn-group > .btn').click();
