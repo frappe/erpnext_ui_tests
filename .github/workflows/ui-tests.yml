@@ -5,6 +5,9 @@ on:
     paths-ignore:
       - '**.md'
   workflow_dispatch:
+  schedule:
+    # Run everday at midnight UTC / 5:30 IST
+    - cron: '0 0 * * *'
 
 
 jobs:
