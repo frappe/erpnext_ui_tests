@@ -4,6 +4,7 @@ context('Website Item', () => {
     });
 
     it('Create an item and publish as website item', () => {
+        
         //Creating an item and publishing it 
         cy.visit(`app/item/`);
 		cy.click_listview_primary_button('Add Item');
@@ -23,21 +24,21 @@ context('Website Item', () => {
 		cy.get_field('stock_uom', 'Link').should('have.value','Nos');
         cy.get('[data-label="Actions"]:visible').click({force:true});
         cy.get('[data-label="Publish%20in%20Website"]').click({force:true});
+        
         //Checking if dialog box opens upon publishing and redirecting to website item record created  
         cy.on('window:alert',  (str) =>  {
             expect(str).to.equal(`Published`)});
         cy.get('.modal.show > .modal-dialog > .modal-content > .modal-body').should('be.visible').contains("ITM-0001").click();
         cy.get_field('web_item_name', 'Data').should('have.value','ITM-0001');
         cy.get_field('published', 'checkbox').should('be.checked');
+        
         //Checking if redirects appropriately to the web page of the published item 
         cy.contains('See on Website').should('be.visible').click();
         cy.visit(`app/website-item`);
         cy.get('.list-row-checkbox').eq(0).click();
  		cy.get('.actions-btn-group > .btn').contains('Actions').should('be.visible').click();
- 		cy.get('.actions-btn-group > .dropdown-menu [data-label="Delete"]').should('be.visible').click();
+ 		cy.get('.actions-btn-group > .dropdown-menu [data-label="Delete"]').should('be.visible').click({force:true});
  		cy.click_modal_primary_button('Yes');
-        cy.visit(`app/item`);
-        cy.remove_doc('Item','ITM-0001');
     });
 });
 
