@@ -27,6 +27,11 @@ Follow these steps to set this up on your local machine:
    bench new-site erpnextui.test --install-app erpnext erpnext_ui_tests
    ```
 
+1. Add to hosts so that the site is accessible via hostname on the browser
+   ```sh
+   bench --site erpnextui.test add-to-hosts
+   ```
+
 1. Complete setup wizard by running this command
    ```sh
    bench --site erpnextui.test execute erpnext.setup.utils.before_tests
