@@ -9,6 +9,9 @@ on:
     # Run everday at midnight UTC / 5:30 IST
     - cron: '0 0 * * *'
 
+concurrency:
+  group: ui-develop-${{ github.event.number }}
+  cancel-in-progress: true
 
 jobs:
   test:
