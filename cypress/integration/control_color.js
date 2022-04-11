@@ -69,7 +69,7 @@ context('Control Color', () => {
 		});
 
 		//Clearing the field and checking if the field contains the placeholder "Choose a color"
-		cy.get_field('color','Color').click({force: true});
+		cy.get('.input-with-feedback').click({force: true});
 		cy.get_field('color','Color').type('{selectall}').clear();
 		cy.get_field('color','Color').invoke('attr', 'placeholder').should('contain', 'Choose a color');
 
