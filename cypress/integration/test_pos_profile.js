@@ -21,7 +21,7 @@ context('Create POS Profile', () => {
             cy.location("pathname").should("eq","/app/pos-profile/new-pos-profile-1");
             cy.get_field('__newname', 'Data').type('Test Profile', {delay: 200});
 			cy.get_field('__newname', 'Data').should('have.value', 'Test Profile');
-			cy.wait(500);
+			cy.get_field('warehouse', 'Link').focus();
             cy.get_field('warehouse', 'Link').clear().type('Stores - CT', {delay: 200});
 			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - CT');
 
@@ -40,12 +40,15 @@ context('Create POS Profile', () => {
 			cy.get_field('allow_discount_change', 'checkbox').should('be.checked');
 
 			//Set necessary accounts
-			cy.get_field('write_off_account', 'Link').clear().type('Write Off - CT');
+			cy.get_field('write_off_account', 'Link').focus();
+			cy.get_field('write_off_account', 'Link').clear().type('Write Off - CT', {delay: 200});
 			cy.get_field('write_off_account', 'Link').should('have.value', 'Write Off - CT');
-			cy.get_field('write_off_cost_center', 'Link').clear().type('Main - CT').focus();
+			cy.get_field('write_off_cost_center', 'Link').focus();
+			cy.get_field('write_off_cost_center', 'Link').clear().type('Main - CT', {delay: 200});
 			cy.get_field('write_off_cost_center', 'Link').should('have.value', 'Main - CT');
             cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get_field('selling_price_list', 'Link').should('have.value', 'Standard Selling');
+			cy.get_field('currency', 'Link').clear().type('INR');
 			cy.get_field('currency', 'Link').should('have.value', 'INR');
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 
