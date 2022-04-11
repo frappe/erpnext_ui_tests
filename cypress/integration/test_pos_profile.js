@@ -48,7 +48,8 @@ context('Create POS Profile', () => {
 			cy.get_field('write_off_cost_center', 'Link').should('have.value', 'Main - CT');
             cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get_field('selling_price_list', 'Link').should('have.value', 'Standard Selling');
-			cy.get_field('currency', 'Link').clear().type('INR');
+			cy.get_field('currency', 'Link').focus();
+			cy.get_field('currency', 'Link').clear().type('INR' , {delay: 200});
 			cy.get_field('currency', 'Link').should('have.value', 'INR');
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 
