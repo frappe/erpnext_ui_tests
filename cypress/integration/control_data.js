@@ -41,11 +41,6 @@ context('Data Control', () => {
 		//Checking if the status is "Not Saved" initially
 		cy.get('.indicator-pill').should('have.text', 'Not Saved');
 
-		//Checking the labels of the data fields
-		cy.get('[title="name1"]').contains('Name');
-		cy.get('[title="email"]').contains('Email-ID');
-		cy.get('[title="phone"]').contains('Phone No.');
-
 		//Inputting data in the field
 		cy.fill_field('name1', '@@###', 'Data');
 
