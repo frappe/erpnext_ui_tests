@@ -17,14 +17,6 @@ context('Quotation Creation', () => {
 				},
 				true
 			)
-			cy.get('.avatar-frame').click();
-			cy.get('[onclick="return frappe.ui.toolbar.setup_session_defaults()"]').click();
-			cy.get_field('company', 'Link').focus().clear().trigger('click', {force: true});
-			cy.wait(400);
-			cy.get_field('company', 'Link').clear();
-			cy.fill_field("company", "Frappe Technologies Pvt. Ltd. ", "Link"), {delay:200};
-			cy.get('[aria-selected="true"] > a > p').click();
-			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 
 			cy.insert_doc(
 				"Item",
@@ -77,6 +69,15 @@ context('Quotation Creation', () => {
 	});
 
 	it('Create Quotation', () => {
+		cy.get('.avatar-frame').click();
+		cy.get('[onclick="return frappe.ui.toolbar.setup_session_defaults()"]').click();
+		cy.get_field('company', 'Link').focus().clear().trigger('click', {force: true});
+		cy.wait(400);
+		cy.get_field('company', 'Link').clear();
+		cy.fill_field("company", "Frappe Technologies Pvt. Ltd. ", "Link"), {delay:200};
+		cy.get('[aria-selected="true"] > a > p').click();
+		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
+
 		cy.visit('app/quotation');
 
 		var today = new Date();
