@@ -7,3 +7,7 @@ coverage:
       default:
         target: auto
         threshold: 0.5%
+
+comment:
+  layout: "diff"
+  require_changes: true
