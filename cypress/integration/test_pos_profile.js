@@ -14,6 +14,7 @@ context('Create POS Profile', () => {
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 		});
 
+		/*
         	it('Create POS Profile', () => {
             cy.visit(`app/pos-profile`);
             cy.wait(200);
@@ -59,5 +60,6 @@ context('Create POS Profile', () => {
 			cy.location("pathname").should("not.be","/app/pos-profile/new-pos-profile-1");
 
 			cy.remove_doc('POS Profile', 'Test Profile');
-        });
+
+        }); */
     });
