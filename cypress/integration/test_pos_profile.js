@@ -53,7 +53,5 @@ context('Create POS Profile', () => {
 			cy.get_field('selling_price_list', 'Link').should('have.value', 'Standard Selling');
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.location("pathname").should("not.be","/app/pos-profile/new-pos-profile-1");
-			cy.remove_doc('POS Profile', 'Test Profile');
-
         });
     });
