@@ -111,6 +111,5 @@ context('Data Control', () => {
 		cy.get('.actions-btn-group > .dropdown-menu [data-label="Delete"]').click();
 		cy.click_modal_primary_button('Yes');
 		cy.get('.btn-modal-close').click();
-
 	});
 });
