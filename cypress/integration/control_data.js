@@ -42,9 +42,9 @@ context('Data Control', () => {
 		cy.get('.indicator-pill').should('have.text', 'Not Saved');
 
 		//Checking the labels of the data fields
-		cy.get('[title="name1"]').should('contain', 'Name');
-		cy.get('[title="email"]').should('contain', 'Email-ID');
-		cy.get('[title="phone"]').should('contain', 'Phone No.');
+		cy.get('[title="name1"] > .form-group > .clearfix > .control-label').should('contain', 'Name');
+		cy.get('[title="email"] > .form-group > .clearfix > .control-label').should('contain', 'Email-ID');
+		cy.get('[title="phone"] > .form-group > .clearfix > .control-label').should('contain', 'Phone No.');
 
 		//Inputting data in the field
 		cy.fill_field('name1', '@@###', 'Data');
