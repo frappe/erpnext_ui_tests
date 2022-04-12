@@ -14,7 +14,6 @@ context('Create POS Profile', () => {
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 		});
 
-		/*
         	it('Create POS Profile', () => {
             cy.visit(`app/pos-profile`);
             cy.wait(200);
@@ -23,7 +22,7 @@ context('Create POS Profile', () => {
             cy.get_field('__newname', 'Data').type('Test Profile', {delay: 200});
 			cy.get_field('__newname', 'Data').should('have.value', 'Test Profile');
 			cy.get_field('warehouse', 'Link').focus();
-            cy.get_field('warehouse', 'Link').clear().type('Stores - CT', {delay: 200});
+            cy.get_field('warehouse', 'Link').clear().type('Stores - CT');
 			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - CT');
 
 			//Select Mode of Payment
@@ -40,6 +39,8 @@ context('Create POS Profile', () => {
 			cy.get_field('allow_discount_change').check();
 			cy.get_field('allow_discount_change', 'checkbox').should('be.checked');
 
+			//Select Item Group
+
 			//Set necessary accounts
 			cy.get_field('write_off_account', 'Link').focus();
 			cy.get_field('write_off_account', 'Link').clear().type('Write Off - CT', {delay: 200});
@@ -47,6 +48,7 @@ context('Create POS Profile', () => {
 			cy.get_field('write_off_cost_center', 'Link').focus();
 			cy.get_field('write_off_cost_center', 'Link').clear().type('Main - CT', {delay: 200});
 			cy.get_field('write_off_cost_center', 'Link').should('have.value', 'Main - CT');
+			cy.get_field('apply_discount_on', 'Select').select('Grand Total');
             cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get_field('selling_price_list', 'Link').should('have.value', 'Standard Selling');
 			//cy.get_field('currency', 'Link').focus();
@@ -58,8 +60,7 @@ context('Create POS Profile', () => {
 			cy.get('.page-title').should('contain', 'Test Profile');
             cy.get('.page-title').should('contain', 'Enabled');
 			cy.location("pathname").should("not.be","/app/pos-profile/new-pos-profile-1");
-
 			cy.remove_doc('POS Profile', 'Test Profile');
 
-        }); */
+        });
     });
