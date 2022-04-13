@@ -14,15 +14,15 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands';
-import '../../../frappe/cypress/support/commands' // eslint-disable-line
-
+import "./commands";
+import "@cypress/code-coverage/support";
+import "../../../frappe/cypress/support/commands"; // eslint-disable-line
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 Cypress.Cookies.defaults({
-	preserve: 'sid'
+	preserve: "sid",
 });
 
 
