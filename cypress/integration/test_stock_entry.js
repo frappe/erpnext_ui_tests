@@ -30,7 +30,6 @@ context('Create Stock Entry', () => {
 			cy.get('.grid-collapse-row').click();
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.get(':nth-child(12) > .section-head').click();
-			//cy.get_field('is_opening', 'Select').select('Yes');
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
