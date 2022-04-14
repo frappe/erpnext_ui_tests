@@ -11,13 +11,11 @@ context('Create Fiscal Year', () => {
 		cy.get_field('year_end_date').should('have.value','12-31-2023');
 		cy.findByRole('button', {name: 'Save'}).click();
 		cy.get('.page-title').should('contain', '2023-2024');
+		cy.get('.page-title').should('contain', 'Enabled');
+
 	});
 
-	it('Deleting FE', () => {
-		cy.visit('app/fiscal-year/2023-2024');
-		cy.get('[title="disabled"] > .checkbox > label > .input-area').click();
-		cy.findByRole('button', {name: 'Save'}).click();
-		cy.wait(400);
+	it.only('Deleting FE', () => {
 		cy.visit('app/fiscal-year');
 		cy.select_listview_row_checkbox(0);
 		cy.findByRole('button', {name: 'Actions'}).click();
