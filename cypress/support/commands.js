@@ -26,10 +26,35 @@
 
 const slug = (name) => name.toLowerCase().replaceAll(" ", "-");
 
+const compare_document = (expected, actual) => {
+	for (const prop in expected) {
+		if (expected[prop] instanceof Array) {
+			// recursively compare child documents.
+			expected[prop].forEach((item, idx) => {
+				compare_document(item, actual[prop][idx]);
+			});
+		} else {
+			assert.equal(
+				expected[prop],
+				actual[prop],
+				`${prop} should be equal.`
+			);
+		}
+	}
+};
+
 Cypress.Commands.add("go_to_doc", (doctype, name) => {
 	cy.visit(`/app/${slug(doctype)}/${encodeURIComponent(name)}`);
 });
 
 Cypress.Commands.add("new_doc_view", (doctype) => {
 	cy.visit(`/app/${slug(doctype)}/new`);
+});
+
+Cypress.Commands.add("compare_document", (expected_document) => {
+	cy.window()
+		.its("cur_frm")
+		.then((frm) => {
+			compare_document(expected_document, frm.doc);
+		});
 });
