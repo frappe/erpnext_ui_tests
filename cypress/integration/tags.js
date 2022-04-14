@@ -64,7 +64,7 @@ context('Tags', () => {
 		//Searching the created tag using the awesome bar
 		cy.get('#navbar-search').type('#custom_docs');
 		cy.wait(500);
-		cy.get('#navbar-search').type('{downarrow}{enter}');
+		cy.get('#navbar-search').type('{enter}');
 		cy.get('.result-section-link').click();
 
 		//Checking if the tag "custom_docs" is being present
