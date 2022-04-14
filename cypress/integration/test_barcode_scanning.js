@@ -7,21 +7,7 @@ const input_scan = (scan_string) => {
 
 // assert partially supplied item attributes with actual frm object.
 const assert_items = (item_list) => {
-	cy.window()
-		.its("cur_frm")
-		.then((frm) => {
-			item_list.forEach((expected_item, idx) => {
-				const actual_item = frm.doc.items[idx];
-				for (const prop in expected_item) {
-					assert.equal(
-						expected_item[prop],
-						actual_item[prop],
-						`Expected :${JSON.stringify(expected_item, null, 2)}
-						 Actual: ${JSON.stringify(actual_item, null, 2)}`
-					);
-				}
-			});
-		});
+	cy.compare_document({items: item_list});
 };
 
 context("Barcode scanning", () => {
