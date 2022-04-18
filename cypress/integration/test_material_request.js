@@ -32,8 +32,6 @@ context('Material Request', () => {
 			console.log(d);
 			cy.visit('app/material-request/new-material-request-1');
 			cy.findByRole('button', {name: 'Save'}).click();
-			cy.findByRole('button', {name: 'Submit'}).click();
-			cy.findByRole('button', {name: 'Yes'}).click();
 		});
 	});
 });
