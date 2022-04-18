@@ -14,14 +14,16 @@ context("Item", () => {
 
 		cy.get(".page-title").should("contain", "ITM-0018");
 		cy.get(".page-title").should("contain", "Enabled");
-		cy.get_field("item_name", "Data").should("have.value", "ITM-0018");
-		cy.get_field("item_group", "Link").should(
-			"have.value",
-			"All Item Groups"
-		);
-		cy.get_field("is_stock_item", "checkbox").should("be.checked");
-		cy.get_field("valuation_rate", "Data").should("have.value", "8,000.00");
-		cy.get_field("stock_uom", "Link").should("have.value", "Nos");
+
+		cy.compare_document({
+			item_name: "ITM-0018",
+			valuation_rate: "8000",
+			item_group: "All Item Groups",
+			stock_uom: "Nos",
+			is_stock_item: 1,
+			uoms: [{ uom: "Nos", conversion_factor: 1 }],
+		});
+
 		cy.remove_doc("Item", "ITM-0018");
 	});
 });
