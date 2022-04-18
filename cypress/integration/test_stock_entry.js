@@ -8,16 +8,18 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Add Stock Entry'}).trigger('click', {force: true});
 			cy.location("pathname").should("eq","/app/stock-entry/new-stock-entry-1");
 			cy.get_field('naming_series', 'Select').select('MAT-STE-.YYYY.-');
-			cy.get_field('stock_entry_type', 'Link').focus();
-			cy.get_field('stock_entry_type', 'Link').should('be.visible').click({force:true});
-			cy.get_field('stock_entry_type', 'Link').type('Material Receipt');
-			cy.get_field('stock_entry_type', 'Link').should('have.value', 'Material Receipt');
+
+			//Set purpose
+			cy.get('.frappe-control[data-fieldname=stock_entry_type] input').focus().as('input');
+				cy.get('@input')
+					.clear({ force: true })
+					.type('Material Request{downarrow}{enter}', { force: true })
+					.blur({ force: true });
+
+			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
 			cy.get('@table').find('[data-idx="1"]').as('row1');
 			cy.get('@row1').find('.btn-open-row').click();
-
-
-			//Set items table attributes
 			cy.get_field('s_warehouse', 'Link').scrollIntoView().should('be.visible').click({force:true});
 			cy.get_field('s_warehouse', 'Link').focus();
 			cy.get_field('s_warehouse', 'Link').type('Stores - CT', {delay: 100});
@@ -58,5 +60,6 @@ context('Create Stock Entry', () => {
 				delay: 200,
 			});
 			cy.location("pathname").should("eq","/app/query-report/Stock%20Ledger");
+			cy.get_field('voucher_no', 'Data').should('have.value', 'MAT-STE-2022-0001');
 		});
     });
