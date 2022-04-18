@@ -54,7 +54,9 @@ context('Create Stock Entry', () => {
 			cy.findByRole("button", { name: "View" }).trigger("click", {
 				force: true,
 			});
-			cy.get('.inner-group-button > .dropdown-menu > :nth-child(1)').click();
+			cy.get('[data-label="Stock%20Ledger"]').click({
+				delay: 200,
+			});
 			cy.location("pathname").should("eq","/app/query-report/Stock%20Ledger");
 		});
     });
