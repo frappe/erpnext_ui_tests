@@ -32,6 +32,11 @@ context('Material Request', () => {
 			console.log(d);
 			cy.visit('app/material-request/new-material-request-1');
 			cy.findByRole('button', {name: 'Save'}).click();
+			cy.visit(`app/material-request`);
+			cy.get('.list-row-checkbox').eq(0).click();
+			cy.get('.actions-btn-group > .btn').contains('Actions').should('be.visible').click();
+			cy.get('.actions-btn-group > .dropdown-menu [data-label="Submit"]').should('be.visible').click({force:true});
+			cy.click_modal_primary_button('Yes');
 		});
 	});
 });
