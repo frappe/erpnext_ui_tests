@@ -7,6 +7,7 @@ context('Create Stock Entry', () => {
 			cy.visit('app/stock-entry');
 			cy.findByRole('button', {name: 'Add Stock Entry'}).trigger('click', {force: true});
 			cy.location("pathname").should("eq","/app/stock-entry/new-stock-entry-1");
+			cy.get_field('naming_series', 'Select').select('MAT-MAR-.YYYY.-');
 			cy.get_field('stock_entry_type', 'Link').focus();
 			cy.get_field('stock_entry_type', 'Link').should('be.visible').click({force:true});
 			cy.get_field('stock_entry_type', 'Link').type('Material Receipt');
