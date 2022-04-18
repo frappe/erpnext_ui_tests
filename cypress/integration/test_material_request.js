@@ -5,7 +5,7 @@ context('Material Request', () => {
 
 			//Set mode of payment first
 			it('Set appropriate field values', () => {
-			const todays_date = Cypress.moment().format('DD-MM-YYYY');
+			const todays_date = Cypress.moment().format('MM-DD-YYYY');
             cy.visit(`app/material-request`);
             cy.click_listview_primary_button('Add Material Request');
             cy.location("pathname").should("eq","/app/material-request/new-material-request-1");
