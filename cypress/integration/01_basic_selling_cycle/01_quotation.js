@@ -25,7 +25,7 @@ context('Quotation Creation', () => {
 					default_price_list: "Standard Selling",
 				},
 				true
-				)
+			)
 
 			cy.insert_doc(
 				"Address",
@@ -52,22 +52,9 @@ context('Quotation Creation', () => {
 				},
 				true
 			)
-
-		cy.get('.avatar-frame').click();
-		cy.get('[onclick="return frappe.ui.toolbar.setup_session_defaults()"]').click();
-		cy.get_field('company', 'Link').focus().clear().trigger('click', {force: true});
-		cy.wait(400);
-		cy.get_field('company', 'Link').clear();
-		cy.fill_field("company", "Frappe Tech ", "Link"), {delay:200};
-		cy.get('[aria-selected="true"] > a > p').click();
-		cy.wait(400);
-		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
-
 	});
 
 	it('Create Quotation', () => {
-
-
 		cy.visit('app/quotation');
 
 		var today = new Date();
@@ -78,31 +65,23 @@ context('Quotation Creation', () => {
 		if (dd < 10) dd = '0' + dd;
 		if (mm < 10) mm = '0' + mm;
 		if (nextMonth < 10) nextMonth = '0' + nextMonth;
-		var today = mm + '-' + dd + '-' + yyyy;
-		var validTill = nextMonth + '-' + dd + '-' + yyyy;
+		var today = dd + '-' + mm + '-' + yyyy;
+		var validTill = dd + '-' + nextMonth + '-' + yyyy;
 
 		cy.click_listview_primary_button('Add Quotation');
 		cy.url().should('include', '/quotation/new-quotation');
 
 		cy.get_field('naming_series', 'Select').should('have.value', 'SAL-QTN-.YYYY.-');
-		// cy.wait(200);
-		// cy.get_field('company', 'Link').focus().clear().trigger('click', {force: true});
-		// cy.wait(400);
-		// cy.get_field('company', 'Link').clear();
-		// cy.fill_field("company", "Frappe Tech", "Link"), {delay:200};
-		// cy.get('[aria-selected="true"]').first();
-		//cy.get('[aria-selected="true"] > a > p > strong').click();
-
 		cy.get_field('transaction_date', 'Date').should('have.value', today);
 		cy.get_field('quotation_to', 'Link').should('have.value', "Customer");
 		cy.get_field('valid_till', 'Date').should('have.value', validTill);
 		cy.get_field('party_name', 'Dynamic Link').focus().trigger('click', {force: true});
 		cy.wait(500);
-		cy.fill_field('party_name', 'Maria Garcia', 'Dynamic Link'), {delay:200}, "{downarrow}{enter}";
+		cy.get_field('party_name', 'Dynamic Link').focus();
+		cy.fill_field('party_name', 'Maria Garcia ', 'Dynamic Link'), {delay:200}, "{downarrow}{enter}";
 		cy.get('#awesomplete_list_6 > [aria-selected="true"]').first().click();
-		//cy.get('#awesomplete_list_6 > [aria-selected="true"] > a > p > strong').contains('Maria Garcia').click();
 		cy.get_field('order_type', 'Select').should('have.value', "Sales");
-		//cy.get('[data-fieldname="customer_name"]').should('contain', "Maria Garcia");
+		cy.get('[data-fieldname="customer_name"]').should('contain', "Maria Garcia");
 
 		cy.findByText('Address and Contact').click();
 		cy.get('[title="customer_address"]').should('contain', "Maria's Address-Billing");
