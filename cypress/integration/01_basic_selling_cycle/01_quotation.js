@@ -91,7 +91,8 @@ context('Quotation Creation', () => {
 		cy.get_field('item_code', 'Link').focus().trigger('click', {force: true});
 		cy.wait(500);
 		cy.fill_field('item_code', 'Apple iPhone 13 Pro', 'Link'), {delay:200}, "{downarrow}{enter}";
-		cy.get('#awesomplete_list_27 > [aria-selected="true"] > a > p').contains('Apple iPhone 13 Pro').click();
+		//cy.get('#awesomplete_list_27 > [aria-selected="true"] > a > p').contains('Apple iPhone 13 Pro').click();
+		cy.get_field('qty', 'Float').click();
 		cy.get_field('qty', 'Float').should('have.value', "1.000");
 		cy.get_field('rate', 'Float').clear();
 		cy.fill_field('rate', '110000', 'Float'), {delay:200}, "{enter}";
