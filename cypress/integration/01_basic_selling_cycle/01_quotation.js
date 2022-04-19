@@ -83,11 +83,6 @@ context('Quotation Creation', () => {
 		cy.get_field('order_type', 'Select').should('have.value', "Sales");
 		cy.get('[data-fieldname="customer_name"]').should('contain', "Maria Garcia");
 
-		cy.findByText('Address and Contact').click();
-		cy.get('[title="customer_address"]').should('contain', "Maria's Address-Billing");
-		cy.get('[title="shipping_address_name"]').should('contain', "Maria's Address-Billing");
-		cy.get_field('territory', 'Link').should('have.value', 'All Territories');
-
 		cy.findByText('Currency and Price List').click();
 		cy.get_field('currency', 'Link').should('have.value', "INR");
 		cy.get_field('selling_price_list', 'Link').should('have.value', "Standard Selling");
@@ -113,5 +108,11 @@ context('Quotation Creation', () => {
 		cy.findByRole('button', {name: 'Submit'}).click();
 		cy.findByRole('button', {name: 'Yes'}).click();
 		cy.get('.page-title').should('contain', 'Open');
+
+		cy.findByText('Address and Contact').click();
+		//cy.get_field('customer_address', 'Link').should('contain', "Maria's Address-Billing");
+		cy.get('[title="customer_address"]').should('contain', "Maria's Address-Billing");
+		cy.get('[title="shipping_address_name"]').should('contain', "Maria's Address-Billing");
+		cy.get_field('territory', 'Link').should('have.value', 'All Territories');
 	});
 });
