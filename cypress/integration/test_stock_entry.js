@@ -12,7 +12,6 @@ context('Create Stock Entry', () => {
 			//Set purpose
 			cy.get_field('stock_entry_type', 'Link').type('Material Receipt');
 
-
 			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
 			cy.get('@table').find('[data-idx="1"]').as('row1');
@@ -33,23 +32,19 @@ context('Create Stock Entry', () => {
 			cy.get('.form-area > .form-layout > .form-page > :nth-child(5)').click();
 
 			//check amount and totals
-			cy.get_field('basic_amount', 'Link').focus();
-			cy.get_field('basic_amount', 'Link').scrollIntoView().should('be.visible').click({force:true});
-			cy.get_field('basic_amount', 'Link').should('not.have.value','0');
-			cy.get_field('amount', 'Link').focus();
-			cy.get_field('amount', 'Link').scrollIntoView().should('be.visible').click({force:true});
-			cy.get_field('amount', 'Link').should('not.have.value','0');
+			cy.get('[data-fieldname="basic_amount"]').click({force:true});
+			cy.get('[data-fieldname="basic_amount"]').should('not.have.value','0');
 			cy.get('.grid-collapse-row').click();
-			cy.get_field('total_incoming_value').should('not.have.value','0');
 
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
+			cy.get('[data-fieldname="total_incoming_value"]').should('not.have.value','0');
 			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
 
 			//View Stock Ledger
 			cy.findByRole("button", { name: "View" }).trigger('click', {force: true});
-			cy.get('[data-label="Stock%20Ledger"]').click();
+			cy.get('[data-label="Stock%20Ledger"]').click({force:true});
 			cy.location("pathname").should("eq","/app/query-report/Stock%20Ledger");
 			cy.get_field('voucher_no', 'Data').should('have.value', 'MAT-STE-2022-0001');
 		});
