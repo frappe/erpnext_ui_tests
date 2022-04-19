@@ -32,8 +32,8 @@ context('Create Stock Entry', () => {
 			cy.get('.form-area > .form-layout > .form-page > :nth-child(5)').click();
 
 			//check amount and totals
-			cy.get('[data-fieldname="basic_amount"]').click({force:true});
-			cy.get('[data-fieldname="basic_amount"]').should('not.have.value','0');
+			//cy.get('[data-fieldname="basic_amount"]').click({force:true});
+			//cy.get('[data-fieldname="basic_amount"]').should('not.have.value','0');
 			cy.get('.grid-collapse-row').click();
 
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
