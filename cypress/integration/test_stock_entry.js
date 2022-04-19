@@ -31,7 +31,6 @@ context('Create Stock Entry', () => {
 			cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
 			cy.get('.form-area > .form-layout > .form-page > :nth-child(5)').click();
-			cy.get_field('conversion_factor', 'Link').should('have.value', '1.000');
 
 			//check amount and totals
 			cy.get_field('basic_amount', 'Link').focus();
