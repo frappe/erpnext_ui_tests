@@ -4,12 +4,7 @@ context('Create Customer', () => {
         });
 
         it('Create Customer', () => {
-            cy.visit(`app/customer`);
-            cy.wait(200);
-            cy.click_listview_primary_button('Add Customer');
-            cy.contains('Edit in full page').click();
-            cy.get('.modal').should('not.be.visible');
-            cy.location("pathname").should("eq","/app/customer/new-customer-1");
+            cy.new_form('Customer');
             cy.get_field('customer_name', 'Data').type('Nidhi', {delay: 200});
             cy.get_field('customer_type', 'Select').should('have.value', 'Company');
             cy.get_field('customer_group', 'Link').clear().type('All Customer Groups');
