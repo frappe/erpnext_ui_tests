@@ -10,11 +10,8 @@ context('Create Stock Entry', () => {
 			cy.get_field('naming_series', 'Select').select('MAT-STE-.YYYY.-');
 
 			//Set purpose
-			cy.get('.frappe-control[data-fieldname=stock_entry_type] input').as('input');
-				cy.get('@input')
-					.clear({ force: true })
-					.type('Material Receipt{downarrow}{enter}', { force: true })
-					.blur({ force: true });
+			cy.get_field('stock_entry_type', 'Link').type('Material Receipt');
+
 
 			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
