@@ -31,7 +31,6 @@ context('Create Stock Entry', () => {
 			cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
 			cy.get('.form-area > .form-layout > .form-page > :nth-child(5)').click();
-			cy.get_field('conversion_factor', 'Float').type('1.000');
 			cy.get_field('conversion_factor', 'Link').should('have.value', '1.000');
 
 			//check amount and totals
@@ -50,12 +49,8 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
 
 			//View Stock Ledger
-			cy.findByRole("button", { name: "View" }).trigger("click", {
-				force: true,
-			});
-			cy.get('[data-label="Stock%20Ledger"]').click({
-				delay: 200,
-			});
+			cy.findByRole("button", { name: "View" }).trigger('click', {force: true});
+			cy.get('[data-label="Stock%20Ledger"]').click();
 			cy.location("pathname").should("eq","/app/query-report/Stock%20Ledger");
 			cy.get_field('voucher_no', 'Data').should('have.value', 'MAT-STE-2022-0001');
 		});
