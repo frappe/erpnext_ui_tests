@@ -45,7 +45,7 @@ context("Stock Settings", () => {
 	});
 		it("Check if Item Price has been inserted as per standad selling rate as auto insert price list option was unchecked", () => {
 		cy.visit(`app/item-price`);
-        cy.contains('ITM-0004').click();
+        cy.findByText('ITM-0004').click();
 		cy.get_field('price_list_rate', 'Currency').should('not.have.value','0');
 		cy.remove_doc("Item", "ITM-0004");
 	});
