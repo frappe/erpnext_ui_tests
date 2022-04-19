@@ -113,6 +113,5 @@ context('Quotation Creation', () => {
 		cy.findByRole('button', {name: 'Submit'}).click();
 		cy.findByRole('button', {name: 'Yes'}).click();
 		cy.get('.page-title').should('contain', 'Open');
-
 	});
 });
