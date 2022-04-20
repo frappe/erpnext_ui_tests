@@ -39,7 +39,7 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get('[data-fieldname="total_incoming_value"]').should('not.have.value','0');
 			cy.wait(500);
-			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
+			cy.findByText('Submit').trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
             cy.wait(500);
 			//View Stock Ledger
