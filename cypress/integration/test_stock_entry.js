@@ -10,7 +10,9 @@ context('Create Stock Entry', () => {
 			cy.get_field('naming_series', 'Select').select('MAT-STE-.YYYY.-');
 
 			//Set purpose
-			cy.get_field('stock_entry_type', 'Link').type('Material Receipt');
+			cy.get_field('stock_entry_type', 'Link').focus().trigger('click', {force: true});
+   			cy.wait(500);
+   			cy.fill_field('stock_entry_type', 'Material Receipt', 'Link'), {delay:200}, "{downarrow}{enter}";
 
 			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
@@ -29,6 +31,8 @@ context('Create Stock Entry', () => {
 			cy.get_field('qty', 'Float').clear().type('23.000');
 			cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
+			cy.get_field('conversion_factor', 'Float').type('1.000');
+			cy.get_field('conversion_factor', 'Link').should('have.value', '1.000');
 			cy.get('.form-area > .form-layout > .form-page > :nth-child(5)').click();
 
 			//check amount and totals
@@ -38,7 +42,7 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get('[data-fieldname="total_incoming_value"]').should('not.have.value','0');
-			cy.findByRole('button', {name: 'Submit'}).click();
+			cy.findByLabelText('Submit').click();
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
             cy.wait(500);
 			//View Stock Ledger
