@@ -6,15 +6,17 @@ context('Material Request', () => {
 			//Set mode of payment first
 			it('Set appropriate field values', () => {
 			const todays_date = Cypress.moment().format('DD-MM-YYYY');
+			var today = new Date();
+			var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
             cy.visit(`app/material-request`);
             cy.click_listview_primary_button('Add Material Request');
             cy.location("pathname").should("eq","/app/material-request/new-material-request-1");
             cy.get_field('material_request_type', 'Select').select('Purchase');
 			cy.get_field('material_request_type', 'Select').should('have.value', 'Purchase');
-			cy.get_field('transaction_date', 'Date').should('have.value', todays_date);
+			cy.get_field('transaction_date', 'Date').should('have.value', date);
 			//Setting Required By field
-			cy.get_field('schedule_date', 'Date').type(todays_date, {delay: 400});
-		    cy.get_field('schedule_date', 'Date').should('have.value', todays_date);
+			cy.get_field('schedule_date', 'Date').type(date, {delay: 400});
+		    cy.get_field('schedule_date', 'Date').should('have.value', date);
 
 			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
