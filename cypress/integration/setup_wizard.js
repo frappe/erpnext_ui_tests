@@ -19,6 +19,7 @@ context('Setup Wizard', () => {
 	});
 
 	it('Verifying setup wizard with Spanish language', () => {
+		cy.intercept("POST", "/api/method/frappe.desk.page.setup_wizard.setup_wizard.load_messages").as("load");
 		cy.get('select:visible').select('Español');
 		cy.wait("@load");
 
@@ -36,6 +37,7 @@ context('Setup Wizard', () => {
 	});
 
 	it('Verifying setup wizard with Russian language', () => {
+		cy.intercept("POST", "/api/method/frappe.desk.page.setup_wizard.setup_wizard.load_messages").as("load");
 		cy.get('select:visible').select('русский');
 		cy.wait("@load");
 
@@ -53,6 +55,7 @@ context('Setup Wizard', () => {
 	});
 
 	it('Verifying setup wizard with German language', () => {
+		cy.intercept("POST", "/api/method/frappe.desk.page.setup_wizard.setup_wizard.load_messages").as("load");
 		cy.get('select:visible').select('Deutsch');
 		cy.wait("@load");
 
@@ -70,6 +73,7 @@ context('Setup Wizard', () => {
 	});
 
 	it('Verifying setup wizard by putting the required values and completing the setup', () => {
+		cy.intercept("POST", "/api/method/frappe.desk.page.setup_wizard.setup_wizard.load_messages").as("load");
 		cy.get('select:visible').select('English');
 		cy.wait("@load");
 		cy.findByRole('button', {name: 'Next'}).click();
