@@ -13,7 +13,7 @@ context('Material Request', () => {
 			cy.get_field('material_request_type', 'Select').should('have.value', 'Purchase');
 			cy.get_field('transaction_date', 'Date').should('not.have.value', '');
 			//Setting Required By field
-			cy.get_field('schedule_date', 'Date').type(todays_date, {delay: 200});
+			cy.get_field('schedule_date', 'Date').type(todays_date);
 		    cy.get_field('schedule_date', 'Date').should('have.value', todays_date);
 
 			//Set items table attributes
