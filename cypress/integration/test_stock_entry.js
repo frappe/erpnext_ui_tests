@@ -35,13 +35,13 @@ context('Create Stock Entry', () => {
 			//cy.get('[data-fieldname="basic_amount"]').click({force:true});
 			//cy.get('[data-fieldname="basic_amount"]').should('not.have.value','0');
 			cy.get('.grid-collapse-row').click();
-
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get('[data-fieldname="total_incoming_value"]').should('not.have.value','0');
+			cy.wait(500);
 			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
-
+            cy.wait(500);
 			//View Stock Ledger
 			cy.findByRole("button", { name: "View" }).trigger('click', {force: true});
 			cy.get('[data-label="Stock%20Ledger"]').click({force:true});
