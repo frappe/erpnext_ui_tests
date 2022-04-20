@@ -38,12 +38,12 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get('[data-fieldname="total_incoming_value"]').should('not.have.value','0');
-			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
+			cy.findByRole('button', {name: 'Submit'}).click();
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
             cy.wait(500);
 			//View Stock Ledger
 			cy.findByRole("button", { name: "View" }).trigger('click', {force: true});
-			cy.get('[data-label="Stock%20Ledger"]').click({force:true});
+			cy.get('[data-label="Stock%20Ledger"]').click();
 			cy.location("pathname").should("eq","/app/query-report/Stock%20Ledger");
 			cy.get_field('voucher_no', 'Data').should('have.value', 'MAT-STE-2022-0001');
 		});
