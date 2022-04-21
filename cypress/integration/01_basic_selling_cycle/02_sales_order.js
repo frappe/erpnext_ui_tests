@@ -48,7 +48,7 @@ context('Create Sales Order', () => {
 		cy.get_field('customer', 'Link').click();
 		cy.fill_field('customer', 'Mihir Sharma ', 'Link'), {delay:200}, "{downarrow}{enter}";
 		cy.wait(200);
-		cy.get('[aria-selected="true"]').findByText('Mihir Sharma').click();
+		cy.get('[aria-selected="true"] > a > p > strong').findByText('Mihir Sharma').click();
 		cy.get_field('customer', 'Link').should('have.value', 'Mihir Sharma');
 
 		cy.get_field('transaction_date', 'Date').should('have.value', today);
@@ -64,7 +64,8 @@ context('Create Sales Order', () => {
 		cy.get_field('item_code', 'Link').focus().trigger('click', {force: true});
 		cy.wait(500);
 		cy.fill_field('item_code', 'Wireless Bluetooth Headphones - Black', 'Link'), {delay:200}, "{downarrow}{enter}";
-		cy.get('#awesomplete_list_32 > [aria-selected="true"] > a > p').click();
+		cy.get('#awesomplete_list_32 > [aria-selected="true"] > a > p > strong').findByText('Wireless Bluetooth Headphones - Black').click();
+		//cy.get('#awesomplete_list_32 > [aria-selected="true"] > a > p').click();
 		cy.get_field('delivery_date', 'Date').should('have.value', today);
 		cy.get_field('qty', 'Float').should('have.value', "1.000");
 		cy.get_field('rate', 'Float').clear();
