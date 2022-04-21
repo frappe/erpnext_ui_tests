@@ -72,6 +72,7 @@ context('Create Sales Order', () => {
 		cy.get_field('qty', 'Float').should('have.value', "1.000");
 		cy.get_field('rate', 'Float').clear();
 		cy.fill_field('rate', '4000', 'Float'), {delay:200}, "{enter}";
+		cy.get_field('rate', 'Float').blur();
 		cy.get_field('rate', 'Float').should('have.value', "4000");
 		cy.get('[data-fieldname="amount"]').should('contain', "4,000");
 
