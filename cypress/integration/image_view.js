@@ -45,7 +45,7 @@ context('Image View', () => {
 		cy.get('.image-view-container').should('contain', 'Test User');
 
 		//Visits the created user
-		cy.get('.image-title > .ellipsis[title="Test User"]:visible').eq(0).click();
+		cy.get(':nth-child(1) > .image-view-footer > .image-title > span.ellipsis > .ellipsis').click();
 		cy.location('pathname').should('eq', '/app/user/test@example.com');
 
 		//Uploads an image for the user
