@@ -47,7 +47,8 @@ context('Create Sales Order', () => {
 		cy.get_field('customer', 'Link').focus();
 		cy.get_field('customer', 'Link').click();
 		cy.fill_field('customer', 'Mihir Sharma ', 'Link'), {delay:200}, "{downarrow}{enter}";
-		cy.get('[aria-selected="true"]').first().click();
+		cy.wait(200);
+		cy.get('[aria-selected="true"]').findByText('Mihir Sharma').click();
 		cy.get_field('customer', 'Link').should('have.value', 'Mihir Sharma');
 
 		cy.get_field('transaction_date', 'Date').should('have.value', today);
