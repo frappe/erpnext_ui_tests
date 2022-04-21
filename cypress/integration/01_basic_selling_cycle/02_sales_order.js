@@ -47,7 +47,7 @@ context('Create Sales Order', () => {
 		cy.get_field('customer', 'Link').focus();
 		cy.get_field('customer', 'Link').click();
 		cy.fill_field('customer', 'Mihir Sharma', 'Link'), {delay:200}, "{downarrow}{enter}";
-		//cy.get('[aria-selected="true"]').first().click();
+		cy.get('[aria-selected="true"]').first().click();
 		cy.get_field('customer', 'Link').should('have.value', 'Mihir Sharma');
 
 		cy.get_field('transaction_date', 'Date').should('have.value', today);
@@ -55,7 +55,7 @@ context('Create Sales Order', () => {
 		cy.get_field('delivery_date', 'Date').click();  //Opens calendar
 		cy.get('.datepicker.active > .datepicker--buttons > .datepicker--button').click();  //Click on 'Today' on calendar view
 
-		cy.findByText('Currency and Price List').click();
+		cy.findByText('Currency and Price List').trigger('click', {force: true});
 		cy.get_field('currency', 'Link').should('have.value', "INR");
 		cy.get_field('selling_price_list', 'Link').should('have.value', "Standard Selling");
 
