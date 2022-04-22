@@ -29,7 +29,7 @@ context('Material Request', () => {
 			cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
 			//cy.get_field('warehouse', 'Link').should('have.value', 'Stores - CT');
-			cy.get_field('conversion_factor', 'Float').type('1');
+			cy.get_field('conversion_factor', 'Float').clear().type('1');
 			cy.get_field('conversion_factor', 'Link').should('have.value', '1');
 
 			//check amount and totals
