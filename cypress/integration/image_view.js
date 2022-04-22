@@ -46,7 +46,7 @@ context('Image View', () => {
 
 		//Visits the created user
 		cy.get(':nth-child(1) > .image-view-footer > .image-title > span.ellipsis > .ellipsis').click();
-		cy.location('pathname').should('eq', '/app/user/test@example.com');
+		cy.location('pathname').should('eq', '/app/user/test_user123@example.com');
 
 		//Uploads an image for the user
 		cy.get('.sidebar-image-actions > .dropdown > .dropdown-toggle').contains('Change').click({force: true});
@@ -60,12 +60,12 @@ context('Image View', () => {
 
 		//Checks if the added image is visible in the image view
 		cy.visit('/app/user/view/image');
-		cy.get('.image-field > img[data-name="test@example.com"]').should('have.attr', 'src', 'https://wallpaperplay.com/walls/full/8/2/b/72402.jpg');
+		cy.get('.image-field > img[data-name="test_user123@example.com"]').should('have.attr', 'src', 'https://wallpaperplay.com/walls/full/8/2/b/72402.jpg');
 
 		//Clicking the like button and checks if the "liked" class is active
-		cy.get('.like-action[data-name="test@example.com"]').should('not.have.class', 'liked');
-		cy.get('.like-action[data-name="test@example.com"]').click({force: true});
-		cy.get('.like-action[data-name="test@example.com"]').should('have.class', 'liked');
+		cy.get('.like-action[data-name="test_user123@example.com"]').should('not.have.class', 'liked');
+		cy.get('.like-action[data-name="test_user123@example.com"]').click({force: true});
+		cy.get('.like-action[data-name="test_user123@example.com"]').should('have.class', 'liked');
 
 		//Applying the filter for full name and checking if it gives "Test Website User" as result
 		cy.get_field('full_name', 'Data').clear();
