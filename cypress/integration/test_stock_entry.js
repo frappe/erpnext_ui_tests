@@ -23,7 +23,6 @@ context('Create Stock Entry', () => {
 
 			cy.get_field('item_code', 'Link').type('ITM-0001', {delay: 200});
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0001');
-			cy.get_field('t_warehouse', 'Link').should('have.value', 'Finished Goods - CT');
 
 			cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
