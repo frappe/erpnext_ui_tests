@@ -7,8 +7,8 @@ context("Stock Settings", () => {
 		cy.visit(`app/stock-settings`);
 		cy.get_field('item_naming_by', 'Select').select('Item Code');
 		cy.get_field('item_naming_by', 'Select').should('have.value', 'Item Code');
-		cy.get_field('default_warehouse', 'Link').clear().type('Stores - CT', {delay: 200});
-		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - CT');
+		cy.get_field('default_warehouse', 'Link').clear().type('Stores - WPL', {delay: 200});
+		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
 		cy.get_field('item_group', 'Link').clear().type('All Item Groups', {delay: 200});
 		cy.get_field('item_group', 'Link').should('have.value','All Item Groups');
 		cy.get_field('stock_uom', 'Link').clear().type('Nos', {delay: 200});
@@ -36,7 +36,9 @@ context("Stock Settings", () => {
 		cy.get('@table').findByRole('button', {name: 'Add Row'}).click();
  		cy.get('@table').find('[data-idx="1"]').as('row1');
  		cy.get('@row1').find('.btn-open-row').click();
-		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - CT');
+		cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
+		cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
+		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
         cy.get('.grid-collapse-row').click();
 		cy.findByRole("button", { name: "Save" }).click();
 
