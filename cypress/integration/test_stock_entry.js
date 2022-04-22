@@ -17,7 +17,7 @@ context('Create Stock Entry', () => {
 			cy.get('@row1').find('.btn-open-row').click();
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
 			cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
-			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WP');
+			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
 			cy.get('.grid-collapse-row').click();
 			cy.findByRole("button", { name: "Save" }).click();
 			cy.wait(500);
@@ -48,7 +48,7 @@ context('Create Stock Entry', () => {
 
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200}, "{downarrow}{enter}");
 
-			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WP', {delay: 200}, "{downarrow}{enter}");
+			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WPL', {delay: 200}, "{downarrow}{enter}");
 			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
 			cy.get('@table').find('[data-idx="1"]').as('row1');
