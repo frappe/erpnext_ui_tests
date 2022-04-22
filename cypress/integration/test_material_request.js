@@ -18,8 +18,8 @@ context('Material Request', () => {
 			cy.get('@row1').find('.btn-open-row').click();
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
 			cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
-			cy.get_field('default_warehouse', 'Link').clear().type('Stores - WPL', {delay: 200});
-			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
+			cy.get_field('default_warehouse', 'Link').clear().type('Stores - WP', {delay: 200});
+			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WP');
 			cy.get('.grid-collapse-row').click();
 			cy.findByRole("button", { name: "Save" }).click();
 			cy.wait(500);
@@ -61,7 +61,7 @@ context('Material Request', () => {
 			cy.get_field('qty', 'Float').clear().type('23.000');
 			cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
-			//cy.get_field('warehouse', 'Link').should('have.value', 'Stores - CT');
+			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - WP');
 			cy.get_field('conversion_factor', 'Float').clear().type('1');
 			cy.get_field('conversion_factor', 'Link').should('have.value', '1');
 
