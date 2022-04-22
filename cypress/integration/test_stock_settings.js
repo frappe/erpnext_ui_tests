@@ -22,7 +22,7 @@ context("Stock Settings", () => {
 
 	it("Check if all options set under item defaults are working", () => {
 	    cy.visit(`app/item/new-item-1`);
-		cy.get_field("item_code", "Data").type('ITM-0004', {delay: 200});
+		cy.get_field("item_code", "Data").type('ITM-0005', {delay: 200});
 
 		//Check if Item Group is set as per item defaults in stock settings
 		cy.get_field('item_group', 'Link').should('have.value','All Item Groups');
@@ -43,13 +43,13 @@ context("Stock Settings", () => {
 		cy.findByRole("button", { name: "Save" }).click();
 
 		//Check if item naming is done as per Item Code
-		cy.get(".page-title").should("contain", "ITM-0004");
+		cy.get(".page-title").should("contain", "ITM-0005");
 	});
 		it("Check if Item Price has been inserted as per standad selling rate as auto insert price list option was unchecked", () => {
 		cy.visit(`app/item-price`);
-        cy.get('.list-row > .level-left > .list-subject > .level-item > .ellipsis').eq(0).click();
+        cy.click_listview_row_item(0);
 		cy.get_field('price_list_rate', 'Currency').should('not.have.value','0');
-		cy.remove_doc("Item", "ITM-0004");
+		cy.remove_doc("Item", "ITM-0005");
 	});
 		it("Check if barcode field appears in stock transactions ", () => {
 			cy.visit(`app/purchase-receipt/new-purchase-receipt-1`);
