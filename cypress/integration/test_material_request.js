@@ -11,11 +11,11 @@ context('Material Request', () => {
             cy.get_field('material_request_type', 'Select').select('Purchase');
 			cy.get_field('material_request_type', 'Select').should('have.value', 'Purchase');
 			cy.get_field('transaction_date', 'Date').should('not.have.value', '');
+
 			//Setting Required By field
 			var today = new Date();
             var date = '01-'+(today.getMonth()+2)+'-'+today.getFullYear();
 			cy.get_field('schedule_date', 'Date').wait(500).clear().type(date, {delay: 200});
-		    cy.get_field('schedule_date', 'Date').should('have.value', date);
 
 			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
