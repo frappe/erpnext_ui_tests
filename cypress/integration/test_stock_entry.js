@@ -45,6 +45,7 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get('[data-fieldname="total_incoming_value"]').should('not.have.value','0');
+			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
 			//cy.findByLabelText('Submit').click();
 			//cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
             //cy.wait(500);
