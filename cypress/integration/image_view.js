@@ -30,8 +30,8 @@ context('Image View', () => {
 		//Creates a new user record
 		cy.create_records({
 			doctype: 'User',
-			email: 'test@example.com',
-			first_name: 'Test User'
+			email: 'test_user123@example.com',
+			first_name: 'Test Website User'
 		});
 		cy.visit('/app/user');
 		cy.get_field('full_name', 'Data').clear();
@@ -42,7 +42,7 @@ context('Image View', () => {
 
 		//Checks the URL after the visiting the Image view
 		cy.location('pathname').should('eq', '/app/user/view/image');
-		cy.get('.image-view-container').should('contain', 'Test User');
+		cy.get('.image-view-container').should('contain', 'Test Website User');
 
 		//Visits the created user
 		cy.get(':nth-child(1) > .image-view-footer > .image-title > span.ellipsis > .ellipsis').click();
@@ -67,10 +67,10 @@ context('Image View', () => {
 		cy.get('.like-action[data-name="test@example.com"]').click({force: true});
 		cy.get('.like-action[data-name="test@example.com"]').should('have.class', 'liked');
 
-		//Applying the filter for full name and checking if it gives "Test User" as result
+		//Applying the filter for full name and checking if it gives "Test Website User" as result
 		cy.get_field('full_name', 'Data').clear();
-		cy.fill_field('full_name', 'Test User', 'Data');
-		cy.get('.image-view-container').should('contain', 'Test User');
+		cy.fill_field('full_name', 'Test Website User', 'Data');
+		cy.get('.image-view-container').should('contain', 'Test Website User');
 
 		//Deleting the user record
 		cy.go_to_list('User');
@@ -84,6 +84,6 @@ context('Image View', () => {
 		cy.get('.custom-btn-group-label').contains('List View').click();
 		cy.get('[data-view="Image"]').click();
 		cy.get_field('full_name', 'Data').clear();
-		cy.get('.image-view-container').should('not.contain', 'Test User');
+		cy.get('.image-view-container').should('not.contain', 'Test Website User');
 	});
 });
