@@ -17,6 +17,7 @@ context('Create Stock Entry', () => {
 			cy.get('@row1').find('.btn-open-row').click();
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
 			cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
+			cy.get('.form-area > .form-layout > .form-page > :nth-child(1)').click();
 			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
 			cy.get('.grid-collapse-row').click();
 			cy.findByRole("button", { name: "Save" }).click();
