@@ -24,6 +24,7 @@ context('Material Request', () => {
 			cy.get_field('item_code', 'Link').focus();
 			cy.get_field('item_code', 'Link').type('ITM-0001', {delay: 200});
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0001');
+			cy.get_field('description', 'Link').type('ITM-0001', {delay: 200});
 			cy.get_field('schedule_date', 'Date').should('not.have.value','');
 			cy.get_field('qty', 'Float').clear().type('23.000');
 			cy.get_field('uom', 'Link').clear().type('Nos');
