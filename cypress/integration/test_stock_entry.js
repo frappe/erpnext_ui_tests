@@ -3,7 +3,7 @@ context('Create Stock Entry', () => {
     cy.login();
         });
 
-		it('Create an item', () => {
+		/*it('Create an item', () => {
 			cy.new_doc_view('Item');
 			cy.get_field('item_code', 'Data').type('ITM-0011');
 			cy.get_field('item_group', 'Link').clear().type('All Item Groups');
@@ -34,7 +34,7 @@ context('Create Stock Entry', () => {
 				stock_uom: 'Nos',
 				is_stock_item: 1,
 		});
-	});
+	});*/
 
 			it('Set Item Table in Material Request', () => {
 			cy.visit('app/stock-entry');
@@ -57,11 +57,11 @@ context('Create Stock Entry', () => {
 
 			cy.get_field('item_code', 'Link').type('ITM-0011', {delay: 200});
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0011');
-
+			cy.get('.form-area > .form-layout > .form-page > :nth-child(3)').click();
 			//cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
 			//cy.get_field('conversion_factor', 'Float').type('1', {delay: 100});
-			cy.get_field('conversion_factor', 'Link').should('have.value', '1');
+			cy.get_field('conversion_factor', 'Link').should('have.value', '1.000');
 			cy.get_field('allow_zero_valuation_rate', 'Check').check();
 
 			cy.get_field('qty', 'Float').scrollIntoView().should('be.visible')
