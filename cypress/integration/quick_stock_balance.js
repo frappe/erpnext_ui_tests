@@ -37,7 +37,7 @@ context('Quick Stock Balance', () => {
 
 	it('Should show correct data on Quick Stock balance', () => {
 		cy.visit('app/quick-stock-balance/Quick%20Stock%20Balance');
-		cy.get_field('warehouse', 'Link').type('Stores - WPL',"{downarrow}{enter}");
+		cy.get_field('warehouse', 'Link').type('Stores - WP',"{downarrow}{enter}");
 
  		cy.get_field('date', 'Date').click();
 		 cy.get('.datepicker--button').click({ force: true }, { multiple: true });
