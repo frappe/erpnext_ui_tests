@@ -3,7 +3,7 @@ context('Create Stock Entry', () => {
     cy.login();
         });
 
-		/*it('Create an item', () => {
+		it('Create an item', () => {
 			cy.new_doc_view('Item');
 			cy.get_field('item_code', 'Data').type('ITM-0011');
 			cy.get_field('item_group', 'Link').clear().type('All Item Groups');
@@ -34,7 +34,7 @@ context('Create Stock Entry', () => {
 				stock_uom: 'Nos',
 				is_stock_item: 1,
 		});
-	});*/
+	});
 
 			it('Set Item Table in Material Request', () => {
 			cy.visit('app/stock-entry');
