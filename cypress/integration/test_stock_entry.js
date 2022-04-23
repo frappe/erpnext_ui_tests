@@ -49,7 +49,7 @@ context('Create Stock Entry', () => {
 
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200}, "{downarrow}{enter}");
 
-			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WPL', {delay: 200}, "{downarrow}{enter}");
+			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WP', {delay: 200}, "{downarrow}{enter}");
 			//Set items table attributes
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
 			cy.get('@table').find('[data-idx="1"]').as('row1');
@@ -58,9 +58,9 @@ context('Create Stock Entry', () => {
 			cy.get_field('item_code', 'Link').type('ITM-0011', {delay: 200});
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0011');
 
-			cy.get_field('uom', 'Link').clear().type('Nos');
+			//cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
-			cy.get_field('conversion_factor', 'Float').type('1', {delay: 100});
+			//cy.get_field('conversion_factor', 'Float').type('1', {delay: 100});
 			cy.get_field('conversion_factor', 'Link').should('have.value', '1');
 			cy.get_field('allow_zero_valuation_rate', 'Check').check();
 
