@@ -55,9 +55,8 @@ context('Create Stock Entry', () => {
 			cy.get('@table').find('[data-idx="1"]').as('row1');
 			cy.get('@row1').find('.btn-open-row').click();
 
-			cy.get_field('item_code', 'Link').type('ITM-0011', {delay: 200});
+			cy.get_field('item_code', 'Link').type('ITM-0011', {delay: 200},"{downarrow}{enter}");
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0011');
-			cy.get('.form-area > .form-layout > .form-page > :nth-child(3)').click();
 			//cy.get_field('uom', 'Link').clear().type('Nos');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
 			//cy.get_field('conversion_factor', 'Float').type('1', {delay: 100});
