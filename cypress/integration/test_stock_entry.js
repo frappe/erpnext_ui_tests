@@ -3,6 +3,7 @@ context('Create Stock Entry', () => {
     cy.login();
         });
 
+
 		it('Create an item', () => {
 			cy.new_doc_view('Item');
 			cy.get_field('item_code', 'Data').type('ITM-0011');
@@ -35,7 +36,6 @@ context('Create Stock Entry', () => {
 				is_stock_item: 1,
 		});
 	});
-
 			it('Set Item Table in Material Request', () => {
 			cy.visit('app/stock-entry');
 			cy.findByRole('button', {name: 'Add Stock Entry'}).trigger('click', {force: true});
@@ -58,16 +58,15 @@ context('Create Stock Entry', () => {
 			cy.findByText('ITM-0011').click();
 			cy.get_field('item_code', 'Link').blur();
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0011');
-			cy.get_field('qty', 'Float').scrollIntoView().should('be.visible')
-				.focus().type('23.000').blur() ;
 
-				//cy.get_field('qty', 'Float').should('have.value', "23.000");
-
-			//cy.get('.form-area > .form-layout > .form-page > :nth-child(5)').click();
-
-			//check amount and totals
-			//cy.get('[data-fieldname="basic_amount"]').should('not.have.value','0');
-			//cy.get('.grid-collapse-row').click();
+			cy.get('.frappe-control[data-fieldname="items"]').as('table');
+			//cy.get('@table').findByRole('button', {name: 'Add Row'}).click();
+			cy.get('@table').find('[data-idx="1"]').as('row1');
+			cy.get('@row1').find('.btn-open-row').click();
+			cy.get_field('qty', 'Float').clear().type('23.000', {delay: 200});
+			cy.get_field('qty', 'Float').should('have.value','23.000');
+			cy.get('.grid-collapse-row').click();
+			cy.wait(500);
 
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
