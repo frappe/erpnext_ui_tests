@@ -75,6 +75,7 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
             cy.wait(500);
 			cy.get('.page-title').should('contain', 'Submitted');
+			cy.wait(500);
 
 			//View Stock Ledger
 			cy.url().then((url) => {
