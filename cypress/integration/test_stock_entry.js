@@ -18,7 +18,6 @@ context('Create Stock Entry', () => {
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
 			cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
 			cy.get('.form-area > .form-layout > .form-page > :nth-child(1)').click();
-			//cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
 			cy.get('.grid-collapse-row').click();
 			cy.findByRole("button", { name: "Save" }).click();
 			cy.wait(500);
@@ -33,8 +32,8 @@ context('Create Stock Entry', () => {
 				description: 'ITM-0011',
 				stock_uom: 'Nos',
 				is_stock_item: 1,
+			});
 		});
-	});
 			it('Set Item Table in Material Request', () => {
 			cy.visit('app/stock-entry');
 			cy.findByRole('button', {name: 'Add Stock Entry'}).trigger('click', {force: true});
@@ -45,8 +44,6 @@ context('Create Stock Entry', () => {
 			cy.get_field('stock_entry_type', 'Link').focus().trigger('click', {force: true});
    			cy.wait(500);
    			cy.fill_field('stock_entry_type', 'Material Receipt', 'Link'), {delay:200}, "{downarrow}{enter}";
-
-			//cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200}, "{downarrow}{enter}");
 
 			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WP', {delay: 200}, "{downarrow}{enter}");
 			//Set items table attributes
@@ -59,7 +56,6 @@ context('Create Stock Entry', () => {
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0011');
 
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
-			//cy.get('@table').findByRole('button', {name: 'Add Row'}).click();
 			cy.get('@table').find('[data-idx="1"]').as('row1');
 			cy.get('@row1').find('.btn-open-row').click();
 			cy.get_field('qty', 'Float').clear().type('23.000', {delay: 200});
