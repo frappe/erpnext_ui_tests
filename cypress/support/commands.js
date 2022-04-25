@@ -58,3 +58,8 @@ Cypress.Commands.add("compare_document", (expected_document) => {
 			compare_document(expected_document, frm.doc);
 		});
 });
+
+Cypress.Commands.add("datepicker_pick_today", (fieldname) => {
+	cy.get_field(fieldname, 'Date').click();  // Opens calendar
+	cy.get('.datepicker.active > .datepicker--buttons > .datepicker--button').click();  // Click on 'Today' on calendar view
+});
