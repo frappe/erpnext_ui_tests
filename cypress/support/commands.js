@@ -68,3 +68,7 @@ Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
 	cy.contains('.dropdown-item', action_name).click();
 });
+
+Cypress.Commands.add("click_section", (title) => {
+	cy.get(".section-head:visible").contains(title).trigger('click');
+});
