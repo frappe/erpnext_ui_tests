@@ -5,18 +5,18 @@ context("Item", () => {
 
 	it("Create an item", () => {
 		cy.new_doc_view("Item");
-		cy.get_field("item_code", "Data").type("ITM-0018");
+		cy.get_field("item_code", "Data").type("ITM-001");
 		cy.get_field("item_group", "Link").clear().type("All Item Groups");
 		cy.get_field("valuation_rate", "Data").clear().type("8000");
 		cy.get_field("stock_uom", "Link").clear().type("Nos");
 		cy.wait(500);
 		cy.findByRole("button", { name: "Save" }).click();
 
-		cy.get(".page-title").should("contain", "ITM-0018");
+		cy.get(".page-title").should("contain", "ITM-001");
 		cy.get(".page-title").should("contain", "Enabled");
 
 		cy.compare_document({
-			item_name: "ITM-0018",
+			item_name: "ITM-001",
 			valuation_rate: "8000",
 			item_group: "All Item Groups",
 			stock_uom: "Nos",
@@ -24,7 +24,7 @@ context("Item", () => {
 			uoms: [{ uom: "Nos", conversion_factor: 1 }],
 		});
 
-		cy.remove_doc("Item", "ITM-0018");
+		cy.remove_doc("Item", "ITM-001");
 	});
 });
 
