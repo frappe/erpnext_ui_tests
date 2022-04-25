@@ -47,7 +47,7 @@ Cypress.Commands.add("go_to_doc", (doctype, name) => {
 	cy.visit(`/app/${slug(doctype)}/${encodeURIComponent(name)}`);
 });
 
-Cypress.Commands.add("new_doc_view", (doctype) => {
+Cypress.Commands.add("new_doc", (doctype) => {
 	cy.visit(`/app/${slug(doctype)}/new`);
 });
 
@@ -57,6 +57,13 @@ Cypress.Commands.add("compare_document", (expected_document) => {
 		.then((frm) => {
 			compare_document(expected_document, frm.doc);
 		});
+});
+
+Cypress.Commands.add("set_input", (fieldname, fieldtype, value) => {
+	cy.get_field(fieldname, fieldtype).clear()
+		.type(value, {delay: 200}).wait(1000).type('{enter}');
+	return cy.window().its('frappe').then((frappe) => frappe.after_ajax());
+
 });
 
 Cypress.Commands.add("datepicker_pick_today", (fieldname) => {
