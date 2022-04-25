@@ -5,7 +5,7 @@ context('Quick Stock Balance', () => {
 
 	it('Create an item', () => {
 		cy.new_doc_view('Item');
-		cy.get_field('item_code', 'Data').type('Item');
+		cy.get_field('item_code', 'Data').type('Item1');
 		cy.get_field('item_group', 'Link').clear().type('All Item Groups');
 		cy.get_field('opening_stock', 'Data').clear().type(100);
 		cy.get_field('standard_rate', 'Data').clear().type(100);
@@ -22,10 +22,10 @@ context('Quick Stock Balance', () => {
 		cy.wait(500);
 
 		cy.compare_document({
-			item_name: 'Item',
+			item_name: 'Item1',
 			standard_rate: '100',
 			item_group: 'All Item Groups',
-			description: 'Item',
+			description: 'Item1',
 			stock_uom: 'Nos',
 			is_stock_item: 1,
 		});
@@ -41,7 +41,7 @@ context('Quick Stock Balance', () => {
 		 //Picking up the todays date
 		 const todays_date = Cypress.moment().format('MM-DD-YYYY');
 
- 	 	cy.get_field('item', 'Link').type('Item', {delay: 100},"{downarrow}{enter}");
+ 	 	cy.get_field('item', 'Link').type('Item1', {delay: 100},"{downarrow}{enter}");
 		//cy.get('[data-fieldname="qty"]').should('have.value','100');
 		//cy.get('[data-fieldname="item_name"]').should('have.value','100');
 		//cy.get('[data-fieldname="item_description"]').should('have.value','100');
