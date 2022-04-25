@@ -5,8 +5,8 @@ context('Create Company', () => {
 
 	it('Create Company', () => {
 		cy.new_doc('Company');
-		cy.set_input('company_name', 'Data', 'Frappe Tech 4');
-		cy.get_field('abbr', 'Data').should('have.value', 'FT4');
+		cy.set_input('company_name', 'Data', 'Frappe Tech');
+		cy.get_field('abbr', 'Data').should('have.value', 'FT');
 		cy.set_input('default_currency', 'Link', 'INR');
 		cy.set_input('country', 'Link', 'India');
 		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
