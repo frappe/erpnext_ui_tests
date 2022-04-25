@@ -59,8 +59,7 @@ context('Create Stock Entry', () => {
 			cy.get_field('item_code', 'Link').blur();
 			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0011');
 			cy.get_field('qty', 'Float').scrollIntoView().should('be.visible')
-				.click({force:true})
-				.clear().type('23.000') ;
+				.focus().type('23.000').blur() ;
 
 				//cy.get_field('qty', 'Float').should('have.value', "23.000");
 
