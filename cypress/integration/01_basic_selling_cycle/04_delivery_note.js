@@ -4,29 +4,29 @@ context('Delivery Note Creation', () => {
 		cy.login();
 		cy.visit('/app');
 
-		// cy.insert_doc(
-		// 	"Item",
-		// 	{
-		// 		item_code: "Solid Wood Dinning Set",
-		// 		item_group: "All Item Groups",
-		// 		valuation_rate: 75000,
-		// 		opening_stock: 5,
-		// 		stock_uom: "Nos",
-		// 	},
-		// 	true
-		// 	)
+		cy.insert_doc(
+			"Item",
+			{
+				item_code: "Solid Wood Dinning Set",
+				item_group: "All Item Groups",
+				valuation_rate: 75000,
+				opening_stock: 5,
+				stock_uom: "Nos",
+			},
+			true
+			)
 
-		// cy.insert_doc(
-		// 	"Customer",
-		// 	{
-		// 		customer_name: "William Harris",
-		// 		customer_group: "All Customer Groups",
-		// 		territory: "All Territories",
-		// 		default_currency: "INR",
-		// 		default_price_list: "Standard Selling",
-		// 	},
-		// 	true
-		// )
+		cy.insert_doc(
+			"Customer",
+			{
+				customer_name: "William Harris",
+				customer_group: "All Customer Groups",
+				territory: "All Territories",
+				default_currency: "INR",
+				default_price_list: "Standard Selling",
+			},
+			true
+		)
 	});
 
 	it('Create DN via SO>SI', () => {
