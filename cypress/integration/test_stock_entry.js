@@ -47,7 +47,7 @@ context('Create Stock Entry', () => {
    			cy.wait(500);
    			cy.fill_field('stock_entry_type', 'Material Receipt', 'Link'), {delay:200}, "{downarrow}{enter}";
 
-			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200}, "{downarrow}{enter}");
+			//cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200}, "{downarrow}{enter}");
 
 			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WP', {delay: 200}, "{downarrow}{enter}");
 			//Set items table attributes
