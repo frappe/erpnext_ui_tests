@@ -21,9 +21,6 @@ context('Quick Stock Balance', () => {
 		cy.findByRole("button", { name: "Save" }).click();
 		cy.wait(500);
 
-		cy.get(".page-title").should("contain", "Item");
-		cy.get(".page-title").should("contain", "Enabled");
-
 		cy.compare_document({
 			item_name: 'Item',
 			standard_rate: '100',
