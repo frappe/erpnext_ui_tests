@@ -3,7 +3,6 @@ context('Create Stock Entry', () => {
     cy.login();
         });
 
-
 		it('Create an item', () => {
 			cy.new_doc_view('Item');
 			cy.get_field('item_code', 'Data').type('ITM-0011');
