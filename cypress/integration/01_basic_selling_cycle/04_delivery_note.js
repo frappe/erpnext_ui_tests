@@ -97,8 +97,8 @@ context('Delivery Note Creation', () => {
 		cy.click_dropdown_action('View', 'Stock Ledger');
 		cy.get('.dt-cell__content > span > div').should('contain', "-1.000");
 
-		// cy.visit('app/sales-order/'+ d.name);
-		// cy.get('.page-title').should('contain', 'Completed');
+		cy.visit('app/sales-order/'+ d.name);
+		cy.get('.page-title').should('contain', 'Completed');
 		});
 	});
 });
