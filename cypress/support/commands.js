@@ -63,3 +63,8 @@ Cypress.Commands.add("datepicker_pick_today", (fieldname) => {
 	cy.get_field(fieldname, 'Date').click();  // Opens calendar
 	cy.get('.datepicker.active > .datepicker--buttons > .datepicker--button').click();  // Click on 'Today' on calendar view
 });
+
+Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
+	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
+	cy.contains('.dropdown-item', action_name).click();
+});
