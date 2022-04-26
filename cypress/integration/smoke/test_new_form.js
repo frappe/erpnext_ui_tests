@@ -41,7 +41,7 @@ describe("Test new document form views", () => {
 
 	test_new_form_doctypes.forEach((doctype) => {
 		it(`should open new ${doctype} form without any errors`, () => {
-			cy.new_doc_view(doctype);
+			cy.new_doc(doctype);
 			// wait till at least "new doctype" heading is visible
 			cy.findByRole("heading", { level: 3 }).contains(doctype);
 			cy.window().then((win) => {
