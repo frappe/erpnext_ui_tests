@@ -36,26 +36,30 @@ context("Stock Settings", () => {
 		cy.get('@table').findByRole('button', {name: 'Add Row'}).click();
  		cy.get('@table').find('[data-idx="1"]').as('row1');
  		cy.get('@row1').find('.btn-open-row').click();
+
 		//cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
 		cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
-		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
+		cy.get_field('default_warehouse', 'Link').type('Stores - WP');
+		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WP');
         cy.get('.grid-collapse-row').click();
 		cy.findByRole("button", { name: "Save" }).click();
 
 		//Check if item naming is done as per Item Code
 		cy.get(".page-title").should("contain", "ITM-0005");
 	});
-		it("Check if Item Price has been inserted as per standad selling rate as auto insert price list option was unchecked", () => {
+
+	it("Check if Item Price has been inserted as per standard selling rate as auto insert price list option was unchecked", () => {
 		cy.visit(`app/item-price`);
         cy.click_listview_row_item(0);
 		cy.get_field('price_list_rate', 'Currency').should('not.have.value','0');
 		cy.remove_doc("Item", "ITM-0005");
 	});
-		it("Check if barcode field appears in stock transactions ", () => {
+
+	it("Check if barcode field appears in stock transactions ", () => {
 			cy.visit(`app/purchase-receipt/new-purchase-receipt-1`);
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
         	cy.get('@table').find('[data-idx="1"]').as('row1');
         	cy.get('@row1').find('.btn-open-row').click();
 			cy.get_field('barcode', 'Link').should('be.visible');
-});
+	});
 });
