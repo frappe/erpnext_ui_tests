@@ -65,15 +65,16 @@ Cypress.Commands.add("get_input", (fieldname) => {
 
 Cypress.Commands.add("set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
-		.clear({scrollBehavior: false})
-		.type(value, {delay: 200, scrollBehavior: 'center'})
+		.clear({scrollBehavior: 'center'})
+		.type(value, {delay: 200, scrollBehavior: false})
 	cy.wait(1000);
 });
 
 Cypress.Commands.add("set_link", (fieldname, value) => {
 	cy.get_input(fieldname)
-		.clear({scrollBehavior: false})
-		.type(value, {delay: 200, scrollBehavior: 'center'})
+		.clear({scrollBehavior: 'center'})
+		.type(value, {delay: 200, scrollBehavior: false})
+		.wait(1000)
 	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
 		.click({scrollBehavior: false});
 	cy.wait(1000);
@@ -92,6 +93,10 @@ Cypress.Commands.add('click_toolbar_dropdown', (text) => {
 
 Cypress.Commands.add('get_page_title', () => {
 	return cy.get('.page-title:visible', {timeout: 50000});
+});
+
+Cypress.Commands.add('click_section', (title) => {
+	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false});
 });
 
 Cypress.Commands.add("datepicker_pick_today", (fieldname) => {
