@@ -81,7 +81,7 @@ Cypress.Commands.add("set_link", (fieldname, value) => {
 });
 
 Cypress.Commands.add('click_toolbar_button', (text) => {
-	cy.scrollTo('top');
+	cy.scrollTo('top', {ensureScrollable: false});
 	cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`)
 		.click({scrollBehavior: false, force:true});
 });
