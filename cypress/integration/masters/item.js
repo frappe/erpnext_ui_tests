@@ -5,18 +5,18 @@ context("Item", () => {
 
 	it("Create an item", () => {
 		cy.new_doc("Item");
-		cy.get_field("item_code", "Data").type("ITM-0018");
-		cy.get_field("item_group", "Link").clear().type("All Item Groups");
-		cy.get_field("valuation_rate", "Data").clear().type("8000");
-		cy.get_field("stock_uom", "Link").clear().type("Nos");
+		cy.set_input('item_code', 'Fairylights');
+		cy.set_link('item_group','All Item Groups');
+		cy.set_input('valuation_rate', '8000');
+		cy.set_link('stock_uom', 'Nos');
 		cy.wait(500);
-		cy.findByRole("button", { name: "Save" }).click();
+		cy.click_toolbar_button('Save');
 
-		cy.get(".page-title").should("contain", "ITM-0018");
-		cy.get(".page-title").should("contain", "Enabled");
+		cy.get_page_title().should('contain', 'Fairylights');
+		cy.get_page_title().should('contain',  'Enabled');
 
 		cy.compare_document({
-			item_name: "ITM-0018",
+			item_name: "Fairylights",
 			valuation_rate: "8000",
 			item_group: "All Item Groups",
 			stock_uom: "Nos",
@@ -24,7 +24,7 @@ context("Item", () => {
 			uoms: [{ uom: "Nos", conversion_factor: 1 }],
 		});
 
-		cy.remove_doc("Item", "ITM-0018");
+		cy.remove_doc("Item", "Fairylights");
 	});
 });
 
