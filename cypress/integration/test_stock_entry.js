@@ -4,7 +4,7 @@ context('Create Stock Entry', () => {
         });
 
 		it('Create an item', () => {
-			cy.new_doc_view('Item');
+			cy.visit(`app/item/new-item-1`);
 			cy.get_field('item_code', 'Data').type('ITM-0011');
 			cy.get_field('item_group', 'Link').clear().type('All Item Groups');
 			cy.get_field('opening_stock', 'Data').clear().type(100);
