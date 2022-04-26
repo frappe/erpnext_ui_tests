@@ -17,7 +17,11 @@ context('Create Stock Entry', () => {
 			cy.get('@row1').find('.btn-open-row').click();
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
 			cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
+<<<<<<< HEAD
 			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
+=======
+			cy.get('.form-area > .form-layout > .form-page > :nth-child(1)').click();
+>>>>>>> develop
 			cy.get('.grid-collapse-row').click();
 			cy.findByRole("button", { name: "Save" }).click();
 			cy.wait(500);
@@ -32,9 +36,14 @@ context('Create Stock Entry', () => {
 				description: 'ITM-0011',
 				stock_uom: 'Nos',
 				is_stock_item: 1,
+<<<<<<< HEAD
 		});
 	});
 
+=======
+			});
+		});
+>>>>>>> develop
 			it('Set Item Table in Material Request', () => {
 			cy.visit('app/stock-entry');
 			cy.findByRole('button', {name: 'Add Stock Entry'}).trigger('click', {force: true});
@@ -46,6 +55,7 @@ context('Create Stock Entry', () => {
    			cy.wait(500);
    			cy.fill_field('stock_entry_type', 'Material Receipt', 'Link'), {delay:200}, "{downarrow}{enter}";
 
+<<<<<<< HEAD
 			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200}, "{downarrow}{enter}");
 
 			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WPL', {delay: 200}, "{downarrow}{enter}");
@@ -72,6 +82,26 @@ context('Create Stock Entry', () => {
 			//check amount and totals
 			cy.get('[data-fieldname="basic_amount"]').should('not.have.value','0');
 			cy.get('.grid-collapse-row').click();
+=======
+			cy.get_field('to_warehouse', 'Link').type('Finished Goods - WP', {delay: 200}, "{downarrow}{enter}");
+			//Set items table attributes
+			cy.get('.rows > .grid-row > .data-row > [data-fieldname="s_warehouse"]').click();
+			cy.get_field('item_code', 'Link').focus().trigger('click', {force: true});
+			cy.wait(500);
+			cy.fill_field('item_code', 'ITM-0011', 'Link'), {delay:200}, "{downarrow}{enter}";
+			cy.findByText('ITM-0011').click();
+			cy.get_field('item_code', 'Link').blur();
+			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0011');
+
+			cy.get('.frappe-control[data-fieldname="items"]').as('table');
+			cy.get('@table').find('[data-idx="1"]').as('row1');
+			cy.get('@row1').find('.btn-open-row').click();
+			cy.get_field('qty', 'Float').clear().type('23.000', {delay: 200});
+			cy.get_field('qty', 'Float').should('have.value','23.000');
+			cy.get('.grid-collapse-row').click();
+			cy.wait(500);
+
+>>>>>>> develop
 			cy.findByRole('button', {name: 'Update Rate and Availability'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.get('[data-fieldname="total_incoming_value"]').should('not.have.value','0');
@@ -80,6 +110,11 @@ context('Create Stock Entry', () => {
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
             cy.wait(500);
 			cy.get('.page-title').should('contain', 'Submitted');
+<<<<<<< HEAD
+=======
+			cy.get_open_dialog().find('.btn-modal-close').click();
+			cy.get('.modal:visible').should('not.exist');
+>>>>>>> develop
 
 			//View Stock Ledger
 			cy.url().then((url) => {

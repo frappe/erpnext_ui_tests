@@ -2,13 +2,9 @@ context('Create Customer', () => {
     before(() => {
     cy.login();
         });
-    
+
         it('Create Customer', () => {
-            cy.visit(`app/customer`);
-            cy.wait(200);
-            cy.click_listview_primary_button('Add Customer');
-            cy.contains('Edit in full page').click();
-            cy.location("pathname").should("eq","/app/customer/new-customer-1");
+            cy.new_form('Customer');
             cy.get_field('customer_name', 'Data').type('Nidhi', {delay: 200});
             cy.get_field('customer_type', 'Select').should('have.value', 'Company');
             cy.get_field('customer_group', 'Link').clear().type('All Customer Groups');
@@ -24,7 +20,7 @@ context('Create Customer', () => {
             cy.get_field('territory', 'Link').should('have.value', 'All Territories');
             cy.location("pathname").should("not.be","/app/customer/new");
         });
-    
+
         after(() => {
             cy.remove_doc('Customer', 'Nidhi');
         });
