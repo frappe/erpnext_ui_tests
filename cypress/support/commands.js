@@ -59,9 +59,8 @@ Cypress.Commands.add("compare_document", (expected_document) => {
 	});
 });
 
-Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
-	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
-	cy.contains('.dropdown-item', action_name).click();
+Cypress.Commands.add("click_listview_checkbox", (number) => {
+	cy.get('.list-row-checkbox').eq(number).click();
 });
 
 Cypress.Commands.add("get_input", (fieldname) => {
@@ -94,6 +93,19 @@ Cypress.Commands.add('click_toolbar_button', (text) => {
 	cy.get_toolbar_button(text).click({scrollBehavior: false, force:true});
 });
 
+Cypress.Commands.add('get_custom_toolbar_button', (text) => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	return cy.get(`.custom-btn-group:visible`).contains(text);
+})
+
+Cypress.Commands.add('click_custom_toolbar_button', (text) => {
+	cy.get_custom_toolbar_button(text).click({scrollBehavior: false, force:true});
+});
+
+Cypress.Commands.add('click_modal_close_button', (text) => {
+	cy.get('.btn-modal-close').click({scrollBehavior: false, force:true});
+});
+
 Cypress.Commands.add('save', () => {
 	cy.intercept('/api').as('api');
 	cy.get_toolbar_button('Save').click({scrollBehavior: false, force:true});
@@ -123,8 +135,4 @@ Cypress.Commands.add("datepicker_pick_today", (fieldname) => {
 Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
 	cy.contains('.dropdown-item', action_name).click();
-});
-
-Cypress.Commands.add("click_section", (title) => {
-	cy.get(".section-head:visible").contains(title).trigger('click');
 });
