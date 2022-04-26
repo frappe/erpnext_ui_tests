@@ -3,7 +3,7 @@ context('Material Request', () => {
     cy.login();
         });
 
-		it('Create an item', () => {
+			it('Create an item', () => {
 			cy.new_doc_view('Item');
 
 			cy.get_field('item_code', 'Data').type('ITM-0001');
@@ -34,8 +34,8 @@ context('Material Request', () => {
 				description: 'ITM-0001',
 				stock_uom: 'Nos',
 				is_stock_item: 1,
+			});
 		});
-	});
 			it('Set appropriate field values', () => {
             cy.visit(`app/material-request`);
             cy.click_listview_primary_button('Add Material Request');
@@ -57,34 +57,19 @@ context('Material Request', () => {
 			cy.get_field('schedule_date', 'Date').should('not.have.value','');
 			cy.get_field('qty', 'Float').clear().type('23.000');
 			cy.get_field('uom', 'Link').should('have.value', 'Nos');
-			/*//Set items table attributes
+			cy.wait(500);
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
 			cy.get('@table').find('[data-idx="1"]').as('row1');
 			cy.get('@row1').find('.btn-open-row').click();
-			cy.get_field('item_code', 'Link').focus();
-			cy.get_field('item_code', 'Link').type('ITM-0001', {delay: 200});
-			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0001');
-			cy.get('.form-area > .form-layout > .form-page > :nth-child(1)').click();
-			//cy.get_field('description', 'Link').type('ITM-0001', {delay: 200});
-			cy.get_field('schedule_date', 'Date').should('not.have.value','');
-			cy.get_field('qty', 'Float').clear().type('23.000');
-			//cy.get_field('uom', 'Link').clear().type('Nos');
-			cy.get_field('uom', 'Link').should('have.value', 'Nos');
-			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - WPL');
-			cy.get_field('conversion_factor', 'Float').clear().type('1');
-			cy.get_field('conversion_factor', 'Link').should('have.value', '1');
 
 			//check amount and totals
 			cy.get_field('rate', 'Link').focus();
 			cy.get_field('rate', 'Link').scrollIntoView().should('be.visible').click({force:true});
-			cy.get_field('rate', 'Link').type('100');
 			cy.get_field('rate', 'Link').should('not.have.value','0');
-			//cy.get_field('amount', 'Link').focus().trigger('click', {force: true});
-			//cy.get_field('amount', 'Link').should('not.have.value','0');*/
 
 			//cy.get('.grid-collapse-row').click();
 			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
 			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
-		});
-    });
+			});
+    	});
