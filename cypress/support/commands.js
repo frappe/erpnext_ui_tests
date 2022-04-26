@@ -71,24 +71,33 @@ Cypress.Commands.add("get_input", (fieldname) => {
 Cypress.Commands.add("set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
-		.type(value, {delay: 200, scrollBehavior: false})
+		.type(value, {delay: 20, scrollBehavior: false})
 	cy.wait(1000);
 });
 
 Cypress.Commands.add("set_link", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
-		.type(value, {delay: 200, scrollBehavior: false})
+		.type(value, {delay: 20, scrollBehavior: false})
 		.wait(1000)
 	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
 		.click({scrollBehavior: false});
 	cy.wait(1000);
 });
 
-Cypress.Commands.add('click_toolbar_button', (text) => {
+Cypress.Commands.add('get_toolbar_button', (text) => {
 	cy.scrollTo('top', {ensureScrollable: false});
-	cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`)
-		.click({scrollBehavior: false, force:true});
+	return cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`);
+})
+
+Cypress.Commands.add('click_toolbar_button', (text) => {
+	cy.get_toolbar_button(text).click({scrollBehavior: false, force:true});
+});
+
+Cypress.Commands.add('save', () => {
+	cy.intercept('/api').as('api');
+	cy.get_toolbar_button('Save').click({scrollBehavior: false, force:true});
+	cy.wait('@api');
 });
 
 Cypress.Commands.add('click_toolbar_dropdown', (text) => {

@@ -3,24 +3,25 @@ context('Lead', () => {
 	before(() => {
 		cy.login();
 	});
-	
+
 	it('Insert and check attributes of a Lead ', () => {
-		cy.visit(`app/lead/`);
-		cy.get('.primary-action').click();
-		cy.get_field('salutation', 'Link').type("Mr");
-		cy.get_field('company_name', 'Link').type("Eleanor School of Music");
-		cy.get_field('first_name', 'Link').type("Oliver");
-		cy.get_field('last_name', 'Link').type("Eleanor");
-		cy.get_field('gender', 'Link').type("Male");
-		cy.get_field('email_id', 'Link').type("oliverel@gmail.com");
-		cy.findByRole('button', {name: 'Save'}).click();
+		cy.new_doc('Lead');
+		cy.set_link('salutation', "Mr");
+		cy.set_input('company_name', "Eleanor School of Music");
+		cy.set_input('first_name', "Oliver");
+		cy.set_input('last_name', "Eleanor");
+		cy.set_link('gender', "Male");
+		cy.set_input('email_id', "oliverel@gmail.com");
+		cy.save();
+
 		cy.get_field('salutation', 'Link').should('have.value', 'Mr');
-		cy.get_field('company_name', 'Link').should('have.value', 'Eleanor School of Music');
-		cy.get_field('first_name', 'Link').should('have.value', 'Oliver');
-		cy.get_field('last_name', 'Link').should('have.value', 'Eleanor');
-		cy.get_field('email_id', 'Link').should('have.value', 'oliverel@gmail.com');
-        cy.get('.page-title').should('contain', 'Lead');
+		cy.get_field('company_name', 'Data').should('have.value', 'Eleanor School of Music');
+		cy.get_field('first_name', 'Data').should('have.value', 'Oliver');
+		cy.get_field('last_name', 'Data').should('have.value', 'Eleanor');
+		cy.get_field('email_id', 'Data').should('have.value', 'oliverel@gmail.com');
+
         cy.location("pathname").should("not.be","/app/lead/new");
-        cy.get('.page-title').should('contain', 'Eleanor School of Music');
+		cy.get_page_title().should('contain', 'Lead');
+        cy.get_page_title().should('contain', 'Eleanor School of Music');
 	});
 });
