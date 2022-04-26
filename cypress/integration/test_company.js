@@ -5,32 +5,24 @@ context('Create Company', () => {
 
 	it('Create Company', () => {
 		cy.new_doc('Company');
-		cy.set_input('company_name', 'Data', 'Frappe Tech');
+		cy.set_input('company_name', 'Frappe Tech');
 		cy.get_field('abbr', 'Data').should('have.value', 'FT');
-		cy.set_input('default_currency', 'Link', 'INR');
-		cy.set_input('country', 'Link', 'India');
-		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
-		cy.wait(500);
-		cy.get('.page-title').should('contain', 'Frappe Tech');
+		cy.set_link('default_currency', 'INR');
+		cy.set_link('country', 'India');
+		cy.click_toolbar_button('Save');
+		cy.wait(5000);
+		cy.get_page_title().should('contain', 'Frappe Tech');
 	});
 
 	it("Check if appropriate Cost Centers are created", () => {
-		cy.findByRole("button", { name: "View" }).trigger("click", {
-			force: true,
-		});
-		cy.get('[data-label="Cost%20Centers"]').click({
-			delay: 200,
-		});
+		cy.click_toolbar_button('View');
+		cy.click_toolbar_dropdown('Cost Centers');
 		cy.location("pathname").should("eq", "/app/cost-center/view/tree");
 	});
 
 	it("Check if appropriate Chart of Accounts are created", () => {
-		cy.findByRole("button", { name: "View" }).trigger("click", {
-			force: true,
-		});
-		cy.get('[data-label="Chart%20of%20Accounts"]').click({
-			delay: 200,
-		});
+		cy.click_toolbar_button('View');
+		cy.click_toolbar_dropdown('Chart of Accounts');
 		cy.location("pathname").should("eq", "/app/account/view/tree");
 	});
 });
