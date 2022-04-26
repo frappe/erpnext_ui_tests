@@ -7,8 +7,8 @@ context("Stock Settings", () => {
 		cy.visit(`app/stock-settings`);
 		cy.get_field('item_naming_by', 'Select').select('Item Code');
 		cy.get_field('item_naming_by', 'Select').should('have.value', 'Item Code');
-		cy.get_field('default_warehouse', 'Link').clear().type('Stores - WPL', {delay: 200});
-		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
+		cy.get_field('default_warehouse', 'Link').clear().type('Stores - WP', {delay: 200});
+		cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WP');
 		cy.get_field('item_group', 'Link').clear().type('All Item Groups', {delay: 200});
 		cy.get_field('item_group', 'Link').should('have.value','All Item Groups');
 		cy.get_field('stock_uom', 'Link').clear().type('Nos', {delay: 200});
