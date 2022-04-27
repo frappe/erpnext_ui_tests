@@ -102,7 +102,7 @@ jobs:
         run: cd ~/frappe-bench/apps/erpnext/ && npx nyc instrument -x 'erpnext/public/dist/**' -x '**/*.bundle.js' --reporter=clover --in-place erpnext
 
       - name: Site Setup
-        run: cd ~/frappe-bench/ && bench --site test_site execute erpnext.setup.utils.before_tests
+        run: cd ~/frappe-bench/ && bench --site test_site execute erpnext_ui_tests.test_utils.site_setup.execute
 
       - name: cypress pre-requisites
         run: cd ~/frappe-bench/apps/frappe && yarn add cypress-file-upload@^5 @4tw/cypress-drag-drop@^2 @testing-library/cypress@^8 --no-lockfile
