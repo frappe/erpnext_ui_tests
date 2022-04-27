@@ -155,3 +155,12 @@ Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
 	cy.contains('.dropdown-item', action_name).click();
 });
+
+Cypress.Commands.add('click_menu_button', () => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	return cy.get(`.menu-btn-group:visible`).click({force: true});
+});
+
+Cypress.Commands.add("get_read_only", (fieldname) => {
+    return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
+});
