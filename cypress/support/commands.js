@@ -68,6 +68,14 @@ Cypress.Commands.add("get_input", (fieldname) => {
 	return cy.get(`[data-fieldname="${fieldname}"]:visible input`, {scrollBehavior: 'center'});
 });
 
+Cypress.Commands.add("get_read_only", (fieldname) => {
+	return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
+});
+
+Cypress.Commands.add("get_select", (fieldname) => {
+	return cy.get(`[data-fieldname="${fieldname}"]:visible select`, {scrollBehavior: 'center'});
+});
+
 Cypress.Commands.add("set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
