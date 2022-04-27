@@ -21,7 +21,7 @@ context("Barcode scanning", () => {
 	});
 
 	beforeEach(() => {
-		cy.new_doc_view("Stock Entry");
+		cy.new_doc("Stock Entry");
 
 		cy.window()
 			.its("cur_frm")
