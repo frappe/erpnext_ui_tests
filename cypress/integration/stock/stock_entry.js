@@ -6,6 +6,7 @@ context('Create Stock Entry', () => {
 		it('Create an item', () => {
 			cy.new_doc('Item');
 			cy.set_input('item_code', 'T-shirt');
+			cy.set_link('item_group','All Item Groups');
 			cy.set_input('opening_stock','100');
 			cy.set_input('standard_rate','100');
  			cy.set_input('valuation_rate', '8000');
