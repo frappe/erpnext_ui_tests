@@ -3,9 +3,15 @@ name: UI
 on:
   pull_request:
     paths-ignore:
-      - '**.md'
+      - "**.md"
   workflow_dispatch:
+  schedule:
+    # Run everday at midnight UTC / 5:30 IST
+    - cron: "0 0 * * *"
 
+concurrency:
+  group: ui-develop-${{ github.event.number }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -92,12 +98,14 @@ jobs:
           DB: mariadb
           TYPE: ui
 
+      - name: Instrument Source Code
+        run: cd ~/frappe-bench/apps/erpnext/ && npx nyc instrument -x 'erpnext/public/dist/**' -x '**/*.bundle.js' --reporter=clover --in-place erpnext
+
       - name: Site Setup
-        run: cd ~/frappe-bench/ && bench --site test_site execute erpnext.setup.utils.before_tests
+        run: cd ~/frappe-bench/ && bench --site test_site execute erpnext_ui_tests.test_utils.site_setup.execute
 
       - name: cypress pre-requisites
-        run: cd ~/frappe-bench/apps/frappe && yarn add cypress-file-upload@^5 @testing-library/cypress@^8 --no-lockfile
-
+        run: cd ~/frappe-bench/apps/frappe && yarn add cypress-file-upload@^5 @4tw/cypress-drag-drop@^2 @testing-library/cypress@^8 --no-lockfile
 
       - name: Build Assets
         run: cd ~/frappe-bench/ && bench build
@@ -105,10 +113,19 @@ jobs:
           CI: Yes
 
       - name: UI Tests
-        run: cd ~/frappe-bench/ && bench --site test_site run-ui-tests erpnext_ui_tests --headless
+        run: cd ~/frappe-bench/ && bench --site test_site run-ui-tests erpnext_ui_tests --with-coverage --headless
         env:
           CYPRESS_RECORD_KEY: 60a8e3bf-08f5-45b1-9269-2b207d7d30cd
 
       - name: Show bench console if tests failed
         if: ${{ failure() }}
         run: cat ~/frappe-bench/bench_run_logs.txt
+
+      - name: Upload Coverage Data
+        uses: codecov/codecov-action@v2
+        with:
+          name: Cypress
+          fail_ci_if_error: true
+          root_dir: /home/runner/frappe-bench/apps/erpnext
+          directory: /home/runner/frappe-bench/apps/erpnext_ui_tests/coverage/
+          verbose: true
