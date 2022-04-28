@@ -167,7 +167,7 @@ Cypress.Commands.add('click_modal_close_button', () => {
 
 Cypress.Commands.add('save', () => {
 	cy.intercept('/api').as('api');
-	cy.get(`button[data-label="Save"]`).click({scrollBehavior: false, force:true});
+	cy.get(`button[data-label="Save"]:visible`).click({scrollBehavior: false, force:true});
 	cy.wait('@api');
 });
 
@@ -177,7 +177,7 @@ Cypress.Commands.add('get_page_indicator', () => {
 
 Cypress.Commands.add('submit', (indicator) => {
 	cy.intercept('/api').as('api');
-	cy.get(`button[data-label="Submit"]`).click({scrollBehavior: false, force:true});
+	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
 	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
 	cy.get_page_indicator().contains(indicator);
@@ -186,7 +186,7 @@ Cypress.Commands.add('submit', (indicator) => {
 
 Cypress.Commands.add('cancel', (indicator) => {
 	cy.intercept('/api').as('api');
-	cy.get(`button[data-label="Cancel"]`).click({scrollBehavior: false, force:true});
+	cy.get(`button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
 	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
 	cy.get_page_indicator().contains(indicator);
