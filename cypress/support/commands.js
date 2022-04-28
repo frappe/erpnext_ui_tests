@@ -139,8 +139,11 @@ Cypress.Commands.add('click_toolbar_button', (text) => {
 });
 
 Cypress.Commands.add('click_toolbar_dropdown', (text) => {
-	cy.get(`.page-head [data-label="${encodeURIComponent(text)}"]:visible`)
-		.click({scrollBehavior: false, force:true});
+	let selector = `.page-head [data-label="${encodeURIComponent(text)}"]:visible`;
+	if (Cypress.$(selector).length===0) {
+		selector = `.page-head [data-label="${text}"]:visible`
+	}
+	cy.get(selector).click({scrollBehavior: false, force:true});
 });
 
 Cypress.Commands.add('get_list_paging_button', (text) => {
