@@ -1,35 +1,34 @@
-
 context('Sales Invoice Creation', () => {
 	before(() => {
 		cy.login();
 		cy.visit('/app');
 
-			cy.insert_doc(
-				"Item",
-				{
-					item_code: "Vintage Green Photo Frame",
-					item_group: "All Item Groups",
-					valuation_rate: 2000,
-					stock_uom: "Nos",
-				},
-				true
-			)
+		cy.insert_doc(
+			"Item",
+			{
+				item_code: "Vintage Green Photo Frame",
+				item_group: "All Item Groups",
+				valuation_rate: 2000,
+				stock_uom: "Nos",
+			},
+			true
+		)
 
-			cy.insert_doc(
-				"Customer",
-				{
-					customer_name: "Anaya Kapoor",
-					customer_group: "All Customer Groups",
-					territory: "All Territories",
-					default_currency: "INR",
-					default_price_list: "Standard Selling",
-				},
-				true
-			)
+		cy.insert_doc(
+			"Customer",
+			{
+				customer_name: "Anaya Kapoor",
+				customer_group: "All Customer Groups",
+				territory: "All Territories",
+				default_currency: "INR",
+				default_price_list: "Standard Selling",
+			},
+			true
+		)
 	});
 
 	it('Create Sales Invoice via SO', () => {
-		cy.visit('app/sales-order');
+		cy.new_doc('Sales Order');
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		const yyyy = today.getFullYear();
@@ -54,36 +53,32 @@ context('Sales Invoice Creation', () => {
 		).then((d)=>{ 
 			console.log(d);
 			cy.visit('app/sales-order/'+ d.name);
-			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
-			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
-			cy.get('.btn-modal-close > .icon').click();
-			cy.get('.page-title').should('contain', 'To Deliver and Bill');
-			cy.findByRole('button', {name: 'Create'}).click();
-			cy.get('[data-label="Sales%20Invoice"]').click();
+			cy.submit('To Deliver and Bill');
+			cy.click_dropdown_action('Create', 'Sales Invoice');
 
 			cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
-			cy.get_field('naming_series', 'Select').should('have.value', 'SINV-.YY.-');
-			cy.get_field('customer', 'Link').should('have.value', 'Anaya Kapoor');
-			cy.get_field('posting_date', 'Date').should('have.value', today_date);
-			cy.get_field('due_date', 'Date').should('have.value', today_date);
+			cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+			cy.get_input('customer').should('have.value', 'Anaya Kapoor');
+			cy.get_input('posting_date').should('have.value', today_date);
+			cy.get_input('due_date').should('have.value', today_date);
 
-			cy.get(':nth-child(7) > .section-head').findByText('Currency and Price List').trigger('click', {force: true});
-			cy.get_field('currency', 'Link').should('have.value', "INR");
-			cy.get_field('selling_price_list', 'Link').should('have.value', "Standard Selling");
+			cy.click_section('Currency and Price List');
+			cy.get_input('currency').should('have.value', 'INR');
+			cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 
 			cy.get('.rows > .grid-row > .data-row > .col-xs-4').click();
-			cy.get_field('item_code', 'Link').should('have.value', 'Vintage Green Photo Frame');
-			cy.get('[data-fieldname="total_qty"]').should('contain', "1");
-			cy.get('[data-fieldname="total"]').should('contain', "₹ 2,000.00");
-			cy.get('[data-fieldname="grand_total"]').should('contain', "₹ 2,000.00");
-			cy.get('[data-fieldname="rounded_total"]').should('contain', "₹ 2,000.00");
+			cy.get_input('item_code').should('have.value', 'Vintage Green Photo Frame');
+			cy.get_input('qty').should('have.value', "1.000");
+			cy.get_input('rate').should('have.value', "2,000.00");
+			cy.get_read_only('amount').should('contain', "2,000.00");
 
-			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
-			cy.get('.page-title').should('contain', 'Draft');
-			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
-			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
-			cy.get('.page-title').should('contain', 'Anaya Kapoor');
-			cy.get('.page-title').should('contain', 'Unpaid');
+			cy.get_read_only('total_qty').should('contain', "1");
+			cy.get_read_only('total').should('contain', "₹ 2,000.00");
+			cy.get_read_only('grand_total').should('contain', "₹ 2,000.00");
+			cy.get_read_only('rounded_total').should('contain', "₹ 2,000.00");
+			console.log('here');
+			cy.save();
+			cy.submit('Unpaid');
 		});
 	});
 });

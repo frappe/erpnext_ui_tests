@@ -178,6 +178,7 @@ Cypress.Commands.add('get_page_indicator', () => {
 Cypress.Commands.add('submit', (indicator) => {
 	cy.intercept('/api').as('api');
 	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
+	cy.wait(1000);
 	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
 	cy.get_page_indicator().contains(indicator);
@@ -187,6 +188,7 @@ Cypress.Commands.add('submit', (indicator) => {
 Cypress.Commands.add('cancel', (indicator) => {
 	cy.intercept('/api').as('api');
 	cy.get(`button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
+	cy.wait(1000);
 	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
 	cy.get_page_indicator().contains(indicator);
