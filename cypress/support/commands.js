@@ -63,7 +63,7 @@ Cypress.Commands.add("click_listview_checkbox", (number) => {
 	cy.get('.list-row-checkbox').eq(number).click();
 });
 
-Cypress.Commands.add("get_input", (fieldname, fieldtype) => {
+Cypress.Commands.add("get_input", (fieldname) => {
 	return cy.get(`[data-fieldname="${fieldname}"]:visible input`, {scrollBehavior: 'center'});
 });
 
