@@ -20,10 +20,7 @@ context('Material Request', () => {
 			items: [{ item_code: "Birch Ply", item_name: 'Birch Ply', warehouse: 'Stores - WP' }],
 		});
 
-		cy.submit();
-		cy.get_page_indicator().contains('Pending');
-
-		cy.cancel();
-		cy.get_page_indicator().contains('Cancelled');
+		cy.submit('Pending');
+		cy.cancel('Cancelled');
 	});
 });
