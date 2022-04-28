@@ -59,13 +59,22 @@ Cypress.Commands.add("compare_document", (expected_document) => {
 	});
 });
 
-Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
-	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
-	cy.contains('.dropdown-item', action_name).click();
+Cypress.Commands.add("click_listview_checkbox", (number) => {
+	cy.get('.list-row-checkbox').eq(number).click();
 });
 
-Cypress.Commands.add("get_input", (fieldname) => {
+Cypress.Commands.add("get_input", (fieldname, fieldtype) => {
 	return cy.get(`[data-fieldname="${fieldname}"]:visible input`, {scrollBehavior: 'center'});
+});
+
+Cypress.Commands.add("get_select", (fieldname) => {
+	return cy.get(`[data-fieldname="${fieldname}"]:visible select`, {scrollBehavior: 'center'});
+});
+
+Cypress.Commands.add("set_select", (fieldname, value) => {
+	cy.get_select(fieldname)
+		.select(value, {delay: 20, scrollBehavior: false})
+	cy.wait(1000);
 });
 
 Cypress.Commands.add("set_input", (fieldname, value) => {
@@ -88,10 +97,32 @@ Cypress.Commands.add("set_link", (fieldname, value) => {
 Cypress.Commands.add('get_toolbar_button', (text) => {
 	cy.scrollTo('top', {ensureScrollable: false});
 	return cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`);
-})
+});
 
 Cypress.Commands.add('click_toolbar_button', (text) => {
 	cy.get_toolbar_button(text).click({scrollBehavior: false, force:true});
+});
+
+Cypress.Commands.add('get_list_paging_button', (text) => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	return cy.get(`.list-paging-area:visible [data-value="${text}"]`);
+});
+
+Cypress.Commands.add('click_list_paging_button', (text) => {
+	cy.get_list_paging_button(text).click({scrollBehavior: false, force:true});
+});
+
+Cypress.Commands.add('get_custom_toolbar_button', (text) => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	return cy.get(`.custom-btn-group:visible`).contains(text);
+})
+
+Cypress.Commands.add('click_custom_toolbar_button', (text) => {
+	cy.get_custom_toolbar_button(text).click({scrollBehavior: false, force:true});
+});
+
+Cypress.Commands.add('click_modal_close_button', () => {
+	cy.get('.btn-modal-close').click({scrollBehavior: false, force: true});
 });
 
 Cypress.Commands.add('save', () => {
@@ -125,6 +156,11 @@ Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 	cy.contains('.dropdown-item', action_name).click();
 });
 
-Cypress.Commands.add("click_section", (title) => {
-	cy.get(".section-head:visible").contains(title).trigger('click');
+Cypress.Commands.add('click_menu_button', () => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	return cy.get(`.menu-btn-group:visible`).click({force: true});
+});
+
+Cypress.Commands.add("get_read_only", (fieldname) => {
+    return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
 });
