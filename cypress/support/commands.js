@@ -113,7 +113,7 @@ Cypress.Commands.add('save', () => {
 });
 
 Cypress.Commands.add('click_toolbar_dropdown', (text) => {
-	cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`)
+	cy.get(`.page-head:visible [data-label="${(text)}"]`)
 		.click({scrollBehavior: false, force:true});
 });
 
