@@ -100,7 +100,8 @@ context("Chart Of Accounts", () => {
 	});
 
 	it("Check if able to view list through menu", () => {
-		cy.click_dropdown_action('Menu', 'Accounts Receivable');
+		cy.click_menu_button();
+		cy.click_toolbar_dropdown('View List');
 		cy.location("pathname").should("eq", "/app/account");
 	});
 
