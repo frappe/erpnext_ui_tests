@@ -172,7 +172,7 @@ Cypress.Commands.add('save', () => {
 });
 
 Cypress.Commands.add('get_page_title', () => {
-	return cy.get('.page-title:visible', {timeout: 50000});
+	return cy.get('.page-title:visible');
 });
 
 Cypress.Commands.add('click_section', (title) => {
