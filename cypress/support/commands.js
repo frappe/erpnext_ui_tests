@@ -175,18 +175,21 @@ Cypress.Commands.add('get_page_indicator', () => {
 	return cy.get('.page-head .indicator-pill:visible');
 });
 
-Cypress.Commands.add('submit', () => {
+Cypress.Commands.add('submit', (indicator) => {
 	cy.intercept('/api').as('api');
 	cy.get(`button[data-label="Submit"]`).click({scrollBehavior: false, force:true});
 	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
+	cy.get_page_indicator().contains(indicator);
+
 });
 
-Cypress.Commands.add('cancel', () => {
+Cypress.Commands.add('cancel', (indicator) => {
 	cy.intercept('/api').as('api');
 	cy.get(`button[data-label="Cancel"]`).click({scrollBehavior: false, force:true});
 	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
+	cy.get_page_indicator().contains(indicator);
 });
 
 Cypress.Commands.add('get_page_title', () => {
