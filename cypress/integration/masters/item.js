@@ -21,7 +21,7 @@ context("Item", () => {
 			item_group: "Raw Material",
 			stock_uom: "Nos",
 			is_stock_item: 1,
-			items: [{ uom: "Nos", conversion_factor: 1 }],
+			uoms: [{ uom: "Nos", conversion_factor: 1 }],
 		});
 	});
 
