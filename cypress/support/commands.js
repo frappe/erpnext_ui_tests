@@ -138,6 +138,11 @@ Cypress.Commands.add('click_toolbar_button', (text) => {
 	cy.get_toolbar_button(text).click({scrollBehavior: false, force:true});
 });
 
+Cypress.Commands.add('click_toolbar_dropdown', (text) => {
+	cy.get(`.page-head [data-label="${encodeURIComponent(text)}"]:visible`)
+		.click({scrollBehavior: false, force:true});
+});
+
 Cypress.Commands.add('get_list_paging_button', (text) => {
 	cy.scrollTo('top', {ensureScrollable: false});
 	return cy.get(`.list-paging-area:visible [data-value="${text}"]`);
@@ -164,11 +169,6 @@ Cypress.Commands.add('save', () => {
 	cy.intercept('/api').as('api');
 	cy.get_toolbar_button('Save').click({scrollBehavior: false, force:true});
 	cy.wait('@api');
-});
-
-Cypress.Commands.add('click_toolbar_dropdown', (text) => {
-	cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`)
-		.click({scrollBehavior: false, force:true});
 });
 
 Cypress.Commands.add('get_page_title', () => {
