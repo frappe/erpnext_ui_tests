@@ -171,11 +171,6 @@ Cypress.Commands.add('save', () => {
 	cy.wait('@api');
 });
 
-Cypress.Commands.add('click_toolbar_dropdown', (text) => {
-	cy.get(`.page-head:visible [data-label="${(text)}"]`)
-		.click({scrollBehavior: false, force:true});
-});
-
 Cypress.Commands.add('get_page_title', () => {
 	return cy.get('.page-title:visible');
 });
