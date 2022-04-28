@@ -71,6 +71,10 @@ Cypress.Commands.add("get_select", (fieldname) => {
 	return cy.get(`[data-fieldname="${fieldname}"]:visible select`, {scrollBehavior: 'center'});
 });
 
+Cypress.Commands.add("get_read_only", (fieldname) => {
+	return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
+});
+
 Cypress.Commands.add("set_select", (fieldname, value) => {
 	cy.get_select(fieldname)
 		.select(value, {delay: 20, scrollBehavior: false})
@@ -141,7 +145,7 @@ Cypress.Commands.add('get_page_title', () => {
 });
 
 Cypress.Commands.add('click_section', (title) => {
-	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false});
+	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false, force: true});
 });
 
 Cypress.Commands.add("datepicker_pick_today", (fieldname) => {
@@ -159,8 +163,4 @@ Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 Cypress.Commands.add('click_menu_button', () => {
 	cy.scrollTo('top', {ensureScrollable: false});
 	return cy.get(`.menu-btn-group:visible`).click({force: true});
-});
-
-Cypress.Commands.add("get_read_only", (fieldname) => {
-    return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
 });

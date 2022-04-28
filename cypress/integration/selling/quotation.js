@@ -74,7 +74,7 @@ context('Quotation Creation', () => {
 		cy.get_input('quotation_to').should('have.value', 'Customer');
 		cy.get_input('valid_till').should('have.value', validTill);
 		cy.set_link('party_name', 'Maria Garcia');
-		cy.get_select('order_type').should('have.value', "Sales");
+		cy.get_select('order_type').should('have.value', 'Sales');
 		cy.get_read_only('customer_name').should('contain', 'Maria Garcia');
 
 		cy.click_section('Address and Contact');
@@ -83,8 +83,8 @@ context('Quotation Creation', () => {
 		cy.get_read_only('territory').should('contain', 'All Territories');
 
 		cy.click_section('Currency and Price List');
-		cy.get_input('currency').should('have.value', "INR");
-		cy.get_input('selling_price_list').should('have.value', "Standard Selling");
+		cy.get_input('currency').should('have.value', 'INR');
+		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 
 		cy.get('.rows > .grid-row > .data-row > .col-xs-4').trigger('click', {force: true});
 		cy.set_link('item_code', 'Apple iPhone 13 Pro');
