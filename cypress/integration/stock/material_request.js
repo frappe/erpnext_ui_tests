@@ -3,73 +3,73 @@ context('Material Request', () => {
     cy.login();
         });
 
-			it('Create an item', () => {
-			cy.new_doc_view('Item');
+		it('Create an item', () => {
+			cy.new_doc('Item');
 
-			cy.get_field('item_code', 'Data').type('ITM-0001');
-			cy.get_field('item_group', 'Link').clear().type('All Item Groups');
-			cy.get_field('opening_stock', 'Data').clear().type(100);
-			cy.get_field('standard_rate', 'Data').clear().type(100);
-			cy.get_field('stock_uom', 'Link').clear().type("Nos");
+			cy.set_input('item_code', 'Wooden Chair');
+			cy.set_link('item_group', 'All Item Groups');
+			cy.set_input('opening_stock', '100');
+			cy.set_input('standard_rate', '100');
+			cy.set_link('stock_uom', 'Nos');
+ 			cy.save();
+			cy.wait(500);
 
 			cy.get('.frappe-control[data-fieldname="item_defaults"]').as('table');
 			cy.get('@table').findByRole('button', {name: 'Add Row'}).click();
 			cy.get('@table').find('[data-idx="1"]').as('row1');
 			cy.get('@row1').find('.btn-open-row').click();
-			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200});
-			cy.get_field('company', 'Link').should('have.value','Wind Power LLC');
-			cy.get_field('default_warehouse', 'Link').clear().type('Stores - WPL', {delay: 200});
-			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WPL');
+			cy.set_link('company', 'Wind Power LLC');
+			cy.set_link('default_warehouse', 'Stores - WP');
+			cy.get_field('default_warehouse', 'Link').should('have.value','Stores - WP');
 			cy.get('.grid-collapse-row').click();
-			cy.findByRole("button", { name: "Save" }).click();
+			cy.click_toolbar_button('Save');
 			cy.wait(500);
-
-			cy.get(".page-title").should("contain", "ITM-0001");
-			cy.get(".page-title").should("contain", "Enabled");
+			cy.get_page_title().should('contain', 'Coffee');
+ 			cy.get_page_title().should('contain',  'Enabled');
 
 			cy.compare_document({
-				item_name: 'ITM-0001',
+				item_name: 'Wooden Chair',
 				standard_rate: '100',
 				item_group: 'All Item Groups',
-				description: 'ITM-0001',
 				stock_uom: 'Nos',
 				is_stock_item: 1,
 			});
 		});
-			it('Set appropriate field values', () => {
-            cy.visit(`app/material-request`);
-            cy.click_listview_primary_button('Add Material Request');
+
+		it('Set appropriate field values', () => {
+			cy.new_doc('Material Request');
             cy.location("pathname").should("eq","/app/material-request/new-material-request-1");
-            cy.get_field('material_request_type', 'Select').select('Purchase');
-			cy.get_field('material_request_type', 'Select').should('have.value', 'Purchase');
+            cy.set_select('material_request_type', 'Purchase');
+			cy.get_select('material_request_type').should('have.value', 'Purchase');
 			cy.get_field('transaction_date', 'Date').should('not.have.value', '');
 
 			//Setting Required By field
 			var today = new Date();
-            var date = '01-'+(today.getMonth()+3)+'-'+today.getFullYear();
+            var date = '01-'+(today.getMonth()+4)+'-'+today.getFullYear();
 			cy.get_field('schedule_date', 'Date').wait(500).clear().type(date, {delay: 200});
-
-			cy.get(':nth-child(3) > .section-body > :nth-child(1)').click();
-			cy.get_field('company', 'Link').clear().type('Wind Power LLC', {delay: 200}, "{downarrow}{enter}");
+			cy.set_link('company', 'Wind Power LLC');
 			cy.get('.rows > .grid-row > .data-row > [data-fieldname="item_code"]').click();
-			cy.get_field('item_code', 'Link').type('ITM-0001', {delay: 200});
-			cy.get_field('item_code', 'Link').should('have.value', 'ITM-0001');
+			cy.set_input('item_code', 'Wooden Chair');
 			cy.get_field('schedule_date', 'Date').should('not.have.value','');
-			cy.get_field('qty', 'Float').clear().type('23.000');
-			cy.get_field('uom', 'Link').should('have.value', 'Nos');
+			cy.set_input('qty','23.000');
+			cy.get_input('uom', 'Data').should('have.value', 'Nos');
 			cy.wait(500);
 			cy.get('.frappe-control[data-fieldname="items"]').as('table');
 			cy.get('@table').find('[data-idx="1"]').as('row1');
 			cy.get('@row1').find('.btn-open-row').click();
 
 			//check amount and totals
-			cy.get_field('rate', 'Link').focus();
-			cy.get_field('rate', 'Link').scrollIntoView().should('be.visible').click({force:true});
-			cy.get_field('rate', 'Link').should('not.have.value','0');
+			cy.get_input('rate', '0');
 
 			//cy.get('.grid-collapse-row').click();
-			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
-			cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
-			cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
+			cy.save();
+			cy.wait(500);
+			cy.get_page_title().should('contain',  'Draft');
+			cy.click_toolbar_button('Submit');
+			cy.click
+			cy.click_modal_primary_button('Yes');
+			cy.get_open_dialog().find('.btn-modal-close').click();
+			cy.get('.modal:visible').should('not.exist');
+			cy.get_page_title().should('contain',  'Pending');
 			});
     	});
