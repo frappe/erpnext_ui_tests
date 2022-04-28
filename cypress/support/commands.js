@@ -196,7 +196,7 @@ Cypress.Commands.add("set_today", (fieldname) => {
 
 Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
-	cy.contains('.dropdown-item', action_name).click();
+	cy.contains('.dropdown-item:visible', action_name).click();
 });
 
 Cypress.Commands.add('click_menu_button', () => {
