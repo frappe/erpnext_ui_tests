@@ -90,6 +90,7 @@ context('Quotation Creation', () => {
 		cy.set_link('item_code', 'Apple iPhone 13 Pro');
 		cy.get_input('qty').should('have.value', "1.000");
 		cy.set_input('rate', '110000');
+		cy.get_input('rate').blur();
 		cy.get_read_only('amount').should('contain', '1,10,000.00');
 
 		cy.get_read_only('total_qty').should('contain', "1");
