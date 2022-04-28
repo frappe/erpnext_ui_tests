@@ -37,8 +37,6 @@ context('Gantt View', () => {
 		cy.get('.gantt').should('have.attr', 'width', '2622');
 		cy.click_list_paging_button('Half Day');
 		cy.get('.gantt').should('have.attr', 'width', '1330');
-		cy.click_list_paging_button('Day');
-		cy.get('.gantt').should('have.attr', 'width', '2470');
 		cy.click_list_paging_button('Week');
 		cy.get('.gantt').should('have.attr', 'width', '1540');
 		cy.click_list_paging_button('Month');
