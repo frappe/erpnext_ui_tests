@@ -131,7 +131,7 @@ Cypress.Commands.add("set_link", (fieldname, value) => {
 
 Cypress.Commands.add('get_toolbar_button', (text) => {
 	cy.scrollTo('top', {ensureScrollable: false});
-	return cy.get(`.page-head:visible [data-label="${(text)}"]`);
+	return cy.get(`.page-head [data-label="${encodeURIComponent(text)}"]:visible button`);
 });
 
 Cypress.Commands.add('click_toolbar_button', (text) => {
@@ -167,7 +167,7 @@ Cypress.Commands.add('click_modal_close_button', () => {
 
 Cypress.Commands.add('save', () => {
 	cy.intercept('/api').as('api');
-	cy.get_toolbar_button('Save').click({scrollBehavior: false, force:true});
+	cy.get('button[data-label="Save"]').click({scrollBehavior: false, force:true});
 	cy.wait('@api');
 });
 
@@ -177,7 +177,7 @@ Cypress.Commands.add('click_toolbar_dropdown', (text) => {
 });
 
 Cypress.Commands.add('get_page_title', () => {
-	return cy.get('.page-title:visible', {timeout: 50000});
+	return cy.get('.page-title:visible');
 });
 
 Cypress.Commands.add('click_section', (title) => {
@@ -193,7 +193,7 @@ Cypress.Commands.add('grid_open_row', (fieldname, row_no) => {
 });
 
 Cypress.Commands.add("set_today", (fieldname) => {
-	cy.get_field(fieldname, 'Date')
+	cy.get(`[data-fieldname="${fieldname}"] input:visible`)
 		.click({scrollBehavior: false}).wait(100);  // Opens calendar
 	cy.get('.datepickers-container [data-action="today"]:visible')
 		.click({scrollBehavior: false}).wait(100);  // Click on 'Today' on calendar view
