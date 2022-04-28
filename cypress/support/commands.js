@@ -188,7 +188,7 @@ Cypress.Commands.add('grid_open_row', (fieldname, row_no) => {
 });
 
 Cypress.Commands.add("set_today", (fieldname) => {
-	cy.get_field(fieldname, 'Date')
+	cy.get(`[data-fieldname="${fieldname}"] input:visible`)
 		.click({scrollBehavior: false}).wait(100);  // Opens calendar
 	cy.get('.datepickers-container [data-action="today"]:visible')
 		.click({scrollBehavior: false}).wait(100);  // Click on 'Today' on calendar view
