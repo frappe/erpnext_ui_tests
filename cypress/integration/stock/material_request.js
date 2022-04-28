@@ -44,9 +44,8 @@ context('Material Request', () => {
 			cy.get_field('transaction_date', 'Date').should('not.have.value', '');
 
 			//Setting Required By field
-			var today = new Date();
-            var date = '01-'+(today.getMonth()+4)+'-'+today.getFullYear();
-			cy.get_field('schedule_date', 'Date').wait(500).clear().type(date, {delay: 200});
+			datepicker_pick_today('schedule_date');
+
 			cy.set_link('company', 'Wind Power LLC');
 			cy.get('.rows > .grid-row > .data-row > [data-fieldname="item_code"]').click();
 			cy.set_input('item_code', 'Wooden Chair');
@@ -69,7 +68,6 @@ context('Material Request', () => {
 			cy.click
 			cy.click_modal_primary_button('Yes');
 			cy.get_open_dialog().find('.btn-modal-close').click();
-			cy.get('.modal:visible').should('not.exist');
 			cy.get_page_title().should('contain',  'Pending');
 			});
     	});
