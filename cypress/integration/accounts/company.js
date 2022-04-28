@@ -20,6 +20,7 @@ context('Create Company', () => {
 	});
 
 	it("Check if appropriate Chart of Accounts are created", () => {
+		cy.visit(`app/company/Bernhardt%20Furnitures`);
 		cy.click_dropdown_action('View','Chart of Accounts');
 		cy.location("pathname").should("eq", "/app/account/view/tree");
 	});
