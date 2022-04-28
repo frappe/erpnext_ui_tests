@@ -19,5 +19,8 @@ context('Material Request', () => {
 			material_request_type: 'Purchase',
 			items: [{ item_code: "Birch Ply", item_name: 'Birch Ply', warehouse: 'Stores - WP' }],
 		});
+
+		cy.submit('Pending');
+		cy.cancel('Cancelled');
 	});
 });

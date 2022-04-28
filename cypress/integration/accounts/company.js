@@ -5,13 +5,12 @@ context('Create Company', () => {
 
 	it('Create Company', () => {
 		cy.new_doc('Company');
-		cy.set_input('company_name', 'Bernhardt Furnitures');
-		cy.get_field('abbr', 'Data').should('have.value', 'BF');
+		cy.set_input('company_name', 'Frappe Tech');
+		cy.get_field('abbr', 'Data').should('have.value', 'FT2');
 		cy.set_link('default_currency', 'INR');
 		cy.set_link('country', 'India');
-		cy.click_toolbar_button('Save');
-		cy.wait(5000);
-		cy.get_page_title().should('contain', 'Bernhardt Furnitures');
+		cy.save();
+		cy.get_page_title().should('contain', 'Frappe Tech');
 	});
 
 	it("Check if appropriate Cost Centers are created", () => {

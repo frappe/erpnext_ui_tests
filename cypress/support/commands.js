@@ -131,7 +131,7 @@ Cypress.Commands.add("set_link", (fieldname, value) => {
 
 Cypress.Commands.add('get_toolbar_button', (text) => {
 	cy.scrollTo('top', {ensureScrollable: false});
-	return cy.get(`.page-head:visible [data-label="${(text)}"]`);
+	return cy.get(`.page-head [data-label="${encodeURIComponent(text)}"]:visible button`);
 });
 
 Cypress.Commands.add('click_toolbar_button', (text) => {
@@ -167,21 +167,37 @@ Cypress.Commands.add('click_modal_close_button', () => {
 
 Cypress.Commands.add('save', () => {
 	cy.intercept('/api').as('api');
-	cy.get_toolbar_button('Save').click({scrollBehavior: false, force:true});
+	cy.get(`button[data-label="Save"]:visible`).click({scrollBehavior: false, force:true});
 	cy.wait('@api');
 });
 
-Cypress.Commands.add('click_toolbar_dropdown', (text) => {
-	cy.get(`.page-head:visible [data-label="${(text)}"]`)
-		.click({scrollBehavior: false, force:true});
+Cypress.Commands.add('get_page_indicator', () => {
+	return cy.get('.page-head .indicator-pill:visible');
+});
+
+Cypress.Commands.add('submit', (indicator) => {
+	cy.intercept('/api').as('api');
+	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
+	cy.get('.modal.show .btn-primary').click();
+	cy.wait('@api');
+	cy.get_page_indicator().contains(indicator);
+
+});
+
+Cypress.Commands.add('cancel', (indicator) => {
+	cy.intercept('/api').as('api');
+	cy.get(`button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
+	cy.get('.modal.show .btn-primary').click();
+	cy.wait('@api');
+	cy.get_page_indicator().contains(indicator);
 });
 
 Cypress.Commands.add('get_page_title', () => {
-	return cy.get('.page-title:visible', {timeout: 50000});
+	return cy.get('.page-title:visible');
 });
 
 Cypress.Commands.add('click_section', (title) => {
-	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false});
+	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: 'center'});
 });
 
 Cypress.Commands.add('grid_add_row', (fieldname) => {
@@ -193,7 +209,7 @@ Cypress.Commands.add('grid_open_row', (fieldname, row_no) => {
 });
 
 Cypress.Commands.add("set_today", (fieldname) => {
-	cy.get_field(fieldname, 'Date')
+	cy.get(`[data-fieldname="${fieldname}"] input:visible`)
 		.click({scrollBehavior: false}).wait(100);  // Opens calendar
 	cy.get('.datepickers-container [data-action="today"]:visible')
 		.click({scrollBehavior: false}).wait(100);  // Click on 'Today' on calendar view
