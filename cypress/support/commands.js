@@ -167,7 +167,25 @@ Cypress.Commands.add('click_modal_close_button', () => {
 
 Cypress.Commands.add('save', () => {
 	cy.intercept('/api').as('api');
-	cy.get('button[data-label="Save"]').click({scrollBehavior: false, force:true});
+	cy.get(`button[data-label="Save"]`).click({scrollBehavior: false, force:true});
+	cy.wait('@api');
+});
+
+Cypress.Commands.add('get_page_indicator', () => {
+	return cy.get('.page-head .indicator-pill:visible');
+});
+
+Cypress.Commands.add('submit', () => {
+	cy.intercept('/api').as('api');
+	cy.get(`button[data-label="Submit"]`).click({scrollBehavior: false, force:true});
+	cy.get('.modal.show .btn-primary').click();
+	cy.wait('@api');
+});
+
+Cypress.Commands.add('cancel', () => {
+	cy.intercept('/api').as('api');
+	cy.get(`button[data-label="Cancel"]`).click({scrollBehavior: false, force:true});
+	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
 });
 
