@@ -240,3 +240,8 @@ Cypress.Commands.add('click_action_button', () => {
 Cypress.Commands.add("get_read_only", (fieldname) => {
     return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
 });
+
+Cypress.Commands.add("get_grid_edit", () => {
+    return cy.get('.frappe-control .btn-open-row:visible')
+		.click({scrollBehavior: "center", force: true});
+});
