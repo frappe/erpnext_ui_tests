@@ -24,7 +24,6 @@ context('Map View', () => {
 		cy.go_to_list('Test Location');
 		cy.get_page_title().should('contain', 'Test Location');
 		cy.click_custom_toolbar_button('List View');
-		cy.get_toolbar_button('Map');
 		cy.click_toolbar_dropdown('Map');
 
 		//Checking for the URL if the view is Map View
