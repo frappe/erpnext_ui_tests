@@ -14,17 +14,15 @@ context('Gantt View', () => {
 		cy.click_listview_row_item(0);
 		cy.findByPlaceholderText('Choose a color').click();
 		cy.get('.swatches > [style="background-color: rgb(203, 41, 41);"]:visible').click();
-		cy.click_toolbar_button('Save');
+		cy.save();
 		cy.go_to_list('ToDo');
 
 		//Checking if the dropdown button contains list view and gantt view option to select from
 		cy.click_custom_toolbar_button('List View');
-		cy.get_toolbar_button('Gantt');
 		cy.click_toolbar_dropdown('Gantt');
 
 		//Checking if the label of the dropdown button has now changed to 'Gantt view'
 		cy.get('.custom-btn-group-label').should('contain', 'Gantt View');
-		//cy.get_field('status', 'Select').select("");
 		cy.set_select('status','');
 		cy.set_select('priority','');
 
@@ -40,7 +38,7 @@ context('Gantt View', () => {
 		cy.click_list_paging_button('Week');
 		cy.get('.gantt').should('have.attr', 'width', '1540');
 		cy.click_list_paging_button('Month');
-		cy.get('.gantt').should('have.attr', 'width', '2040');
+		cy.get('.gantt').should('have.attr', 'width', '2160');
 		cy.click_list_paging_button('Year');
 		cy.get('.gantt').should('have.attr', 'width', '100%');
 
