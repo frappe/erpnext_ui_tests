@@ -2,41 +2,25 @@
 context('Material Request', () => {
 	before(() => {
 		cy.login();
-		cy.visit('/app');
-			cy.insert_doc(
-				"Item",
-				{
-					item_code: "ITM-0002",
-					item_group: "All Item Groups",
-					valuation_rate: 100,
-					stock_uom: "Nos",
-				},
-				true
-			)
 	});
 
 	it('Create Material Request', () => {
-		cy.visit('app/material-request');
-		var today = new Date();
-		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-		cy.insert_doc(
-			"Material Request",
-			{
-				naming_series: "MAT-MAR-.YYYY.-",
-				schedule_date: date,
-				transaction_date: date,
-				items: [{"item_code": "ITM-0002", "qty": 1, "rate": 100, "amount": 100}]
-			},
-			true
-		).then((d)=>{ 
-			console.log(d);
-			cy.visit('app/material-request/new-material-request-1');
-			cy.findByRole('button', {name: 'Save'}).click();
-			cy.visit(`app/material-request`);
-			cy.get('.list-row-checkbox').eq(0).click();
-			cy.get('.actions-btn-group > .btn').contains('Actions').should('be.visible').click();
-			cy.get('.actions-btn-group > .dropdown-menu [data-label="Submit"]').should('be.visible').click({force:true});
-			cy.click_modal_primary_button('Yes');
+		cy.new_doc('Material Request');
+
+		cy.set_today('schedule_date');
+		cy.set_link('items.item_code', 'Birch Ply');
+		cy.set_input('items.qty', 10);
+		cy.grid_add_row('items');
+		cy.set_link('items.item_code', 'WB-001');
+		cy.set_input('items.qty', 40);
+		cy.save();
+
+		cy.compare_document({
+			material_request_type: 'Purchase',
+			items: [{ item_code: "Birch Ply", item_name: 'Birch Ply', warehouse: 'Stores - WP' }],
 		});
+
+		cy.submit('Pending');
+		cy.cancel('Cancelled');
 	});
 });
