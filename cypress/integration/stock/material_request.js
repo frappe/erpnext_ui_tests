@@ -1,4 +1,3 @@
-
 context('Material Request', () => {
 	before(() => {
 		cy.login();
@@ -8,6 +7,7 @@ context('Material Request', () => {
 		cy.new_doc('Material Request');
 
 		cy.set_today('schedule_date');
+		cy.set_link('set_warehouse', 'Stores - WP');
 		cy.set_link('items.item_code', 'Birch Ply');
 		cy.set_input('items.qty', 10);
 		cy.grid_add_row('items');
@@ -17,7 +17,7 @@ context('Material Request', () => {
 
 		cy.compare_document({
 			material_request_type: 'Purchase',
-			items: [{ item_code: "Birch Ply", item_name: 'Birch Ply', warehouse: 'Stores - WP' }],
+			items: [{ item_code: "Birch Ply", item_name: 'Birch Ply'}],
 		});
 
 		cy.submit('Pending');
