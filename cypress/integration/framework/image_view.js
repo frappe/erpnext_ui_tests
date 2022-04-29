@@ -74,7 +74,7 @@ context('Image View', () => {
 		//Deleting the user record
 		cy.go_to_list('User');
 		cy.click_listview_checkbox(0);
-		cy.click_toolbar_button('Actions');
+		cy.click_action_button('Actions');
 		cy.click_toolbar_dropdown('Delete');
 		cy.click_modal_primary_button('Yes');
 		cy.click_modal_close_button();
