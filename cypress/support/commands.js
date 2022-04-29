@@ -26,6 +26,17 @@
 
 const slug = (name) => name.toLowerCase().replaceAll(" ", "-");
 
+const get_field_parts = (fieldname) => {
+	let field = { 'tablefield': null, 'fieldname': fieldname };
+	if (fieldname.includes('.')) {
+		// table field, split
+		let parts = fieldname.split('.');
+		field.tablefield = parts[0];
+		field.fieldname = parts[1];
+	}
+	return field;
+}
+
 const compare_document = (expected, actual) => {
 	for (const prop in expected) {
 		if (expected[prop] instanceof Array) {
@@ -64,7 +75,24 @@ Cypress.Commands.add("click_listview_checkbox", (row_no) => {
 });
 
 Cypress.Commands.add("get_input", (fieldname) => {
-	return cy.get(`[data-fieldname="${fieldname}"]:visible input`, {scrollBehavior: 'center'});
+	const field = get_field_parts(fieldname);
+
+	// selector for the input
+	let selector_string = `[data-fieldname="${field.fieldname}"] input:visible`;
+
+
+	if (field.tablefield) {
+		// is the last row activated (does the control exist)?
+		if (Cypress.$(`[data-fieldname="${field.tablefield}"] .grid-body .row:last .frappe-control[data-fieldname="${field.fieldname}"]:visible`).length === 0) {
+
+			// click on the box - this activates the row and creates controls
+			cy.get(`[data-fieldname="${field.tablefield}"] .grid-body .row:last [data-fieldname="${field.fieldname}"]:visible`).click({scrollBehavior: 'center'});
+		}
+
+		// selector for input
+		selector_string = `[data-fieldname="${field.tablefield}"] ${selector_string}`;
+	}
+	return cy.get(selector_string);
 });
 
 Cypress.Commands.add("get_select", (fieldname) => {
@@ -77,30 +105,45 @@ Cypress.Commands.add("set_select", (fieldname, value) => {
 	cy.wait(1000);
 });
 
-Cypress.Commands.add("set_input", (fieldname, value) => {
+Cypress.Commands.add("_set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
 		.type(value, {delay: 20, scrollBehavior: false})
+});
+
+Cypress.Commands.add("set_input", (fieldname, value) => {
+	cy._set_input(fieldname, value);
 	cy.wait(1000);
 });
 
 Cypress.Commands.add("set_link", (fieldname, value) => {
-	cy.get_input(fieldname)
-		.clear({scrollBehavior: 'center'})
-		.type(value, {delay: 20, scrollBehavior: false})
-		.wait(1000)
-	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
+	cy.intercept('/api/method/frappe.desk.search.search_link').as('search_query');
+
+	cy._set_input(fieldname, value);
+	cy.wait('@search_query');
+
+	// select link value from dropdown
+	const field = get_field_parts(fieldname);
+	cy.get(`[data-fieldname="${field.fieldname}"] ul:visible li:first-child`)
 		.click({scrollBehavior: false});
 	cy.wait(1000);
 });
 
 Cypress.Commands.add('get_toolbar_button', (text) => {
 	cy.scrollTo('top', {ensureScrollable: false});
-	return cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`);
+	return cy.get(`.page-head [data-label="${encodeURIComponent(text)}"]:visible button`);
 });
 
 Cypress.Commands.add('click_toolbar_button', (text) => {
 	cy.get_toolbar_button(text).click({scrollBehavior: false, force:true});
+});
+
+Cypress.Commands.add('click_toolbar_dropdown', (text) => {
+	let selector = `.page-head [data-label="${encodeURIComponent(text)}"]:visible`;
+	if (Cypress.$(selector).length===0) {
+		selector = `.page-head [data-label="${text}"]:visible`
+	}
+	cy.get(selector).click({scrollBehavior: false, force:true});
 });
 
 Cypress.Commands.add('get_list_paging_button', (text) => {
@@ -127,33 +170,57 @@ Cypress.Commands.add('click_modal_close_button', () => {
 
 Cypress.Commands.add('save', () => {
 	cy.intercept('/api').as('api');
-	cy.get_toolbar_button('Save').click({scrollBehavior: false, force:true});
+	cy.get(`button[data-label="Save"]:visible`).click({scrollBehavior: false, force:true});
 	cy.wait('@api');
 });
 
-Cypress.Commands.add('click_toolbar_dropdown', (text) => {
-	cy.get(`.page-head:visible [data-label="${encodeURIComponent(text)}"]`)
-		.click({scrollBehavior: false, force:true});
+Cypress.Commands.add('get_page_indicator', () => {
+	return cy.get('.page-head .indicator-pill:visible');
+});
+
+Cypress.Commands.add('submit', (indicator) => {
+	cy.intercept('/api').as('api');
+	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
+	cy.get('.modal.show .btn-primary').click();
+	cy.wait('@api');
+	cy.get_page_indicator().contains(indicator);
+
+});
+
+Cypress.Commands.add('cancel', (indicator) => {
+	cy.intercept('/api').as('api');
+	cy.get(`button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
+	cy.get('.modal.show .btn-primary').click();
+	cy.wait('@api');
+	cy.get_page_indicator().contains(indicator);
 });
 
 Cypress.Commands.add('get_page_title', () => {
-	return cy.get('.page-title:visible', {timeout: 50000});
+	return cy.get('.page-title:visible');
 });
 
 Cypress.Commands.add('click_section', (title) => {
-	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false});
+	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: 'center'});
 });
 
-Cypress.Commands.add("datepicker_pick_today", (fieldname) => {
-	cy.get_field(fieldname, 'Date')
-		.click({scrollBehavior: false});  // Opens calendar
-	cy.get('.datepicker.active > .datepicker--buttons > .datepicker--button')
-		.click({scrollBehavior: false});  // Click on 'Today' on calendar view
+Cypress.Commands.add('grid_add_row', (fieldname) => {
+	cy.get(`[data-fieldname="${fieldname}"] .grid-add-row:visible`).click({scrollBehavior: 'center'});
+});
+
+Cypress.Commands.add('grid_open_row', (fieldname, row_no) => {
+	cy.get(`[data-fieldname="${fieldname}"] .grid-row[data-idx="${row_no}"] .row-index`).click({scrollBehavior: 'center'});
+});
+
+Cypress.Commands.add("set_today", (fieldname) => {
+	cy.get(`[data-fieldname="${fieldname}"] input:visible`)
+		.click({scrollBehavior: false}).wait(100);  // Opens calendar
+	cy.get('.datepickers-container [data-action="today"]:visible')
+		.click({scrollBehavior: false}).wait(100);  // Click on 'Today' on calendar view
 });
 
 Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 	cy.findByRole("button", { name: dropdown_name }).trigger('click', {force: true});
-	cy.contains('.dropdown-item', action_name).click();
+	cy.contains('.dropdown-item:visible', action_name).click();
 });
 
 Cypress.Commands.add('click_menu_button', () => {
