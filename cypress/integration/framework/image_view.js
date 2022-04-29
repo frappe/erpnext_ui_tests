@@ -24,7 +24,6 @@ context('Image View', () => {
 	it('Creates new user and checks if it visible in both list view and image view', () => {
 		cy.go_to_list('User');
 		cy.click_custom_toolbar_button('List View');
-		cy.get_toolbar_button('Image');
 		cy.click_toolbar_dropdown('Image');
 
 		//Creates a new user record
