@@ -24,7 +24,6 @@ context('Image View', () => {
 	it('Creates new user and checks if it visible in both list view and image view', () => {
 		cy.go_to_list('User');
 		cy.click_custom_toolbar_button('List View');
-		cy.get_toolbar_button('Image');
 		cy.click_toolbar_dropdown('Image');
 
 		//Creates a new user record
@@ -75,7 +74,7 @@ context('Image View', () => {
 		//Deleting the user record
 		cy.go_to_list('User');
 		cy.click_listview_checkbox(0);
-		cy.click_toolbar_button('Actions');
+		cy.click_action_button('Actions');
 		cy.click_toolbar_dropdown('Delete');
 		cy.click_modal_primary_button('Yes');
 		cy.click_modal_close_button();

@@ -24,7 +24,6 @@ context('Map View', () => {
 		cy.go_to_list('Test Location');
 		cy.get_page_title().should('contain', 'Test Location');
 		cy.click_custom_toolbar_button('List View');
-		cy.get_toolbar_button('Map');
 		cy.click_toolbar_dropdown('Map');
 
 		//Checking for the URL if the view is Map View
@@ -58,7 +57,7 @@ context('Map View', () => {
 	it('Removing the doc', () => {
 		cy.go_to_list('Test Location');
 		cy.click_listview_checkbox(0);
-		cy.click_toolbar_button('Actions');
+		cy.click_action_button('Actions');
 		cy.click_toolbar_dropdown('Delete');
 		cy.click_modal_primary_button('Yes');
 		cy.hide_dialog();
