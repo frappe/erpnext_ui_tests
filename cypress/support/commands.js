@@ -203,7 +203,7 @@ Cypress.Commands.add('get_page_title', () => {
 });
 
 Cypress.Commands.add('click_section', (title) => {
-	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: 'center'});
+	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false, force: true});
 });
 
 Cypress.Commands.add('grid_add_row', (fieldname) => {
