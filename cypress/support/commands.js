@@ -234,6 +234,11 @@ Cypress.Commands.add('click_menu_button', () => {
 	return cy.get(`.menu-btn-group:visible button`).click({force: true});
 });
 
+Cypress.Commands.add('click_action_button', () => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	return cy.get(`.actions-btn-group:visible button`).click({force: true});
+});
+
 Cypress.Commands.add("get_read_only", (fieldname) => {
     return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
 });
