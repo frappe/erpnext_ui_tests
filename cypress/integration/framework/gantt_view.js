@@ -14,7 +14,7 @@ context('Gantt View', () => {
 		cy.click_listview_row_item(0);
 		cy.findByPlaceholderText('Choose a color').click();
 		cy.get('.swatches > [style="background-color: rgb(203, 41, 41);"]:visible').click();
-		cy.click_toolbar_button('Save');
+		cy.save();
 		cy.go_to_list('ToDo');
 
 		//Checking if the dropdown button contains list view and gantt view option to select from
@@ -24,7 +24,6 @@ context('Gantt View', () => {
 
 		//Checking if the label of the dropdown button has now changed to 'Gantt view'
 		cy.get('.custom-btn-group-label').should('contain', 'Gantt View');
-		//cy.get_field('status', 'Select').select("");
 		cy.set_select('status','');
 		cy.set_select('priority','');
 
