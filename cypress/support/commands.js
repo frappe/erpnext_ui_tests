@@ -131,7 +131,11 @@ Cypress.Commands.add("set_link", (fieldname, value) => {
 
 Cypress.Commands.add('get_toolbar_button', (text) => {
 	cy.scrollTo('top', {ensureScrollable: false});
-	return cy.get(`.page-head [data-label="${encodeURIComponent(text)}"]:visible button`);
+	let selector = `.page-head [data-label="${encodeURIComponent(text)}"]:visible button`;
+	if (Cypress.$(selector).length===0) {
+	 selector = `.page-head button[data-label="${encodeURIComponent(text)}"]:visible`
+	}
+	return cy.get(selector);
 });
 
 Cypress.Commands.add('click_toolbar_button', (text) => {
@@ -225,7 +229,7 @@ Cypress.Commands.add("click_dropdown_action", (dropdown_name, action_name) => {
 
 Cypress.Commands.add('click_menu_button', () => {
 	cy.scrollTo('top', {ensureScrollable: false});
-	return cy.get(`.menu-btn-group:visible`).click({force: true});
+	return cy.get(`.menu-btn-group:visible button`).click({force: true});
 });
 
 Cypress.Commands.add("get_read_only", (fieldname) => {
