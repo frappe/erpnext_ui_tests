@@ -45,14 +45,13 @@ context('Create Sales Order', () => {
 		cy.get_input('transaction_date').should('have.value', today);
 		cy.get_select('order_type').should('have.value', 'Sales');
 		cy.get_input('customer').should('have.value', 'Mihir Sharma');
-		cy.datepicker_pick_today('delivery_date');
+		cy.set_today('delivery_date');
 
 		cy.click_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 
-		cy.get('.rows > .grid-row > .data-row > .col-xs-3').trigger('click', {force: true});
-		cy.set_link('item_code', 'Wireless Bluetooth Headphones - Black');
+		cy.set_link('items.item_code', 'Wireless Bluetooth Headphones - Black');
 		cy.get_input('item_code').should('have.value', 'Wireless Bluetooth Headphones - Black');
 
 		cy.get_input('delivery_date').should('have.value', today);
