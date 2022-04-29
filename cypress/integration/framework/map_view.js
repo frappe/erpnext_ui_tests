@@ -57,7 +57,7 @@ context('Map View', () => {
 	it('Removing the doc', () => {
 		cy.go_to_list('Test Location');
 		cy.click_listview_checkbox(0);
-		cy.click_toolbar_button('Actions');
+		cy.click_action_button('Actions');
 		cy.click_toolbar_dropdown('Delete');
 		cy.click_modal_primary_button('Yes');
 		cy.hide_dialog();
