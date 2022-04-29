@@ -36,7 +36,7 @@ context('Image View', () => {
 		cy.get_input('full_name').clear();
 		cy.click_custom_toolbar_button('List View');
 		cy.location('pathname').should('eq', '/app/user');
-		cy.click_toolbar_button('Image');
+		cy.click_toolbar_dropdown('Image');
 		cy.get_input('full_name').clear();
 
 		//Checks the URL after the visiting the Image view
