@@ -76,8 +76,8 @@ context('Sales Invoice Creation', () => {
 			cy.get_read_only('total').should('contain', "₹ 2,000.00");
 			cy.get_read_only('grand_total').should('contain', "₹ 2,000.00");
 			cy.get_read_only('rounded_total').should('contain', "₹ 2,000.00");
-			console.log('here');
 			cy.save();
+			cy.get_page_title().should('contain', 'Draft');
 			cy.submit('Unpaid');
 		});
 	});
