@@ -19,7 +19,6 @@ context('Gantt View', () => {
 
 		//Checking if the dropdown button contains list view and gantt view option to select from
 		cy.click_custom_toolbar_button('List View');
-		cy.get_toolbar_button('Gantt');
 		cy.click_toolbar_dropdown('Gantt');
 
 		//Checking if the label of the dropdown button has now changed to 'Gantt view'
