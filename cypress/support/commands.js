@@ -189,10 +189,9 @@ Cypress.Commands.add('get_page_indicator', () => {
 Cypress.Commands.add('submit', (indicator) => {
 	cy.intercept('/api').as('api');
 	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
-	cy.get('.modal.show .btn-primary').click();
 	cy.wait('@api');
+	cy.get('.modal.show button.btn-primary').click();
 	cy.get_page_indicator().contains(indicator);
-
 });
 
 Cypress.Commands.add('cancel', (indicator) => {
@@ -208,7 +207,7 @@ Cypress.Commands.add('get_page_title', () => {
 });
 
 Cypress.Commands.add('click_section', (title) => {
-	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: 'center'});
+	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false, force: true});
 });
 
 Cypress.Commands.add('grid_add_row', (fieldname) => {
