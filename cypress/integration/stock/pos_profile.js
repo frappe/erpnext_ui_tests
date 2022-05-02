@@ -13,7 +13,7 @@ context('Create POS Profile', () => {
 			cy.save();
 		});
 
-        	it.only('Create POS Profile', () => {
+        	it('Create POS Profile', () => {
             cy.visit(`app/pos-profile`);
             cy.wait(200);
             cy.click_listview_primary_button('Add POS Profile');
