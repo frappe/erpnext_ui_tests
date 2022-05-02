@@ -15,15 +15,13 @@ context('Website Item', () => {
 			cy.compare_document({
 			item_name: "Teak Shoe Rack",
 			valuation_rate: "1000",
-			valuation_rate: "12300.000'",
+			standard_rate: "12300.000'",
 			item_group: "All Item Groups",
 			stock_uom: "Nos",
 			is_stock_item: 1,
 			uoms: [{ uom: "Nos", conversion_factor: 1 }],
 		});
-	});
         //Creating an item and publishing it
-      	it('Create an item and publish as website item', () => {
 		cy.click_dropdown_action('Actions', 'Publish in Website');
 
         //Checking if dialog box opens upon publishing and redirecting to website item record created
@@ -42,4 +40,3 @@ context('Website Item', () => {
  		cy.click_modal_primary_button('Yes');
     });
 });
-
