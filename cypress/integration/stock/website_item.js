@@ -3,9 +3,27 @@ context('Website Item', () => {
         cy.login();
     });
 
+		it("Create an item", () => {
+			cy.new_doc("Item");
+			cy.set_input('item_code', 'Teak Shoe Rack');
+			cy.set_link('item_group','All Item Groups');
+			cy.set_input('valuation_rate', '1000');
+			cy.set_input('standard_rate', '12300.000');
+			cy.set_link('stock_uom', 'Nos');
+			cy.save();
+
+			cy.compare_document({
+			item_name: "Teak Shoe Rack",
+			valuation_rate: "1000",
+			valuation_rate: "12300.000'",
+			item_group: "All Item Groups",
+			stock_uom: "Nos",
+			is_stock_item: 1,
+			uoms: [{ uom: "Nos", conversion_factor: 1 }],
+		});
+	});
         //Creating an item and publishing it
       	it('Create an item and publish as website item', () => {
-		cy.visit('app/item/Teak%20Shoe%20Rack');
 		cy.click_dropdown_action('Actions', 'Publish in Website');
 
         //Checking if dialog box opens upon publishing and redirecting to website item record created
