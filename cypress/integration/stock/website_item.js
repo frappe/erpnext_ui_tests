@@ -11,16 +11,8 @@ context('Website Item', () => {
 			cy.set_input('standard_rate', '12300.000');
 			cy.set_link('stock_uom', 'Nos');
 			cy.save();
+			cy.wait(500);
 
-			cy.compare_document({
-			item_name: "Teak Shoe Rack",
-			valuation_rate: "1000",
-			standard_rate: "12300'",
-			item_group: "All Item Groups",
-			stock_uom: "Nos",
-			is_stock_item: 1,
-			uoms: [{ uom: "Nos", conversion_factor: 1 }],
-		});
         //Creating an item and publishing it
 		cy.click_dropdown_action('Actions', 'Publish in Website');
 

@@ -25,6 +25,7 @@
     "stock/material_request.js",
     "stock/stock_entry.js",
     "stock/pos_profile.js",
-    "stock/website_item.js"
+    "stock/website_item.js",
+    "stock/quick_stock_balance.js"
   ]
 }
