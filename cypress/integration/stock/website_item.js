@@ -15,7 +15,7 @@ context('Website Item', () => {
 			cy.compare_document({
 			item_name: "Teak Shoe Rack",
 			valuation_rate: "1000",
-			standard_rate: "12300.000'",
+			standard_rate: "12300'",
 			item_group: "All Item Groups",
 			stock_uom: "Nos",
 			is_stock_item: 1,
