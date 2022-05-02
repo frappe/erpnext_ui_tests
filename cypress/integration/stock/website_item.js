@@ -4,15 +4,7 @@ context('Website Item', () => {
     });
 
 		it("Create an item", () => {
-			cy.new_doc("Item");
-			cy.set_input('item_code', 'Teak Shoe Rack');
-			cy.set_link('item_group','All Item Groups');
-			cy.set_input('opening_stock', '1000');
-			cy.set_input('valuation_rate', '1000');
-			cy.set_input('standard_rate', '12300.000');
-			cy.set_link('stock_uom', 'Nos');
-			cy.save();
-			cy.wait(500);
+		cy.visit(`app/item/Teak%20Shoe%20Rack`);
 
         //Creating an item and publishing it
 		cy.click_dropdown_action('Actions', 'Publish in Website');
