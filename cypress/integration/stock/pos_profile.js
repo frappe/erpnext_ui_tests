@@ -6,32 +6,30 @@ context('Create POS Profile', () => {
 			//Set mode of payment first
 			it('Sets appropriate account for mode of payment', () => {
 			cy.visit('app/mode-of-payment/Wire%20Transfer');
-			cy.findByRole('button', {name: 'Add Row'}).trigger('click', {force: true});
-			cy.get('.rows > .grid-row > .data-row > .row-index').click();
-			cy.get_field('default_account', 'Link').clear().type('Cash - CT', {delay: 200});
-			cy.get('.grid-collapse-row').click();
+			cy.get_grid_edit();
+			cy.set_link('accounts.company', 'Wind Power LLC');
+			cy.set_link('accounts.default_account', 'Cash - WP');
 			cy.wait(500);
-			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
+			cy.save();
 		});
 
-        	it('Create POS Profile', () => {
+        	it.only('Create POS Profile', () => {
             cy.visit(`app/pos-profile`);
             cy.wait(200);
             cy.click_listview_primary_button('Add POS Profile');
             cy.location("pathname").should("eq","/app/pos-profile/new-pos-profile-1");
-            cy.get_field('__newname', 'Data').type('Test Profile', {delay: 200});
-			cy.get_field('__newname', 'Data').should('have.value', 'Test Profile');
-			cy.get_field('warehouse', 'Link').focus();
-            cy.get_field('warehouse', 'Link').clear().type('Stores - CT');
-			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - CT');
+            cy.set_input('__newname', 'Test Profile');
+			cy.get_input('__newname', 'Data').should('have.value', 'Test Profile');
+			cy.set_link('warehouse', 'Stores - WP');
+			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - WP');
 
-			//Select Mode of Payment
-			cy.get('.rows > .grid-row > .data-row > .col-xs-8').trigger('click', {force:true});
-			cy.get_field('mode_of_payment', 'Link').focus().trigger('click', {force:true}).should('be.visible');
-			cy.get_field('mode_of_payment', 'Link').type('Wire Transfer');
-			cy.get_field('mode_of_payment', 'Link').should('have.value', 'Wire Transfer');
-			cy.get_field('default').check();
+			//SeleWP Mode of Payment
+			cy.get_grid_edit();
+			cy.get_field('default', 'Check').check();
 			cy.get_field('default', 'checkbox').should('be.checked');
+			cy.set_link('payments.mode_of_payment', 'Wire Transfer');
+			cy.get_field('mode_of_payment', 'Link').should('have.value', 'Wire Transfer');
+			cy.get('.grid-collapse-row').click();
 
 			//Set POS Configurations
 			cy.get_field('allow_rate_change').check();
@@ -39,19 +37,16 @@ context('Create POS Profile', () => {
 			cy.get_field('allow_discount_change').check();
 			cy.get_field('allow_discount_change', 'checkbox').should('be.checked');
 
-			//Select Item Group
+			//SeleWP Item Group
 
 			//Set necessary accounts
-			cy.get_field('write_off_account', 'Link').focus();
-			cy.get_field('write_off_account', 'Link').clear().type('Write Off - CT', {delay: 200});
-			cy.get_field('write_off_account', 'Link').should('have.value', 'Write Off - CT');
-			cy.get_field('write_off_cost_center', 'Link').focus();
-			cy.get_field('write_off_cost_center', 'Link').clear().type('Main - CT', {delay: 200});
-			cy.get_field('write_off_cost_center', 'Link').should('have.value', 'Main - CT');
-			cy.get_field('apply_discount_on', 'Select').select('Grand Total');
-            cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
-			cy.get_field('selling_price_list', 'Link').should('have.value', 'Standard Selling');
-			cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
+			cy.set_link('write_off_account', 'Write Off - WP');
+			cy.get_field('write_off_account', 'Link').should('have.value', 'Write Off - WP');
+			cy.set_link('write_off_cost_center', 'Main - WP');
+			cy.get_field('write_off_cost_center', 'Link').should('have.value', 'Main - WP');
+			cy.set_select('apply_discount_on', 'Grand Total');
+            cy.save();
+			cy.get_input('selling_price_list', 'Link').should('have.value', 'Standard Selling');
 			cy.location("pathname").should("not.be","/app/pos-profile/new-pos-profile-1");
         });
     });
