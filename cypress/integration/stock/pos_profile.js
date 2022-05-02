@@ -3,16 +3,6 @@ context('Create POS Profile', () => {
     cy.login();
         });
 
-			//Set mode of payment first
-			it('Sets appropriate account for mode of payment', () => {
-			cy.visit('app/mode-of-payment/Wire%20Transfer');
-			cy.get_grid_edit();
-			cy.set_link('accounts.company', 'Wind Power LLC');
-			cy.set_link('accounts.default_account', 'Cash - WP');
-			cy.wait(500);
-			cy.save();
-		});
-
         	it('Create POS Profile', () => {
             cy.visit(`app/pos-profile`);
             cy.wait(200);

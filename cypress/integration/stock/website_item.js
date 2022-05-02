@@ -21,7 +21,6 @@ context('Website Item', () => {
 				stock_uom: 'Nos',
 				is_stock_item: 1,
 			});
-		});
 
 		cy.get_page_title().should('contain', 'Teak Shoe Rack');
 		cy.get_page_title().should('contain',  'Enabled');
@@ -42,4 +41,5 @@ context('Website Item', () => {
 		cy.click_dropdown_action('Actions', 'Delete');
  		cy.click_modal_primary_button('Yes');
     });
+});
 
