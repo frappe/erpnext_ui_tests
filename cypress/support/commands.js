@@ -99,6 +99,10 @@ Cypress.Commands.add("get_select", (fieldname) => {
 	return cy.get(`[data-fieldname="${fieldname}"]:visible select`, {scrollBehavior: 'center'});
 });
 
+Cypress.Commands.add("get_read_only", (fieldname) => {
+	return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
+});
+
 Cypress.Commands.add("set_select", (fieldname, value) => {
 	cy.get_select(fieldname)
 		.select(value, {delay: 20, scrollBehavior: false})
