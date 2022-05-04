@@ -218,6 +218,16 @@ Cypress.Commands.add('grid_open_row', (fieldname, row_no) => {
 	cy.get(`[data-fieldname="${fieldname}"] .grid-row[data-idx="${row_no}"] .row-index`).click({scrollBehavior: 'center'});
 });
 
+Cypress.Commands.add("close_grid_edit_modal", () => {
+    return cy.get('.frappe-control .grid-collapse-row:visible')
+		.click({scrollBehavior: "center", force: true});
+});
+
+Cypress.Commands.add('grid_delete_row', (fieldname, row_no) => {
+	cy.get(`[data-fieldname="${fieldname}"] .grid-row[data-idx="${row_no}"] .row-check`).click({scrollBehavior: 'center'});
+	cy.get(`.grid-remove-rows:visible`).click({scrollBehavior: 'center'});
+});
+
 Cypress.Commands.add("set_today", (fieldname) => {
 	cy.get(`[data-fieldname="${fieldname}"] input:visible`)
 		.click({scrollBehavior: false}).wait(100);  // Opens calendar
@@ -242,9 +252,4 @@ Cypress.Commands.add('click_action_button', () => {
 
 Cypress.Commands.add("get_read_only", (fieldname) => {
     return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
-});
-
-Cypress.Commands.add("get_grid_edit", () => {
-    return cy.get('.frappe-control .btn-open-row:visible')
-		.click({scrollBehavior: "center", force: true});
 });

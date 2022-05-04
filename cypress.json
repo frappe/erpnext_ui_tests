@@ -10,7 +10,7 @@
   },
   "testFiles": [
     "TF_01_smoke/*",
-	"TF_02_framework/*",
+	  "TF_02_framework/*",
     "TF_03_masters/*",
     "TF_04_accounts/*",
     "TF_05_selling/*",
