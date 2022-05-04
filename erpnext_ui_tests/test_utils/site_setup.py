@@ -3,7 +3,7 @@
 
 from __future__ import unicode_literals
 import frappe
-from erpnext.setup.utils import _enable_all_domains, _enable_all_roles_for_admin, set_defaults_for_tests
+from erpnext.setup.utils import _enable_all_roles_for_admin, set_defaults_for_tests
 
 def execute():
 	frappe.clear_cache()
@@ -30,7 +30,6 @@ def execute():
 				"domains": ["Manufacturing"],
 			}
 		)
-		_enable_all_domains()
 
 	frappe.db.sql("delete from `tabLeave Allocation`")
 	frappe.db.sql("delete from `tabLeave Application`")
