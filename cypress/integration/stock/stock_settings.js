@@ -44,7 +44,7 @@ context("Stock Settings", () => {
 	    cy.get_input('price_list_rate', 'Currency').should('not.have.value','0');
 	});
 
-	it.only("Check if barcode field appears in stock transactions ", () => {
+	it("Check if barcode field appears in stock transactions ", () => {
 			cy.new_doc('Delivery Note')
 			cy.grid_open_row('items', 1);
 			cy.get_input('barcode', 'Link').should('be.visible');
