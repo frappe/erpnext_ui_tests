@@ -14,12 +14,12 @@ context('Create POS Profile', () => {
 			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - WP');
 
 			//SeleWP Mode of Payment
-			cy.get_grid_edit();
+			cy.grid_open_row('payments', 1);
 			cy.get_field('default', 'Check').check();
 			cy.get_field('default', 'checkbox').should('be.checked');
 			cy.set_link('payments.mode_of_payment', 'Wire Transfer');
 			cy.get_field('mode_of_payment', 'Link').should('have.value', 'Wire Transfer');
-			cy.get('.grid-collapse-row').click();
+			cy.close_grid_edit_modal();
 
 			//Set POS Configurations
 			cy.get_field('allow_rate_change').check();
