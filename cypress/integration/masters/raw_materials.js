@@ -17,7 +17,7 @@ context("Item", () => {
 		cy.get_page_title().should('contain',  'Enabled');
 	});
 
-	it.only("Create a raw material : 1", () => {
+	it("Create a raw material : 1", () => {
 		let item_code = 'Wooden Furniture Legs 6 inch'
 		cy.new_doc("Item");
 		cy.set_input('item_code', item_code);
@@ -36,6 +36,7 @@ context("Item", () => {
 		cy.new_doc("Item");
 		cy.set_input('item_code', item_code);
 		cy.set_link('item_group','Raw Material');
+		cy.set_input('opening_stock', '1000');
 		cy.set_input('valuation_rate', '1000');
 		cy.set_input('standard_rate', '1000');
 		cy.set_link('stock_uom', 'Nos');
@@ -49,6 +50,7 @@ context("Item", () => {
 		cy.new_doc("Item");
 		cy.set_input('item_code', item_code);
 		cy.set_link('item_group','Raw Material');
+		cy.set_input('opening_stock', '1000');
 		cy.set_input('valuation_rate', '400');
 		cy.set_input('standard_rate', '499');
 		cy.set_link('stock_uom', 'Nos');
@@ -61,6 +63,7 @@ context("Item", () => {
 		cy.set_input('item_code', item_code);
 		cy.set_input('item_name', 'Premium Wood Stain Fast Dry - 1L');
 		cy.set_link('item_group','Raw Material');
+		cy.set_input('opening_stock', '1000');
 		cy.set_input('valuation_rate', '1000');
 		cy.set_input('standard_rate', '1499');
 		cy.set_link('stock_uom', 'Nos');
@@ -73,6 +76,7 @@ context("Item", () => {
 		cy.set_input('item_code', item_code);
 		cy.set_input('item_name', 'Linzer 3121 Wood Stain Brush');
 		cy.set_link('item_group','Raw Material');
+		cy.set_input('opening_stock', '1000');
 		cy.set_input('valuation_rate', '599');
 		cy.set_input('standard_rate', '599');
 		cy.set_link('stock_uom', 'Nos');
