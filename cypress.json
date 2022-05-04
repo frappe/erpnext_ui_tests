@@ -9,23 +9,11 @@
     "openMode": 0
   },
   "testFiles": [
-    "framework/*",
-    "smoke/*",
-    "masters/*",
-    "accounts/company.js",
-    "accounts/chart_of_accounts.js",
-    "accounts/fiscal_year.js",
-    "selling/lead.js",
-    "selling/quotation.js",
-    "selling/sales_order.js",
-    "selling/sales_invoice.js",
-    "selling/sales_invoice_payment.js",
-    "selling/delivery_note.js",
-    "stock/warehouse.js",
-    "stock/material_request.js",
-    "stock/stock_entry.js",
-    "stock/pos_profile.js",
-    "stock/website_item.js",
-	"stock/quick_stock_balance.js"
+    "TF_01_smoke/*",
+	"TF_02_framework/*",
+    "TF_03_masters/*",
+    "TF_04_accounts/*",
+    "TF_05_selling/*",
+    "TF_06_stock/*"
   ]
 }
