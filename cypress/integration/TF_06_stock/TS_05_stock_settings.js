@@ -46,6 +46,7 @@ context("Stock Settings", () => {
 
 	it("Check if barcode field appears in stock transactions ", () => {
 		cy.new_doc('Delivery Note')
+
 		cy.grid_open_row('items', 1);
 		cy.get_input('barcode', 'Link').should('be.visible');
 	});
