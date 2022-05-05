@@ -1,3 +1,4 @@
+
 context('Delivery Note Creation', () => {
 	before(() => {
 		cy.login();
@@ -13,7 +14,7 @@ context('Delivery Note Creation', () => {
 				stock_uom: "Nos",
 			},
 			true
-		)
+			)
 
 		cy.insert_doc(
 			"Customer",
@@ -39,6 +40,7 @@ context('Delivery Note Creation', () => {
 		if (mm < 10) mm = '0' + mm;
 		var today_date = dd + '-' + mm + '-' + yyyy;
 
+		cy.wait(500);
 		cy.insert_doc(
 			"Sales Order",
 			{
@@ -51,41 +53,52 @@ context('Delivery Note Creation', () => {
 			},
 			true
 		).then((d)=>{ 
-			console.log(d);
-			cy.visit('app/sales-order/'+ d.name);
-			cy.submit('To Deliver and Bill');
-			cy.click_dropdown_action('Create', 'Sales Invoice');
+		console.log(d);
+		cy.visit('app/sales-order/'+ d.name);
+		cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
+		cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
+		cy.hide_dialog();
+		cy.get('.page-title').should('contain', 'To Deliver and Bill');
+		cy.findByRole('button', {name: 'Create'}).click();
+		cy.get('[data-label="Sales%20Invoice"]').click();
 
-			cy.save();
-			cy.get_page_title().should('contain', 'Draft');
-			cy.submit('Unpaid');
-			cy.click_dropdown_action('Create', 'Delivery');
+		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
+		cy.get('.page-title').should('contain', 'Draft');
+		cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
+		cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
+		cy.hide_dialog();
+		cy.get('.page-title').should('contain', 'Unpaid');
 
-			cy.url().should('include', '/app/delivery-note/new-delivery-note');
-			cy.get_select('naming_series').should('have.value', 'MAT-DN-.YYYY.-');
-			cy.get_input('customer').should('have.value', 'William Harris');
-			cy.get_input('posting_date').should('have.value', today_date);
+		cy.findByRole('button', {name: 'Create'}).trigger('click', {force: true});
+		cy.get('[data-label="Delivery"]').click();
 
-			cy.click_section('Currency and Price List');
-			cy.get_input('currency').should('have.value', 'INR');
-			cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
+		cy.get_field('naming_series', 'Select').should('have.value', 'MAT-DN-.YYYY.-');
+		cy.get_field('customer', 'Link').should('have.value', 'William Harris');
+		cy.get_field('posting_date', 'Date').should('have.value', today_date);
 
-			cy.get_table_field('items', 1, 'item_code', 'Link').contains('Solid Wood Dinning Set');
-			cy.get_read_only('total_qty').should('contain', "1");
-			cy.get_read_only('total').should('contain', "₹ 75,000.00");
-			cy.get_read_only('grand_total').should('contain', "₹ 75,000.00");
-			cy.get_read_only('rounded_total').should('contain', "₹ 75,000.00");
+		cy.click_section('Currency and Price List');
+		cy.get_field('currency', 'Link').should('have.value', "INR");
+		cy.get_field('selling_price_list', 'Link').should('have.value', "Standard Selling");
 
-			cy.save();
-			cy.get_page_title().should('contain', 'Draft');
-			cy.submit('Completed');
-			cy.get_page_title().should('contain', 'William Harris');
+		cy.get_table_field('items', 1, 'item_code', 'Link').contains('Solid Wood Dinning Set');
+		cy.get('[data-fieldname="total_qty"]').should('contain', "1");
+		cy.get('[data-fieldname="total"]').should('contain', "₹ 75,000.00");
+		cy.get('[data-fieldname="grand_total"]').should('contain', "₹ 75,000.00");
+		cy.get('[data-fieldname="rounded_total"]').should('contain', "₹ 75,000.00");
 
-			cy.click_dropdown_action('View', 'Stock Ledger');
-			cy.get('.dt-cell__content > span > div').should('contain', "-1.000");
+		cy.findByRole('button', {name: 'Save'}).trigger('click', {force: true});
+		cy.get('.page-title').should('contain', 'Draft');
+		cy.findByRole('button', {name: 'Submit'}).trigger('click', {force: true});
+		cy.findByRole('button', {name: 'Yes'}).trigger('click', {force: true});
+		cy.hide_dialog();
+		cy.get('.page-title').should('contain', 'William Harris');
+		cy.get('.page-title').should('contain', 'Completed');
 
-			cy.visit('app/sales-order/'+ d.name);
-			cy.get_page_title().should('contain', 'Completed');
+		cy.click_dropdown_action('View', 'Stock Ledger');
+		cy.get('.dt-cell__content > span > div').should('contain', "-1.000");
+
+		cy.visit('app/sales-order/'+ d.name);
+		cy.get('.page-title').should('contain', 'Completed');
 		});
 	});
 });
