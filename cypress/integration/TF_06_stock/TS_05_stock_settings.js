@@ -20,7 +20,7 @@ context("Stock Settings", () => {
 		cy.save();
 	});
 
-	it.only("Check if all options set under item defaults are working", () => {
+	it("Check if all options set under item defaults are working", () => {
 	    cy.visit('app/item/Scrapwood%20table%20top');
 
 		//Check if Item Group is set as per item defaults in stock settings
