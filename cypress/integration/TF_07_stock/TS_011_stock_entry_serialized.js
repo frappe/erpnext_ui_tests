@@ -25,7 +25,7 @@ context('Create Stock Entry', () => {
 		cy.new_doc('Stock Entry');
 		cy.location("pathname").should("eq","/app/stock-entry/new-stock-entry-1");
 		cy.set_link('stock_entry_type', 'Material Receipt');
-		cy.set_link('to_warehouse', 'Stores - CT');
+		cy.set_link('to_warehouse', 'Stores - WP');
 		cy.set_link('items.item_code', 'Solid Wood Armchair In Honey Oak Finish');
 		cy.set_input('items.qty', 5);
 		cy.save();
