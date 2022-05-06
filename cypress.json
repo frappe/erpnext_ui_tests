@@ -10,10 +10,11 @@
   },
   "testFiles": [
     "TF_01_smoke/*",
-	"TF_02_framework/*",
+    "TF_02_framework/*",
     "TF_03_masters/*",
     "TF_04_accounts/*",
     "TF_05_selling/*",
-    "TF_06_stock/*"
+    "TF_06_buying/*",
+    "TF_07_stock/*"
   ]
 }

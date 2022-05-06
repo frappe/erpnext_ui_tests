@@ -86,8 +86,7 @@ context('Quotation Creation', () => {
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 
-		cy.get('.rows > .grid-row > .data-row > .col-xs-4').trigger('click', {force: true});
-		cy.set_link('item_code', 'Apple iPhone 13 Pro');
+		cy.set_link('items.item_code', 'Apple iPhone 13 Pro');
 		cy.get_input('qty').should('have.value', "1.000");
 		cy.set_input('rate', '110000');
 		cy.get_input('rate').blur();
