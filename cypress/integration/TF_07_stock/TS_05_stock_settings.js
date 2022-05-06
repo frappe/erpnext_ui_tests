@@ -21,17 +21,13 @@ context("Stock Settings", () => {
 	});
 
 	it("Check if all options set under item defaults are working", () => {
-	    cy.new_doc('Item');
-		cy.set_input('item_code', 'Scrapwood table top');
+	    cy.visit('app/item/Scrapwood%20table%20top');
 
 		//Check if Item Group is set as per item defaults in stock settings
 		cy.get_input('item_group', 'Link').should('have.value','All Item Groups');
 
 		//Check if Stock UOM is set as per item defaults in stock settings
 		cy.get_input('stock_uom', 'Link').should('have.value','Nos');
-		cy.set_input('standard_rate', '12300.00');
-		cy.save();
-		cy.wait(500);
 
 		//Check if item naming is done as per Item Code
 		cy.get_page_title().should('contain', 'Scrapwood table top');
@@ -44,10 +40,11 @@ context("Stock Settings", () => {
 	    cy.get_input('price_list_rate', 'Currency').should('not.have.value','0');
 	});
 
-	it.only("Check if barcode field appears in stock transactions ", () => {
-			cy.new_doc('Delivery Note')
-			cy.get_grid_edit();
-			cy.get_input('barcode', 'Link').should('be.visible');
+	it("Check if barcode field appears in stock transactions ", () => {
+		cy.new_doc('Delivery Note')
+
+		cy.grid_open_row('items', 1);
+		cy.get_input('barcode', 'Link').should('be.visible');
 	});
 });
 
