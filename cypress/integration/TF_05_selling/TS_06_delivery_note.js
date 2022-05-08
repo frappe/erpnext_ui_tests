@@ -39,7 +39,9 @@ context('Delivery Note Creation', () => {
 
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
-		cy.submit('Completed');
+		cy.click_toolbar_button('Submit');
+		cy.click_modal_primary_button('Yes');
+		cy.get_page_title().should('contain', 'Completed');
 		cy.get_page_title().should('contain', 'William Harris');
 
 		cy.click_dropdown_action('View', 'Stock Ledger');

@@ -37,7 +37,6 @@ context("Item", () => {
 	});
 
 	it('Create stock item', () => {
-		let item_code = 'WB-001'
 		cy.new_doc("Item");
 		cy.set_input('item_code', 'Apple iPhone 13 Pro Max');
 		cy.get_input('item_name').should('have.value', 'Apple iPhone 13 Pro Max');
