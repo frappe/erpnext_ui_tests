@@ -28,7 +28,7 @@ context('Delivery Note Creation', () => {
 
 		//cy.get_table_field('items', 1, 'item_code', 'Link').contains('Apple iPhone 13 Pro Max');
 		cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
-		cy.get_input('qty').should('have.value', "1");
+		cy.get_input('qty').should('have.value', "1.000");
 		cy.get_input('rate').should('have.value', "1,10,000.00");
 		cy.get_read_only('amount').should('contain', "1,10,000.00");
 
