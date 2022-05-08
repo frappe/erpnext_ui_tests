@@ -15,7 +15,6 @@ context('Delivery Note Creation', () => {
 
 		cy.visit('app/sales-invoice');
 		cy.click_listview_row_item(0);
-		cy.get_page_title().should('contain', 'Unpaid');
 		cy.click_dropdown_action('Create', 'Delivery');
 		cy.url().should('include', '/app/delivery-note/new-delivery-note');
 
