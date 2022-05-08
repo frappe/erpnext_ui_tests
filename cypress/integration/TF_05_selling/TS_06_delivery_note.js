@@ -41,6 +41,7 @@ context('Delivery Note Creation', () => {
 		cy.get_page_title().should('contain', 'Draft');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
+		cy.hide_dialog();
 		cy.get_page_title().should('contain', 'Completed');
 		cy.get_page_title().should('contain', 'William Harris');
 
