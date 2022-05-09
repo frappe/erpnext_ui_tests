@@ -34,5 +34,16 @@ context("Item", () => {
 		cy.set_input('valuation_rate', '400');
 		cy.set_link('stock_uom', 'Nos');
 		cy.save();
+	});
+
+	it('Create stock item', () => {
+		cy.new_doc("Item");
+		cy.set_input('item_code', 'Apple iPhone 13 Pro Max');
+		cy.get_input('item_name').should('have.value', 'Apple iPhone 13 Pro Max');
+		cy.set_link('item_group','All Item Groups');
+		cy.set_input('opening_stock', '10')
+		cy.set_input('valuation_rate', '110000');
+		cy.set_link('stock_uom', 'Nos');
+		cy.save();
 	})
 });
