@@ -4,11 +4,12 @@ context('Accounts Settings', () => {
 	});
 
 	it('Check unlinking of Payment on cancellation of Invoice', () => {
+		var today = new Date();
+		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
 		cy.visit('/app/accounts-settings');
 		cy.get_input('unlink_payment_on_cancellation_of_invoice', 'checkbox').should('be.checked');
 
-		var today = new Date();
-		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		cy.insert_doc(
 			"Sales Invoice",
 			{
