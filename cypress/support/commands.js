@@ -71,7 +71,7 @@ Cypress.Commands.add("compare_document", (expected_document) => {
 });
 
 Cypress.Commands.add("click_listview_checkbox", (row_no) => {
-	cy.get('.list-row-checkbox').eq(row_no).click();
+	cy.get('.list-row-checkbox:visible').eq(row_no).click({force: true});
 });
 
 Cypress.Commands.add("get_input", (fieldname) => {
@@ -252,4 +252,38 @@ Cypress.Commands.add('click_action_button', () => {
 
 Cypress.Commands.add("get_read_only", (fieldname) => {
     return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
+});
+
+Cypress.Commands.add('get_list_row', (fieldname) => {
+	return cy.get(`.frappe-list .level-item[title="${fieldname}"]`);
+});
+
+Cypress.Commands.add('list_open_row', (fieldname) => {
+	return cy.get_list_row(fieldname).click({scrollBehavior: 'center', force: true});
+});
+
+Cypress.Commands.add('clear_filter', () => {
+	let has_filter = false;
+	cy.intercept({
+		method: 'POST',
+		url: 'api/method/frappe.model.utils.user_settings.save'
+	}).as('filter-saved');
+	cy.get('.filter-section .filter-button:visible').click({force: true});
+	cy.wait(300);
+	cy.get('.filter-popover').should('exist');
+	cy.get('.filter-popover').then(popover => {
+		if (popover.find('input.input-with-feedback')[0].value != '') {
+			has_filter = true;
+		}
+	});
+	cy.get('.filter-popover').find('.clear-filters').click();
+	cy.get('.filter-section .filter-button:visible').click();
+	cy.window().its('cur_list').then(cur_list => {
+		cur_list && cur_list.filter_area && cur_list.filter_area.clear();
+		has_filter && cy.wait('@filter-saved');
+	});
+});
+
+Cypress.Commands.add('get_filter_button', () => {
+	cy.get('.filter-selector > .btn:visible');
 });
