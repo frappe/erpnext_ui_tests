@@ -5,9 +5,8 @@ context('Material Request', () => {
 
 	it('Create Material Request', () => {
 		cy.new_doc('Material Request');
-        var today = new Date();
-        var date = '22-'+(today.getMonth()+4)+'-'+today.getFullYear();
-		cy.set_input('schedule_date', date);
+
+		cy.set_today('schedule_date');
 		cy.set_link('set_warehouse', 'Stores - WP');
 		cy.set_link('items.item_code', 'Birch Ply');
 		cy.set_input('items.qty', 10);
