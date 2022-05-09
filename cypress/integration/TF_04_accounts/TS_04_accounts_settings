@@ -15,9 +15,9 @@ context('Accounts Settings', () => {
 			{
 					naming_series: "SINV-.YY.-",
 					posting_date: date,
-					customer: "Ankur Agarawal",
+					customer: "William Harris",
 					due_date: date,
-					items: [{"item_code": "Sleepy Owl Coffee Mug", "qty": 1, "rate": 400, "amount": 400}]
+					items: [{"item_code": "Apple iPhone 13 Pro Max", "qty": 1, "rate": 110000, "amount": 110000}]
 			},
 			true
 		).then((a)=>{
