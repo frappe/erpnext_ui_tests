@@ -13,9 +13,9 @@ context('Work Order', () => {
 			cy.click_modal_primary_button('Create');
 			cy.get_field('production_item').should('have.value', 'Classic Dining Table-TEAK');
 			cy.get_input('qty', '1');
-			cy.set_link('source_warehouse', 'Stores - CT');
-			cy.set_link('fg_warehouse', 'Finished Goods - CT');
-			cy.set_link('wip_warehouse', 'Work In Progress - CT');
+			cy.set_link('source_warehouse', 'Stores - WP');
+			cy.set_link('fg_warehouse', 'Finished Goods - WP');
+			cy.set_link('wip_warehouse', 'Work In Progress - WP');
 
 			//Setting operations against raw materials
 			cy.grid_open_row('required_items', 1);
