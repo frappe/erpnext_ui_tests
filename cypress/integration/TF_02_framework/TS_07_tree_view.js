@@ -6,6 +6,15 @@ context('Tree View', () => {
 		cy.go_to_list('DocType');
 		cy.insert_doc('DocType', doctype_location, true);
 	});
+
+	it('Creating root node', () =>{
+		cy.new_doc('Test Location');
+		cy.set_input('location_name', 'Mumbai');
+		cy.set_input('latitude', '17.632');
+		cy.set_input('longitude', '19.632');
+		cy.save();
+	});
+
 	it('Enabling "is_tree" for doctype and creating and verifying tree view', () => {
 		//Enabling tree for location doctype
 		cy.list_open_row('Test Location');
