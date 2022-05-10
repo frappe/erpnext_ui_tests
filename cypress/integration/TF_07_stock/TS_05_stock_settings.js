@@ -20,6 +20,21 @@ context("Stock Settings", () => {
 		cy.save();
 	});
 
+	it("Create an item", () => {
+		cy.new_doc('Item');
+		cy.set_input('item_code', 'Scrapwood table top');
+		cy.set_link('item_group','All Item Groups');
+		cy.set_input('opening_stock', '1000');
+		cy.set_input('valuation_rate', '1000');
+		cy.set_input('standard_rate', '22300');
+		cy.set_link('stock_uom', 'Nos');
+		cy.save();
+		cy.wait(500);
+		cy.get_page_title().should('contain', 'Scrapwood table top');
+		cy.get_page_title().should('contain',  'Enabled');
+	});
+
+
 	it("Check if all options set under item defaults are working", () => {
 	    cy.visit('app/item/Scrapwood%20table%20top');
 
