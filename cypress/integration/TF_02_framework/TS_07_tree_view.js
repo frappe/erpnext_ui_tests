@@ -93,6 +93,7 @@ context('Tree View', () => {
 		cy.get('.tree-children .tree-link').should('contain', 'LOCATION23456');
 
 		//Deleting the children node
+		cy.get('.tree-children .tree-link').click();
 		cy.get('.tree-node .tree-node-toolbar button').contains('Delete').click();
 		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Yes').click({force: true});
 		cy.hide_dialog();
