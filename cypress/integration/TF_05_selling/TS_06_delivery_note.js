@@ -5,7 +5,6 @@ context('Delivery Note Creation', () => {
 
 	it('Create DN via SI', () => {
 		var today = new Date();
-		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		const yyyy = today.getFullYear();
 		let mm = today.getMonth() + 1; // Months start at 0!
 		let dd = today.getDate();

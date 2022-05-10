@@ -34,7 +34,6 @@ context("Stock Settings", () => {
 		cy.get_page_title().should('contain',  'Enabled');
 	});
 
-
 	it("Check if all options set under item defaults are working", () => {
 	    cy.visit('app/item/Scrapwood%20table%20top');
 
