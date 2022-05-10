@@ -78,7 +78,6 @@ context('Tree View', () => {
 		//Renaming the children node
 		cy.get('.tree-children .tree-link').click();
 		cy.get('.tree-node .tree-node-toolbar button').contains('Rename').click();
-		//cy.click_modal_primary_button('Rename');
 		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Rename').click({force: true});
 		cy.get('.msgprint').should('contain', 'No changes made because old and new name are the same.');
 		cy.get('.btn-modal-close').click({force: true, multiple: true});
@@ -89,7 +88,7 @@ context('Tree View', () => {
 		cy.findByRole('button', {name: 'Rename'}).click();
 		cy.set_input('new_name', 'LOCATION23456');
 		cy.intercept('/api').as('api');
-		cy.click_modal_primary_button('Rename');
+		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Rename').click({force: true});
 		cy.wait('@api');
 		cy.get('.tree-children .tree-link').should('contain', 'LOCATION23456');
 
