@@ -1,4 +1,4 @@
-context('Material Request', () => {
+context('Work Order', () => {
 	before(() => {
 		cy.login();
 	});
@@ -11,7 +11,7 @@ context('Material Request', () => {
             	expect(str).to.equal(`Work Order`)});
 			cy.set_input('qty', '1');
 			cy.click_modal_primary_button('Create');
-			cy.get_field('production_item').should('have.value', 'Marcel Coffee Table');
+			cy.get_field('production_item').should('have.value', 'Classic Dining Table-TEAK');
 			cy.get_input('qty', '1');
 			cy.set_link('source_warehouse', 'Stores - CT');
 			cy.set_link('fg_warehouse', 'Finished Goods - CT');
