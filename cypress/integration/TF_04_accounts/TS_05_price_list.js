@@ -21,7 +21,7 @@ context('Price List', () => {
 
 		cy.new_doc('Item Price');
 		cy.url().should('include', '/app/item-price/new-item-price');
-		cy.set_link('item_code', 'dinning table chair set');
+		cy.set_link('item_code', 'Apple iPhone 13 Pro Max');
 		cy.set_link('price_list', 'Standard Selling');
 		cy.set_input('price_list_rate', '110000');
 		cy.save();
@@ -29,7 +29,7 @@ context('Price List', () => {
 
 		cy.new_doc('Item Price');
 		cy.url().should('include', '/app/item-price/new-item-price');
-		cy.set_link('item_code', 'dinning table chair set');
+		cy.set_link('item_code', 'Apple iPhone 13 Pro Max');
 		cy.set_link('price_list', 'Platinum');
 		cy.set_input('price_list_rate', '105000');
 		cy.save();
@@ -37,7 +37,7 @@ context('Price List', () => {
 
 		cy.new_doc('Item Price');
 		cy.url().should('include', '/app/item-price/new-item-price');
-		cy.set_link('item_code', 'dinning table chair set');
+		cy.set_link('item_code', 'Apple iPhone 13 Pro Max');
 		cy.set_link('price_list', 'Gold');
 		cy.set_input('price_list_rate', '108000');
 		cy.save();
@@ -51,7 +51,7 @@ context('Price List', () => {
 					party_name: "William Harris",
 					order_type: "Sales",
 					selling_price_list: "Standard Selling",
-					items: [{item_code: "dinning table chair set", qty: 1, rate: 110000}]
+					items: [{item_code: "Apple iPhone 13 Pro Max", qty: 1, rate: 110000}]
 				},
 			true
 		).then((b)=>{
@@ -59,7 +59,7 @@ context('Price List', () => {
 			cy.visit('app/quotation/'+ b.name);
 			cy.compare_document({
 				party_name: "William Harris",
-				items: [{item_code: "dinning table chair set", rate: 110000}]
+				items: [{item_code: "Apple iPhone 13 Pro Max", rate: 110000}]
 			});
 		});
 		cy.wait(200);
@@ -72,7 +72,7 @@ context('Price List', () => {
 					party_name: "William Harris",
 					order_type: "Sales",
 					selling_price_list: "Platinum",
-					items: [{item_code: "dinning table chair set", qty: 1, rate: 105000}]
+					items: [{item_code: "Apple iPhone 13 Pro Max", qty: 1, rate: 105000}]
 				},
 			true
 		).then((b)=>{
@@ -80,7 +80,7 @@ context('Price List', () => {
 			cy.visit('app/quotation/'+ b.name);
 			cy.compare_document({
 				party_name: "William Harris",
-				items: [{item_code: "dinning table chair set", rate: 105000}]
+				items: [{item_code: "Apple iPhone 13 Pro Max", rate: 105000}]
 			});
 		});
 		cy.wait(200);
@@ -93,7 +93,7 @@ context('Price List', () => {
 					party_name: "William Harris",
 					order_type: "Sales",
 					selling_price_list: "Gold",
-					items: [{item_code: "dinning table chair set", qty: 1, rate: 108000}]
+					items: [{item_code: "Apple iPhone 13 Pro Max", qty: 1, rate: 108000}]
 				},
 			true
 		).then((b)=>{
@@ -101,7 +101,7 @@ context('Price List', () => {
 			cy.visit('app/quotation/'+ b.name);
 			cy.compare_document({
 				party_name: "William Harris",
-				items: [{item_code: "dinning table chair set", rate: 108000}]
+				items: [{item_code: "Apple iPhone 13 Pro Max", rate: 108000}]
 			});
 		});
 	});
