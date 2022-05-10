@@ -38,7 +38,7 @@ context('Delivery Return Check', () => {
 			cy.submit('To Deliver and Bill');
 			cy.click_dropdown_action('Create', 'Delivery');
 			cy.url().should('include', '/app/delivery-note/new-delivery-note');
-			cy.save();
+			cy.click_toolbar_button('Save');
 			cy.get_page_title().should('contain', 'Draft');
 			cy.click_toolbar_button('Submit');
 			cy.click_modal_primary_button('Yes');
