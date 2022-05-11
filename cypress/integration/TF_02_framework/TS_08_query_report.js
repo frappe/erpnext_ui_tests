@@ -36,7 +36,7 @@ context('Query report', () => {
 
 		//Inoutting the query for generating the report
 		cy.list_open_row('Test item query report');
-		cy.fill_field('query', 'Select item_name, item_group, stock_uom from `tabitem`', 'Code');
+		cy.fill_field('query', 'Select item_name, item_group, stock_uom from tabItem', 'Code');
 		cy.wait(500);
 		cy.save();
 		cy.wait(800);
