@@ -40,12 +40,8 @@ context('Work Order', () => {
 			cy.wait(500);
 
 			//View Job Cards created and verify they're in draft state
-			cy.url().then((url) => {
-				cy.visit('app/job-card/view/list');
-				const name = url.split('/').pop();
-				cy.get_field('work_order', 'Link').should('have.value', name);
-				cy.click_listview_row_item(0);
-				cy.get_page_title().should('contain', 'Draft');
-			});
+			cy.visit('app/job-card/view/list');
+			cy.click_listview_row_item(0);
+			cy.get_page_title().should('contain', 'Open');
 		});
 });
