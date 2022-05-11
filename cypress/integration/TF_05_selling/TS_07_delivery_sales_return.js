@@ -8,15 +8,15 @@ context('Delivery Return Check', () => {
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
-		// Not adding item in master as stock consumption in other scripts can impact this case
+		//Not adding item in master as stock consumption in other scripts can impact this case
 		cy.insert_doc(
 			"Item",
 			{
-				item_code: "Sleepy Owl Coffee Mug",
-				item_group: "Products",
+				item_code: 'Sleepy Owl Coffee Mug',
+				item_group: 'Products',
 				valuation_rate: 500,
 				opening_stock: 5,
-				stock_uom: "Nos",
+				stock_uom: 'Nos',
 			},
 			true
 		)
@@ -24,12 +24,12 @@ context('Delivery Return Check', () => {
 		cy.insert_doc(
 			"Sales Order",
 				{
-					naming_series: "SAL-ORD-.YYYY.-",
+					naming_series: 'SAL-ORD-.YYYY.-',
 					transaction_date: date,
 					delivery_date: date,
-					customer: "William Harris",
-					order_type: "Sales",
-					items: [{"item_code": "Sleepy Owl Coffee Mug", "delivery_date": date, "qty": 1, "rate": 500}]
+					customer: 'William Harris',
+					order_type: 'Sales',
+					items: [{item_code: 'Sleepy Owl Coffee Mug', delivery_date: date, qty: 1, rate: 500}]
 				},
 			true
 		).then((c)=>{
@@ -40,10 +40,7 @@ context('Delivery Return Check', () => {
 			cy.url().should('include', '/app/delivery-note/new-delivery-note');
 			cy.click_toolbar_button('Save');
 			cy.get_page_title().should('contain', 'Draft');
-			cy.click_toolbar_button('Submit');
-			cy.click_modal_primary_button('Yes');
-			cy.hide_dialog();
-			cy.get_page_title().should('contain', 'To Bill');
+			cy.submit('To Bill');
 
 			cy.click_dropdown_action('View', 'Stock Ledger');
 			cy.get('.dt-cell__content > span > div').should('contain', "-1.000");
@@ -59,7 +56,7 @@ context('Delivery Return Check', () => {
 		cy.compare_document({
 			customer: "William Harris",
 			is_return: true,
-			items: [{item_code: "Sleepy Owl Coffee Mug", qty: "-1", rate: 500}]
+			items: [{item_code: 'Sleepy Owl Coffee Mug', qty: '-1', rate: 500, amount: '-500'}]
 		});
 
 		cy.save();
@@ -70,7 +67,7 @@ context('Delivery Return Check', () => {
 		cy.get_page_title().should('contain', 'Return');
 
 		cy.click_dropdown_action('View', 'Stock Ledger');
-		cy.get('.dt-cell__content > span > div').should('contain', "1.000");
+		cy.get('.dt-cell__content > span > div').should('contain', '1.000');
 
 		cy.visit('app/sales-order');
 		cy.click_listview_row_item(0);
