@@ -43,7 +43,6 @@ context('Work Order', () => {
 			cy.url().then((url) => {
 				cy.visit('app/job-card/view/list');
 				const name = url.split('/').pop();
-				cy.get_field('work_order', 'Link').clear();
 				cy.get_field('work_order', 'Link').should('have.value', name);
 				cy.click_listview_row_item(0);
 				cy.get_page_title().should('contain', 'Draft');
