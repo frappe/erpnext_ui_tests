@@ -14,7 +14,7 @@ context('Partial Payment', () => {
 				posting_date: date,
 				customer: "William Harris",
 				due_date: date,
-				items: [{item_code: "Apple iPhone 13 Pro Max2", qty: 1, rate: 110000, amount: 110000}]
+				items: [{item_code: "Apple iPhone 13 Pro Max", qty: 1, rate: 110000, amount: 110000}]
 			},
 			true
 		).then((d)=>{
