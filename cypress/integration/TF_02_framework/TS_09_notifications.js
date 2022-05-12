@@ -1,0 +1,89 @@
+context('Notifications', () => {
+	before(() => {
+		cy.login();
+		cy.go_to_list('User');
+	});
+
+	it('Creating a new user and Todo', () => {
+		//Creating a new user with all the roles assigned
+		cy.create_records({
+			doctype: 'User',
+			email: 'billy_jones@example.com',
+			first_name: 'Billy Jones'
+		});
+		cy.list_open_row('Billy Jones');
+		cy.wait(5000);
+		cy.get('.role-editor button.select-all').click({force: true});
+		cy.wait(500);
+		cy.click_section('Change Password');
+		cy.set_input('new_password', 'password@12345');
+		cy.save();
+		cy.hide_dialog();
+
+		//Creating a new todo
+		cy.set_input_awesomebar('todo');
+		cy.create_records({
+			doctype: 'ToDo',
+			priority: 'Low',
+			description: 'This is a test notifications Todo'
+		});
+		cy.logout('Administrator');
+	});
+
+	it('Login in into the new user and verifying if the notifications panel is initially empty', () => {
+		//Login in into the new user
+		cy.user_login('billy_jones@example.com', 'password@12345');
+		cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
+		cy.get('.notification-list-header').should('exist');
+
+		//Checking if the notifications panel has 2 tabs
+		cy.get('.notification-list-header .nav-tabs').find('li').should('have.length', '2');
+		cy.get('.notification-list-header .nav-tabs .notifications-category').should('contain', 'Notifications')
+		.and('contain', "Today's Events");
+
+		//Checking if the notifications tab is the active tab
+		cy.get('#notifications:visible').should('have.class', 'active');
+
+		//Checking if the notifications and events panel is empty
+		cy.get('.notification-list-body .panel-notifications').should('contain', 'No New notifications');
+		cy.get('#todays_events').click({force: true});
+		cy.get('#todays_events:visible').should('have.class', 'active');
+		cy.get('.notification-list-body .panel-events').should('contain', 'No Upcoming Events');
+		cy.logout('Billy Jones');
+		cy.user_login('administrator', 'admin');
+		cy.wait(2000);
+	});
+
+	it('Assigning a todo to the new user using the admin login and verifying if the notification is sent to user', () => {
+		cy.set_input_awesomebar('todo');
+		cy.list_open_row('This is a test notifications Todo');
+
+		//Assigning todo to the new user Billy Jones
+		cy.get('.form-sidebar button.add-assignment-btn').click({force: true});
+		cy.set_input('assign_to', 'billy_jones{enter}');
+		cy.click_modal_primary_button('Add');
+		cy.logout('Administrator');
+		cy.user_login('billy_jones@example.com', 'password@12345');
+		cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
+
+		//Checking if the notification is sent and is visible in the notifications panel of the user Billy Jones
+		cy.get('.message').should('exist');
+		cy.get('.subject-title').should('have.text', 'This is a test notifications Todo');
+	});
+
+	it('Deleting user and todo', () => {
+		cy.logout('Billy Jones');
+		cy.user_login('administrator', 'admin');
+
+		//Deleting the user Billy Jones
+		cy.delete_first_record('user');
+		cy.hide_dialog();
+
+		//Deleting todo
+		cy.set_input_awesomebar('todo');
+		cy.click_listview_checkbox(0);
+		cy.click_action_button('Actions');
+		cy.click_toolbar_dropdown('Delete');
+		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Yes').click({force: true});
+	});
+});
