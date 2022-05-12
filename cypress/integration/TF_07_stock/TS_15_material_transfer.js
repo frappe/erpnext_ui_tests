@@ -1,4 +1,4 @@
-context('Operations', () => {
+context('Material Transfer for Manufacturing', () => {
 	before(() => {
         cy.login();
     });
