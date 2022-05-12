@@ -55,6 +55,8 @@ context('Partial Payment', () => {
 	});
 
 	it('Create Second Payment against invoice', () => {
+		cy.visit('app/sales-invoice');
+		cy.click_listview_row_item(0);
 		cy.click_dropdown_action('Create', 'Payment');
 		cy.url().should('include', '/app/payment-entry/new-payment-entry');
 
