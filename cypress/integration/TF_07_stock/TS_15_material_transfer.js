@@ -17,6 +17,8 @@ context('Material Transfer for Manufacturing', () => {
 		cy.save();
 		cy.wait(500);
 		cy.submit('Submitted');
+		cy.wait(500);
+		cy.get_page_title().should('contain', 'Submitted');
 
 		//View stock ledger entries are made against correct voucher
 		cy.url().then((url) => {

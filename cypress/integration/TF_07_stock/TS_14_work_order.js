@@ -43,6 +43,6 @@ context('Work Order', () => {
 
 			cy.visit('app/job-card/view/list');
 			cy.click_listview_row_item(0);
-			cy.get_page_title().should('contain', 'Draft');
+			cy.get_page_title().should('contain', 'Open');
 		});
 });
