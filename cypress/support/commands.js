@@ -329,3 +329,9 @@ Cypress.Commands.add('delete_first_record', (doctype_name) => {
 	cy.click_toolbar_dropdown('Delete');
 	cy.click_modal_primary_button('Yes', {multiple: true});
 });
+
+Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
+	cy.set_input(fieldname, value);
+	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
+	.click({scrollBehavior: false});
+});
