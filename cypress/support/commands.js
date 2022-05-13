@@ -298,3 +298,46 @@ Cypress.Commands.add('get_filter_button', () => {
 	cy.get('.filter-selector > .btn:visible');
 });
 
+Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
+	cy.set_input(fieldname, value);
+	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
+	.click({scrollBehavior: false});
+});
+
+Cypress.Commands.add('set_input_awesomebar', (text) => {
+	cy.get('#navbar-search').type(`${text}{enter}`, {delay: 1000});
+});
+
+Cypress.Commands.add('click_navbar_icon', (name) => {
+	cy.get(`.navbar .dropdown-navbar-user .avatar[title="${name}"]`).click({force: true});
+});
+
+Cypress.Commands.add('click_navbar_dropdown', (text) => {
+	cy.get('#toolbar-user').contains(text).click({force: true});
+});
+
+Cypress.Commands.add('user_login', (email, password) => {
+	cy.get('.navbar .nav-item .nav-link[href="/login"]').click({force: true});
+	cy.wait(5000);
+	cy.get('#login_email').type(`${email}`);
+	cy.get('#login_password').type(`${password}`);
+	cy.intercept('/api').as('api');
+	cy.get('.btn-login').contains('Login').click({force: true});
+	cy.wait('@api');
+});
+
+Cypress.Commands.add('logout', (user_name) => {
+	cy.click_navbar_icon(`${user_name}`);
+	cy.intercept('/api').as('api');
+	cy.click_navbar_dropdown('Log out');
+	cy.wait('@api');
+});
+
+Cypress.Commands.add('delete_first_record', (doctype_name) => {
+	cy.wait(1000);
+	cy.set_input_awesomebar(`${doctype_name}`);
+	cy.click_listview_checkbox(0);
+	cy.click_action_button('Actions');
+	cy.click_toolbar_dropdown('Delete');
+	cy.click_modal_primary_button('Yes', {multiple: true});
+});
