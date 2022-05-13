@@ -8,10 +8,10 @@ context('Notifications', () => {
 		//Creating a new user with all the roles assigned
 		cy.create_records({
 			doctype: 'User',
-			email: 'billy_jones@example.com',
-			first_name: 'Billy Jones'
+			email: 'test_notif_user@example.com',
+			first_name: 'Test Notification User'
 		});
-		cy.list_open_row('Billy Jones');
+		cy.list_open_row('Test Notification User');
 		cy.wait(5000);
 		cy.get('.role-editor button.select-all').click({force: true});
 		cy.wait(500);
@@ -32,7 +32,7 @@ context('Notifications', () => {
 
 	it('Login in into the new user and verifying if the notifications panel is initially empty', () => {
 		//Login in into the new user
-		cy.user_login('billy_jones@example.com', 'password@12345');
+		cy.user_login('test_notif_user@example.com', 'password@12345');
 		cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
 		cy.get('.notification-list-header').should('exist');
 
@@ -49,7 +49,7 @@ context('Notifications', () => {
 		cy.get('#todays_events').click({force: true});
 		cy.get('#todays_events:visible').should('have.class', 'active');
 		cy.get('.notification-list-body .panel-events').should('contain', 'No Upcoming Events');
-		cy.logout('Billy Jones');
+		cy.logout('Test Notification User');
 		cy.user_login('administrator', 'admin');
 		cy.wait(2000);
 	});
@@ -60,10 +60,10 @@ context('Notifications', () => {
 
 		//Assigning todo to the new user Billy Jones
 		cy.get('.form-sidebar button.add-assignment-btn').click({force: true});
-		cy.set_input('assign_to', 'billy_jones{enter}');
+		cy.set_input('assign_to', 'test_notif_user{enter}');
 		cy.click_modal_primary_button('Add');
 		cy.logout('Administrator');
-		cy.user_login('billy_jones@example.com', 'password@12345');
+		cy.user_login('test_notif_user@example.com', 'password@12345');
 		cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
 
 		//Checking if the notification is sent and is visible in the notifications panel of the user Billy Jones
@@ -72,7 +72,7 @@ context('Notifications', () => {
 	});
 
 	it('Deleting user and todo', () => {
-		cy.logout('Billy Jones');
+		cy.logout('Test Notification User');
 		cy.user_login('administrator', 'admin');
 
 		//Deleting the user Billy Jones
