@@ -10,6 +10,7 @@ context('Notifications', () => {
         cy.set_input('email', 'test_notif_user@example.com');
         cy.set_input('first_name', 'Test Notification User');
         cy.save();
+		cy.hide_dialog();
         cy.set_input_awesomebar('User');
         cy.list_open_row('Test Notification User');
         cy.wait(5000);
