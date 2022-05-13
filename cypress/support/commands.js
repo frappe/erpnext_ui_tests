@@ -109,6 +109,12 @@ Cypress.Commands.add("set_select", (fieldname, value) => {
 	cy.wait(1000);
 });
 
+Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
+	cy.set_input(fieldname, value);
+	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
+	.click({scrollBehavior: false});
+  });
+
 Cypress.Commands.add("_set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
@@ -292,8 +298,3 @@ Cypress.Commands.add('get_filter_button', () => {
 	cy.get('.filter-selector > .btn:visible');
 });
 
-Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
-	cy.set_input(fieldname, value);
-	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
-	.click({scrollBehavior: false});
-});

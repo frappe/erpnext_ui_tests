@@ -3,7 +3,7 @@ context('Executing Job Cards', () => {
         cy.login();
     });
 
-	it.only('Check status of Work Order', () => {
+	it('Check status of Work Order', () => {
 		cy.visit('/app/work-order');
 		cy.click_listview_row_item(0);
 		cy.get_page_title().should('contain', 'In Process');
@@ -18,7 +18,7 @@ context('Executing Job Cards', () => {
 		cy.click_toolbar_button('Start Job');
 		cy.on('window:alert',  (str) =>  {
 			  expect(str).to.equal(`Assign Job to Employee`)});
-		cy.get_field('employees', 'Table MultiSelect').clear().type('John Mayer', {delay: 200});
+		cy.set_input_multiselect('employees', 'John Mayer');
 		cy.click_modal_primary_button('Submit');
 		cy.wait(1000);
 		cy.click_toolbar_button('Complete Job');
@@ -31,12 +31,13 @@ context('Executing Job Cards', () => {
 		cy.click_toolbar_button('Start Job');
 		cy.on('window:alert',  (str) =>  {
 			  expect(str).to.equal(`Assign Job to Employee`)});
-		cy.set_select('employees', 'Maya Menon');
+		cy.set_input_multiselect('employees', 'John Mayer');
 		cy.click_modal_primary_button('Submit');
 		cy.wait(1000);
 		cy.click_toolbar_button('Complete Job');
 		cy.set_input('qty', '1');
 		cy.click_modal_primary_button('Submit');
+		cy.click_modal_primary_button('Yes');
 		cy.submit('Completed');
 
 		//Complete third operation
@@ -44,7 +45,7 @@ context('Executing Job Cards', () => {
 		cy.click_toolbar_button('Start Job');
 		cy.on('window:alert',  (str) =>  {
 			  expect(str).to.equal(`Assign Job to Employee`)});
-		cy.set_select('employees', 'Maya Menon');
+		cy.set_input_multiselect('employees', 'John Mayer');
 		cy.click_modal_primary_button('Submit');
 		cy.wait(1000);
 		cy.click_toolbar_button('Complete Job');
@@ -72,5 +73,5 @@ context('Executing Job Cards', () => {
 		cy.click_listview_row_item(0);
   		cy.get_page_title().should('contain', 'Completed');
 		cy.get_read_only('produced_qty').should('contain','1');
-});
+	});
 });
