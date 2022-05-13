@@ -291,3 +291,9 @@ Cypress.Commands.add('clear_filter', () => {
 Cypress.Commands.add('get_filter_button', () => {
 	cy.get('.filter-selector > .btn:visible');
 });
+
+Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
+	cy.set_input(fieldname, value);
+	cy.get(`[data-fieldname="${fieldname}"] ul:visible li:first-child`)
+	.click({scrollBehavior: false});
+});
