@@ -335,3 +335,16 @@ Cypress.Commands.add('delete_first_record', (doctype_name) => {
 	cy.click_toolbar_dropdown('Delete');
 	cy.click_modal_primary_button('Yes', {multiple: true});
 });
+
+Cypress.Commands.add('set_date', (year, month, date) => {
+	cy.get('.datepickers-container .datepicker--nav .datepicker--nav-title:visible')
+		.click({scrollBehavior: false});
+	cy.get('.datepickers-container .datepicker--nav .datepicker--nav-title:visible')
+		.click({force: true, scrollBehavior: false});
+	cy.get(`.datepicker--years > .datepicker--cells > .datepicker--cell[data-year="${year}"]:visible`)
+		.click({scrollBehavior: false});
+	cy.get(`.datepicker--months > .datepicker--cells > .datepicker--cell[data-month="${month}"]:visible`)
+		.click({scrollBehavior: false});
+	cy.get(`.datepicker--days > .datepicker--cells > .datepicker--cell[data-date="${date}"]:visible`)
+		.click({scrollBehavior: false});
+});
