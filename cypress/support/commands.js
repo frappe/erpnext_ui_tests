@@ -341,8 +341,6 @@ Cypress.Commands.add('delete_first_record', (doctype_name) => {
 	cy.click_toolbar_dropdown('Delete');
 	cy.click_modal_primary_button('Yes', {multiple: true});
 });
-<<<<<<< HEAD
-=======
 
 Cypress.Commands.add('set_date', (year, month, date) => {
 	cy.get('.datepickers-container .datepicker--nav .datepicker--nav-title:visible')
@@ -356,4 +354,3 @@ Cypress.Commands.add('set_date', (year, month, date) => {
 	cy.get(`.datepicker--days > .datepicker--cells > .datepicker--cell[data-date="${date}"]:visible`)
 		.click({scrollBehavior: false});
 });
->>>>>>> develop
