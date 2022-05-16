@@ -1,4 +1,4 @@
-context('Operations', () => {
+context('Material Transfer for Manufacturing', () => {
 	before(() => {
         cy.login();
     });
@@ -17,13 +17,7 @@ context('Operations', () => {
 		cy.save();
 		cy.wait(500);
 		cy.submit('Submitted');
-
-		//View stock ledger entries are made against correct voucher
-		cy.url().then((url) => {
-			cy.click_dropdown_action('View', 'Stock Ledger')
-			cy.location("pathname").should("eq","/app/query-report/Stock%20Ledger");
-			const name = url.split('/').pop();
-			cy.get_field('voucher_no', 'Data').should('have.value', name);
-		});
+		cy.wait(500);
+		cy.get_page_title().should('contain', 'Submitted');
 	});
 });
