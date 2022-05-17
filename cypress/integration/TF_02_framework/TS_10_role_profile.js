@@ -7,7 +7,7 @@ context('Role Profile', () => {
     it('Creating new role profile', () => {
 		//Creating role profile
 		cy.new_doc('Role Profile');
-		cy.set_input('role_profile', 'Test Role Profile');
+		cy.set_input('role_profile', 'Test RoleProfile');
 		cy.save();
 		cy.wait(1000);
 		cy.get('button.select-all').click({force: true});
@@ -24,7 +24,7 @@ context('Role Profile', () => {
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
-		cy.get_field('role_profile_name', 'Link').scrollIntoView().should('have.value', 'Test Role Profile');
+		cy.get_field('role_profile_name', 'Link').scrollIntoView().should('have.value', 'Test RoleProfile');
 		cy.get_field('roles', 'MultiCheck').should('be.checked');
 	});
 
@@ -36,14 +36,14 @@ context('Role Profile', () => {
 		cy.save();
 		cy.wait(1000);
 		cy.get_field('role_profile_name', 'Link').click({force: true, scrollBehavior: false});
-		cy.get('[data-fieldname="role_profile_name"] ul:visible li:first-child').should('contain', 'Test Role Profile');	
+		cy.get('[data-fieldname="role_profile_name"] ul:visible li:first-child').should('contain', 'Test RoleProfile');	
 		cy.get_field('roles', 'MultiCheck').should('be.checked');
 	});
 
 	it('Creating a new role profile with minimum roles and creating user using it', () => {
 		//Creating a new role profile with minimum roles assigned
 		cy.new_doc('Role Profile');
-		cy.set_input('role_profile', 'Test Role Profile1');
+		cy.set_input('role_profile', 'Test RoleProfile1');
 		cy.save();
 		cy.wait(1000);
 		cy.get('.checkbox-options [type="checkbox"][data-unit="System Manager"]:visible').check();
@@ -61,7 +61,7 @@ context('Role Profile', () => {
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
-		cy.get_field('role_profile_name', 'Link').scrollIntoView().should('have.value', 'Test Role Profile1');
+		cy.get_field('role_profile_name', 'Link').scrollIntoView().should('have.value', 'Test RoleProfile1');
 		cy.get('.role-editor [type="checkbox"][data-unit="System Manager"]:visible').should('be.checked');
 		cy.get('.role-editor [type="checkbox"][data-unit="Sales Manager"]:visible').should('be.checked');
 
