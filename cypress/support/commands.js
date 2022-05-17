@@ -339,7 +339,9 @@ Cypress.Commands.add('delete_first_record', (doctype_name) => {
 	cy.click_listview_checkbox(0);
 	cy.click_action_button('Actions');
 	cy.click_toolbar_dropdown('Delete');
-	cy.click_modal_primary_button('Yes', {multiple: true});
+	cy.get('.modal-footer > .standard-actions > button.btn-primary:visible')
+		.contains('Yes')
+		.click({force: true, multiple: true});
 });
 
 Cypress.Commands.add('set_date', (year, month, date) => {
