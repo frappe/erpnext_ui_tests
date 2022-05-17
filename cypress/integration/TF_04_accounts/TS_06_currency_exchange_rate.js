@@ -33,7 +33,7 @@ context('Currency and Exchange Rate Check', () => {
 			cy.click_section('Currency and Price List');
 			cy.set_link('currency', 'EUR');
 
-			cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max1');
+			cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
 			cy.get_input('qty').should('have.value', "1.000");
 			cy.get_input('rate').should('have.value', '1,466.67'); // 110000 / 75
 			cy.get_input('amount').should('have.value', '1,466.67'); // 110000 / 75
