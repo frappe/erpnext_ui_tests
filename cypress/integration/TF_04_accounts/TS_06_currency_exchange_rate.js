@@ -1,11 +1,9 @@
 const TEST_RATE = 110000;
-const TEST_EXCHANGE_VALUE = 75.00;
 
 context('Currency and Exchange Rate Check', () => {
 	before(() => {
 		cy.login();
 		cy.visit('/app');
-		cy.intercept('POST', '/api/method/erpnext.setup.utils.get_exchange_rate', {"message": TEST_EXCHANGE_VALUE});
 	});
 
 	it('Create quotation with different currency and fetching currency exchange rate', () => {
@@ -29,23 +27,46 @@ context('Currency and Exchange Rate Check', () => {
 			cy.visit('app/quotation/'+ c.name);
 			cy.get_input('quotation_to').should('have.value', 'Customer');
 			cy.get_input('party_name').should('have.value', 'William Harris');
+			cy.wait(200);
 
 			cy.click_section('Currency and Price List');
 			cy.set_link('currency', 'EUR');
+			cy.wait(400);
 
-			cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
-			cy.get_input('qty').should('have.value', "1.000");
-			cy.get_input('rate').should('have.value', '1,466.67'); // 110000 / 75
-			cy.get_input('amount').should('have.value', '1,466.67'); // 110000 / 75
+			cy.click_section('Currency and Price List');
+			cy.get_input('conversion_rate')
+ 				.invoke('val')
+				.then(val => {
+					const exRate = val;
+					cy.log(exRate);
+					const roundedExchRate = Number(exRate).toFixed(2);
 
-			cy.get_read_only('total_qty').should('contain', "1");
-			cy.get_read_only('total').should('contain', "€ 1,466.67");
-			cy.get_read_only('base_total').should('contain', '₹ 1,10,000.25'); // 1466.67 * 75
+					const rate = (110000/exRate);
+					const roundedRate = Number(rate).toFixed(2);
+					const formattedRate = new Intl.NumberFormat().format(roundedRate);
+					cy.log("formatted rate " + formattedRate);
+					const rateInCurrency = ('€ '+formattedRate);
 
-			cy.get_read_only('base_grand_total').should('contain', '₹ 1,10,000.25'); // 1466.67 * 75
-			cy.get_read_only('grand_total').should('contain', "€ 1,466.67");
-			cy.get_read_only('base_rounded_total').should('contain', '₹ 1,10,000.25');
-			cy.get_read_only('rounded_total').should('contain', "€ 1,466.67");
+					cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
+					cy.get_input('qty').should('have.value', "1.000");
+					cy.get_input('rate').should('have.value', formattedRate);
+					cy.get_input('amount').should('have.value', formattedRate);
+
+					const total = (roundedRate * roundedExchRate);
+					const roundedTotal = Number(total).toFixed(2);
+					const formattedTotal = Intl.NumberFormat('en-IN').format(roundedTotal);
+					cy.log("total " + formattedTotal);
+					const totalInCurrency = ('₹ '+formattedTotal);
+
+					cy.get_read_only('total_qty').should('contain', "1");
+					cy.get_read_only('total').should('contain', rateInCurrency);
+					cy.get_read_only('base_total').should('contain', totalInCurrency);
+
+					cy.get_read_only('base_grand_total').should('contain', totalInCurrency);
+					cy.get_read_only('grand_total').should('contain', rateInCurrency);
+					cy.get_read_only('base_rounded_total').should('contain', totalInCurrency);
+					cy.get_read_only('rounded_total').should('contain', rateInCurrency);
+				});
 
 			cy.click_toolbar_button('Save');
 			cy.get_page_title().should('contain', 'Draft');
