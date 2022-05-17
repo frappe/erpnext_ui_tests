@@ -9,8 +9,8 @@ context('Role Profile', () => {
 		cy.new_doc('Role Profile');
 		cy.set_input('role_profile', 'Test RoleProfile');
 		cy.save();
-		cy.wait(1000);
-		cy.get('button.select-all').click({force: true});
+		cy.wait(2000);
+		cy.get('.select-all').click({force: true, scrollBehavior: false});
 		cy.save();
 
 		//Creating a new user using the created role profile
