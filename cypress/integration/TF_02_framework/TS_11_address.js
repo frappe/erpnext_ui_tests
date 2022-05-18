@@ -94,7 +94,9 @@ context('Address', () => {
 		cy.wait(3000);
 		cy.get('.title-text:visible').click({force: true, scrollBehaviour: false});
 		cy.set_input('name', 'Test Billing');
+		cy.intercept('/api').as('api');
 		cy.click_modal_primary_button('Rename');
+		cy.wait('@api');
 		cy.wait(8000);
 		cy.get('.title-text:visible').should('contain', 'Test Billing');
 	});
