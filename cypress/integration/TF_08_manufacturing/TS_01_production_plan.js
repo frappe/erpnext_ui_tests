@@ -11,7 +11,6 @@ context('Production Plan', () => {
 		cy.set_link('items.item_code', 'Classic Dining Table-ACACIA');
 		cy.set_input('items.qty', '1');
 		cy.grid_open_row('items', 1);
-		cy.set_link('warehouse', 'Stores - WP');
 		cy.save();
 		cy.wait(500);
 		cy.submit('To Deliver and Bill');
