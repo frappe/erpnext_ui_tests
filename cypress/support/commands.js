@@ -118,7 +118,7 @@ Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
 Cypress.Commands.add("_set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
-		.type(value, {delay: 20, scrollBehavior: false})
+		.type(value, {delay: 100, scrollBehavior: false})
 });
 
 Cypress.Commands.add("set_input", (fieldname, value) => {
