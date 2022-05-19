@@ -220,6 +220,13 @@ Cypress.Commands.add('click_section', (title) => {
 	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false, force: true});
 });
 
+Cypress.Commands.add('open_section', (title) => {
+	if (open && !Cypress.$(`.section-head:visible:contains(${title})`).hasClass('collapsed')) {
+		return cy.get('.section-head:visible').contains(title);
+	}
+	return cy.click_section(title);
+});
+
 Cypress.Commands.add('grid_add_row', (fieldname) => {
 	cy.get(`[data-fieldname="${fieldname}"] .grid-add-row:visible`).click({scrollBehavior: 'center'});
 });
@@ -279,7 +286,7 @@ Cypress.Commands.add('clear_filter', () => {
 		url: 'api/method/frappe.model.utils.user_settings.save'
 	}).as('filter-saved');
 	cy.get('.filter-section .filter-button:visible').click({force: true});
-	cy.wait(300);
+	cy.wait("@filter-saved");
 	cy.get('.filter-popover').should('exist');
 	cy.get('.filter-popover').then(popover => {
 		if (popover.find('input.input-with-feedback')[0].value != '') {
@@ -318,7 +325,6 @@ Cypress.Commands.add('click_navbar_dropdown', (text) => {
 
 Cypress.Commands.add('user_login', (email, password) => {
 	cy.get('.navbar .nav-item .nav-link[href="/login"]').click({force: true});
-	cy.wait(5000);
 	cy.get('#login_email').type(`${email}`);
 	cy.get('#login_password').type(`${password}`);
 	cy.intercept('/api').as('api');
