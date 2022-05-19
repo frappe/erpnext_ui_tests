@@ -8,7 +8,7 @@ context('Map View', () => {
 	});
 	it('Creating a record for the doctype and checking if the map view for the records works', () => {
 		cy.go_to_list('DocType');
-		cy.new_form('Test Location');	
+		cy.new_form('Test Location');
 		cy.get('#navbar-breadcrumbs').contains('Test Location').click();
 		cy.click_listview_primary_button('Add Test Location');
 
@@ -60,6 +60,5 @@ context('Map View', () => {
 		cy.click_action_button('Actions');
 		cy.click_toolbar_dropdown('Delete');
 		cy.click_modal_primary_button('Yes');
-		cy.hide_dialog();
-	});		
+	});
 });
