@@ -78,7 +78,6 @@ context('Notifications', () => {
 
         //Deleting the user Billy Jones
         cy.delete_first_record('user');
-        cy.hide_dialog();
 
         //Deleting todo
         cy.set_input_awesomebar('todo');
