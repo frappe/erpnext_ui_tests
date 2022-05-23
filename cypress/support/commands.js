@@ -199,8 +199,8 @@ Cypress.Commands.add('get_page_indicator', () => {
 Cypress.Commands.add('submit', (indicator) => {
 	cy.intercept('/api/method/frappe.desk.form.save.savedocs').as('form-submit');
 	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
-	cy.wait('@form-submit');
 	cy.get('.modal.show button.btn-primary').click();
+	cy.wait('@form-submit');
 	cy.get_page_indicator().contains(indicator);
 });
 
