@@ -187,9 +187,9 @@ Cypress.Commands.add('click_modal_primary_button', (btn_name) => {
 });
 
 Cypress.Commands.add('save', () => {
-	cy.intercept('/api').as('api');
+	cy.intercept('api/method/frappe.desk.form.save.savedocs').as('form-save');
 	cy.get(`button[data-label="Save"]:visible`).click({scrollBehavior: false, force:true});
-	cy.wait('@api');
+	cy.wait('@form-save');
 });
 
 Cypress.Commands.add('get_page_indicator', () => {
@@ -197,18 +197,18 @@ Cypress.Commands.add('get_page_indicator', () => {
 });
 
 Cypress.Commands.add('submit', (indicator) => {
-	cy.intercept('/api').as('api');
+	cy.intercept('/api/method/frappe.desk.form.save.savedocs').as('form-submit');
 	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
-	cy.wait('@api');
+	cy.wait('@form-submit');
 	cy.get('.modal.show button.btn-primary').click();
 	cy.get_page_indicator().contains(indicator);
 });
 
 Cypress.Commands.add('cancel', (indicator) => {
-	cy.intercept('/api').as('api');
+	cy.intercept('/api/method/frappe.desk.form.save.cancel').as('form-cancel');
 	cy.get(`button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
 	cy.get('.modal.show .btn-primary').click();
-	cy.wait('@api');
+	cy.wait('@form-cancel');
 	cy.get_page_indicator().contains(indicator);
 });
 
