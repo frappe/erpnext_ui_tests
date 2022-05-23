@@ -7,7 +7,8 @@ context('Inbox View', () => {
 	it('Setting Email and enabling default email account', () => {
 		//Setting Email account for user administrator
 		cy.list_open_row('Administrator');
-		cy.click_section('Email');
+		cy.wait(500);
+		cy.open_section('Email');
 		cy.grid_add_row('user_emails');
 		cy.set_link('user_emails.email_account','Notifications');
 		cy.save();
@@ -26,13 +27,14 @@ context('Inbox View', () => {
 		//Verifying if the Inbox view has been enabled
 		cy.go_to_list('Communication');
 		cy.location('pathname').should('eq', '/app/communication');
+		cy.reload();
 		cy.get_page_title().should('contain', 'Communication');
 		cy.click_custom_toolbar_button('List View');
 		cy.click_toolbar_dropdown('Inbox');
 		cy.location('pathname').should('eq', '/app/communication/view/inbox/Notifications');
 		cy.get_page_title().should('contain', 'Notifications');
-		cy.get('.views-section:visible').should('contain', 'Inbox');	
-		cy.get('.views-section .selected-view:visible').should('contain', 'Notifications');	
+		cy.get('.views-section:visible').should('contain', 'Inbox');
+		cy.get('.views-section .selected-view:visible').should('contain', 'Notifications');
 		cy.get('.views-section .selected-view:visible').click({force: true});
 		cy.get('.views-section .list-link:visible').find('li').should('have.length', 3);
 
@@ -58,7 +60,7 @@ context('Inbox View', () => {
 			.and('contain', 'admin@example.com');
 	});
 
-	it('Deleting the mail and reseting the email account configurations', () => {	
+	it('Deleting the mail and reseting the email account configurations', () => {
 		cy.click_custom_toolbar_button('Inbox View');
 		cy.click_toolbar_dropdown('List');
 		cy.intercept('/api').as('api');
