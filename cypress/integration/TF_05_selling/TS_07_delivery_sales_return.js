@@ -49,7 +49,6 @@ context('Delivery Return Check', () => {
 		//cy.submit('To Bill');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
-		cy.hide_dialog();
 		cy.get_page_title().should('contain', 'To Bill');
 
 		cy.click_dropdown_action('View', 'Stock Ledger');
@@ -72,7 +71,6 @@ context('Delivery Return Check', () => {
 		cy.get_page_title().should('contain', 'Draft');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
-		cy.hide_dialog();
 		cy.get_page_title().should('contain', 'Return');
 
 		cy.click_dropdown_action('View', 'Stock Ledger');

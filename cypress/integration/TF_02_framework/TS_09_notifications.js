@@ -9,11 +9,11 @@ context('Notifications', () => {
         cy.new_doc('User');
         cy.set_input('email', 'test_notif_user@example.com');
         cy.set_input('first_name', 'Test Notification User');
+        cy.get_field('send_welcome_email', 'Check').uncheck();
         cy.save();
-		cy.hide_dialog();
         cy.set_input_awesomebar('User');
         cy.list_open_row('Test Notification User');
-        cy.wait(5000);
+        cy.wait(1000);
         cy.get('.role-editor button.select-all').click({force: true});
         cy.wait(500);
         cy.click_section('Change Password');
@@ -28,11 +28,11 @@ context('Notifications', () => {
             priority: 'Low',
             description: 'This is a test notifications Todo'
         });
-        cy.logout('Administrator');
     });
 
     it('Login in into the new user and verifying if the notifications panel is initially empty', () => {
         //Login in into the new user
+        cy.logout('Administrator');
         cy.user_login('test_notif_user@example.com', 'password@12345');
         cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
         cy.get('.notification-list-header').should('exist');
@@ -78,7 +78,6 @@ context('Notifications', () => {
 
         //Deleting the user Billy Jones
         cy.delete_first_record('user');
-        cy.hide_dialog();
 
         //Deleting todo
         cy.set_input_awesomebar('todo');

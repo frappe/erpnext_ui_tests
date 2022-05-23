@@ -12,7 +12,6 @@ context('Executing Job Cards', () => {
 
 	it('Start operation via Job Card', () => {
 		cy.visit('app/job-card/view/list');
-		cy.clear_filter();
 		cy.click_listview_row_item(0);
 		cy.click_toolbar_button('Start Job');
 		cy.on('window:alert',  (str) =>  {
@@ -20,6 +19,7 @@ context('Executing Job Cards', () => {
 		cy.set_input_multiselect('employees', 'John Mayer');
 		cy.click_modal_primary_button('Submit');
 		cy.click_section('Production');
+		cy.
 		cy.get_input('for_quantity', '1');
 		cy.get_field('wip_warehouse').should('have.value', 'Work In Progress - WP')
 	});
@@ -28,7 +28,6 @@ context('Executing Job Cards', () => {
 		cy.visit('app/job-card/view/list');
 
 		//Complete first operation
-		cy.clear_filter();
 		cy.click_listview_row_item(0);
 		cy.click_toolbar_button('Complete Job');
 		cy.set_input('qty', '1');
