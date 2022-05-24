@@ -1,4 +1,4 @@
-context('Executing Job Cards', () => {
+context('Finish work order', () => {
 	before(() => {
         cy.login();
     });
