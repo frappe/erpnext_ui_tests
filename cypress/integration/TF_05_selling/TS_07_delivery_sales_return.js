@@ -71,6 +71,7 @@ context('Delivery Return Check', () => {
 		cy.get_page_title().should('contain', 'Draft');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
+		cy.reload();
 		cy.get_page_title().should('contain', 'Return');
 
 		cy.click_dropdown_action('View', 'Stock Ledger');
