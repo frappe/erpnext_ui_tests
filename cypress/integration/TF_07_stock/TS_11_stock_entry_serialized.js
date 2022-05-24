@@ -21,7 +21,7 @@ context('Create Stock Entry', () => {
         cy.wait(500);
 	});
 
-	it.only('Create opening stock entry for serialized and batched item', () => {
+	it('Create opening stock entry for serialized and batched item', () => {
 		cy.new_doc('Stock Entry');
 		cy.location("pathname").should("eq","/app/stock-entry/new-stock-entry-1");
 		cy.set_link('stock_entry_type', 'Material Receipt');
