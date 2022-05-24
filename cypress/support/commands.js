@@ -123,14 +123,16 @@ Cypress.Commands.add("_set_input", (fieldname, value) => {
 
 Cypress.Commands.add("set_input", (fieldname, value) => {
 	cy._set_input(fieldname, value);
-	cy.wait(1000);
+	cy.wait(500);
 });
 
 Cypress.Commands.add("set_link", (fieldname, value) => {
 	cy.intercept('/api/method/frappe.desk.search.search_link').as('search_query');
-
-	cy._set_input(fieldname, value);
+	cy.set_input(fieldname, value);
 	cy.wait('@search_query');
+
+	// wait for dropdown
+	cy.wait(500);
 
 	// select link value from dropdown
 	const field = get_field_parts(fieldname);
