@@ -28,15 +28,11 @@ context('Accounts Settings', () => {
 			cy.set_input('reference_no', 'ABC-1234');
 			cy.set_today('reference_date');
 			cy.save();
-			cy.click_toolbar_button('Submit');
-			cy.click_modal_primary_button('Yes');
+			cy.submit();
 
 			cy.visit('app/sales-invoice');
 			cy.click_listview_row_item(0);
-			cy.click_toolbar_button('Cancel');
-			cy.click_modal_primary_button('Yes');
-			cy.hide_dialog();
-			cy.wait(200);
+			cy.cancel();
 
 			cy.get_open_dialog().should('contain', 'Message');
 			cy.get('.msgprint').invoke('text').should('match', /Payment Entries ACC-PAY-.+ are un-linked/);
