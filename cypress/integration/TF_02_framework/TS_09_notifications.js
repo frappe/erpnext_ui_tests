@@ -84,6 +84,6 @@ context('Notifications', () => {
         cy.click_listview_checkbox(0);
         cy.click_action_button('Actions');
         cy.click_toolbar_dropdown('Delete');
-        cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Yes').click({force: true});
+        cy.click_modal_primary_button('Yes');
     });
 });
