@@ -118,19 +118,22 @@ Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
 Cypress.Commands.add("_set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
-		.type(value, {delay: 100, scrollBehavior: false})
+		.clear({scrollBehavior: 'center'}) // hack to make sure number fields are properly cleared
+		.type(value, {scrollBehavior: false})
 });
 
 Cypress.Commands.add("set_input", (fieldname, value) => {
 	cy._set_input(fieldname, value);
-	cy.wait(1000);
+	cy.wait(500);
 });
 
 Cypress.Commands.add("set_link", (fieldname, value) => {
 	cy.intercept('/api/method/frappe.desk.search.search_link').as('search_query');
-
-	cy._set_input(fieldname, value);
+	cy.set_input(fieldname, value);
 	cy.wait('@search_query');
+
+	// wait for dropdown
+	cy.wait(500);
 
 	// select link value from dropdown
 	const field = get_field_parts(fieldname);
@@ -183,13 +186,15 @@ Cypress.Commands.add('click_modal_close_button', () => {
 });
 
 Cypress.Commands.add('click_modal_primary_button', (btn_name) => {
-	cy.get('.modal-footer > .standard-actions > .btn-primary').contains(btn_name).trigger('click', {force: true});
+	cy.wait(500)
+	cy.get('.modal-footer:visible > .standard-actions > .btn-primary')
+		.contains(btn_name).trigger('click', {force: true});
 });
 
 Cypress.Commands.add('save', () => {
-	cy.intercept('/api').as('api');
+	cy.intercept('api/method/frappe.desk.form.save.savedocs').as('form-save');
 	cy.get(`button[data-label="Save"]:visible`).click({scrollBehavior: false, force:true});
-	cy.wait('@api');
+	cy.wait('@form-save');
 });
 
 Cypress.Commands.add('get_page_indicator', () => {
@@ -197,19 +202,23 @@ Cypress.Commands.add('get_page_indicator', () => {
 });
 
 Cypress.Commands.add('submit', (indicator) => {
-	cy.intercept('/api').as('api');
-	cy.get(`button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
-	cy.wait('@api');
-	cy.get('.modal.show button.btn-primary').click();
-	cy.get_page_indicator().contains(indicator);
+	cy.intercept('/api/method/frappe.desk.form.save.savedocs').as('form-submit');
+	cy.get(`.standard-actions button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
+	cy.click_modal_primary_button('Yes');
+	cy.wait('@form-submit');
+	if (indicator) {
+		cy.get_page_indicator().contains(indicator);
+	}
 });
 
 Cypress.Commands.add('cancel', (indicator) => {
-	cy.intercept('/api').as('api');
-	cy.get(`button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
-	cy.get('.modal.show .btn-primary').click();
-	cy.wait('@api');
-	cy.get_page_indicator().contains(indicator);
+	cy.intercept('/api/method/frappe.desk.form.save.cancel').as('form-cancel');
+	cy.get(`.standard-actions button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
+	cy.click_modal_primary_button('Yes');
+	cy.wait('@form-cancel');
+	if (indicator) {
+		cy.get_page_indicator().contains(indicator);
+	}
 });
 
 Cypress.Commands.add('get_page_title', () => {
@@ -286,7 +295,7 @@ Cypress.Commands.add('clear_filter', () => {
 		url: 'api/method/frappe.model.utils.user_settings.save'
 	}).as('filter-saved');
 	cy.get('.filter-section .filter-button:visible').click({force: true});
-	cy.wait("@filter-saved");
+	cy.wait(300);
 	cy.get('.filter-popover').should('exist');
 	cy.get('.filter-popover').then(popover => {
 		if (popover.find('input.input-with-feedback')[0].value != '') {
