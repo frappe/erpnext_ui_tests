@@ -69,7 +69,8 @@ context("Quality Inspection", () => {
 		//Now try submitting DN
 		cy.visit('app/delivery-note');
 		cy.click_listview_row_item(0);
-		cy.submit('To Bill');
+		cy.click_toolbar_button('Submit');
+		cy.click_modal_primary_button('Yes');
 	});
 });
 
