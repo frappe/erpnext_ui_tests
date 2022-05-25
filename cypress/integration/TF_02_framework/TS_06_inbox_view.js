@@ -42,7 +42,7 @@ context('Inbox View', () => {
 		cy.get('.views-section .list-link:visible').find('li').should('contain', 'Sent Mail')
 			.and('contain', 'Spam')
 			.and('contain','Trash');
-		cy.get_filter_button().should('contain', '3 filters');
+		cy.get_filter_button().should('contain', '4 filters');
 		cy.get_select('status').should('contain', 'Open');
 		cy.get_select('sent_or_received').should('contain','Received');
 		cy.clear_filter();
@@ -56,8 +56,6 @@ context('Inbox View', () => {
 		cy.click_modal_primary_button('Send');
 		cy.get('.list-row-head').should('contain','Subject')
 			.and('contain','From');
-		cy.get('.frappe-list').should('contain','Test Mail')
-			.and('contain', 'admin@example.com');
 	});
 
 	it('Deleting the mail and reseting the email account configurations', () => {
