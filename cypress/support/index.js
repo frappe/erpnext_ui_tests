@@ -14,9 +14,9 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+import "../../../frappe/cypress/support/commands"; // eslint-disable-line
 import "./commands";
 import "@cypress/code-coverage/support";
-import "../../../frappe/cypress/support/commands"; // eslint-disable-line
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

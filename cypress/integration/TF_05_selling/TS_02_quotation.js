@@ -6,7 +6,7 @@ context('Quotation Creation', () => {
 
 	it('Create Quotation', () => {
 		cy.new_doc('Quotation');
-		cy.url().should('include', '/quotation/new-quotation');
+		cy.location('pathname').should('include', '/app/quotation/new-quotation');
 
 		var today = new Date();
 		const yyyy = today.getFullYear();
@@ -27,7 +27,7 @@ context('Quotation Creation', () => {
 		cy.get_select('order_type').should('have.value', 'Sales');
 		cy.get_read_only('customer_name').should('contain', 'William Harris');
 
-		cy.click_section('Address and Contact');
+		cy.open_section('Address and Contact');
 		cy.get_read_only('customer_address').should('contain', "William's Address-Billing");
 		cy.get_read_only('shipping_address_name').should('contain', "William's Address-Billing");
 		cy.get_read_only('territory').should('contain', 'All Territories');
