@@ -4,7 +4,7 @@ context('Exchange Rate Creation Check', () => {
 		cy.visit('/app');
 	});
 
-	it('Create other currency bank account and unrealized exchange gain/loss account, and set in company', () => {
+	it('Create other currency bank account and an unrealized exchange gain/loss account in COA', () => {
 		cy.insert_doc(
 			"Account",
 			{
@@ -32,9 +32,12 @@ context('Exchange Rate Creation Check', () => {
 			},
 			true
 		)
+	});
 
+	it('Set unrealized exchange gain/loss account in company master', () => {
 		cy.visit('/app/company');
 		cy.click_listview_row_item(0);
+		cy.reload();
 		cy.set_link('unrealized_exchange_gain_loss_account', 'Unrealized Exchange Gain/Loss');
 		cy.save();
 	});
