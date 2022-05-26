@@ -32,14 +32,12 @@ context('Quotation Creation', () => {
 		cy.get_read_only('shipping_address_name').should('contain', "William's Address-Billing");
 		cy.get_read_only('territory').should('contain', 'All Territories');
 
-		cy.click_section('Currency and Price List');
 		cy.open_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 
 		cy.set_link('items.item_code', 'Apple iPhone 13 Pro Max');
 		cy.get_input('qty').should('have.value', "1.000");
-		cy.get_input('rate').clear();
 		cy.set_input('rate', '110000');
 		cy.get_input('rate').blur();
 		cy.get_read_only('amount').should('contain', '1,10,000.00');
