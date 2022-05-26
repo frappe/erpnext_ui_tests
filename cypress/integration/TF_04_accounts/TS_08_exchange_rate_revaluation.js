@@ -8,7 +8,7 @@ context('Exchange Rate Creation Check', () => {
 		cy.insert_doc(
 			"Account",
 			{
-				account_name: "Bank of America", //change name
+				account_name: "Bank of America", // name
 				is_group: 0,
 				root_type: "Asset",
 				report_type: "Balance Sheet",
@@ -22,7 +22,7 @@ context('Exchange Rate Creation Check', () => {
 		cy.insert_doc(
 			"Account",
 			{
-				account_name: "Unrealized Exchange Gain/Loss", //change name
+				account_name: "Unrealized Exchange Gain/Loss", // name
 				is_group: 0,
 				root_type: "Expense",
 				report_type: "Profit and Loss",
