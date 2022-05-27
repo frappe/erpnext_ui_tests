@@ -163,7 +163,7 @@ context('Multi Currency Accounting', () => {
 				cy.click_toolbar_button('Ledger');
 				cy.get('.dt-row-header > .dt-cell--col-4 > .dt-cell__content').should('contain', "Credit (INR)");
 				const credit = (formattedTotal+'0');
-				cy.get('.dt-row-9 > .dt-cell--col-4 > .dt-cell__content').should('contain', credit);
+				cy.get('.dt-row-3 > .dt-cell--col-4 > .dt-cell__content > div').should('contain', credit);
 			});
 	});
 });
