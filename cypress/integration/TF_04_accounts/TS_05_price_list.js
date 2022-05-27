@@ -112,9 +112,8 @@ context('Price List', () => {
 		cy.url().should('include', '/app/price-list/new-price-list');
 
 		cy.set_input('price_list_name', 'Silver');
-		cy.set_input('currency', 'USD');
+		cy.set_link('currency', 'USD');
 		cy.get_field('selling', 'checkbox').check();
-		cy.get_input('currency').should('have.value', 'USD');
 		cy.save();
 
 		cy.new_doc('Item Price');
