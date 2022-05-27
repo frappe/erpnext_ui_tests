@@ -105,4 +105,69 @@ context('Price List', () => {
 			});
 		});
 	});
+
+	it('Price List check - Different item prices in different currency', () => {
+		cy.visit('/app/price-list');
+		cy.new_doc('Price List');
+		cy.url().should('include', '/app/price-list/new-price-list');
+
+		cy.set_input('price_list_name', 'Silver');
+		cy.set_link('currency', 'USD');
+		cy.get_field('selling', 'checkbox').check();
+		cy.save();
+
+		cy.new_doc('Item Price');
+		cy.url().should('include', '/app/item-price/new-item-price');
+		cy.set_link('item_code', 'Apple iPhone 13 Pro Max'); 		//
+		cy.set_link('price_list', 'Silver');
+		cy.set_input('price_list_rate', '1400');
+		cy.save();
+		cy.wait(200);
+
+		cy.insert_doc(
+			"Quotation",
+				{
+					naming_series: "SAL-QTN-.YYYY.-",
+					quotation_to: "Customer",
+					party_name: "William Harris",
+					order_type: "Sales",
+					currency: "USD",
+					selling_price_list: "Standard Selling",
+					items: [{item_code: "Apple iPhone 13 Pro Max", qty: 1}]		 //
+				},
+			true
+		).then((b)=>{
+			console.log(b);
+			cy.visit('app/quotation/'+ b.name);
+			cy.log(b.conversion_rate);
+			const rate = (110000/b.conversion_rate);
+			const roundedRate = Number(rate).toFixed(2);
+			cy.compare_document({
+				party_name: "William Harris",
+				items: [{item_code: "Apple iPhone 13 Pro Max", rate: roundedRate}]  // rate as per currency exchange
+			});
+		});
+		cy.wait(200);
+
+		cy.insert_doc(
+			"Quotation",
+				{
+					naming_series: "SAL-QTN-.YYYY.-",
+					quotation_to: "Customer",
+					party_name: "William Harris",
+					order_type: "Sales",
+					currency: "USD",
+					selling_price_list: "Silver",
+					items: [{item_code: "Apple iPhone 13 Pro Max", qty: 1}]		 //
+				},
+			true
+		).then((b)=>{
+			console.log(b);
+			cy.visit('app/quotation/'+ b.name);
+			cy.compare_document({
+				party_name: "William Harris",
+				items: [{item_code: "Apple iPhone 13 Pro Max", rate: 1400}]  // rate as per price list
+			});
+		});
+	});
 });
