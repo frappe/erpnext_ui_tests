@@ -141,6 +141,18 @@ context('Multi Currency Accounting', () => {
 				cy.get_read_only('total_allocated_amount').should('contain', rateInCurrency);
 				cy.get_read_only('base_total_allocated_amount').should('contain', totalInCurrency);
 
+				cy.get_read_only('difference_amount')
+					.invoke('text')
+					.then(text => {
+						const diff_amount = text.split(' ').pop();
+						cy.log(diff_amount);
+						if (diff_amount == 0){
+							cy.log('success');
+						} else {
+							cy.findByRole('button', {name: 'Set Exchange Gain / Loss'}).click();
+						}
+					});
+
 				cy.set_input('reference_no', 'AB-01');
 				cy.set_today('reference_date');
 
