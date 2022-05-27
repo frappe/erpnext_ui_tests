@@ -8,11 +8,11 @@ context('Multi Currency Accounting', () => {
 		cy.insert_doc(
 			"Account",
 			{
-				account_name: "Debtors- EUR - WP", // name - WP
+				account_name: "Debtor-EUR",
 				is_group: 0,
 				root_type: "Asset",
 				report_type: "Balance Sheet",
-				account_currency: "USD",
+				account_currency: "EUR",
 				parent_account: "Accounts Receivable - WP", // - WP
 				account_type: "Receivable",
 			},
