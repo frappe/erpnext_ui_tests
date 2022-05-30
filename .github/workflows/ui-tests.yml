@@ -114,24 +114,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: "UI Tests - Chrome"
-        uses: cypress-io/github-action@v2
-        with:
-          # we have already installed all dependencies above
-          install: false
-          start: yarn start:ci
-          wait-on: "http://localhost:3000"
-          wait-on-timeout: 120
-          browser: chrome
-          record: true
-          parallel: true
-          group: "UI - Chrome"
-          spec: cypress/integration/${{ matrix.container }}/**/*.js
+      - name: UI Tests
+        run: cd ~/frappe-bench/ && bench --site test_site run-ui-tests erpnext_ui_tests/cypress/integration/${{ matrix.container }}/**/*.js --with-coverage --headless
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_RECORD_KEY: 60a8e3bf-08f5-45b1-9269-2b207d7d30cd
+
+      # - name: "UI Tests - Chrome"
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     # we have already installed all dependencies above
+      #     install: false
+      #     start: yarn start:ci
+      #     wait-on: "http://localhost:3000"
+      #     wait-on-timeout: 120
+      #     browser: chrome
+      #     record: true
+      #     parallel: true
+      #     group: "UI - Chrome"
+      #     spec: cypress/integration/${{ matrix.container }}/**/*.js
+      #   env:
+      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #     # Recommended: pass the GitHub token lets this action correctly
+      #     # determine the unique run id necessary to re-run the checks
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # test:
   #   runs-on: ubuntu-latest
