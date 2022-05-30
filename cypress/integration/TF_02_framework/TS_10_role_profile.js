@@ -22,7 +22,8 @@ context('Role Profile', () => {
 		cy.click_modal_primary_button('Save');
 		//cy.hide_dialog();
 		//cy.get('.btn-modal-close').click({force: true, multiple: true});
-		cy.get('.modal').type('{esc}');
+		//cy.get('.modal').type('{esc}');
+		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
