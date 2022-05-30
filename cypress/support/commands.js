@@ -241,7 +241,7 @@ Cypress.Commands.add('grid_add_row', (fieldname) => {
 });
 
 Cypress.Commands.add('grid_open_row', (fieldname, row_no) => {
-	cy.get(`[data-fieldname="${fieldname}"] .grid-row[data-idx="${row_no}"] .row-index`).click({scrollBehavior: 'center'});
+	cy.get(`[data-fieldname="${fieldname}"] .grid-row[data-idx="${row_no}"] .row-index:visible `).click({scrollBehavior: 'center'});
 });
 
 Cypress.Commands.add("close_grid_edit_modal", () => {

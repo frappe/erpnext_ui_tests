@@ -31,6 +31,18 @@ context('Sales Invoice Payment', () => {
 		cy.get_input('references.reference_doctype').should('have.value', 'Sales Invoice');
 		cy.get_input('allocated_amount').should('have.value', '1,10,000.000');
 
+		cy.get_read_only('difference_amount')
+			.invoke('text')
+			.then(text => {
+				const diff_amount = text.split(' ').pop();
+				cy.log(diff_amount);
+				if (diff_amount == 0){
+					cy.log('success');
+				} else {
+					cy.findByRole('button', {name: 'Set Exchange Gain / Loss'}).click();
+				}
+			});
+
 		cy.set_input('reference_no', 'ABC-123');
 		cy.set_today('reference_date');
 
