@@ -20,6 +20,7 @@ context('Role Profile', () => {
 		cy.set_input('email', 'test_role_user@exapmle.com');
 		cy.set_input('first_name', 'Test Role User');
 		cy.click_modal_primary_button('Save');
+		cy.wait(2000);
 		//cy.hide_dialog();
 		//cy.get('.btn-modal-close').click({force: true, multiple: true});
 		//cy.get('.modal').type('{esc}');
