@@ -38,7 +38,6 @@ jobs:
         with:
           # Disable running of tests within install job
           runTests: false
-          build: yarn build
 
       - name: Add to Hosts
         run: |
@@ -77,14 +76,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Cache cypress binary
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache
-          key: ${{ runner.os }}-cypress-
-          restore-keys: |
-            ${{ runner.os }}-cypress-
-            ${{ runner.os }}-
 
       - name: Install
         run: bash ${GITHUB_WORKSPACE}/.github/helper/install.sh
@@ -126,11 +117,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: Download the build folders
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: build
-      #     path: build
+      - name: Download the build folders
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+  
       - name: "UI Tests - Chrome"
         uses: cypress-io/github-action@v2
         with:
