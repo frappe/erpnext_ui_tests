@@ -1,6 +1,7 @@
 ## ERPNext UI Tests
 
 [![UI](https://github.com/erpnext/erpnext_ui_tests/actions/workflows/ui-tests.yml/badge.svg?branch=develop&event=schedule)](https://github.com/erpnext/erpnext_ui_tests/actions/workflows/ui-tests.yml)
+[![UI Coverage](https://codecov.io/gh/erpnext/erpnext_ui_tests/branch/develop/graph/badge.svg?token=Y3X3T1Y04O)](https://codecov.io/gh/erpnext/erpnext_ui_tests)
 
 This repository contains Integration tests for ERPNext features written in Cypress. These tests are run on GitHub Actions via cron every day.
 
