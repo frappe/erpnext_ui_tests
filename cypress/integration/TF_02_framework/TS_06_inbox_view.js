@@ -45,7 +45,6 @@ context('Inbox View', () => {
 		cy.get_filter_button().should('contain', '4 filters');
 		cy.get_select('status').should('contain', 'Open');
 		cy.get_select('sent_or_received').should('contain','Received');
-		//cy.clear_filter();
 
 		//Composing and sending an email
 		cy.get('.frappe-list button.btn-new-doc:visible').should('contain', 'Compose Email')

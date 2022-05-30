@@ -78,6 +78,7 @@ context('Notifications', () => {
 
         //Deleting the user Billy Jones
         cy.delete_first_record('user');
+		cy.get('.modal').type('{esc}');
 
         //Deleting todo
         cy.set_input_awesomebar('todo');
