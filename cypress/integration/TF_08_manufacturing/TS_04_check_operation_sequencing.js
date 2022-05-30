@@ -35,8 +35,8 @@ context('Work Order', () => {
 	it('Start operation via Job Card', () => {
 		cy.visit('app/job-card/view/list');
 		cy.click_listview_row_item(0);
-		cy.click_toolbar_button('Start Job');
-		/*cy.on('window:alert',  (str) =>  {
+		/*cy.click_toolbar_button('Start Job');
+		cy.on('window:alert',  (str) =>  {
 			  expect(str).to.equal(`Assign Job to Employee`)});
 		cy.set_input_multiselect('employees', 'John Mayer');*/
 		cy.click_modal_primary_button('Submit');
