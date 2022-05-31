@@ -25,8 +25,8 @@ context('Role Profile', () => {
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
-		cy.get_field('role_profile_name', 'Link').should('have.value', 'Test RoleProfile');
-		cy.get_field('roles', 'MultiCheck').should('be.checked');
+		cy.get_input('role_profile_name').should('have.value', 'Test RoleProfile');
+		cy.get_input('roles').should('be.checked');
 	});
 
 	it('New user', () => {
@@ -40,7 +40,7 @@ context('Role Profile', () => {
 		cy.get('[data-fieldname="role_profile_name"] ul:visible li:first-child')
 			.should('contain', 'Test RoleProfile')
 			.click({force:true});	
-		cy.get_field('roles', 'MultiCheck').should('be.checked');
+		cy.get_input('roles').should('be.checked');
 	});
 
 	it('Creating a new role profile with minimum roles and creating user using it', () => {
@@ -64,7 +64,7 @@ context('Role Profile', () => {
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
-		cy.get_field('role_profile_name', 'Link').should('have.value', 'Test RoleProfile1');
+		cy.get_input('role_profile_name').should('have.value', 'Test RoleProfile1');
 		cy.get('.role-editor [type="checkbox"][data-unit="System Manager"]:visible').should('be.checked');
 		cy.get('.role-editor [type="checkbox"][data-unit="Sales Manager"]:visible').should('be.checked');
 
