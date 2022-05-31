@@ -119,7 +119,7 @@ Cypress.Commands.add("_set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
 		.clear({scrollBehavior: 'center'}) // hack to make sure number fields are properly cleared
-		.type(value, {scrollBehavior: false})
+		.type(value, {delay: 100, scrollBehavior: false})
 });
 
 Cypress.Commands.add("set_input", (fieldname, value) => {
@@ -295,7 +295,7 @@ Cypress.Commands.add('clear_filter', () => {
 		url: 'api/method/frappe.model.utils.user_settings.save'
 	}).as('filter-saved');
 	cy.get('.filter-section .filter-button:visible').click({force: true});
-	cy.wait(300);
+	cy.wait("@filter-saved");
 	cy.get('.filter-popover').should('exist');
 	cy.get('.filter-popover').then(popover => {
 		if (popover.find('input.input-with-feedback')[0].value != '') {
@@ -354,7 +354,9 @@ Cypress.Commands.add('delete_first_record', (doctype_name) => {
 	cy.click_listview_checkbox(0);
 	cy.click_action_button('Actions');
 	cy.click_toolbar_dropdown('Delete');
-	cy.click_modal_primary_button('Yes', {multiple: true});
+	cy.get('.modal-footer > .standard-actions > button.btn-primary:visible')
+		.contains('Yes')
+		.click({force: true, multiple: true});
 });
 
 Cypress.Commands.add('set_date', (year, month, date) => {
@@ -369,3 +371,25 @@ Cypress.Commands.add('set_date', (year, month, date) => {
 	cy.get(`.datepicker--days > .datepicker--cells > .datepicker--cell[data-date="${date}"]:visible`)
 		.click({scrollBehavior: false});
 });
+
+Cypress.Commands.add('delete_doc', (doctype, name) => {
+	return cy
+		.window()
+		.its('frappe.csrf_token')
+		.then(csrf_token => {
+			return cy
+				.request({
+					method: 'DELETE',
+					url: `/api/resource/${doctype}/${name}`,
+					headers: {
+						Accept: 'application/json',
+						'X-Frappe-CSRF-Token': csrf_token
+					}
+				})
+				.then(res => {
+					expect(res.status).eq(202);
+					return res.body;
+				});
+		});
+});
+
