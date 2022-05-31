@@ -11,18 +11,15 @@ context('Quotation Creation', () => {
 		var today = new Date();
 		const yyyy = today.getFullYear();
 		let mm = today.getMonth() + 1; // Months start at 0!
-		let nextMonth = today.getMonth() + 2; //Validiy till next month
 		let dd = today.getDate();
 		if (dd < 10) dd = '0' + dd;
 		if (mm < 10) mm = '0' + mm;
-		if (nextMonth < 10) nextMonth = '0' + nextMonth;
 		var todaydate = dd + '-' + mm + '-' + yyyy;
-		var validTill = dd + '-' + nextMonth + '-' + yyyy;
 
 		cy.get_select('naming_series').should('have.value', 'SAL-QTN-.YYYY.-');
 		cy.get_input('transaction_date').should('have.value', todaydate);
 		cy.get_input('quotation_to').should('have.value', 'Customer');
-		cy.get_input('valid_till').should('have.value', validTill);
+		cy.get_input('valid_till').should('not.have.value', 0);
 		cy.set_link('party_name', 'William Harris');
 		cy.get_select('order_type').should('have.value', 'Sales');
 		cy.get_read_only('customer_name').should('contain', 'William Harris');
