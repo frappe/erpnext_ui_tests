@@ -19,7 +19,7 @@ context('Notifications', () => {
         cy.click_section('Change Password');
         cy.set_input('new_password', 'password@12345');
         cy.save();
-        cy.hide_dialog();
+		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 
         //Creating a new todo
         cy.set_input_awesomebar('todo');

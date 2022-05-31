@@ -35,7 +35,9 @@ context('Role Profile', () => {
 		cy.new_doc('User');
 		cy.set_input('email', 'test_role_user123@exapmle.com');
 		cy.set_input('first_name', 'Test Role User123');
+		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
+		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.wait(1000);
 		cy.get_field('role_profile_name', 'Link').click({force: true, scrollBehavior: false});
 		cy.get('[data-fieldname="role_profile_name"] ul:visible li:first-child')
