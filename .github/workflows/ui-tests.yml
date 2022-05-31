@@ -28,6 +28,9 @@ jobs:
     steps:
       - uses: ./.github/workflows/setup.yml
 
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: UI Tests
         run: cd ~/frappe-bench/ && bench --site test_site run-ui-tests erpnext_ui_tests/cypress/integration/${{ matrix.container }}/**/*.js --with-coverage --headless
         env:
