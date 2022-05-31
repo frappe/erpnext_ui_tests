@@ -47,7 +47,8 @@ context('Work Order', () => {
 	it('Start an operation randomly via Job Card', () => {
 		cy.visit('app/job-card/view/list');
 		cy.click_listview_row_item(0);
-		cy.click_modal_primary_button('Submit');
+		cy.click_toolbar_button('Submit');
+		cy.click_modal_primary_button('Yes');
 		cy.click_section('Production');
 		cy.get_input('for_quantity', '1');
 		cy.get_field('wip_warehouse').should('have.value', 'Work In Progress - WP')
