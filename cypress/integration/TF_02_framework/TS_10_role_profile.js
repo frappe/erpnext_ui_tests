@@ -17,11 +17,10 @@ context('Role Profile', () => {
 		cy.get('.form-dashboard-section .form-documents .document-link').should('contain', 'User');
 		cy.get('.form-dashboard-section .form-documents .document-link button')
 			.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
+		cy.get('.modal-footer:visible > .custom-actions > .btn-secondary').click();
 		cy.set_input('email', 'test_role_user@exapmle.com');
 		cy.set_input('first_name', 'Test Role User');
-		cy.get('.modal-footer .standard-actions button.btn-primary:visible')
-			.contains('Save')
-			.click({force: true, scrollBehavior: false});
+		cy.save();
 		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.wait(1000);
 
