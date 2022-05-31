@@ -80,7 +80,7 @@ context('Tree View', () => {
 		cy.get('.tree-node .tree-node-toolbar button').contains('Rename').click();
 		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Rename').click({force: true});
 		cy.get('.msgprint').should('contain', 'No changes made because old and new name are the same.');
-		cy.get('.btn-modal-close').click({force: true, multiple: true});
+		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.get('#navbar-search').type('test location list', {delay: 200});
 		cy.get('#navbar-search').type('{enter}');
 		cy.click_custom_toolbar_button('List View');
