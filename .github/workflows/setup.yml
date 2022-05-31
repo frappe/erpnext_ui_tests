@@ -2,19 +2,19 @@ name: Setup For Running Tests
 
 on:
   workflow_call:
-    
+
 jobs:
   install:
     runs-on: ubuntu-latest
-      timeout-minutes: 180
-      services:
-        mysql:
-          image: mariadb:10.3
-          env:
-            MYSQL_ALLOW_EMPTY_PASSWORD: YES
-          ports:
-            - 3306:3306
-          options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+    timeout-minutes: 180
+    services:
+      mysql:
+        image: mariadb:10.3
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: YES
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
