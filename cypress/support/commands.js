@@ -371,3 +371,25 @@ Cypress.Commands.add('set_date', (year, month, date) => {
 	cy.get(`.datepicker--days > .datepicker--cells > .datepicker--cell[data-date="${date}"]:visible`)
 		.click({scrollBehavior: false});
 });
+
+Cypress.Commands.add('delete_doc', (doctype, name) => {
+	return cy
+		.window()
+		.its('frappe.csrf_token')
+		.then(csrf_token => {
+			return cy
+				.request({
+					method: 'DELETE',
+					url: `/api/resource/${doctype}/${name}`,
+					headers: {
+						Accept: 'application/json',
+						'X-Frappe-CSRF-Token': csrf_token
+					}
+				})
+				.then(res => {
+					expect(res.status).eq(202);
+					return res.body;
+				});
+		});
+});
+
