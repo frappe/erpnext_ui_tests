@@ -60,10 +60,12 @@ context('Role Profile', () => {
 		cy.get('.form-dashboard-section .form-documents .document-link').should('contain', 'User');
 		cy.get('.form-dashboard-section .form-documents .document-link button')
 			.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
+		cy.get('.modal-footer:visible > .custom-actions > .btn-secondary').click();
 		cy.set_input('email', 'test_rle_user@example.com');
 		cy.set_input('first_name', 'TestRole User');
-		cy.click_modal_primary_button('Save');
-		cy.hide_dialog();
+		cy.get_field('send_welcome_email', 'Check').uncheck();
+		cy.save();
+		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
