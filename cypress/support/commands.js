@@ -236,6 +236,27 @@ Cypress.Commands.add('open_section', (title) => {
 	return cy.click_section(title);
 });
 
+Cypress.Commands.add("set_grid_input", (fieldname, value) => {
+	const field = get_field_parts(fieldname);
+
+	// selector for the input
+	let selector_string = `[data-fieldname="${field.fieldname}"] input:visible`;
+
+
+	if (field.tablefield) {
+		// is the last row activated (does the control exist)?
+		if (Cypress.$(`[data-fieldname="${field.tablefield}"] .grid-body .row:last .frappe-control[data-fieldname="${field.fieldname}"]:visible`).length === 0) {
+
+			// click on the box - this activates the row and creates controls
+			cy.get(`[data-fieldname="${field.tablefield}"] .grid-body .row:last [data-fieldname="${field.fieldname}"]:visible`).click({scrollBehavior: 'center'});
+		}
+
+		// selector for input
+		selector_string = `[data-fieldname="${field.tablefield}"] ${selector_string}`;
+	}
+	return cy.get(selector_string).type(value);
+});
+
 Cypress.Commands.add('grid_add_row', (fieldname) => {
 	cy.get(`[data-fieldname="${fieldname}"] .grid-add-row:visible`).click({scrollBehavior: 'center'});
 });
