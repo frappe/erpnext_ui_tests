@@ -19,8 +19,9 @@ context('Role Profile', () => {
 			.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
 		cy.set_input('email', 'test_role_user@exapmle.com');
 		cy.set_input('first_name', 'Test Role User');
-		cy.get('.modal-footer .standard-actions .btn-primary:visible').contains('Save').click({force: true});
-		cy.wait(2000);
+		cy.get('.modal-footer .standard-actions button.btn-primary:visible')
+			.contains('Save')
+			.click({force: true, scrollBehavior: false});
 		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.wait(1000);
 
