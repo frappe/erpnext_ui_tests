@@ -20,6 +20,7 @@ context('Role Profile', () => {
 		cy.get('.modal-footer:visible > .custom-actions > .btn-secondary').click();
 		cy.set_input('email', 'test_role_user@exapmle.com');
 		cy.set_input('first_name', 'Test Role User');
+		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
 		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.wait(1000);
