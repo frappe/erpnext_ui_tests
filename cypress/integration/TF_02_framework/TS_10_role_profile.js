@@ -4,7 +4,7 @@ context('Role Profile', () => {
         cy.go_to_list('Website');
     });
 
-    it('Creating new role profile', () => {
+    it('Creates new role profile', () => {
 		//Creating role profile
 		cy.new_doc('Role Profile');
 		cy.set_input('role_profile', 'Test RoleProfile');
