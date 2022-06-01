@@ -1,11 +1,21 @@
 import frappe
-
 from erpnext.stock.doctype.item.test_item import make_item
 
 
 @frappe.whitelist()
 def create_barcode_scan_test_docs():
 	make_item("ScanNormalItem", properties={"barcodes": [{"barcode": "12399"}]})
+
+	make_item(
+		"ScanUOMItem",
+		properties={
+			"stock_uom": "Kg",
+			"barcodes": [
+				{"barcode": "910-KG", "uom": "Kg"},
+				{"barcode": "910-TN", "uom": "Tonne"},
+			],
+		},
+	)
 
 	batch_item = make_item("ScanBatchItem", properties={"has_batch_no": 1})
 	for batch_no in ("ScanBatchItem1", "ScanBatchItem2"):
