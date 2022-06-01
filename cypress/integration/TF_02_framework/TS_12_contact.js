@@ -13,7 +13,7 @@ context('Contact', () => {
 		cy.get_open_dialog().should('contain', 'Missing Fields')
 			.and('contain', 'Mandatory fields required in Contact');
 		cy.get('.msgprint').find('li').should('contain', 'First Name');
-		cy.get('.btn-modal-close').click({force: true, multiple: true});
+		cy.get('.modal').type('{esc}');
 		cy.set_input('first_name', 'Jenny Holmes');
 		cy.get_select('status').should('contain', 'Passive')
 			.and('contain', 'Open')
