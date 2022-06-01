@@ -21,7 +21,8 @@ context('Notifications', () => {
         cy.click_section('Change Password');
         cy.set_input('new_password', 'password@12345');
         cy.save();
-
+		cy.get('.modal').type('{esc}');
+		
         //Creating a new todo
         cy.set_input_awesomebar('todo');
         cy.create_records({

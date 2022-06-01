@@ -101,12 +101,11 @@ context('Tree View', () => {
 	});
 
 	it('Deleting the created doctype', () => {
-		// cy.get('#navbar-search').type('doctype list', {delay: 200});
-		// cy.get('#navbar-search').type('{enter}');
-		// cy.click_listview_checkbox(0);
-		// cy.click_action_button('Actions');
-		// cy.click_toolbar_dropdown('Delete');
-		// cy.click_modal_primary_button('Yes', {multiple: true});		
-		cy.delete_doc('Doctype', 'Test Location');
+		cy.get('#navbar-search').type('doctype list', {delay: 200});
+		cy.get('#navbar-search').type('{enter}');
+		cy.click_listview_checkbox(0);
+		cy.click_action_button('Actions');
+		cy.click_toolbar_dropdown('Delete');
+		cy.click_modal_primary_button('Yes', {multiple: true});		
 	});	
 });
