@@ -10,7 +10,6 @@ context("Chart Of Accounts", () => {
     it("Check if Expand All works", () => {
         cy.click_toolbar_button('Expand All');
         cy.get(".tree-children").should("be.visible");
-		cy.get(".tree-children").should("not.have.value", 0);
     });
 
     it("Check if Chart of Cost Center under View dropdown works", () => {
