@@ -8,9 +8,23 @@ context("BOM with scrap management", () => {
 		cy.set_link('default_scrap_warehouse', 'Work In Progress - CT');
 	});
 
+	it('Create an item', () => {
+		let item_code = 'Hutch table with cabinet and bookshelf'
+		cy.new_doc("Item");
+		cy.set_input('item_code', item_code);
+		cy.set_link('item_group','All Item Groups');
+		cy.set_input('opening_stock', '1000');
+		cy.set_input('valuation_rate', '1000');
+		cy.set_input('standard_rate', '22300');
+		cy.set_link('stock_uom', 'Nos');
+		cy.save();
+		cy.get_page_title().should('contain', item_code);
+		cy.get_page_title().should('contain',  'Enabled');
+	});
+
 	it('Create a Bill of Materials with scrap', () => {
 		cy.new_doc("BOM");
-		cy.set_link('item', 'Classic Center Table');
+		cy.set_link('item', 'Hutch table with cabinet and bookshelf');
 		cy.get_field('with_operations', 'checkbox').check();
 		cy.get_field('with_operations', 'checkbox').should('be.checked');
 		cy.get_select('transfer_material_against', 'Work Order');
