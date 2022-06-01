@@ -10,7 +10,7 @@ context("BOM with scrap management", () => {
 
 	it('Create a Bill of Materials with scrap', () => {
 		cy.new_doc("BOM");
-		cy.set_link('item', 'Classic Center Table-ACACIA');
+		cy.set_link('item', 'Classic Center Table');
 		cy.get_field('with_operations', 'checkbox').check();
 		cy.get_field('with_operations', 'checkbox').should('be.checked');
 		cy.get_select('transfer_material_against', 'Work Order');
