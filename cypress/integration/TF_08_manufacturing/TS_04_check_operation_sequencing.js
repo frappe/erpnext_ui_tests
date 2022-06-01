@@ -52,11 +52,6 @@ context('Work Order', () => {
 		cy.click_section('Production');
 		cy.get_input('for_quantity', '1');
 		cy.get_field('wip_warehouse').should('have.value', 'Work In Progress - WP')
-	});
-
-	it('Check validation for operation sequencing', () => {
-		cy.visit('app/job-card/view/list');
-		cy.click_listview_row_item(0);
 		cy.click_toolbar_button('Complete Job');
 		cy.set_input('qty', '1');
 		cy.click_modal_primary_button('Submit');
