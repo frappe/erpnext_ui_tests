@@ -79,10 +79,6 @@ context('Contact', () => {
 	it('Deleting the addresses and customer', () => {
 		cy.wait(5000);
 		cy.remove_doc('Contact', 'Jenny');
-		// cy.delete_first_record('contact');
-		// cy.hide_dialog();
 		cy.remove_doc('Customer', 'Test Customer Contact');
-		// cy.delete_first_record('customer');
-		// cy.hide_dialog();
 	});
 });
