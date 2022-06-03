@@ -103,13 +103,7 @@ context('Address', () => {
 	it('Deleting the addresses and customer', () => {
 		cy.wait(2000);
 		cy.remove_doc('Address', 'Test Billing');
-		//cy.delete_first_record('address');
-		//cy.hide_dialog();
 		cy.remove_doc('Address', 'Test Address Shipping-Shipping');
-		//cy.delete_first_record('address');
-		//cy.hide_dialog();
 		cy.remove_doc('Customer', 'Test Customer Address');
-		//cy.delete_first_record('customer');
-		//cy.hide_dialog();
 	});
 });
