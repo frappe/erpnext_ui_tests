@@ -7,7 +7,7 @@ const input_scan = (scan_string) => {
 
 // assert partially supplied item attributes with actual frm object.
 const assert_items = (item_list) => {
-	cy.compare_document({items: item_list});
+	cy.compare_document({ items: item_list });
 };
 
 context("Barcode scanning", () => {
@@ -36,6 +36,25 @@ context("Barcode scanning", () => {
 
 		input_scan("12399");
 		assert_items([{ item_code: "ScanNormalItem", qty: 2 }]);
+	});
+
+	it("should scan UOM specific barcodes", () => {
+		input_scan("910-KG");
+		assert_items([{ item_code: "ScanUOMItem", qty: 1, uom: "Kg" }]);
+
+		input_scan("910-KG");
+		assert_items([{ item_code: "ScanUOMItem", qty: 2, uom: "Kg" }]);
+
+		input_scan("910-TN");
+		assert_items([
+			{ item_code: "ScanUOMItem", qty: 2, uom: "Kg" },
+			{
+				item_code: "ScanUOMItem",
+				qty: 1,
+				uom: "Tonne",
+				conversion_factor: 1000.0,
+			},
+		]);
 	});
 
 	it("should scan batched item", () => {
