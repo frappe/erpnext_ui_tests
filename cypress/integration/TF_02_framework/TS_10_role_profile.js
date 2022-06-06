@@ -70,7 +70,8 @@ context('Role Profile', () => {
 		cy.set_input('first_name', 'TestRole User');
 		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
-		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
+		cy.reload();
+		// cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
