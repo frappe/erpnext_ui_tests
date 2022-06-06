@@ -38,18 +38,18 @@ context('Currency and Exchange Rate Check', () => {
  				.invoke('val')
 				.then(val => {
 					const exRate = val;
-                    cy.log("exchange rate " + exRate);
-                    const roundedExchRate = Number(exRate).toFixed(2);
+					cy.log("exchange rate " + exRate);
+					const roundedExchRate = Number(exRate).toFixed(2);
 
-                    const rate = (110000/exRate);
-                    const roundedRate = Number(rate).toFixed(2);
-                    cy.log("rounded rate " + roundedRate);
-                    //const formattedRate = new Intl.NumberFormat().format(roundedRate);
-                    const formattedRate = Number(roundedRate).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
-                    cy.log("formatted rate " + formattedRate);
-                    const rateInCurrency = ('€ '+formattedRate);
+					const rate = (110000/exRate);
+					const roundedRate = Number(rate).toFixed(2);
+					cy.log("rounded rate " + roundedRate);
+					//const formattedRate = new Intl.NumberFormat().format(roundedRate);
+					const formattedRate = Number(roundedRate).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
+					cy.log("formatted rate " + formattedRate);
+					const rateInCurrency = ('€ '+formattedRate);
 
-                    cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
+					cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
 					cy.get_input('qty').should('have.value', "1.000");
 					cy.get_input('rate').should('have.value', formattedRate);
 					cy.get_input('amount').should('have.value', formattedRate);
