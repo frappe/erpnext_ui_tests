@@ -64,7 +64,7 @@ context('Role Profile', () => {
 			.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
 		cy.get('.modal-footer:visible > .custom-actions > button.btn-secondary')
 			.contains('Edit in full page')
-			.click();
+			.click({force: true});
 		cy.set_input('email', 'test_rle_user@example.com');
 		cy.set_input('first_name', 'TestRole User');
 		cy.get_field('send_welcome_email', 'Check').uncheck();
