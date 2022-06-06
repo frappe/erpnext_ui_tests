@@ -46,7 +46,7 @@ context('Role Profile', () => {
 		cy.get_input('roles').should('be.checked');
 	});
 
-	it.only('Creating a new role profile with minimum roles and creating user using it', () => {
+	it('Creating a new role profile with minimum roles and creating user using it', () => {
 		//Creating a new role profile with minimum roles assigned
 		cy.new_doc('Role Profile');
 		cy.set_input('role_profile', 'Test RoleProfile1');
