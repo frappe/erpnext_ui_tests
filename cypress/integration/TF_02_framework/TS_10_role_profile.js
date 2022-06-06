@@ -76,16 +76,16 @@ context('Role Profile', () => {
 		cy.get('.role-editor [type="checkbox"][data-unit="Sales Manager"]:visible').should('be.checked');
 
 		//Deleting the user and the role profile
-		cy.delete_doc('User', 'test_rle_user@example.com');
-		cy.delete_doc('Role Profile', 'Test RoleProfile1');
+		cy.remove_doc('User', 'test_rle_user@example.com');
+		cy.remove_doc('Role Profile', 'Test RoleProfile1');
 	});
 
 	after(() => {
         //Deleting the user
-		cy.delete_doc('User', 'test_role_user123@exapmle.com');
-		cy.delete_doc('User', 'test_role_user@exapmle.com');
+		cy.remove_doc('User', 'test_role_user123@exapmle.com');
+		cy.remove_doc('User', 'test_role_user@exapmle.com');
 
 		//Deleting the role profile
-		cy.delete_doc('Role Profile', 'Test RoleProfile');
+		cy.remove_doc('Role Profile', 'Test RoleProfile');
     });
 });
