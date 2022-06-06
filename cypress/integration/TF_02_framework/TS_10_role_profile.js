@@ -18,8 +18,10 @@ context('Role Profile', () => {
 		cy.get('.form-dashboard-section .form-documents .document-link button')
 			.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
 		cy.get('.modal-footer:visible > .custom-actions > .btn-secondary').click();
-		cy.set_input('email', 'test_role_user@exapmle.com');
-		cy.set_input('first_name', 'Test Role User');
+		//cy.set_input('email', 'test_role_user@exapmle.com');
+		cy.fill_field('email', 'test_role_user@exapmle.com', 'Data');
+		cy.fill_field('first_name', 'Test Role User', 'Data');
+		//cy.set_input('first_name', 'Test Role User');
 		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
 		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
