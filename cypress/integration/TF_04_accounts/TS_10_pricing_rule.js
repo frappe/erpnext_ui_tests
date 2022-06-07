@@ -1,4 +1,4 @@
-context('Quotation Creation', () => {
+context('Pricing Rule Check on Quotation', () => {
 	before(() => {
 		cy.login();
 	});
