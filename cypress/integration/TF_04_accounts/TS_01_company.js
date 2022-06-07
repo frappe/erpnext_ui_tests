@@ -10,7 +10,7 @@ context('Create Company', () => {
 		cy.set_link('default_currency', 'INR');
 		cy.set_link('country', 'India');
 		cy.save();
- });
+ 	});
 
 	it("Check if appropriate Cost Centers are created", () => {
 		cy.visit(`app/company/Bernhardt%20Furnitures`);
