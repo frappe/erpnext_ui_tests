@@ -66,6 +66,8 @@ Cypress.Commands.add("compare_document", (expected_document) => {
 	cy.window()
 	.its("cur_frm")
 	.then((frm) => {
+		// Don't remove this, cypress can't magically wait for events it has no control over.
+		cy.wait(1000);
 		compare_document(expected_document, frm.doc);
 	});
 });
