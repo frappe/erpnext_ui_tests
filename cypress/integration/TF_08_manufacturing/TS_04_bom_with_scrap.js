@@ -31,32 +31,15 @@ context("BOM with scrap management", () => {
 
 		//Setting operations
 		cy.grid_add_row('operations');
-		cy.set_link('operations.operation', 'Attaching the table top with legs');
-		cy.set_input('operations.time_in_mins', '1440');
-		cy.grid_add_row('operations');
-		cy.set_link('operations.operation', 'Sanding  the table');
-		cy.set_input('operations.time_in_mins', '2880');
-		cy.grid_add_row('operations');
 		cy.set_link('operations.operation', 'Staining the table');
 		cy.set_input('operations.time_in_mins', '2880');
 
 		//Setting items
 		cy.grid_add_row('items');
-		cy.set_link('items.item_code', 'Scrapwood table top');
-		cy.set_input('items.qty', '1');
-		cy.grid_add_row('items');
-		cy.set_link('items.item_code', 'Wooden Furniture Legs 6 inch');
-		cy.set_input('items.qty', '1');
-		cy.grid_add_row('items');
-		cy.set_link('items.item_code', 'Pidilite Fevicol SR 998');
-		cy.set_input('items.qty', '1');
-		cy.grid_add_row('items');
-		cy.set_link('items.item_code', '80-grit sandpaper');
-		cy.set_input('items.qty', '1');
-		cy.grid_add_row('items');
 		cy.set_link('items.item_code', 'Paint brush');
 		cy.set_input('items.qty', '1');
 		cy.save();
+		cy.wait(500);
 
 		//set scrap item
 		cy.click_section('Scrap');
