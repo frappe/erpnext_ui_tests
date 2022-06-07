@@ -59,7 +59,8 @@ context('Multi Currency Accounting', () => {
 
 				const rate = (110000/exRate);
 				const roundedRate = Number(rate).toFixed(2);
-				const formattedRate = new Intl.NumberFormat().format(roundedRate);
+				//const formattedRate = new Intl.NumberFormat().format(roundedRate);
+				const formattedRate = Number(roundedRate).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
 				cy.log("formatted rate " + formattedRate);
 				const rateInCurrency = ('€ '+formattedRate);
 
@@ -70,7 +71,8 @@ context('Multi Currency Accounting', () => {
 
 				const total = (roundedRate * roundedExchRate);
 				const roundedTotal = Number(total).toFixed(2);
-				const formattedTotal = Intl.NumberFormat('en-IN').format(roundedTotal);
+				//const formattedTotal = Intl.NumberFormat('en-IN').format(roundedTotal);
+				const formattedTotal = Number(roundedTotal).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
 				cy.log("total " + formattedTotal);
 				const totalInCurrency = ('₹ '+formattedTotal);
 

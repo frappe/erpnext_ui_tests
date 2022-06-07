@@ -38,12 +38,14 @@ context('Currency and Exchange Rate Check', () => {
  				.invoke('val')
 				.then(val => {
 					const exRate = val;
-					cy.log(exRate);
+					cy.log("exchange rate " + exRate);
 					const roundedExchRate = Number(exRate).toFixed(2);
 
 					const rate = (110000/exRate);
 					const roundedRate = Number(rate).toFixed(2);
-					const formattedRate = new Intl.NumberFormat().format(roundedRate);
+					cy.log("rounded rate " + roundedRate);
+					//const formattedRate = new Intl.NumberFormat().format(roundedRate);
+					const formattedRate = Number(roundedRate).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
 					cy.log("formatted rate " + formattedRate);
 					const rateInCurrency = ('€ '+formattedRate);
 
