@@ -3,7 +3,7 @@ context('Pricing Rule Check on Quotation', () => {
 		cy.login();
 	});
 
-	it('Create Pricing Rule', () => {
+	it('Create Pricing Rule Record', () => {
 		cy.new_doc('Pricing Rule');
 		cy.location('pathname').should('include', 'app/pricing-rule/new-pricing-rule');
 		cy.get_select('naming_series').should('have.value', 'PRLE-.####');
