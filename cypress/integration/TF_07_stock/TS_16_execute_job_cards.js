@@ -18,7 +18,7 @@ context('Executing Job Cards', () => {
 			  expect(str).to.equal(`Assign Job to Employee`)});
 		cy.set_input_multiselect('employees', 'John Mayer');
 		cy.click_modal_primary_button('Submit');
-		cy.click_section('Production');
+		cy.open_section('Production');
 		cy.get_input('for_quantity', '1');
 		cy.get_field('wip_warehouse').should('have.value', 'Work In Progress - WP')
 	});
