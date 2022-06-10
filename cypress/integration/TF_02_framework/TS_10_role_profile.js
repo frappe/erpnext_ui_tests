@@ -64,7 +64,7 @@ context('Role Profile', () => {
 		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
 		//cy.reload();
-		cy.get('.modal:visible').type('{esc}');
+		//cy.get('.modal:visible').type('{esc}');
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
