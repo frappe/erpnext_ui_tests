@@ -25,6 +25,7 @@ context('Create Sales Order', () => {
 		cy.set_today('delivery_date');
 
 		cy.click_section('Currency and Price List');
+		cy.open_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 
