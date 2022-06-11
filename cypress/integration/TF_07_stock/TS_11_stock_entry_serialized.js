@@ -9,7 +9,7 @@ context('Create Stock Entry', () => {
 		cy.set_input('item_code', item_code);
 		cy.set_link('item_group','All Item Groups');
 		cy.set_input('valuation_rate', '10000');
-        	cy.set_input('standard_rate', '12000');
+        cy.set_input('standard_rate', '12000');
 		cy.set_link('stock_uom', 'Nos');
         cy.click_section('Serial Nos and Batches');
         cy.get_field('has_batch_no', 'checkbox').check();
