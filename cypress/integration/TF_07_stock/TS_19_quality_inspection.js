@@ -13,6 +13,7 @@ context("Quality Inspection", () => {
 		cy.set_input('standard_rate', '11999');
 		cy.set_link('stock_uom', 'Nos');
 		cy.click_section('Inspection Criteria');
+		cy.open_section('Inspection Criteria');
 		cy.set_link('quality_inspection_template', 'Quality Inspection Template - I');
 		cy.get_field('inspection_required_before_delivery').check();
 		cy.save();
