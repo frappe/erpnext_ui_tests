@@ -95,7 +95,7 @@ context('Tree View', () => {
 		//Deleting the children node
 		cy.get('.tree-children .tree-link[data-label="LOCATION23456"]').click({force: true});
 		cy.get('.tree-node .tree-node-toolbar button').contains('Delete').click();
-		cy.get('.modal').type('{esc}');
+		cy.get('.modal:visible').type('{esc}');
 	});
 
 	it('Deleting the created doctype', () => {
