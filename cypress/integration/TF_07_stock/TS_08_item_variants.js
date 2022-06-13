@@ -30,7 +30,7 @@ context('Variant Item', () => {
 		cy.set_link('stock_uom', 'Nos');
 		cy.get_field('is_stock_item', 'checkbox').uncheck();
 		cy.get_input('is_stock_item', 'checkbox').should('not.be.checked');
-		cy.click_section('Variants');
+		cy.contains('Variants').click();
 		cy.get_field('has_variants', 'checkbox').check();
 		cy.get_input('has_variants', 'checkbox').should('be.checked');
 		cy.set_select('variant_based_on', 'Item Attribute');
