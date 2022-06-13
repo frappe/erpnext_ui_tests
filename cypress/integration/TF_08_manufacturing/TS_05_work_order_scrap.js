@@ -19,18 +19,6 @@ context('Work Order', () => {
 
 			//Setting operations against raw materials
 			cy.grid_open_row('required_items', 1);
-			cy.set_link('operation', 'Attaching the table top with legs');
-			cy.close_grid_edit_modal();
-			cy.grid_open_row('required_items', 2);
-			cy.set_link('operation', 'Attaching the table top with legs');
-			cy.close_grid_edit_modal();
-			cy.grid_open_row('required_items', 3);
-			cy.set_link('operation', 'Attaching the table top with legs');
-			cy.close_grid_edit_modal();
-			cy.grid_open_row('required_items', 4);
-			cy.set_link('operation', 'Sanding the table');
-			cy.close_grid_edit_modal();
-			cy.grid_open_row('required_items', 5);
 			cy.set_link('operation', 'Staining the table');
 			cy.close_grid_edit_modal();
 			cy.save();
