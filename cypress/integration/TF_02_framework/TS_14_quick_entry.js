@@ -46,11 +46,10 @@ describe("Test quick entry for doctypes", () => {
 		cy.set_input('first_name', 'Jenny Holmes');
 		cy.get_field('send_welcome_email', 'Check').uncheck();
 		//cy.click_modal_primary_button('Save');
-		cy.intercept('api/method/frappe.desk.form.save.savedocs').as('form-save');
 		cy.get('.modal-footer .standard-actions button.btn-modal-primary')
 			.contains('Save')
 			.click({force: true});
-		cy.wait('@form-save');
+		cy.wait(1000);
 		cy.get('.frappe-list').contains('Jenny Holmes');
 		cy.remove_doc('User', 'jenny_holmes@example.com');
 
@@ -66,7 +65,7 @@ describe("Test quick entry for doctypes", () => {
 		cy.get('.modal-footer .standard-actions button.btn-modal-primary')
 			.contains('Save')
 			.click({force: true});
-		cy.wait('@form-save');
+		cy.wait(1000);
 		cy.get('.frappe-list').contains('Table');
 		cy.remove_doc('Item', 'Table');
 
@@ -78,7 +77,7 @@ describe("Test quick entry for doctypes", () => {
 		cy.get('.modal-footer .standard-actions button.btn-modal-primary')
 			.contains('Save')
 			.click({force: true});
-		cy.wait('@form-save');
+		cy.wait(1000);
 		cy.get('.frappe-list').contains('Test Project');
 		cy.remove_doc('Project', 'PROJ-0002');
 	});
