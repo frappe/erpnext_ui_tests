@@ -416,3 +416,8 @@ Cypress.Commands.add('delete_doc', (doctype, name) => {
 		});
 });
 
+Cypress.Commands.add('click_tab', (fieldname) => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	cy.get(`.form-tabs .nav-item [aria-controls=${fieldname}]`)
+		.click({force: true, scrollBehavior: "center"});
+});
