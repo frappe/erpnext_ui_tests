@@ -421,3 +421,13 @@ Cypress.Commands.add('click_tab', (fieldname) => {
 	cy.get(`.form-tabs .nav-item [aria-controls=${fieldname}]`)
 		.click({force: true, scrollBehavior: "center"});
 });
+
+Cypress.Commands.add('click_link_button', () => {
+    cy.get('.link-btn:visible .btn-open')
+        .click({force: true, scrollBehavior: false});
+});
+
+Cypress.Commands.add('grid_delete_all', () => {
+    cy.get('.form-grid .grid-heading-row .grid-row-check').click({force: true});
+    cy.get('.grid-remove-rows:visible').click({force: true});
+});
