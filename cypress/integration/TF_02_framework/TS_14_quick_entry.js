@@ -46,9 +46,6 @@ describe("Test quick entry for doctypes", () => {
 		cy.set_input('first_name', 'Jenny Holmes');
 		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.click_modal_primary_button('Save');
-		// cy.get('.modal-footer .standard-actions button.btn-modal-primary')
-		// 	.contains('Save')
-		// 	.click({force: true});
 		cy.reload();
 		cy.get('.frappe-list').contains('Jenny Holmes');
 		cy.remove_doc('User', 'jenny_holmes@example.com');
@@ -62,9 +59,6 @@ describe("Test quick entry for doctypes", () => {
 		cy.get('.modal-dialog [data-fieldname="item_group"] input:visible')
 			.type('{enter}');	
 		cy.click_modal_primary_button('Save');
-		// cy.get('.modal-footer .standard-actions button.btn-modal-primary')
-		// 	.contains('Save')
-		// 	.click({force: true});
 		cy.reload();
 		cy.get('.frappe-list').contains('Table');
 		cy.remove_doc('Item', 'Table');
@@ -74,12 +68,9 @@ describe("Test quick entry for doctypes", () => {
 		cy.get('.modal-dialog [data-fieldname="project_name"] input:visible')
 			.type('Test Project', {delay: 200});
 		cy.click_modal_primary_button('Save');
-		// cy.get('.modal-footer .standard-actions button.btn-modal-primary')
-		// 	.contains('Save')
-		// 	.click({force: true});
 		cy.wait(500);
 		cy.reload();
 		cy.get('.frappe-list').contains('Test Project');
-		cy.remove_doc('Project', 'PROJ-0002');
+		cy.remove_doc('Project', 'PROJ-0001');
 	});
 });
