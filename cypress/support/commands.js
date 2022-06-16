@@ -227,6 +227,11 @@ Cypress.Commands.add('get_page_title', () => {
 	return cy.get('.page-title:visible');
 });
 
+Cypress.Commands.add('get_section', (title) => {
+	cy.wait(2000);
+	return cy.get('.section-head:visible').contains(title).scrollIntoView();
+});
+
 Cypress.Commands.add('click_section', (title) => {
 	return cy.get('.section-head:visible').contains(title).click({scrollBehavior: false, force: true});
 });
