@@ -19,7 +19,7 @@ context("Journal Entry Types", () => {
 		cy.get_input('posting_date').should('have.value', todaysDate);
 
 		//Checking if the accounting entires are of type "Asset" and "Liability" only
-		cy.grid_open_row('accounts', 3);
+		cy.grid_open_row('accounts', 4);
 		cy.get_input('account').click({force: true});
 		cy.click_link_button();
 		cy.get_read_only('root_type').should('contain', 'Asset');
