@@ -37,7 +37,7 @@ context("Journal Entry Types", () => {
 		//Deleting all the rows and adding credit and debit entries
 		cy.scrollTo('top', {ensureScrollable: false});
 		cy.grid_delete_all();
-		cy.wait(2000);
+		cy.wait(5000);
 		cy.grid_add_row('accounts');
 		cy.set_link('accounts.account', 'Shareholders Funds');
 		cy.set_input('accounts.credit_in_account_currency', '50000');
