@@ -4,6 +4,18 @@ context("Journal Entry Types", () => {
 	});
 
 	it("Opening Entry (Journal Entry)", () => {
+		cy.insert_doc(
+			"Account",
+			{
+			 account_name: "Shareholders Funds",
+			 is_group: 0,
+			 root_type: "Liability",
+			 report_type: "Balance Sheet",
+			 account_currency: "INR",
+			 parent_account: "Capital Account - WP",
+			},
+			true
+		)
 		cy.new_doc('Journal Entry');
 
 		//Setting the type as Opening Entry
@@ -38,20 +50,6 @@ context("Journal Entry Types", () => {
 		cy.scrollTo('top', {ensureScrollable: false});
 		cy.grid_delete_all();
 		cy.wait(5000);
-
-		cy.insert_doc(
-			"Account",
-			{
-			 account_name: "Shareholders Funds",
-			 is_group: 0,
-			 root_type: "Liability",
-			 report_type: "Balance Sheet",
-			 account_currency: "INR",
-			 parent_account: "Capital Account - WP",
-			},
-			true
-		   )
-
 		cy.grid_add_row('accounts');
 		cy.set_link('accounts.account', 'Shareholders Funds');
 		cy.set_input('accounts.credit_in_account_currency', '50000');
