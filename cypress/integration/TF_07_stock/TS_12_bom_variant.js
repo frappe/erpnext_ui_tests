@@ -25,16 +25,14 @@ context("Bill of Materials", () => {
 		cy.new_doc('Item');
         cy.set_input('item_code', 'Classic Dining Table');
 		cy.set_link('item_group','All Item Groups');
-		//cy.set_input('opening_stock', '100');
 		cy.set_input('valuation_rate', '20000');
 		cy.set_input('standard_rate', '24999');
 		cy.set_link('stock_uom', 'Nos');
 		cy.get_field('is_stock_item', 'checkbox').check();
 		cy.get_input('is_stock_item', 'checkbox').should('be.checked');
-		cy.click_section('Variants');
-		cy.open_section('Variants');
 		cy.get_field('has_variants', 'checkbox').check();
 		cy.get_input('has_variants', 'checkbox').should('be.checked');
+		cy.click_tab('Variants');
 		cy.set_select('variant_based_on', 'Item Attribute');
 		cy.grid_add_row('attributes');
         cy.set_input('attributes.attribute', 'Wood Type');
