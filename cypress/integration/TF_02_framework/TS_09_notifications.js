@@ -11,8 +11,9 @@ context('Notifications', () => {
         cy.set_input('first_name', 'Test Notification User');
         cy.get_field('send_welcome_email', 'Check').uncheck();
         cy.save();
-		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
-		//cy.get('.modal').type('{esc}');
+		// cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
+		// //cy.get('.modal').type('{esc}');
+		cy.reload();
         cy.set_input_awesomebar('User');
         cy.list_open_row('Test Notification User');
         cy.wait(1000);
