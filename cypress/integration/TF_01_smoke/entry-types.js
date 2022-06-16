@@ -29,7 +29,7 @@ context("Journal Entry Types", () => {
 		cy.click_link_button();
 		cy.get_read_only('root_type').should('contain', 'Asset');
 		cy.go('back');
-		cy.grid_open_row('accounts', 35);
+		cy.grid_open_row('accounts', 3);
 		cy.get_input('account').click({force: true});
 		cy.click_link_button();
 		cy.get_read_only('root_type').should('contain', 'Liability');
