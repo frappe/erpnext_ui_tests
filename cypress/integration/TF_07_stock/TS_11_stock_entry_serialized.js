@@ -3,7 +3,7 @@ context('Create Stock Entry', () => {
     cy.login();
         });
 
-    it("Create a serialized & batched item", () => {
+	it.only("Create a serialized & batched item", () => {
 		let item_code = 'Solid Wood Armchair In Honey Oak Finish'
 		cy.new_doc('Item');
 		cy.set_input('item_code', item_code);
@@ -11,7 +11,9 @@ context('Create Stock Entry', () => {
 		cy.set_input('valuation_rate', '10000');
         cy.set_input('standard_rate', '12000');
 		cy.set_link('stock_uom', 'Nos');
-        cy.click_section('Serial Nos and Batches');
+		cy.click_tab('Inventory');
+		cy.get_section('Serial Nos and Batches');
+		cy.click_section('Serial Nos and Batches');
 		cy.open_section('Serial Nos and Batches');
         cy.get_field('has_batch_no', 'checkbox').check();
         cy.get_field('create_new_batch', 'checkbox').check();
