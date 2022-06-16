@@ -135,7 +135,7 @@ Cypress.Commands.add("set_link", (fieldname, value) => {
 	cy.wait('@search_query');
 
 	// wait for dropdown
-	cy.wait(500);
+	cy.wait(2000);
 
 	// select link value from dropdown
 	const field = get_field_parts(fieldname);
