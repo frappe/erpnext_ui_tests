@@ -40,22 +40,22 @@ context("Journal Entry Types", () => {
 		cy.grid_delete_all();
 		cy.wait(5000);
 		cy.grid_add_row('accounts');
-		// cy.insert_doc(
-		// 	"Account",
-		// 	{
-		// 		account_name: "Shareholders Funds3",
-		// 		is_group: 0,
-		// 		root_type: "Liability",
-		// 		report_type: "Balance Sheet",
-		// 		account_currency: "INR",
-		// 		parent_account: "Capital Account - UP",
-		// 	},
-		// 	true
-		// )
+		cy.insert_doc(
+			"Account",
+			{
+				account_name: "Shareholders Funds1",
+				is_group: 0,
+				root_type: "Liability",
+				report_type: "Balance Sheet",
+				account_currency: "INR",
+				parent_account: "Capital Account - UP",
+			},
+			true
+		)
 		cy.set_link('accounts.account', 'Temporary Opening');
 		cy.set_input('accounts.debit_in_account_currency', '50000');
 		cy.grid_add_row('accounts');
-		cy.set_link('accounts.account', 'Shareholders Funds');
+		cy.set_link('accounts.account', 'Shareholders Funds1');
 		cy.set_input('accounts.credit_in_account_currency', '50000');
 		cy.get_input('cheque_no').click({force: true});
 
