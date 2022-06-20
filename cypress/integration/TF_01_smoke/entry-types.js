@@ -48,7 +48,7 @@ context("Journal Entry Types", () => {
 				root_type: "Liability",
 				report_type: "Balance Sheet",
 				account_currency: "INR",
-				parent_account: "Capital Account - UP",
+				parent_account: "Capital Account - WP",
 			},
 			true
 		)
