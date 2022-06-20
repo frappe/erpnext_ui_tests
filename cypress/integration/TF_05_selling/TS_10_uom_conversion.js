@@ -22,7 +22,7 @@ context('Create Sales Order', () => {
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 		cy.grid_open_row('items', '1');
-		cy.set_link('item_code', 'Scrapwood table top');
+		cy.set_link('item_code', 'Marcel Coffee Table');
 		cy.set_input('qty', '1');
 		cy.set_link('uom','Box');
 		cy.get_read_only('conversion_factor').should('contain', '5');
