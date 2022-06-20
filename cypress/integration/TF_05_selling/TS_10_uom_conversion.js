@@ -27,7 +27,7 @@ context('Create Sales Order', () => {
 		cy.set_link('uom','Box');
 		cy.get_read_only('conversion_factor').should('contain', '5');
 		cy.get_read_only('stock_qty').should('contain', "5");
-		cy.set_link('warehouse', 'Stores - CT')
+		cy.set_link('warehouse', 'Stores - WP')
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.wait(500);
