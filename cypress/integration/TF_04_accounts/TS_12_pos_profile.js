@@ -10,6 +10,7 @@ context('Create POS Profile', () => {
             cy.location("pathname").should("eq","/app/pos-profile/new-pos-profile-1");
             cy.set_input('__newname', 'Test Profile');
 			cy.get_input('__newname', 'Data').should('have.value', 'Test Profile');
+			cy.set_link('company', 'Wind Power LLC');
 			cy.set_link('warehouse', 'Stores - WP');
 			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - WP');
 
