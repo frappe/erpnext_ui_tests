@@ -427,6 +427,16 @@ Cypress.Commands.add('click_tab', (fieldname) => {
 		.click({force: true, scrollBehavior: "center"});
 });
 
+Cypress.Commands.add("click_dropdown_option", (text, fieldname) => {
+	cy.get(`.page-head [data-label="${encodeURIComponent(text)}"]:visible button`)
+		.click({force: true, scrollBehavior: false});
+	let selector = `.page-head [data-label="${encodeURIComponent(fieldname)}"]:visible`;
+	if (Cypress.$(selector).length===0) {
+	  selector = `.page-head [data-label="${fieldname}"]:visible`;
+	}
+	cy.get(selector).click({scrollBehavior: false, force:true});
+});
+
 Cypress.Commands.add('click_link_button', () => {
     cy.get('.link-btn:visible .btn-open')
         .click({force: true, scrollBehavior: false});
