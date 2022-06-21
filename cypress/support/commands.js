@@ -135,7 +135,7 @@ Cypress.Commands.add("set_link", (fieldname, value) => {
 	cy.wait('@search_query');
 
 	// wait for dropdown
-	cy.wait(500);
+	cy.wait(2000);
 
 	// select link value from dropdown
 	const field = get_field_parts(fieldname);
@@ -284,7 +284,7 @@ Cypress.Commands.add('grid_delete_row', (fieldname, row_no) => {
 
 Cypress.Commands.add("set_today", (fieldname) => {
 	cy.get(`[data-fieldname="${fieldname}"] input:visible`)
-		.click({scrollBehavior: false}).wait(100);  // Opens calendar
+		.click({scrollBehavior: false}).scrollIntoView().wait(100);  // Opens calendar
 	cy.get('.datepickers-container [data-action="today"]:visible')
 		.click({scrollBehavior: false}).wait(100);  // Click on 'Today' on calendar view
 });
@@ -435,4 +435,14 @@ Cypress.Commands.add("click_dropdown_option", (text, fieldname) => {
 	  selector = `.page-head [data-label="${fieldname}"]:visible`;
 	}
 	cy.get(selector).click({scrollBehavior: false, force:true});
+});
+
+Cypress.Commands.add('click_link_button', () => {
+    cy.get('.link-btn:visible .btn-open')
+        .click({force: true, scrollBehavior: false});
+});
+
+Cypress.Commands.add('grid_delete_all', () => {
+    cy.get('.form-grid .grid-heading-row .grid-row-check').click({force: true});
+    cy.get('.grid-remove-rows:visible').click({force: true});
 });
