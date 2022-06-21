@@ -13,14 +13,6 @@ context('Create POS Profile', () => {
 			cy.set_link('warehouse', 'Stores - WP');
 			cy.get_field('warehouse', 'Link').should('have.value', 'Stores - WP');
 
-			//Set POS as default
-			cy.grid_add_row('applicable_for_users');
-			cy.grid_open_row('applicable_for_users', 1);
-			cy.get_field('default', 'Check').check();
-			cy.get_field('default', 'checkbox').should('be.checked');
-			cy.set_link('user', 'Administrator');
-			cy.close_grid_edit_modal();
-
 			//Select Mode of Payment
 			cy.grid_open_row('payments', 1);
 			cy.get_field('default', 'Check').check();

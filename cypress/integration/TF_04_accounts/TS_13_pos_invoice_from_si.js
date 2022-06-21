@@ -8,7 +8,7 @@ context('Invoice Creation', () => {
 		cy.get_field('is_pos', 'checkbox').check();
 		cy.get_field('is_pos', 'checkbox').should('be.checked');
 		cy.set_link('customer', 'William Harris');
-		cy.get_field('pos_profile').should('have.value', 'Test Profile');
+		cy.set_link('pos_profile', 'Test Profile');
 		cy.get_field('update_stock', 'checkbox').should('be.checked');
 		cy.click_section('Currency and Price List');
 		cy.open_section('Currency and Price List');
