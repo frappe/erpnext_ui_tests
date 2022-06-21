@@ -43,7 +43,7 @@ context("Journal Entry Types", () => {
 		cy.insert_doc(
 			"Account",
 			{
-				account_name: "Shareholders Funds1",
+				account_name: "Shareholders Funds20",
 				is_group: 0,
 				root_type: "Liability",
 				report_type: "Balance Sheet",
@@ -55,7 +55,7 @@ context("Journal Entry Types", () => {
 		cy.set_link('accounts.account', 'Temporary Opening');
 		cy.set_input('accounts.debit_in_account_currency', '50000');
 		cy.grid_add_row('accounts');
-		cy.set_link('accounts.account', 'Shareholders Funds1');
+		cy.set_link('accounts.account', 'Shareholders Funds20');
 		cy.set_input('accounts.credit_in_account_currency', '50000');
 		cy.get_input('cheque_no').click({force: true});
 
