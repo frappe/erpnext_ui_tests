@@ -4,7 +4,7 @@ context('Advance Payment Check', () => {
 		cy.visit('/app');
 	});
 
-	it.only('Create sales order and advance payment from it', () => {
+	it('Create sales order and advance payment from it', () => {
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		cy.log(date);
@@ -39,7 +39,6 @@ context('Advance Payment Check', () => {
 			cy.get_input('party').should('have.value', 'William Harris');
 			cy.get_input('paid_amount').should('have.value', '1,10,000.00');
 
-			cy.get_input('paid_amount').click().clear();
 			cy.set_input('paid_amount', '20000');
 			cy.get_input('references.reference_doctype').should('have.value', 'Sales Order');
 			cy.get_input('reference_name').should('have.value', c.name);
