@@ -62,6 +62,12 @@ Cypress.Commands.add("new_doc", (doctype) => {
 	cy.visit(`/app/${slug(doctype)}/new`);
 });
 
+// change default command
+Cypress.Commands.overwrite("login", (original_login, email="frappe@example.com", password="l33t_entropy") => {
+	return original_login(email, password);
+});
+
+
 Cypress.Commands.add("compare_document", (expected_document) => {
 	cy.window()
 	.its("cur_frm")

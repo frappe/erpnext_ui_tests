@@ -1,9 +1,9 @@
 # Copyright (c) 2021, Frappe Technologies Pvt. Ltd. and Contributors
 # MIT License. See license.txt
 
-from __future__ import unicode_literals
 import frappe
 from erpnext.setup.utils import _enable_all_roles_for_admin, set_defaults_for_tests
+
 
 def execute():
 	frappe.clear_cache()
@@ -39,5 +39,25 @@ def execute():
 	_enable_all_roles_for_admin()
 
 	set_defaults_for_tests()
+	create_default_user()
 
 	frappe.db.commit()
+
+
+def create_default_user():
+	user = frappe.new_doc("User")
+	user.email = "frappe@example.com"
+	user.first_name = "Frappe"
+	user.new_password = "l33t_entropy"
+	user.send_welcome_email = 0
+	user.insert(ignore_if_duplicate=True)
+
+	user.reload()
+
+	blocked_roles = {"Administrator", "Guest", "All"}
+	all_roles = set(frappe.get_all("Role", pluck="name"))
+
+	for role in all_roles - blocked_roles:
+		user.append("roles", {"role": role})
+
+	user.save()
