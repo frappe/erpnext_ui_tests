@@ -284,7 +284,7 @@ Cypress.Commands.add('grid_delete_row', (fieldname, row_no) => {
 
 Cypress.Commands.add("set_today", (fieldname) => {
 	cy.get(`[data-fieldname="${fieldname}"] input:visible`)
-		.click({scrollBehavior: false}).wait(100);  // Opens calendar
+		.click({scrollBehavior: false}).scrollIntoView().wait(100);  // Opens calendar
 	cy.get('.datepickers-container [data-action="today"]:visible')
 		.click({scrollBehavior: false}).wait(100);  // Click on 'Today' on calendar view
 });
