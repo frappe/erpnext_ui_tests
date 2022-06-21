@@ -74,7 +74,7 @@ context('Item Tax Template Check', () => {
 		cy.get_page_title().should('contain', 'To Deliver and Bill');
 	});
 
-	it.only('Check SO with item having item tax template linked', () => {
+	it('Check SO with item having item tax template linked', () => {
 		cy.new_doc('Sales order');
 		cy.get_select('naming_series').should('have.value', 'SAL-ORD-.YYYY.-');
 		cy.get_input('transaction_date').should('not.have.value', 0);
