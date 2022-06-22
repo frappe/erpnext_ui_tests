@@ -18,7 +18,6 @@ context('Create POS Profile', () => {
 			cy.grid_open_row('applicable_for_users', 1);
 			cy.get_field('default', 'Check').check();
 			cy.get_field('default', 'checkbox').should('be.checked');
-			cy.set_link('user', 'frappe@example.com');
 			cy.close_grid_edit_modal();
 
 			//Select Mode of Payment
