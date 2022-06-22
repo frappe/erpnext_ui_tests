@@ -447,6 +447,16 @@ Cypress.Commands.add('grid_delete_all', () => {
     cy.get('.grid-remove-rows:visible').click({force: true});
 });
 
+Cypress.Commands.add('set_heading_text_editor', (value) => {
+	cy.get('[aria-controls="ql-picker-options-1"]').click({force: true});
+	cy.get(`#ql-picker-options-1 > [data-value="${value}"]`).click({force: true});
+});
+
+Cypress.Commands.add('set_alignment_text_editor', (value) => {
+	cy.get('[aria-controls="ql-picker-options-5"]').click({force: true});
+	cy.get(`#ql-picker-options-5 > [data-value="${value}"]`).click({force: true});
+});
+
 Cypress.Commands.add('add_filter', () => {
 	cy.get('.filter-section .filter-button').click();
 	cy.wait(300);
