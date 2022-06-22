@@ -4,10 +4,22 @@ context('Advance Payment Check', () => {
 		cy.visit('/app');
 	});
 
-	it('Create sales order and advance payment from it', () => {
+	it('Create customer, sales order and advance payment from it', () => {
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		cy.log(date);
+
+		cy.insert_doc(
+			"Customer",
+			{
+				customer_name: "Robert Forster",
+				customer_group: "All Customer Groups",
+				territory: "All Territories",
+				default_currency: "INR",
+				default_price_list: "Standard Selling",
+			},
+			true
+		)
 
 		cy.insert_doc(
 			"Sales Order",
@@ -15,7 +27,7 @@ context('Advance Payment Check', () => {
 					naming_series: 'SAL-ORD-.YYYY.-',
 					transaction_date: date,
 					delivery_date: date,
-					customer: 'William Harris',
+					customer: 'Robert Forster',
 					order_type: 'Sales',
 					items: [{item_code: 'Apple iPhone 13 Pro Max', delivery_date: date, qty: 1, rate: 110000}]
 				}, // name change
@@ -36,7 +48,7 @@ context('Advance Payment Check', () => {
 			cy.get_input('posting_date').should('not.have.value', 0);
 
 			cy.get_input('party_type').should('have.value', 'Customer');
-			cy.get_input('party').should('have.value', 'William Harris');
+			cy.get_input('party').should('have.value', 'Robert Forster');
 			cy.get_input('paid_amount').should('have.value', '1,10,000.00');
 
 			cy.get_input('paid_amount').scrollIntoView();
@@ -80,7 +92,7 @@ context('Advance Payment Check', () => {
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 
 		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
-		cy.get_input('customer').should('have.value', 'William Harris');
+		cy.get_input('customer').should('have.value', 'Robert Forster');
 		cy.get_input('posting_date').should('not.have.value', 0);
 		cy.get_input('due_date').should('not.have.value', 0);
 
@@ -96,7 +108,10 @@ context('Advance Payment Check', () => {
 		cy.open_section('Advance Payments');
 		cy.findByRole('button', {name: 'Get Advances Received'}).click();
 
-		cy.get_input('advances.allocated_amount').should('have.value', '20,000.00');
+		cy.grid_open_row('advances', 1);
+		cy.get_input('allocated_amount').should('have.value', '20,000.00');
+		cy.close_grid_edit_modal();
+		cy.wait(500);
 
 		cy.click_listview_primary_button('Save');
 		cy.get_page_title().should('contain', 'Draft');
