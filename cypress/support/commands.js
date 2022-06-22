@@ -446,3 +446,13 @@ Cypress.Commands.add('grid_delete_all', () => {
     cy.get('.form-grid .grid-heading-row .grid-row-check').click({force: true});
     cy.get('.grid-remove-rows:visible').click({force: true});
 });
+
+Cypress.Commands.add('set_heading_text_editor', (value) => {
+	cy.get('[aria-controls="ql-picker-options-1"]').click({force: true});
+	cy.get(`#ql-picker-options-1 > [data-value="${value}"]`).click({force: true});
+});
+
+Cypress.Commands.add('set_alignment_text_editor', (value) => {
+	cy.get('[aria-controls="ql-picker-options-5"]').click({force: true});
+	cy.get(`#ql-picker-options-5 > [data-value="${value}"]`).click({force: true});
+});
