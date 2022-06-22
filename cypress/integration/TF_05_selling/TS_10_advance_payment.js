@@ -4,7 +4,7 @@ context('Advance Payment Check', () => {
 		cy.visit('/app');
 	});
 
-	it.only('Create sales order and advance payment from it', () => {
+	it('Create sales order and advance payment from it', () => {
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		cy.log(date);
@@ -17,7 +17,7 @@ context('Advance Payment Check', () => {
 					delivery_date: date,
 					customer: 'William Harris',
 					order_type: 'Sales',
-					items: [{item_code: 'Apple iPhone 13 Pro Max1', delivery_date: date, qty: 1, rate: 110000}]
+					items: [{item_code: 'Apple iPhone 13 Pro Max', delivery_date: date, qty: 1, rate: 110000}]
 				}, // name change
 			true
 		).then((c)=>{
@@ -96,7 +96,7 @@ context('Advance Payment Check', () => {
 		cy.open_section('Advance Payments');
 		cy.findByRole('button', {name: 'Get Advances Received'}).click();
 
-		cy.get_input('advances.allocated_amount').should('have.value', '20,000.00'); // name
+		cy.get_input('advances.allocated_amount').should('have.value', '20,000.00');
 
 		cy.click_listview_primary_button('Save');
 		cy.get_page_title().should('contain', 'Draft');
