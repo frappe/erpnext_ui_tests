@@ -446,3 +446,31 @@ Cypress.Commands.add('grid_delete_all', () => {
     cy.get('.form-grid .grid-heading-row .grid-row-check').click({force: true});
     cy.get('.grid-remove-rows:visible').click({force: true});
 });
+
+Cypress.Commands.add('add_filter', () => {
+	cy.get('.filter-section .filter-button').click();
+	cy.wait(300);
+	cy.get('.filter-popover').should('exist');
+});
+
+Cypress.Commands.add('clear_filters', () => {
+	let has_filter = false;
+	cy.intercept({
+		method: 'POST',
+		url: 'api/method/frappe.model.utils.user_settings.save'
+	}).as('filter-saved');
+	cy.get('.filter-section .filter-button').click({force: true});
+	cy.wait(300);
+	cy.get('.filter-popover').should('exist');
+	cy.get('.filter-popover').then(popover => {
+		if (popover.find('input.input-with-feedback')[0].value != '') {
+			has_filter = true;
+		}
+	});
+	cy.get('.filter-popover').find('.clear-filters').click();
+	cy.get('.filter-section .filter-button').click();
+	cy.window().its('cur_list').then(cur_list => {
+		cur_list && cur_list.filter_area && cur_list.filter_area.clear();
+		has_filter && cy.wait('@filter-saved');
+	});
+});
