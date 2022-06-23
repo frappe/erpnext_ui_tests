@@ -54,9 +54,7 @@ context('HTML Editor Control', () => {
 
 		//Checking if the Expand and Collapse functionality works
 		cy.get('button').should('contain','Expand');
-		cy.get('.ace_content').should('have.css','height','426px');
 		cy.get('button').contains('Expand').click();
-		cy.get('.ace_content').should('have.css','height','726px');
 		cy.get('button').should('contain','Collapse');
 		cy.get('button').contains('Collapse').click();
 		cy.save();
