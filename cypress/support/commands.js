@@ -484,3 +484,8 @@ Cypress.Commands.add('clear_filters', () => {
 		has_filter && cy.wait('@filter-saved');
 	});
 });
+
+Cypress.Commands.add('set_input_html_editor', (value) => {
+	cy.get('.ace_content')
+	.type(value, {delay: 100, scrollBehavior: false});
+});
