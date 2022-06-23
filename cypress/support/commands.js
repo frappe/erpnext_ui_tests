@@ -484,3 +484,8 @@ Cypress.Commands.add('clear_filters', () => {
 		has_filter && cy.wait('@filter-saved');
 	});
 });
+
+Cypress.Commands.add('click_print_button', () => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	cy.get('.page-head button[data-original-title="Print"]').click({force: true});
+});
