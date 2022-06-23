@@ -489,3 +489,8 @@ Cypress.Commands.add('set_input_html_editor', (value) => {
 	cy.get('.ace_content')
 	.type(value, {delay: 100, scrollBehavior: false});
 });
+
+Cypress.Commands.add('click_print_button', () => {
+	cy.scrollTo('top', {ensureScrollable: false});
+	cy.get('.page-head button[data-original-title="Print"]').click({force: true});
+});
