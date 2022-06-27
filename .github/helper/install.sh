@@ -11,6 +11,9 @@ pip install frappe-bench
 frappeuser=${FRAPPE_USER:-"frappe"}
 frappebranch=${FRAPPE_BRANCH:-${GITHUB_BASE_REF:-${GITHUB_REF##*/}}}
 
+erpnextuser=${ERPNEXT_USER:-"frappe"}
+erpnextbranch=${ERPNEXT_BRANCH:-${GITHUB_BASE_REF:-${GITHUB_REF##*/}}}
+
 git clone "https://github.com/${frappeuser}/frappe" --branch "${frappebranch}" --depth 1
 bench init --skip-assets --frappe-path ~/frappe --python "$(which python)" frappe-bench
 
@@ -46,7 +49,7 @@ sed -i 's/schedule:/# schedule:/g' Procfile
 sed -i 's/socketio:/# socketio:/g' Procfile
 sed -i 's/redis_socketio:/# redis_socketio:/g' Procfile
 
-bench get-app erpnext --branch develop
+bench get-app "https://github.com/$erpnextuser/erpnext" --branch "$erpnextbranch"
 bench get-app erpnext_ui_tests "${GITHUB_WORKSPACE}"
 
 bench start &> bench_run_logs.txt &
