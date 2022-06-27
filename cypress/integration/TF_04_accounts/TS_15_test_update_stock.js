@@ -3,12 +3,10 @@ context('Invoice Creation', () => {
 		cy.login();
 	});
 
-	it('Create POS Invoice from Sales Invoice', () => {
+	it('Create Sales Invoice and test update stock', () => {
 		cy.new_doc("Sales Invoice");
-		cy.get_field('is_pos', 'checkbox').check();
-		cy.get_field('is_pos', 'checkbox').should('be.checked');
 		cy.set_link('customer', 'William Harris');
-		cy.set_link('pos_profile', 'Test Profile');
+		cy.get_field('update_stock').check();
 		cy.get_field('update_stock', 'checkbox').should('be.checked');
 		cy.click_section('Currency and Price List');
 		cy.open_section('Currency and Price List');
@@ -20,13 +18,16 @@ context('Invoice Creation', () => {
 		cy.get_read_only('price_list_rate').should('contain', "₹ 12,300.00");
 		cy.get_input('rate', '12,300.00');
 		cy.get_read_only('amount').should('contain', "₹ 12,300.00");
+		cy.get_section('Stock Details');
+		cy.click_section('Stock Details');
+		cy.set_link('warehouse', 'Stores - CT');
 		cy.close_grid_edit_modal();
 		cy.get_read_only('total').should('contain', "₹ 12,300.00");
 		cy.get_read_only('grand_total').should('contain', "₹ 12,300.00");
 		cy.get_read_only('rounded_total').should('contain', "₹ 12,300.00");
 		cy.save();
 		cy.wait(500);
-		cy.submit('Paid');
+		cy.submit('Unpaid');
 		cy.click_dropdown_action('View', 'Stock Ledger');
 		cy.get('.dt-cell__content > span > div').should('contain', "-1.000");
 	});
