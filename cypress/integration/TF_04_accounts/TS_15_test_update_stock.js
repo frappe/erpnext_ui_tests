@@ -13,7 +13,7 @@ context('Invoice Creation', () => {
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 		cy.grid_open_row('items', '1');
-		cy.set_link('item_code', 'Scrapwood table top');
+		cy.set_link('item_code', 'Marcel Coffee Table');
 		cy.set_input('qty', '1');
 		cy.get_read_only('price_list_rate').should('contain', "₹ 12,300.00");
 		cy.get_input('rate', '12,300.00');
