@@ -26,8 +26,12 @@ Cypress.Cookies.defaults({
 });
 
 // spy on error and warnings
-Cypress.on('window:before:load', (win) => {
-  cy.spy(win.console, 'error');
-  cy.spy(win.console, 'log');
-  cy.spy(win.console, 'warn');
+Cypress.on("window:before:load", (win) => {
+	cy.spy(win.console, "error");
+});
+
+afterEach(() => {
+	cy.window().then((win) => {
+		expect(win.console.error).to.have.callCount(0);
+	});
 });
