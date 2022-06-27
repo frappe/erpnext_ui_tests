@@ -5,6 +5,7 @@ context('Invoice Creation', () => {
 
 	it('Create Sales Invoice and test update stock', () => {
 		cy.new_doc("Sales Invoice");
+		cy.set_link('company', 'Wind Power LLC')
 		cy.set_link('customer', 'William Harris');
 		cy.get_field('update_stock').check();
 		cy.get_field('update_stock', 'checkbox').should('be.checked');
