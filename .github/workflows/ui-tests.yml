@@ -4,7 +4,6 @@ on:
   pull_request:
     paths-ignore:
       - "**.md"
-  workflow_dispatch:
   push:
     branches: [ develop ]
     paths-ignore:
@@ -12,6 +11,24 @@ on:
   schedule:
     # Run everday at midnight UTC / 5:30 IST
     - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      frappe_user:
+        description: 'Frappe Repo Username'
+        default: 'frappe'
+        type: string
+      frappe_branch:
+        description: 'Frappe Branch name'
+        default: 'develop'
+        type: string
+      erpnext_user:
+        description: 'ERPNext Repo Username'
+        default: 'frappe'
+        type: string
+      erpnext_branch:
+        description: 'ERPNext Branch name'
+        default: 'develop'
+        type: string
 
 concurrency:
   group: ui-develop-${{ github.event.number }}
@@ -101,6 +118,10 @@ jobs:
         env:
           DB: mariadb
           TYPE: ui
+          FRAPPE_USER: ${{ github.event.inputs.frappe_user }}
+          FRAPPE_BRANCH: ${{ github.event.inputs.frappe_branch }}
+          ERPNEXT_USER: ${{ github.event.inputs.erpnext_user }}
+          ERPNEXT_BRANCH: ${{ github.event.inputs.erpnext_branch }}
 
       - name: Instrument Source Code
         run: cd ~/frappe-bench/apps/erpnext/ && npx nyc instrument -x 'erpnext/public/dist/**' -x '**/*.bundle.js' --reporter=clover --in-place erpnext
