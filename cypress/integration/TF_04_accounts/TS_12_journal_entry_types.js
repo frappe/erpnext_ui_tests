@@ -79,27 +79,7 @@ context("Journal Entry Types", () => {
         const todaysDate = Cypress.moment().format('DD-MM-YYYY');
         cy.get_input('posting_date').should('have.value', todaysDate);
 
-        //Checking if the accounting entires are of type "Asset" and "Liability" only
-        cy.grid_open_row('accounts', 3);
-        cy.get_input('account').click({force: true});
-        cy.click_link_button();
-		cy.contains('[data-fieldname="root_type"]:visible', /[Asset, Liability]/);
-        cy.go('back');
-        cy.grid_open_row('accounts', 18);
-        cy.get_input('account').click({force: true});
-        cy.click_link_button();
-		cy.contains('[data-fieldname="root_type"]:visible', /[Asset, Liability]/);
-        cy.go('back');
-        cy.grid_open_row('accounts', 35);
-        cy.get_input('account').click({force: true});
-        cy.click_link_button();
-		cy.contains('[data-fieldname="root_type"]:visible', /[Asset, Liability]/);
-        cy.go('back');
-
-        //Deleting all the rows and adding credit and debit entries
-        cy.scrollTo('top', {ensureScrollable: false});
-        cy.grid_delete_all();
-        cy.wait(5000);
+        //Adding credit and debit entries
         cy.grid_add_row('accounts');
         cy.set_link('accounts.account', 'Temporary Opening');
         cy.set_input('accounts.debit_in_account_currency', '50000');
