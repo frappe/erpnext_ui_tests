@@ -349,7 +349,7 @@ Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
 });
 
 Cypress.Commands.add('set_input_awesomebar', (text) => {
-	cy.get('#navbar-search').type(`${text}{enter}`, {delay: 1000});
+	cy.get('#navbar-search').type(`${text}{enter}`, {delay: 600});
 });
 
 Cypress.Commands.add('click_navbar_icon', (name) => {
