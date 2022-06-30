@@ -489,3 +489,8 @@ Cypress.Commands.add('click_print_button', () => {
 	cy.scrollTo('top', {ensureScrollable: false});
 	cy.get('.page-head button[data-original-title="Print"]').click({force: true});
 });
+
+Cypress.Commands.add('click_grid_row_checkbox', (fieldname, row_no) => {
+	cy.get(`[data-fieldname="${fieldname}"] .form-grid .grid-row[data-idx="${row_no}"] .grid-row-check`)
+		.click({force: true, scrollBehavior: false});
+});
