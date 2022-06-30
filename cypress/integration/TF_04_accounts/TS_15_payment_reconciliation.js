@@ -28,19 +28,19 @@ context('Payment Reconciliation', () => {
 		cy.insert_doc(
 			"Payment Entry",
 			{
-				"naming_series": "ACC-PAY-.YYYY.-",
-				"payment_type": "Receive",
-				"posting_date": date,
-				"party_type": "Customer",
-				"party": "Jennifer Robinson",
-				"party_name": "Jennifer Robinson",
-				"paid_from": "Debtors - TQ",  // name
-				"paid_from_account_type": "Receivable",
-				"paid_from_account_currency": "INR",
-				"paid_to": "Cash - TQ",  // name
-				"paid_to_account_currency": "INR",
-				"paid_amount": 40000,
-				"received_amount": 40000,
+				naming_series: "ACC-PAY-.YYYY.-",
+				payment_type: "Receive",
+				posting_date: date,
+				party_type: "Customer",
+				party: "Jennifer Robinson",
+				party_name: "Jennifer Robinson",
+				paid_from: "Debtors - WP",  // name
+				paid_from_account_type: "Receivable",
+				paid_from_account_currency: "INR",
+				paid_to: "Cash - WP",  // name
+				paid_to_account_currency: "INR",
+				paid_amount: 40000,
+				received_amount: 40000,
 			},
 			true
 		).then((payment)=>{
@@ -56,7 +56,7 @@ context('Payment Reconciliation', () => {
 					posting_date: date,
 					customer: "Jennifer Robinson",
 					due_date: date,
-					items: [{item_code: "Apple iPhone 13 Pro Max1", qty: 1, rate: 110000, amount: 110000}]  // name
+					items: [{item_code: "Apple iPhone 13 Pro Max", qty: 1, rate: 110000, amount: 110000}]  // name
 				},
 				true
 			).then((SI)=>{
@@ -64,24 +64,23 @@ context('Payment Reconciliation', () => {
 				cy.submit('Unpaid');
 
 				cy.wait(200);
+				// Opening Payment Reconciliation tool and applying filters to get unreconcilied entries
 				cy.set_input_awesomebar(' Payment Reconciliation');
 				cy.set_link('party_type', "customer");
 				cy.set_link('party', "Jennifer Robinson");
-				cy.get_input('receivable_payable_account').should('have.value', 'Debtors - TQ');
+				cy.get_input('receivable_payable_account').should('have.value', 'Debtors - WP');  // NAME
 
 				cy.set_today('from_invoice_date');
 				cy.set_today('to_invoice_date');
 				cy.set_today('from_payment_date');
 				cy.set_today('to_payment_date');
-				cy.set_link('bank_cash_account', 'Cash - TQ');
+				cy.set_link('bank_cash_account', 'Cash - WP'); // name
 				cy.click_toolbar_button('Get Unreconciled Entries');
 
-				cy.get(':nth-child(4) > .section-body > :nth-child(1) > form > .frappe-control > .form-grid > .grid-body > .rows > .grid-row > .data-row > .row-check > .grid-row-check').click();
-				cy.get(':nth-child(2) > form > .frappe-control > .form-grid > .grid-body > .rows > .grid-row > .data-row > .row-check > .grid-row-check').click();
-				//cy.click_listview_row_item(0);
-				//cy.select_listview_row_checkbox(0);
-				//cy.click_listview_checkbox(0);
+				cy.click_grid_row_checkbox('invoices', 1);
+				cy.click_grid_row_checkbox('payments', 1);
 
+				// Allocating and reconciling invoice and payment
 				cy.click_toolbar_button('Allocate');
 				cy.get_input('allocation.reference_name').should('have.value', payment.name);
 				cy.get_input('allocation.invoice_number').should('have.value', SI.name);
@@ -90,6 +89,12 @@ context('Payment Reconciliation', () => {
 				cy.click_toolbar_button('Reconcile');
 				cy.get_open_dialog().should('contain', 'Message');
 				cy.get('.msgprint').invoke('text').should('match', /Successfully Reconciled/);
+
+				// Validating sales invoice outstanding amount after reconiling
+				cy.visit('app/sales-invoice/'+ SI.name);
+				cy.get_page_title().should('contain', 'Partly Paid');
+				cy.get_read_only('rounded_total').should('contain', "₹ 1,10,000.00");
+				cy.get_read_only('outstanding_amount').should('contain', "₹ 70,000.00");
 			});
 		});
 	});
