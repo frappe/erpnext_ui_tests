@@ -349,7 +349,7 @@ Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
 });
 
 Cypress.Commands.add('set_input_awesomebar', (text) => {
-	cy.get('#navbar-search').type(`${text}{enter}`, {delay: 1000});
+	cy.get('#navbar-search').type(`${text}{enter}`, {delay: 600});
 });
 
 Cypress.Commands.add('click_navbar_icon', (name) => {
@@ -485,7 +485,17 @@ Cypress.Commands.add('clear_filters', () => {
 	});
 });
 
+Cypress.Commands.add('set_input_html_editor', (value) => {
+	cy.get('.ace_content')
+	.type(value, {delay: 100, scrollBehavior: false});
+});
+
 Cypress.Commands.add('click_print_button', () => {
 	cy.scrollTo('top', {ensureScrollable: false});
 	cy.get('.page-head button[data-original-title="Print"]').click({force: true});
+});
+
+Cypress.Commands.add('click_grid_row_checkbox', (fieldname, row_no) => {
+	cy.get(`[data-fieldname="${fieldname}"] .form-grid .grid-row[data-idx="${row_no}"] .grid-row-check`)
+		.click({force: true, scrollBehavior: false});
 });
