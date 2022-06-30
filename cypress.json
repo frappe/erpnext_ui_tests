@@ -18,6 +18,7 @@
     "TF_05_selling/*",
     "TF_06_buying/*",
     "TF_07_stock/*",
-    "TF_08_manufacturing/*"
+    "TF_08_manufacturing/*",
+	"TF_09_reports/*"
   ]
 }
