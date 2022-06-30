@@ -495,6 +495,18 @@ Cypress.Commands.add('click_print_button', () => {
 	cy.get('.page-head button[data-original-title="Print"]').click({force: true});
 });
 
+Cypress.Commands.add('get_report_header', () => {
+	cy.get('.dt-row-header .dt-cell');
+});
+
+Cypress.Commands.add('get_report_cell', () => {
+	cy.get(`.datatable .dt-row`);
+});
+
+Cypress.Commands.add('set_input_report', (text) => {
+	cy.get('.dt-cell--col-1 .dt-filter').clear().type(`${text}`);
+});
+
 Cypress.Commands.add('click_grid_row_checkbox', (fieldname, row_no) => {
 	cy.get(`[data-fieldname="${fieldname}"] .form-grid .grid-row[data-idx="${row_no}"] .grid-row-check`)
 		.click({force: true, scrollBehavior: false});
