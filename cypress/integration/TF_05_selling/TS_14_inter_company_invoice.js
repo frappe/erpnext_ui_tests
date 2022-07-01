@@ -28,6 +28,7 @@ context('Sales Invoice Creation', () => {
 
 		//Create Inter Company Purchase Invoice
 		cy.click_dropdown_action('Create', 'Inter Company Purchase Invoice')
+		cy.url().should('include', '/app/purchase-invoice/new-purchase-invoice');
 		cy.get_field('company').should('have.value','Bernhardt Furnitures');
 		cy.get_field('supplier').should('have.value', 'Wind Power LLC');
 		cy.click_section('Currency and Price List');
