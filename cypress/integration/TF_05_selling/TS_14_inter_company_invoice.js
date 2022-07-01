@@ -12,6 +12,7 @@ context('Sales Invoice Creation', () => {
 		cy.grid_open_row('items', '1');
 		cy.set_link('item_code', 'Marcel Coffee Table');
 		cy.set_input('qty', '1');
+		cy.click_section('Stock Details');
 		cy.set_link('warehouse', 'Stores - WP')
 		cy.close_grid_edit_modal();
 		cy.save();
