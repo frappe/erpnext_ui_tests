@@ -8,7 +8,7 @@ context('Sales Invoice Creation', () => {
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
 		cy.set_input('customer', 'Bernhardt Furnitures');
-		cy.set_input('company', 'Wind Power LLC');
+		cy.get_field('company').should('have.value', 'Wind Power LLC');
 		cy.click_section('Currency and Price List');
 		cy.open_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
