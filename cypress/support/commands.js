@@ -511,3 +511,7 @@ Cypress.Commands.add('click_grid_row_checkbox', (fieldname, row_no) => {
 	cy.get(`[data-fieldname="${fieldname}"] .form-grid .grid-row[data-idx="${row_no}"] .grid-row-check`)
 		.click({force: true, scrollBehavior: false});
 });
+
+Cypress.Commands.add('get_error_msg', () => {
+	cy.get('.msgprint');
+});
