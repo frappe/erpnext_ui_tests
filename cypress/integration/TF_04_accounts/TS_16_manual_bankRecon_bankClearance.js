@@ -60,8 +60,11 @@ context('Manual Bank Reconciliation via Bank Clearance', () => {
 		cy.set_input_awesomebar(' Bank Reconciliation Statement');
 		cy.location('pathname').should('include', '/app/query-report/Bank%20Reconciliation%20Statement');
 		cy.get_input('company').should('not.have.value', 0);
-		cy.get_input('account').click();
-		cy.set_link('account', 'Kotak Mahindra');
+
+		cy.get_input('account').clear();
+		cy.get_input('account').type('Kotak Mahindra - WP');
+		cy.get_input('account').blur();
+		//cy.set_link('account', 'Kotak Mahindra');
 		cy.get('.dt-row-0 > .dt-cell--col-2 > .dt-cell__content').should('contain', 'Payment Entry');
 		cy.get('.dt-row-0 > .dt-cell--col-4 > .dt-cell__content > div').should('contain', '₹ 15,000.00');
 	});
