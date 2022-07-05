@@ -1,5 +1,3 @@
-const { getCypressElementCoordinates } = require("cypress-real-events/getCypressElementCoordinates");
-
 context("Item", () => {
 	before(() => {
 		cy.login();
