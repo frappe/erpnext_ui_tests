@@ -62,8 +62,9 @@ context('Manual Bank Reconciliation via Bank Clearance', () => {
 		cy.get_input('company').should('not.have.value', 0);
 
 		//cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').clear();
+		cy.get_field("account", "Link").focus();
 		cy.get_field("account", "Link").clear();
-		cy.fill_field("account", "Kotak Mahindra - TQ", "Link");
+		cy.fill_field("account", "Kotak Mahindra - WP", "Link");
 		cy.get_field("account", "Link").type('{enter}');
 		// cy.get_field('account').type('Kotak Mahindra - TQ', {delay: 200});
 		// cy.get_field('account').type('{enter}');
