@@ -44,8 +44,16 @@ context('Create Delivery Note', () => {
 	});
 
 	it('Select only batch and check validation for serial number', () => {
-		cy.visit('/app/delivery-note');
-		cy.click_listview_row_item(0);
+		cy.new_doc("Delivery Note");
+		cy.url().should('include', '/app/delivery-note/new-delivery-note');
+		cy.set_link('customer', 'William Harris');
+		cy.grid_open_row('items', '1');
+		cy.set_link('item_code', 'Book Storage Set');
+		cy.set_input('qty', '1');
+		cy.set_link('warehouse', 'Stores - WP')
+		cy.close_grid_edit_modal();
+		cy.save();
+		cy.hide_dialog();
 		cy.grid_open_row('packed_items', '1');
 		cy.get_read_only('parent_item').should('contain', 'Book Storage Set');
 		cy.get_read_only('item_code').should('contain' ,'Alpine Book Shelves In Wenge Finish');
@@ -71,9 +79,16 @@ context('Create Delivery Note', () => {
 
 
 	it('Select serial number and submit DN now', () => {
-		cy.visit('/app/delivery-note');
-		cy.click_listview_row_item(0);
-		//Check Packed Items and verify quantity
+		cy.new_doc("Delivery Note");
+		cy.url().should('include', '/app/delivery-note/new-delivery-note');
+		cy.set_link('customer', 'William Harris');
+		cy.grid_open_row('items', '1');
+		cy.set_link('item_code', 'Book Storage Set');
+		cy.set_input('qty', '1');
+		cy.set_link('warehouse', 'Stores - CT')
+		cy.close_grid_edit_modal();
+		cy.save();
+		cy.hide_dialog();
 		cy.grid_open_row('packed_items', '1');
 		cy.get_read_only('parent_item').should('contain', 'Book Storage Set');
 		cy.get_read_only('item_code').should('contain' ,'Alpine Book Shelves In Wenge Finish');
