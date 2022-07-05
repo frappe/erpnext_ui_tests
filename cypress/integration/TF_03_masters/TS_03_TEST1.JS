@@ -61,14 +61,18 @@ context('Manual Bank Reconciliation via Bank Clearance', () => {
 		cy.location('pathname').should('include', '/app/query-report/Bank%20Reconciliation%20Statement');
 		cy.get_input('company').should('not.have.value', 0);
 
-		//cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').clear();
-		cy.get_field("account", "Link").focus();
-		cy.get_field("account", "Link").clear();
-		cy.fill_field("account", "Kotak Mahindra - WP", "Link");
-		cy.get_field("account", "Link").type('{enter}');
+		cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').click();
+		cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').type('Kotak Mahindra - WP', {delay: 200});
+		cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').type('{enter}');
+
+		//cy.get_field("account", "Link").clear();
+		//cy.fill_field("account", "Kotak Mahindra - TQ", "Link");
+		//cy.get_field("account", "Link").type('{enter}');
+
 		// cy.get_field('account').type('Kotak Mahindra - TQ', {delay: 200});
 		// cy.get_field('account').type('{enter}');
 		//cy.get_field('account').blur();
+
 		//cy.set_link('account', 'Kotak Mahindra');
 		cy.get('.dt-row-0 > .dt-cell--col-2 > .dt-cell__content').should('contain', 'Payment Entry');
 		cy.get('.dt-row-0 > .dt-cell--col-4 > .dt-cell__content > div').should('contain', '₹ 15,000.00');

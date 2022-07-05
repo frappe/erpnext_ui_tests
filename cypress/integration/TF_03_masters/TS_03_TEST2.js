@@ -61,7 +61,7 @@ context('Manual Bank Reconciliation via Bank Clearance', () => {
 		cy.location('pathname').should('include', '/app/query-report/Bank%20Reconciliation%20Statement');
 		cy.get_input('company').should('not.have.value', 0);
 
-		cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').clear();
+		//cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').clear();
 		cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').type('Kotak Mahindra - WP', {delay: 200});
 		cy.get('[data-original-title="Bank Account"] > .link-field > .awesomplete > .input-with-feedback').type('{enter}');
 
