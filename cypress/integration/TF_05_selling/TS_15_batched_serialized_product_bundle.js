@@ -53,7 +53,6 @@ context('Create Delivery Note', () => {
 		cy.set_link('warehouse', 'Stores - WP')
 		cy.close_grid_edit_modal();
 		cy.save();
-		cy.hide_dialog();
 		cy.grid_open_row('packed_items', '1');
 		cy.get_read_only('parent_item').should('contain', 'Book Storage Set');
 		cy.get_read_only('item_code').should('contain' ,'Alpine Book Shelves In Wenge Finish');
@@ -85,10 +84,9 @@ context('Create Delivery Note', () => {
 		cy.grid_open_row('items', '1');
 		cy.set_link('item_code', 'Book Storage Set');
 		cy.set_input('qty', '1');
-		cy.set_link('warehouse', 'Stores - CT')
+		cy.set_link('warehouse', 'Stores - WP')
 		cy.close_grid_edit_modal();
 		cy.save();
-		cy.hide_dialog();
 		cy.grid_open_row('packed_items', '1');
 		cy.get_read_only('parent_item').should('contain', 'Book Storage Set');
 		cy.get_read_only('item_code').should('contain' ,'Alpine Book Shelves In Wenge Finish');
