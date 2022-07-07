@@ -57,7 +57,7 @@ context('Accounts Receivable', () => {
 				.and('contain','Customer Group');
 			cy.get_report_cell().should('contain', 'Jacob Williams')
 				.and('contain', 'Sales Invoice')
-				.and('contain', 'Debtors - U')
+				.and('contain', 'Debtors - WP')
 				.and('contain', '₹ 1,10,000.00')
 				.and('contain', todaysDate);
 
