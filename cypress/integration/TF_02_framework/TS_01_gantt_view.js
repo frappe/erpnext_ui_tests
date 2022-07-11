@@ -11,6 +11,8 @@ context('Gantt View', () => {
 			description: 'This is a test todo'
 		}).as('todos');
 		cy.go_to_list('ToDo');
+		cy.get_input('allocated_to').clear();
+		cy.get_input('name').click();
 		cy.click_listview_row_item(0);
 		cy.findByPlaceholderText('Choose a color').click();
 		cy.get('.swatches > [style="background-color: rgb(203, 41, 41);"]:visible').click();
@@ -23,6 +25,8 @@ context('Gantt View', () => {
 
 		//Checking if the label of the dropdown button has now changed to 'Gantt view'
 		cy.get('.custom-btn-group-label').should('contain', 'Gantt View');
+		cy.get_input('allocated_to').clear();
+		cy.get_input('name').click();
 		cy.set_select('status','');
 		cy.set_select('priority','');
 
