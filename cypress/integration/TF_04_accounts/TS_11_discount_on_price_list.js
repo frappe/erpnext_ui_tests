@@ -62,7 +62,7 @@ context('Discount Check on Price List Rate', () => {
 		cy.new_doc('Sales Invoice');
 		cy.location('pathname').should('include', '/app/sales-invoice/new-sales-invoice');
 
-		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.get_input('company').should('not.have.value', 0);
 		cy.get_input('posting_date').should('not.have.value', 0);
 		cy.wait(500);
