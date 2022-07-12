@@ -74,13 +74,13 @@ context('Sales Taxes and Charges Tax Template', () => {
 				"taxes": [
 					{
 						"charge_type": "On Net Total",
-						"account_head": "test Output Tax SGST - WP",  //name
+						"account_head": "test Output Tax SGST - WP",   //name
 						"description": "Output Tax SGST @ 9.0",
 						"rate": 9,
 					},
 					{
 						"charge_type": "On Net Total",
-						"account_head": "test Output Tax CGST - WP",  //name
+						"account_head": "test Output Tax CGST - WP",   //name
 						"description": "Output Tax CGST @ 9.0",
 						"rate": 9,
 					}
