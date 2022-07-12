@@ -6,7 +6,7 @@ context('Invoice Creation', () => {
 	it('Create Sales Invoice and test update stock', () => {
 		cy.new_doc("Sales Invoice");
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
-		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.set_link('customer', 'William Harris');
 		cy.get_field('update_stock').check();
 		cy.get_field('update_stock', 'checkbox').should('be.checked');

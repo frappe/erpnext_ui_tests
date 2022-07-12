@@ -18,7 +18,7 @@ context('Sales Invoice Creation', () => {
 		cy.click_dropdown_action('Create', 'Sales Invoice');
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 
-		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.get_input('customer').should('have.value', 'William Harris');
 		cy.get_input('posting_date').should('have.value', today_date);
 		cy.get_input('due_date').should('have.value', today_date);

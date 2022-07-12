@@ -91,7 +91,7 @@ context('Advance Payment Check', () => {
 		cy.click_dropdown_action('Create', 'Sales Invoice');
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 
-		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.get_input('customer').should('have.value', 'Robert Forster');
 		cy.get_input('posting_date').should('not.have.value', 0);
 		cy.get_input('due_date').should('not.have.value', 0);
