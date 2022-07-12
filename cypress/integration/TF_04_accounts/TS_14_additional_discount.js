@@ -41,8 +41,8 @@ context('Additional Discount', () => {
 		cy.get_read_only('total_qty').should('contain', "1");
 		cy.get_read_only('total').should('contain', "₹ 100.00");
 
-		// Checking values without applying additin discount
-		cy.set_link('taxes_and_charges', 'Output GST Out-state');
+		// Checking values without applying additional discount
+		cy.set_link('taxes_and_charges', 'test Output GST Out-state');
 		cy.get_input('taxes.tax_amount').should('have.value', '18.00');
 		cy.get_read_only('total').should('contain', "118.00");
 		cy.get_read_only('total_taxes_and_charges').should('contain', "₹ 18.00");
@@ -100,8 +100,8 @@ context('Additional Discount', () => {
 		cy.get_read_only('total_qty').should('contain', "1");
 		cy.get_read_only('total').should('contain', "₹ 100.00");
 
-		// Checking values without applying additin discount
-		cy.set_link('taxes_and_charges', 'Output GST Out-state');
+		// Checking values without applying additional discount
+		cy.set_link('taxes_and_charges', 'test Output GST Out-state');
 		cy.get_input('taxes.tax_amount').should('have.value', '18.00');
 		cy.get_read_only('total').should('contain', "118.00");
 		cy.get_read_only('total_taxes_and_charges').should('contain', "₹ 18.00");
