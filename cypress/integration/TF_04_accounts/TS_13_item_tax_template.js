@@ -21,7 +21,7 @@ context('Item Tax Template Check', () => {
 					is_stock_item: 1,
 					//opening_stock: 5,
 					valuation_rate: 100,
-					taxes: [{item_tax_template: "GST 12% - WP", parent: "SanDisk Cruzer Blade 32GB USB Pendrive",}]   //both names
+					taxes: [{item_tax_template: "test GST 12% - WP", parent: "SanDisk Cruzer Blade 32GB USB Pendrive",}]   //both names
 				},
 			true
 		)
@@ -59,7 +59,7 @@ context('Item Tax Template Check', () => {
 		cy.get_input('rate').blur();
 		cy.get_read_only('amount').should('contain', "100.00");
 
-		cy.set_link('taxes_and_charges', 'Output GST Out-state');
+		cy.set_link('taxes_and_charges', 'test Output GST Out-state');
 		cy.get_input('taxes.tax_amount').should('have.value', '18.00');
 		cy.get_read_only('total').should('contain', "118.00");
 
@@ -94,13 +94,13 @@ context('Item Tax Template Check', () => {
 		cy.get_read_only('amount').should('contain', "100.00");
 
 		cy.get_input('taxes_and_charges').click();
-		cy.set_link('taxes_and_charges', 'Output GST Out-state');
+		cy.set_link('taxes_and_charges', 'test Output GST Out-state');
 		cy.get_input('taxes.tax_amount').should('have.value', '12.00');
 		cy.get_read_only('total').should('contain', "112.00");
 
 		cy.grid_open_row('items', 1);
 		cy.get_input('item_tax_template').scrollIntoView().should('be.visible');
-		cy.get_input('item_tax_template').should('have.value', 'GST 12% - WP'); // name
+		cy.get_input('item_tax_template').should('have.value', 'test GST 12% - WP'); // name
 		cy.close_grid_edit_modal();
 
 		cy.get_read_only('total_taxes_and_charges').should('contain', "₹ 12.00");
