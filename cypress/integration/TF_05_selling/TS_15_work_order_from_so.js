@@ -18,7 +18,7 @@ context('Create Sales Order', () => {
 		cy.grid_open_row('items', '1');
 		cy.set_link('item_code', 'Marcel Coffee Table');
 		cy.set_input('qty', '1');
-		cy.set_link('warehouse', 'Stores -WP');
+		cy.set_link('warehouse', 'Stores - WP');
 		cy.get_input('rate').should('have.value', "22,300.00");
 		cy.get_input('qty').should('have.value', "1.000");
 		cy.close_grid_edit_modal();
