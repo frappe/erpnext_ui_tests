@@ -7,7 +7,7 @@ context('Tax Category', () => {
 		cy.visit('/app/tax-category');
 		cy.new_doc("Tax Category");
 		cy.set_input('title','test out-state category');
-		cy.get_field('is_inter_state', 'checkbox').check();
+		//cy.get_field('is_inter_state', 'checkbox').check();
 		cy.save();
 	});
 
