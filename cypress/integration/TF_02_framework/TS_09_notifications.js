@@ -60,6 +60,8 @@ context('Notifications', () => {
 
     it('Assigning a todo to the new user using the admin login and verifying if the notification is sent to user', () => {
         cy.set_input_awesomebar('todo');
+		cy.get_input('allocated_to').clear();
+		cy.get_input('name').click();
         cy.list_open_row('This is a test notifications Todo');
 
         //Assigning todo to the new user Billy Jones
@@ -85,6 +87,8 @@ context('Notifications', () => {
 
         //Deleting todo
         cy.set_input_awesomebar('todo');
+		cy.get_input('allocated_to').clear();
+		cy.get_input('name').click();
         cy.click_listview_checkbox(0);
         cy.click_action_button('Actions');
         cy.click_toolbar_dropdown('Delete');
