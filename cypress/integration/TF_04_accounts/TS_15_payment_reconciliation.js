@@ -52,7 +52,7 @@ context('Payment Reconciliation', () => {
 			cy.insert_doc(
 				"Sales Invoice",
 				{
-					naming_series: "SINV-.YY.-",
+					naming_series: "ACC-SINV-.YYYY.-",
 					posting_date: date,
 					customer: "Jennifer Robinson",
 					due_date: date,
