@@ -6,7 +6,7 @@ context('Sales Invoice Creation', () => {
 	it('Create Sales Invoice', () => {
 		cy.new_doc("Sales Invoice");
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
-		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.set_input('customer', 'Bernhardt Furnitures');
 		cy.get_field('company').should('have.value', 'Wind Power LLC');
 		cy.grid_open_row('items', '1');
