@@ -520,3 +520,7 @@ Cypress.Commands.add('click_modal_grid_row_checkbox', (fieldname, row_no) => {
 Cypress.Commands.add('get_error_msg', () => {
 	cy.get('.msgprint');
 });
+
+Cypress.Commands.add("set_textarea", (fieldname, value) => {
+	cy.get(`[data-fieldname="${fieldname}"] textarea:visible`).type(value);
+});
