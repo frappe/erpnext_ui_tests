@@ -63,5 +63,5 @@ context('Create Sales Order', () => {
 		cy.set_link('source_warehouse', 'Stores - WP');
 		cy.save();
 		cy.submit('Not Started');
-});
+	});
 });
