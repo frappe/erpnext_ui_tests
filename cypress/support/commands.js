@@ -304,10 +304,6 @@ Cypress.Commands.add('click_action_button', () => {
 	return cy.get(`.actions-btn-group:visible button`).click({force: true});
 });
 
-Cypress.Commands.add("get_read_only", (fieldname) => {
-    return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
-});
-
 Cypress.Commands.add('get_list_row', (fieldname) => {
 	return cy.get(`.frappe-list .level-item[title="${fieldname}"]`);
 });
@@ -519,4 +515,8 @@ Cypress.Commands.add('click_modal_grid_row_checkbox', (fieldname, row_no) => {
 
 Cypress.Commands.add('get_error_msg', () => {
 	cy.get('.msgprint');
+});
+
+Cypress.Commands.add("set_textarea", (fieldname, value) => {
+	cy.get(`[data-fieldname="${fieldname}"] textarea:visible`).type(value);
 });
