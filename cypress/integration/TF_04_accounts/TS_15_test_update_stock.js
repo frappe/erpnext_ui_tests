@@ -6,9 +6,14 @@ context('Invoice Creation', () => {
 	it('Create Sales Invoice and test update stock', () => {
 		cy.new_doc("Sales Invoice");
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
+		cy.get_input('customer').click();
+		cy.wait(500);
 		cy.set_link('customer', 'William Harris');
 		cy.get_field('update_stock').check();
 		cy.get_field('update_stock', 'checkbox').should('be.checked');
+		cy.findByText('Currency and Price List').scrollIntoView().should('be.visible');
+		cy.wait(400);
 		cy.click_section('Currency and Price List');
 		cy.open_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
