@@ -54,7 +54,7 @@ context('Currency and Exchange Rate Check', () => {
 					cy.get_input('rate').should('have.value', formattedRate);
 					cy.get_input('amount').should('have.value', formattedRate);
 
-					const total = (rate * exRate);
+					const total = (roundedRate * exRate);
 					const roundedTotal = Number(total).toFixed(2);
 					const formattedTotal = Number(roundedTotal).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
 					//const formattedTotal = Intl.NumberFormat('en-IN').format(roundedTotal);
@@ -63,11 +63,11 @@ context('Currency and Exchange Rate Check', () => {
 
 					cy.get_read_only('total_qty').should('contain', "1");
 					cy.get_read_only('total').should('contain', rateInCurrency);
-					//cy.get_read_only('base_total').should('contain', totalInCurrency);  //need to find a way to assert base values
+					cy.get_read_only('base_total').should('contain', totalInCurrency);  //need to find a way to assert base values
 
-					//cy.get_read_only('base_grand_total').should('contain', totalInCurrency);
+					cy.get_read_only('base_grand_total').should('contain', totalInCurrency);
 					cy.get_read_only('grand_total').should('contain', rateInCurrency);
-					//cy.get_read_only('base_rounded_total').should('contain', totalInCurrency);
+					cy.get_read_only('base_rounded_total').should('contain', totalInCurrency);
 					cy.get_read_only('rounded_total').should('contain', rateInCurrency);
 				});
 
