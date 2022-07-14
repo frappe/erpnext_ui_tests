@@ -45,7 +45,6 @@ context('Create Sales Order', () => {
 	it('Check Work Order created', () => {
 		cy.visit('app/work-order/view/list');
 		cy.click_listview_row_item(0);
-		cy.get_input('production_item').should('have.value', 'Marcel Coffee Table');
 		cy.get_input('qty', '2');
 		cy.get_input('fg_warehouse').should('have.value', 'Stores - WP');
 		cy.get_read_only('status').should('contain', 'Draft');
@@ -73,12 +72,12 @@ context('Create Sales Order', () => {
         cy.click_modal_primary_button('Submit');
         cy.get_page_title().should('contain', 'On Hold');
         cy.click_dropdown_action('Status', 'Resume');
-        cy.get_page_title().should('contain', 'Overdue');
+        cy.get_page_title().should('contain', 'To Deliver and Bill');
         cy.click_dropdown_action('Status', 'Close');
-        cy.get_page_title().should('contain', 'Overdue');
+        cy.get_page_title().should('contain', 'To Deliver and Bill');
         cy.visit('app/sales-order');
         cy.click_listview_row_item(0);
         cy.click_dropdown_action('Status', 'Re-open');
-        cy.get_page_title().should('contain', 'Overdue');
+        cy.get_page_title().should('contain', 'To Deliver and Bill');
     });
 });
