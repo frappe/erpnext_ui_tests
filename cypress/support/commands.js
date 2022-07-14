@@ -520,3 +520,12 @@ Cypress.Commands.add('click_modal_grid_row_checkbox', (fieldname, row_no) => {
 Cypress.Commands.add('get_error_msg', () => {
 	cy.get('.msgprint');
 });
+
+Cypress.Commands.add("set_textarea", (fieldname, value) => {
+	cy.get(`[data-fieldname="${fieldname}"] textarea:visible`).type(value);
+});
+
+Cypress.Commands.add("click_move_or_add_button", (warehouse_name, button_name) => {
+	cy.get(`.dashboard-list-item button[data-warehouse="${warehouse_name}"]`)
+		.contains(button_name).click({force: true, scrollBehavior: false});
+});
