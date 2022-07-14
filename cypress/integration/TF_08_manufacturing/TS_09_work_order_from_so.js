@@ -64,4 +64,21 @@ context('Create Sales Order', () => {
 		cy.save();
 		cy.submit('Not Started');
 	});
+
+	it('Check Hold and Close functionality', () => {
+        cy.visit('app/sales-order');
+        cy.click_listview_row_item(0);
+        cy.click_dropdown_action('Status', 'Hold');
+        cy.set_textarea('reason_for_hold', 'Closed');
+        cy.click_modal_primary_button('Submit');
+        cy.get_page_title().should('contain', 'On Hold');
+        cy.click_dropdown_action('Status', 'Resume');
+        cy.get_page_title().should('contain', 'Overdue');
+        cy.click_dropdown_action('Status', 'Close');
+        cy.get_page_title().should('contain', 'Overdue');
+        cy.visit('app/sales-order');
+        cy.click_listview_row_item(0);
+        cy.click_dropdown_action('Status', 'Re-open');
+        cy.get_page_title().should('contain', 'Overdue');
+    });
 });
