@@ -48,7 +48,6 @@ context('Create Sales Order', () => {
 		cy.get_read_only('production_item').should('contain', 'Marcel Coffee Table');
 		cy.get_read_only('qty').should('contain', '2');
 		cy.get_read_only('fg_warehouse').should('contain', 'Stores - WP');
-		cy.get_read_only('status').should('contain', 'Draft');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
 		cy.on('window:alert',  (str) =>  {
