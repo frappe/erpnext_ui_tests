@@ -61,7 +61,6 @@ context('Create Sales Order', () => {
 		cy.hide_dialog();
 		cy.set_link('source_warehouse', 'Stores - WP');
 		cy.save();
-		cy.submit('Not Started');
 	});
 
 	it('Check Hold and Close functionality', () => {
