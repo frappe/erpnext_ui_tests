@@ -7,7 +7,6 @@ context('Create Sales Order', () => {
 		cy.new_doc("Sales Order");
 		cy.url().should('include', '/app/sales-order/new-sales-order');
 		cy.get_select('naming_series').should('have.value', 'SAL-ORD-.YYYY.-');
-		cy.set_link('company', 'Wind Power LLC')
 		cy.set_link('customer', 'William Harris');
 		cy.get_input('customer').should('have.value', 'William Harris');
 		cy.get_select('order_type').should('have.value', 'Sales');
@@ -49,17 +48,7 @@ context('Create Sales Order', () => {
 		cy.get_read_only('production_item').should('contain', 'Marcel Coffee Table');
 		cy.get_read_only('qty').should('contain', '2');
 		cy.get_read_only('fg_warehouse').should('contain', 'Stores - WP');
-		cy.click_toolbar_button('Submit');
-		cy.click_modal_primary_button('Yes');
-		cy.on('window:alert',  (str) =>  {
-            expect(str).to.equal(`Missing Fields`)});
- 		cy.get_error_msg().should('contain', 'Mandatory fields required in Work Order');
-		cy.hide_dialog();
 		cy.set_link('wip_warehouse', 'Work In Progress - WP');
-		cy.click_toolbar_button('Submit');
-		cy.on('window:alert',  (str) =>  {
-            expect(str).to.equal(`Missing Fields`)});
-		cy.hide_dialog();
 		cy.set_link('source_warehouse', 'Stores - WP');
 		cy.save();
 	});
