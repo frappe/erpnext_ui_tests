@@ -304,6 +304,10 @@ Cypress.Commands.add('click_action_button', () => {
 	return cy.get(`.actions-btn-group:visible button`).click({force: true});
 });
 
+Cypress.Commands.add("get_read_only", (fieldname) => {
+    return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
+});
+
 Cypress.Commands.add('get_list_row', (fieldname) => {
 	return cy.get(`.frappe-list .level-item[title="${fieldname}"]`);
 });
