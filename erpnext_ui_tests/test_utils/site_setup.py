@@ -31,9 +31,6 @@ def execute():
 			}
 		)
 
-	frappe.db.sql("delete from `tabLeave Allocation`")
-	frappe.db.sql("delete from `tabLeave Application`")
-	frappe.db.sql("delete from `tabSalary Slip`")
 	frappe.db.sql("delete from `tabItem Price`")
 
 	_enable_all_roles_for_admin()
