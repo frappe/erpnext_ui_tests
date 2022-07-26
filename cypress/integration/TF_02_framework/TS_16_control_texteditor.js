@@ -74,7 +74,9 @@ context('Text Editor Control', () => {
 
 		//Verifying Ordered list
 		cy.get_field('inptext','Text Editor').clear();
-		cy.fill_field('inptext','Test1{enter}Test2{enter}Test3{enter}','Text Editor');
+		cy.fill_field('inptext','Test1','Text Editor').type('{enter}');
+		cy.fill_field('inptext','Test2','Text Editor').type('{enter}');
+		cy.fill_field('inptext','Test3','Text Editor').type('{enter}');
 		cy.get_field('inptext','Text Editor').type('{selectall}');
 		cy.get('[value="ordered"]').first().click();
 		cy.get('ol').should('be.visible');
