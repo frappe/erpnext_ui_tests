@@ -20,6 +20,7 @@ context('Sales Invoice Creation', () => {
 
 		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.get_input('customer').should('have.value', 'William Harris');
+		cy.get_field('set_posting_time', 'Check').check();
 		cy.get_input('posting_date').should('have.value', today_date);
 		cy.get_input('due_date').should('have.value', today_date);
 
