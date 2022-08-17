@@ -19,6 +19,7 @@ context('Notifications', () => {
         cy.wait(1000);
         cy.get('.role-editor button.select-all').click({force: true});
         cy.wait(500);
+		cy.click_tab('Settings');
         cy.click_section('Change Password');
         cy.set_input('new_password', 'password@12345');
         cy.save();
