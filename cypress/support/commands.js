@@ -541,3 +541,13 @@ Cypress.Commands.add('delete_list_row', (doctype_name, fieldname) => {
 		.contains('Yes')
 		.click({force: true, multiple: true});
 });
+
+Cypress.Commands.add("click_grid_action_button", (fieldname, row_no) => {
+    cy.get(`[data-fieldname="${fieldname}"] .datatable .dt-row[data-row-index="${row_no}"] button.btn-primary`)
+        .contains('Actions').click({force: true});
+});
+
+Cypress.Commands.add("click_grid_checkbox", (fieldname, row_no) => {
+    cy.get(`[data-fieldname="${fieldname}"] .datatable .dt-row[data-row-index="${row_no}"] input:visible`)
+        .click({force: true});
+});
