@@ -512,6 +512,20 @@ Cypress.Commands.add('click_grid_row_checkbox', (fieldname, row_no) => {
 		.click({force: true, scrollBehavior: false});
 });
 
+Cypress.Commands.add('click_modal_grid_row_checkbox', (fieldname, row_no) => {
+	cy.get(`.modal-dialog [data-fieldname="${fieldname}"] .form-grid .grid-row[data-idx="${row_no}"] .grid-row-check`)
+		.click({force: true, scrollBehavior: false});
+});
+
 Cypress.Commands.add('get_error_msg', () => {
 	cy.get('.msgprint');
+});
+
+Cypress.Commands.add("set_textarea", (fieldname, value) => {
+	cy.get(`[data-fieldname="${fieldname}"] textarea:visible`).type(value);
+});
+
+Cypress.Commands.add("click_move_or_add_button", (warehouse_name, button_name) => {
+	cy.get(`.dashboard-list-item button[data-warehouse="${warehouse_name}"]`)
+		.contains(button_name).click({force: true, scrollBehavior: false});
 });

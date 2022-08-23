@@ -37,7 +37,7 @@ context('Multi Currency Accounting', () => {
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 		cy.get_input('posting_date').should('not.be.empty');
 
-		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.wait(800);
 		cy.get_input('customer').click();
 		cy.set_link('customer', 'Martha Stewart');

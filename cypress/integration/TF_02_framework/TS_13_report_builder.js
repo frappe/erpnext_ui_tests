@@ -34,6 +34,8 @@ context("Report Builder", () => {
 		cy.click_toolbar_button('Show Report');
 		cy.location('pathname').should('eq', '/app/todo/view/report/Test%20Report%20Builder');
 		cy.get_page_title().should('contain', 'Test Report Builder');
+		cy.get_input('allocated_to').clear();
+		cy.get_input('name').click();
 		cy.get('.datatable').should('exist');
 		cy.get('.datatable .dt-header .dt-cell--header').should('contain', 'ID')
 		.and('contain', 'Description')

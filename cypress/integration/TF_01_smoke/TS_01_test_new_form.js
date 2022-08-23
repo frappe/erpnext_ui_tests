@@ -4,6 +4,7 @@
 
 const test_new_form_doctypes = [
 	"Account",
+	"Asset Maintenance",
 	"BOM",
 	"Bank Account",
 	"Batch",

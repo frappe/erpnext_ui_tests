@@ -8,7 +8,6 @@ context('Terms and Condition', () => {
 		cy.set_input('title','Dummy Terms');
 		cy.get_input('selling', 'checkbox').should('be.checked');
 		cy.get_input('buying', 'checkbox').should('be.checked');
-		cy.get_input('hr', 'checkbox').should('be.checked');
 		//cy.get_field('terms','This is Dummy Terms and Conditions');
 		cy.get_field('terms', 'Text Editor').type('This is Dummy Terms and Conditions');
 		cy.wait(500);
