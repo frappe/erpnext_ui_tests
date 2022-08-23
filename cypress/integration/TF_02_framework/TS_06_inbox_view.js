@@ -8,6 +8,7 @@ context('Inbox View', () => {
 		//Setting Email account for user administrator
 		cy.list_open_row('Administrator');
 		cy.wait(500);
+		cy.click_tab('Settings');
 		cy.open_section('Email');
 		cy.grid_add_row('user_emails');
 		cy.set_link('user_emails.email_account','Notifications');
