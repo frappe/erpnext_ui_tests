@@ -69,7 +69,7 @@ context('Multi Currency Accounting', () => {
 				cy.get_input('rate').should('have.value', formattedRate);
 				cy.get_input('amount').should('have.value', formattedRate);
 
-				const total = (roundedRate * roundedExchRate);
+				const total = (roundedRate * exRate);
 				const roundedTotal = Number(total).toFixed(2);
 				//const formattedTotal = Intl.NumberFormat('en-IN').format(roundedTotal);
 				const formattedTotal = Number(roundedTotal).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
