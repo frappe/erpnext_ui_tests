@@ -174,7 +174,6 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 
 	it('Create transaction', () => {
 		cy.visit('/app/bank-reconciliation-tool/Bank%20Reconciliation%20Tool');
-		//cy.get_input('company').should('not.have.value', '');
 		cy.set_link('company', 'Wind Power LLC');
 		cy.set_link('bank_account', 'ICICI Savings - ');   // name
 		cy.save();
@@ -187,6 +186,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.save();
 
 		cy.click_grid_action_button('reconciliation_tool_dt', 3);
+		cy.get_select('action').scrollIntoView().should('be.visible').focus();
 		cy.set_select('action', 'Create Voucher');
 		cy.set_select('document_type', 'Payment Entry');
 		cy.set_link('party_type', 'Customer');
