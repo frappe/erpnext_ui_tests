@@ -174,7 +174,8 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 
 	it('Create transaction', () => {
 		cy.visit('/app/bank-reconciliation-tool/Bank%20Reconciliation%20Tool');
-		cy.get_input('company').should('not.have.value', '');
+		//cy.get_input('company').should('not.have.value', '');
+		cy.set_link('company', 'Wind Power LLC');
 		cy.set_link('bank_account', 'ICICI Savings - ');   // name
 		cy.save();
 		cy.set_today('bank_statement_from_date');
