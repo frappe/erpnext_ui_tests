@@ -72,7 +72,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.set_link('party_type', 'Customer');
 		cy.set_link('party', 'William Harris');
 		cy.get_input('party_name').should('have.value', 'William Harris');
-		cy.set_link('bank_account', 'ICICI Savings -');   // bank account name
+		cy.set_link('bank_account', 'ICICI Savings -');    // bank account name
 
 		cy.set_input('paid_amount', '2500');
 		cy.set_input('reference_no', 'Ref-22');
