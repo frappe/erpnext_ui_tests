@@ -185,27 +185,6 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.set_input('bank_statement_closing_balance', '1500');
 		cy.save();
 
-		cy.click_grid_action_button('reconciliation_tool_dt', 3);
-		cy.get_select('action').scrollIntoView().should('be.visible').focus();
-		cy.set_select('action', 'Create Voucher');
-		cy.set_select('document_type', 'Payment Entry');
-		cy.set_link('party_type', 'Customer');
-		cy.set_link('party', 'William Harris');
-		cy.click_modal_primary_button('Submit');
-		cy.click_modal_close_button();
-		cy.on('window:alert',  (str) =>  {
-			expect(str).to.equal(/Bank Transaction ACC-.+ added as /)});
-
-		cy.click_grid_action_button('reconciliation_tool_dt', 2);
-		cy.set_select('action', 'Create Voucher');
-		cy.set_select('document_type', 'Journal Entry');
-		cy.set_select('journal_entry_type', 'Journal Entry');
-		cy.set_link('second_account', 'Cash - ');
-		cy.click_modal_primary_button('Submit');
-		cy.click_modal_close_button();
-		cy.on('window:alert',  (str) =>  {
-			expect(str).to.equal(/Bank Transaction ACC-.+ added as /)});
-
 		cy.click_grid_action_button('reconciliation_tool_dt', 0);
 		cy.set_select('action','Match Against Voucher');
 		cy.get_field('payment_entry', 'Check').check();
@@ -225,5 +204,26 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.click_modal_close_button();
 		cy.on('window:alert',  (str) =>  {
 			expect(str).to.equal(/Bank Transaction ACC-.+ Matched/)});
+
+		cy.click_grid_action_button('reconciliation_tool_dt', 2);
+		cy.set_select('action', 'Create Voucher');
+		cy.set_select('document_type', 'Journal Entry');
+		cy.set_select('journal_entry_type', 'Journal Entry');
+		cy.set_link('second_account', 'Cash - ');
+		cy.click_modal_primary_button('Submit');
+		cy.click_modal_close_button();
+		cy.on('window:alert',  (str) =>  {
+			expect(str).to.equal(/Bank Transaction ACC-.+ added as /)});
+
+		cy.click_grid_action_button('reconciliation_tool_dt', 3);
+		cy.get_select('action').scrollIntoView().should('be.visible').focus();
+		cy.set_select('action', 'Create Voucher');
+		cy.set_select('document_type', 'Payment Entry');
+		cy.set_link('party_type', 'Customer');
+		cy.set_link('party', 'William Harris');
+		cy.click_modal_primary_button('Submit');
+		cy.click_modal_close_button();
+		cy.on('window:alert',  (str) =>  {
+			expect(str).to.equal(/Bank Transaction ACC-.+ added as /)});
 	});
 });
