@@ -18,6 +18,7 @@ context('User Group', () => {
 		//cy.go_to_list('User');
 		//cy.list_open_row('Beth keil');
 		cy.save();
+		cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
 		cy.wait(500);
@@ -39,6 +40,7 @@ context('User Group', () => {
 		//cy.go_to_list('User');
 		//cy.list_open_row('Beth Ketty');
 		cy.save();
+		cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
 		cy.wait(500);
