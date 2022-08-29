@@ -5,15 +5,19 @@ context('User Group', () => {
 	});
 
 	it('Test', () => {
-		cy.insert_doc(
-			"User",
-			{
-				email: "beth_keil@test.com",
-				first_name: "Beth keil"
-			},
-		)
-		cy.go_to_list('User');
-		cy.list_open_row('Beth keil');
+		// cy.insert_doc(
+		// 	"User",
+		// 	{
+		// 		email: "beth_keil@test.com",
+		// 		first_name: "Beth keil"
+		// 	},
+		// )
+		cy.new_form('User');
+		cy.set_input('email', 'beth_keil@test.com');
+		cy.set_input('first_name', 'Beth keil');
+		//cy.go_to_list('User');
+		//cy.list_open_row('Beth keil');
+		cy.save();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
 		cy.wait(500);
@@ -22,15 +26,19 @@ context('User Group', () => {
 		cy.set_input('new_password', 'password@12345');
 		cy.save();
 
-		cy.insert_doc(
-			"User",
-			{
-				email: "beth_ketty@test.com",
-				first_name: "Beth Ketty"
-			},
-		)
-		cy.go_to_list('User');
-		cy.list_open_row('Beth Ketty');
+		// cy.insert_doc(
+		// 	"User",
+		// 	{
+		// 		email: "beth_ketty@test.com",
+		// 		first_name: "Beth Ketty"
+		// 	},
+		// )
+		cy.new_form('User');
+		cy.set_input('email', 'beth_ketty@test.com');
+		cy.set_input('first_name', 'Beth Ketty');
+		//cy.go_to_list('User');
+		//cy.list_open_row('Beth Ketty');
+		cy.save();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
 		cy.wait(500);
