@@ -17,8 +17,9 @@ context('User Group', () => {
 		cy.set_input('first_name', 'Beth keil');
 		//cy.go_to_list('User');
 		//cy.list_open_row('Beth keil');
-		cy.click_toolbar_button('Save');
-		cy.wait(3000);
+		//cy.click_toolbar_button('Save');
+		cy.save();
+		cy.wait(1000);
 		cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
@@ -40,8 +41,9 @@ context('User Group', () => {
 		cy.set_input('first_name', 'Beth Ketty');
 		//cy.go_to_list('User');
 		//cy.list_open_row('Beth Ketty');
-		cy.click_toolbar_button('Save');
-		cy.wait(3000);
+		//cy.click_toolbar_button('Save');
+		cy.save();
+		cy.wait(1000);
 		cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
