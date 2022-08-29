@@ -8,12 +8,12 @@ context('User Group', () => {
 		cy.insert_doc(
 			"User",
 			{
-				email: "test_user_grp@test.com",
-				first_name: "Test User Grp"
+				email: "beth_keil@test.com",
+				first_name: "Beth keil"
 			},
 		)
 		cy.go_to_list('User');
-		cy.list_open_row('Test User Grp');
+		cy.list_open_row('Beth keil');
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
 		cy.wait(500);
@@ -25,12 +25,12 @@ context('User Group', () => {
 		cy.insert_doc(
 			"User",
 			{
-				email: "test_user_grp1@test.com",
-				first_name: "Test User Grp1"
+				email: "beth_ketty@test.com",
+				first_name: "Beth Ketty"
 			},
 		)
 		cy.go_to_list('User');
-		cy.list_open_row('Test User Grp1');
+		cy.list_open_row('Beth Ketty');
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get('button.select-all').click();
 		cy.wait(500);
@@ -50,12 +50,12 @@ context('User Group', () => {
 		cy.set_input('__newname', 'Test User Group');
 		cy.get_input('user_group_members').click();
 		cy.get('.link-field').find('ul > li')
-			.should('contain', 'test_user_grp@test.com')
-			.and('contain', 'test_user_grp1@test.com');
+			.should('contain', 'beth_keil@test.com')
+			.and('contain', 'beth_ketty@test.com');
 
-		cy.get('.link-field li [title="test_user_grp@test.com"]').click({force: true});
+		cy.get('.link-field li [title="beth_keil@test.com"]').click({force: true});
 		cy.get_input('user_group_members').click();
-		cy.get('.link-field li [title="test_user_grp1@test.com"]').click({force: true});
+		cy.get('.link-field li [title="beth_ketty@test.com"]').click({force: true});
 		cy.save();
 
 		cy.get('[data-fieldname="comment"]:visible').type('@Test User Group');
@@ -73,24 +73,24 @@ context('User Group', () => {
 		cy.get_error_msg().find('li').should('contain', 'User Group Members');
 		cy.hide_dialog();
 		cy.get_input('user_group_members').click();
-		cy.get('.link-field li [title="test_user_grp1@test.com"]').click({force: true});
+		cy.get('.link-field li [title="beth_ketty@test.com"]').click({force: true});
 		cy.save();
 		cy.get_open_dialog().should('contain', 'Duplicate Name')
 		.and('contain', 'User Group Test User Group already exists');
 		
 		cy.logout('Administrator');
-        cy.user_login('test_user_grp@test.com', 'password@12345');
+        cy.user_login('beth_keil@test.com', 'password@12345');
         cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
 		cy.get('.subject-title').should('have.text', 'Test Comment');
-		cy.logout('Test User Grp');
-		cy.user_login('test_user_grp1@test.com', 'password@12345');
+		cy.logout('Beth keil');
+		cy.user_login('beth_ketty@test.com', 'password@12345');
         cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
 		cy.get('.subject-title').should('have.text', 'Test Comment');
-		cy.logout('Test User Grp1');
+		cy.logout('Beth Ketty');
 		cy.user_login('Administrator', 'admin');
 
 		cy.remove_doc('User Group', 'Test User Group');
-		cy.remove_doc('User', 'test_user_grp@test.com');
-		cy.remove_doc('User', 'test_user_grp1@test.com');
+		cy.remove_doc('User', 'beth_keil@test.com');
+		cy.remove_doc('User', 'beth_ketty@test.com');
 	});
 }); 
