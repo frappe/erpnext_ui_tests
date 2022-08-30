@@ -1,0 +1,17 @@
+{
+  "baseUrl": "http://test_site:8000/",
+  "projectId": "da59y9",
+  "env": {"adminPassword": "yashi123"},
+  "defaultCommandTimeout": 20000,
+  "pageLoadTimeout": 30000,
+  "video": true,
+  "videoUploadOnPasses": false,
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  },
+  "testFiles": [
+    "TF_01_smoke/*",
+    "TF_02_framework/*"
+  ]
+}
