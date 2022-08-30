@@ -75,11 +75,11 @@ context('User Group', () => {
 		cy.logout('Administrator');
         cy.user_login('beth_keil@test.com', 'password@12345');
         cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
-		cy.get('.subject-title').should('have.text', 'Test Comment');
+		cy.get('.subject-title').should('have.text', 'Test User Group');
 		cy.logout('Beth keil');
 		cy.user_login('beth_ketty@test.com', 'password@12345');
         cy.get('.navbar .nav-item .nav-link[data-original-title="Notifications"]').click({force: true});
-		cy.get('.subject-title').should('have.text', 'Test Comment');
+		cy.get('.subject-title').should('have.text', 'Test User Group');
 		cy.logout('Beth Ketty');
 		cy.user_login('Administrator', 'admin');
 
