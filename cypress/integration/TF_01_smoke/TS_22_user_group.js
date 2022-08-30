@@ -83,8 +83,8 @@ context('User Group', () => {
 		cy.logout('Beth Ketty');
 		cy.user_login('Administrator', 'admin');
 
-		cy.delete_doc('User Group', 'Test User Group');
-		cy.delete_doc('User', 'beth_keil@test.com');
-		cy.delete_doc('User', 'beth_ketty@test.com');
+		cy.remove_doc('User Group', 'Test%20User%20Group');
+		cy.remove_doc('User', 'beth_keil@test.com');
+		cy.remove_doc('User', 'beth_ketty@test.com');
 	});
 }); 
