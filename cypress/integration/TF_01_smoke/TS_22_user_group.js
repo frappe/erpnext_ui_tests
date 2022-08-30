@@ -11,17 +11,25 @@ context('User Group', () => {
 		// 		email: "beth_keil@test.com",
 		// 		first_name: "Beth keil"
 		// 	},
-		// )
-		cy.new_form('User');
+		// // )
+		// cy.new_form('User');
+		// cy.set_input('email', 'beth_keil@test.com');
+		// cy.set_input('first_name', 'Beth keil');
+
+		// cy.save();
+		// cy.wait(1000);
+		// cy.reload();
+		// cy.findByRole("tab", { name: "Roles & Permissions" }).click();
+
+		cy.new_doc('User');
 		cy.set_input('email', 'beth_keil@test.com');
 		cy.set_input('first_name', 'Beth keil');
-		//cy.go_to_list('User');
-		//cy.list_open_row('Beth keil');
-		//cy.click_toolbar_button('Save');
+		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
 		cy.wait(1000);
-		cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
+
+
 		cy.get('button.select-all').click();
 		cy.wait(500);
 		cy.click_tab('Settings');
