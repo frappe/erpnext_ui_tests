@@ -54,6 +54,12 @@ bench get-app "https://github.com/$erpnextuser/erpnext" --branch "$erpnextbranch
 bench get-app erpnext_ui_tests "${GITHUB_WORKSPACE}"
 
 bench start &> bench_run_logs.txt &
+
+CI=Yes bench build --force --production &
+build_pid=$!
+
 bench --site test_site reinstall --yes
 
 bench --site test_site install-app erpnext_ui_tests
+
+wait $build_pid
