@@ -184,7 +184,7 @@ Cypress.Commands.add('click_custom_toolbar_button', (text) => {
 });
 
 Cypress.Commands.add('click_modal_close_button', () => {
-	cy.get('.btn-modal-close').click({scrollBehavior: false, force: true});
+	cy.get('.btn-modal-close:visible').click({scrollBehavior: false, force: true});
 });
 
 Cypress.Commands.add('click_modal_primary_button', (btn_name) => {
