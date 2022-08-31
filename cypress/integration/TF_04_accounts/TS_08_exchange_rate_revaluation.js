@@ -168,7 +168,7 @@ context('Exchange Rate Creation Check', () => {
 	});
 	it('Deletion of created currency exchange rate', () => {
 		cy.visit('app/currency-exchange');
-		cy.clear_filter();
+		cy.clear_filters();
 		cy.click_listview_checkbox(0);
 		cy.click_dropdown_action('Actions', 'Delete');
 		cy.click_modal_primary_button('Yes');

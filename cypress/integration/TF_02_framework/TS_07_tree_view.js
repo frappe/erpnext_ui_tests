@@ -85,6 +85,7 @@ context('Tree View', () => {
 		cy.get('#navbar-search').type('{enter}');
 		cy.click_custom_toolbar_button('List View');
 		cy.click_toolbar_dropdown('Tree');
+		cy.get('.tree-children .tree-link').click();
 		cy.findByRole('button', {name: 'Rename'}).click();
 		cy.set_input('new_name', 'LOCATION23456');
 		cy.intercept('/api').as('api');

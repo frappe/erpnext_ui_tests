@@ -11,15 +11,16 @@ context('Notifications', () => {
         cy.set_input('first_name', 'Test Notification User');
         cy.get_field('send_welcome_email', 'Check').uncheck();
         cy.save();
-		// cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
-		// //cy.get('.modal').type('{esc}');
 		cy.reload();
         cy.set_input_awesomebar('User');
         cy.list_open_row('Test Notification User');
         cy.wait(1000);
         cy.get('.role-editor button.select-all').click({force: true});
         cy.wait(500);
+		cy.click_tab('Settings');
+		cy.wait(500);
         cy.click_section('Change Password');
+		cy.open_section('Change Password');
         cy.set_input('new_password', 'password@12345');
         cy.save();
 		cy.get('.modal').type('{esc}');
@@ -60,6 +61,8 @@ context('Notifications', () => {
 
     it('Assigning a todo to the new user using the admin login and verifying if the notification is sent to user', () => {
         cy.set_input_awesomebar('todo');
+		cy.get_input('allocated_to').clear();
+		cy.get_input('name').click();
         cy.list_open_row('This is a test notifications Todo');
 
         //Assigning todo to the new user Billy Jones
@@ -85,6 +88,8 @@ context('Notifications', () => {
 
         //Deleting todo
         cy.set_input_awesomebar('todo');
+		cy.get_input('allocated_to').clear();
+		cy.get_input('name').click();
         cy.click_listview_checkbox(0);
         cy.click_action_button('Actions');
         cy.click_toolbar_dropdown('Delete');

@@ -37,7 +37,7 @@ context('Multi Currency Accounting', () => {
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 		cy.get_input('posting_date').should('not.be.empty');
 
-		cy.get_select('naming_series').should('have.value', 'SINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
 		cy.wait(800);
 		cy.get_input('customer').click();
 		cy.set_link('customer', 'Martha Stewart');
@@ -69,7 +69,7 @@ context('Multi Currency Accounting', () => {
 				cy.get_input('rate').should('have.value', formattedRate);
 				cy.get_input('amount').should('have.value', formattedRate);
 
-				const total = (roundedRate * roundedExchRate);
+				const total = (roundedRate * exRate);
 				const roundedTotal = Number(total).toFixed(2);
 				//const formattedTotal = Intl.NumberFormat('en-IN').format(roundedTotal);
 				const formattedTotal = Number(roundedTotal).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');

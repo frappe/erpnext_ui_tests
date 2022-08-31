@@ -184,7 +184,7 @@ Cypress.Commands.add('click_custom_toolbar_button', (text) => {
 });
 
 Cypress.Commands.add('click_modal_close_button', () => {
-	cy.get('.btn-modal-close').click({scrollBehavior: false, force: true});
+	cy.get('.btn-modal-close:visible').click({scrollBehavior: false, force: true});
 });
 
 Cypress.Commands.add('click_modal_primary_button', (btn_name) => {
@@ -512,6 +512,42 @@ Cypress.Commands.add('click_grid_row_checkbox', (fieldname, row_no) => {
 		.click({force: true, scrollBehavior: false});
 });
 
+Cypress.Commands.add('click_modal_grid_row_checkbox', (fieldname, row_no) => {
+	cy.get(`.modal-dialog [data-fieldname="${fieldname}"] .form-grid .grid-row[data-idx="${row_no}"] .grid-row-check`)
+		.click({force: true, scrollBehavior: false});
+});
+
 Cypress.Commands.add('get_error_msg', () => {
 	cy.get('.msgprint');
+});
+
+Cypress.Commands.add("set_textarea", (fieldname, value) => {
+	cy.get(`[data-fieldname="${fieldname}"] textarea:visible`).type(value);
+});
+
+Cypress.Commands.add("click_move_or_add_button", (warehouse_name, button_name) => {
+	cy.get(`.dashboard-list-item button[data-warehouse="${warehouse_name}"]`)
+		.contains(button_name).click({force: true, scrollBehavior: false});
+});
+
+Cypress.Commands.add('delete_list_row', (doctype_name, fieldname) => {
+	cy.wait(1000);
+	cy.go_to_list(`${doctype_name}`);
+	cy.get(`.list-row .level-item .list-row-checkbox[data-name="${fieldname}"]`)
+		.click({force: true, scrollBehavior: false});
+	cy.click_action_button('Actions');
+	cy.click_toolbar_dropdown('Delete');
+	cy.get('.modal-footer > .standard-actions > button.btn-primary:visible')
+		.contains('Yes')
+		.click({force: true, multiple: true});
+});
+
+Cypress.Commands.add("click_grid_action_button", (fieldname, row_no) => {
+    cy.get(`[data-fieldname="${fieldname}"] .datatable .dt-row[data-row-index="${row_no}"] button.btn-primary`)
+        .contains('Actions').click({force: true});
+});
+
+Cypress.Commands.add("click_grid_checkbox", (fieldname, row_no) => {
+    cy.get(`[data-fieldname="${fieldname}"] .datatable .dt-row[data-row-index="${row_no}"] input:visible`)
+        .click({force: true});
 });

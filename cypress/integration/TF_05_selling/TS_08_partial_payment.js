@@ -10,7 +10,7 @@ context('Partial Payment', () => {
 		cy.insert_doc(
 			"Sales Invoice",
 			{
-				naming_series: "SINV-.YY.-",
+				naming_series: "ACC-SINV-.YYYY.-",
 				posting_date: date,
 				customer: "William Harris",
 				due_date: date,

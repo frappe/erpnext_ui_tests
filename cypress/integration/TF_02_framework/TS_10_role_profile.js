@@ -23,9 +23,10 @@ context('Role Profile', () => {
 		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
 		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
-		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
+		cy.reload();
+		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get_input('role_profile_name').should('have.value', 'Test RoleProfile');
 		cy.get_input('roles').should('be.checked');
 	});
@@ -38,6 +39,7 @@ context('Role Profile', () => {
 		cy.get_field('send_welcome_email', 'Check').uncheck();
 		cy.save();
 		cy.wait(1000);
+		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get_field('role_profile_name', 'Link').click({force: true, scrollBehavior: false});
 		cy.get('[data-fieldname="role_profile_name"] ul:visible li:first-child')
 			.should('contain', 'Test RoleProfile')
@@ -65,6 +67,7 @@ context('Role Profile', () => {
 		cy.wait(1000);
 
 		//Checking if the roles selected in role profile is also checked in the user
+		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get_field('role_profile_name', 'Link').click({force: true, scrollBehavior: false});
 		cy.get('[data-fieldname="role_profile_name"] ul:visible li')
 			.should('contain', 'Test RoleProfile1');
