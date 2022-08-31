@@ -31,3 +31,19 @@ Cypress.on('window:before:load', (win) => {
   cy.spy(win.console, 'log');
   cy.spy(win.console, 'warn');
 });
+
+
+// taken from https://github.com/cypress-io/cypress/issues/5302#issuecomment-543959807
+let timeout_id;
+
+const test_timeout = 5 * 60 * 1000; // 5 minutes
+
+beforeEach(() => {
+  timeout_id = setTimeout(() => {
+    throw new Error("Test took too long time.")
+  }, test_timeout);
+})
+
+afterEach(() => {
+  clearTimeout(timeout_id)
+})
