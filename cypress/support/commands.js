@@ -184,7 +184,7 @@ Cypress.Commands.add('click_custom_toolbar_button', (text) => {
 });
 
 Cypress.Commands.add('click_modal_close_button', () => {
-	cy.get('.btn-modal-close').click({scrollBehavior: false, force: true});
+	cy.get('.btn-modal-close:visible').click({scrollBehavior: false, force: true});
 });
 
 Cypress.Commands.add('click_modal_primary_button', (btn_name) => {
@@ -302,6 +302,10 @@ Cypress.Commands.add('click_menu_button', () => {
 Cypress.Commands.add('click_action_button', () => {
 	cy.scrollTo('top', {ensureScrollable: false});
 	return cy.get(`.actions-btn-group:visible button`).click({force: true});
+});
+
+Cypress.Commands.add("get_read_only", (fieldname) => {
+    return cy.get(`[data-fieldname="${fieldname}"]:visible`, {scrollBehavior: 'center'});
 });
 
 Cypress.Commands.add('get_list_row', (fieldname) => {
@@ -524,4 +528,26 @@ Cypress.Commands.add("set_textarea", (fieldname, value) => {
 Cypress.Commands.add("click_move_or_add_button", (warehouse_name, button_name) => {
 	cy.get(`.dashboard-list-item button[data-warehouse="${warehouse_name}"]`)
 		.contains(button_name).click({force: true, scrollBehavior: false});
+});
+
+Cypress.Commands.add('delete_list_row', (doctype_name, fieldname) => {
+	cy.wait(1000);
+	cy.go_to_list(`${doctype_name}`);
+	cy.get(`.list-row .level-item .list-row-checkbox[data-name="${fieldname}"]`)
+		.click({force: true, scrollBehavior: false});
+	cy.click_action_button('Actions');
+	cy.click_toolbar_dropdown('Delete');
+	cy.get('.modal-footer > .standard-actions > button.btn-primary:visible')
+		.contains('Yes')
+		.click({force: true, multiple: true});
+});
+
+Cypress.Commands.add("click_grid_action_button", (fieldname, row_no) => {
+    cy.get(`[data-fieldname="${fieldname}"] .datatable .dt-row[data-row-index="${row_no}"] button.btn-primary`)
+        .contains('Actions').click({force: true});
+});
+
+Cypress.Commands.add("click_grid_checkbox", (fieldname, row_no) => {
+    cy.get(`[data-fieldname="${fieldname}"] .datatable .dt-row[data-row-index="${row_no}"] input:visible`)
+        .click({force: true});
 });
