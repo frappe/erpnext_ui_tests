@@ -61,7 +61,7 @@ context('Inbox View', () => {
 	it('Deleting the mail and reseting the email account configurations', () => {
 		cy.click_custom_toolbar_button('Inbox View');
 		cy.click_toolbar_dropdown('List');
-		cy.intercept('/api').as('api');
+		cy.intercept('/api**').as('api');
 		cy.location('pathname').should('eq', '/app/communication/view/list');
 		cy.wait('@api');
 		cy.click_listview_checkbox(0);
