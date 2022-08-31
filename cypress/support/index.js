@@ -36,7 +36,7 @@ Cypress.on('window:before:load', (win) => {
 // taken from https://github.com/cypress-io/cypress/issues/5302#issuecomment-543959807
 let timeout_id;
 
-const test_timeout = 10 * 60 * 1000; // 10 minutes
+const test_timeout = 5 * 60 * 1000; // 5 minutes
 
 beforeEach(() => {
   timeout_id = setTimeout(() => {
