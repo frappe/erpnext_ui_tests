@@ -14,6 +14,6 @@ context('Stock Reconciliation', () => {
 			cy.get_field('cost_center').should('have.value' , 'Main - WP');
 			cy.save();
 			cy.wait(500);
-			cy.submit('Submitted');
+			cy.submit_doc('Submitted');
 		});
 });

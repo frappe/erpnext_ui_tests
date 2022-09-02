@@ -160,7 +160,7 @@ context('Multi Currency Accounting', () => {
 
 				cy.save();
 				cy.get_page_title().should('contain', 'Draft');
-				cy.submit('Submitted');
+				cy.submit_doc('Submitted');
 
 				cy.click_toolbar_button('Ledger');
 				cy.get('.dt-row-header > .dt-cell--col-4 > .dt-cell__content').should('contain', "Credit (INR)");

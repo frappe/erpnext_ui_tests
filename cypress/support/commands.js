@@ -37,39 +37,12 @@ const get_field_parts = (fieldname) => {
 	return field;
 }
 
-const compare_document = (expected, actual) => {
-	for (const prop in expected) {
-		if (expected[prop] instanceof Array) {
-			// recursively compare child documents.
-			expected[prop].forEach((item, idx) => {
-				compare_document(item, actual[prop][idx]);
-			});
-		} else {
-			assert.equal(
-				expected[prop],
-				actual[prop],
-				`${prop} should be equal.`
-			);
-		}
-	}
-};
-
 Cypress.Commands.add("go_to_doc", (doctype, name) => {
 	cy.visit(`/app/${slug(doctype)}/${encodeURIComponent(name)}`);
 });
 
 Cypress.Commands.add("new_doc", (doctype) => {
 	cy.visit(`/app/${slug(doctype)}/new`);
-});
-
-Cypress.Commands.add("compare_document", (expected_document) => {
-	cy.window()
-	.its("cur_frm")
-	.then((frm) => {
-		// Don't remove this, cypress can't magically wait for events it has no control over.
-		cy.wait(1000);
-		compare_document(expected_document, frm.doc);
-	});
 });
 
 Cypress.Commands.add("click_listview_checkbox", (row_no) => {
@@ -203,7 +176,7 @@ Cypress.Commands.add('get_page_indicator', () => {
 	return cy.get('.page-head .indicator-pill:visible');
 });
 
-Cypress.Commands.add('submit', (indicator) => {
+Cypress.Commands.add('submit_doc', (indicator) => {
 	cy.intercept('/api/method/frappe.desk.form.save.savedocs').as('form-submit');
 	cy.get(`.standard-actions button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
 	cy.click_modal_primary_button('Yes');
@@ -364,14 +337,14 @@ Cypress.Commands.add('user_login', (email, password) => {
 	cy.get('.navbar .nav-item .nav-link[href="/login"]').click({force: true});
 	cy.get('#login_email').type(`${email}`);
 	cy.get('#login_password').type(`${password}`);
-	cy.intercept('/api').as('api');
+	cy.intercept('/api**').as('api');
 	cy.get('.btn-login').contains('Login').click({force: true});
 	cy.wait('@api');
 });
 
 Cypress.Commands.add('logout', (user_name) => {
 	cy.click_navbar_icon(`${user_name}`);
-	cy.intercept('/api').as('api');
+	cy.intercept('/api**').as('api');
 	cy.click_navbar_dropdown('Log out');
 	cy.wait('@api');
 });

@@ -16,7 +16,7 @@ context('Finish work order', () => {
         cy.get_input('fg_completed_qty', '1');
         cy.save();
         cy.wait(500);
-        cy.submit('Submitted');
+        cy.submit_doc('Submitted');
     });
 
     it('Check status for work order', () => {

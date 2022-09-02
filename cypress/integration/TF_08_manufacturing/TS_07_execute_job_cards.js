@@ -32,6 +32,6 @@ context('Executing Job Cards', () => {
 		cy.click_toolbar_button('Complete Job');
 		cy.set_input('qty', '1');
 		cy.click_modal_primary_button('Submit');
-		cy.submit('Completed');
+		cy.submit_doc('Completed');
 	});
 });

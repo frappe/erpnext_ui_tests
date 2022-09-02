@@ -16,7 +16,7 @@ context('Material Transfer for Manufacturing', () => {
 		cy.get_input('fg_completed_qty', '1');
 		cy.save();
 		cy.wait(500);
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 		cy.wait(500);
 		cy.get_page_title().should('contain', 'Submitted');
 	});

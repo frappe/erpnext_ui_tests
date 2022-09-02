@@ -92,7 +92,7 @@ context("Bill of Materials", () => {
 		cy.set_input('items.qty', '1');
 		cy.save();
 		cy.wait(500);
-		cy.submit('Template');
+		cy.submit_doc('Template');
 		cy.wait(500);
 
         //Create Variant BOM
@@ -105,7 +105,7 @@ context("Bill of Materials", () => {
 		cy.get_field('item', 'Link').should('have.value', 'Classic Dining Table-TEAK');
 		cy.save();
 		cy.wait(500);
-		cy.submit('Default');
+		cy.submit_doc('Default');
 		cy.wait(500);
 		cy.get_page_title().should('contain', 'Default');
 		cy.click_toolbar_button('Browse BOM');
