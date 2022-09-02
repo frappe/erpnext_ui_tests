@@ -23,7 +23,7 @@ context('Work Order', () => {
 			cy.close_grid_edit_modal();
 			cy.save();
 			cy.wait(500);
-			cy.submit('Not Started');
+			cy.submit_doc('Not Started');
 			cy.get_page_title().should('contain', 'Not Started');
 			cy.visit('app/job-card/view/list');
 			cy.click_listview_row_item(0);

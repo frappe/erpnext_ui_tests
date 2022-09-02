@@ -46,7 +46,7 @@ context('Payment Reconciliation', () => {
 		).then((payment)=>{
 			console.log(payment);
 			cy.visit('app/payment-entry/'+ payment.name);
-			cy.submit('Submitted');
+			cy.submit_doc('Submitted');
 
 			// Creating a sales invoice for this customer
 			cy.insert_doc(
@@ -61,7 +61,7 @@ context('Payment Reconciliation', () => {
 				true
 			).then((SI)=>{
 				cy.visit('app/sales-invoice/'+ SI.name);
-				cy.submit('Unpaid');
+				cy.submit_doc('Unpaid');
 
 				cy.wait(200);
 				// Opening Payment Reconciliation tool and applying filters to get unreconcilied entries

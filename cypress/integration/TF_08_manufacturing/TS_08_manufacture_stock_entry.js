@@ -21,7 +21,7 @@ context('Finish work order', () => {
 		cy.get_input('is_scrap_item', 'checkbox').should('be.checked');
 		cy.get_input('qty').should('have.value', '1.000');
 		cy.close_grid_edit_modal();
-        cy.submit('Submitted');
+        cy.submit_doc('Submitted');
     });
 
     it('Check status for work order', () => {

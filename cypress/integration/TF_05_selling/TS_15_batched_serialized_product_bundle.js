@@ -35,7 +35,7 @@ context('Create Delivery Note', () => {
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.wait(500);
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 		cy.wait(500);
 
 		//Check if a pop appears indicating creation of serial numbers and batch numbers
@@ -75,6 +75,6 @@ context('Create Delivery Note', () => {
 		cy.get_read_only('grand_total').should('contain', "₹ 40,000.00");
 		cy.get_read_only('rounded_total').should('contain', "₹ 40,000.00");
 		cy.save();
-		cy.submit('To Bill');
+		cy.submit_doc('To Bill');
 	});
 });

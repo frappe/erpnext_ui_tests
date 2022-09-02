@@ -31,6 +31,6 @@ context('Create Sales Order', () => {
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.wait(500);
-		cy.submit('To Deliver and Bill');
+		cy.submit_doc('To Deliver and Bill');
 	});
 });

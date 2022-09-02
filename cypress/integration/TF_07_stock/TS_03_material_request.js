@@ -24,7 +24,7 @@ context('Material Request', () => {
 			items: [{ item_code: "Birch Ply", item_name: 'Birch Ply'}],
 		});
 
-		cy.submit('Pending');
+		cy.submit_doc('Pending');
 		cy.cancel('Cancelled');
 	});
 });
