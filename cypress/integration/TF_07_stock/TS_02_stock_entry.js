@@ -27,7 +27,7 @@ context('Stock Entry', () => {
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.wait(500);
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 		cy.wait(500);
 
 		//View Stock Ledger and verify if correct stock ledger entries are correct

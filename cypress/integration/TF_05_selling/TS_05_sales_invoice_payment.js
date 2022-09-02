@@ -47,6 +47,6 @@ context('Sales Invoice Payment', () => {
 
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 	});
 });

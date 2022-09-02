@@ -33,7 +33,7 @@ context('Invoice Creation', () => {
 		cy.get_read_only('rounded_total').should('contain', "₹ 22,300.00");
 		cy.save();
 		cy.wait(500);
-		cy.submit('Unpaid');
+		cy.submit_doc('Unpaid');
 		cy.click_dropdown_action('View', 'Stock Ledger');
 		cy.get('.dt-cell__content > span > div').should('contain', "-1.000");
 	});

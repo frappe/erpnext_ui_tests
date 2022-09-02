@@ -35,7 +35,7 @@ context('Delivery Return Check', () => {
 		).then((c)=>{
 			console.log(c);
 			cy.visit('app/sales-order/'+ c.name);
-			cy.submit('To Deliver and Bill');
+			cy.submit_doc('To Deliver and Bill');
 		});
 	});
 
@@ -46,7 +46,7 @@ context('Delivery Return Check', () => {
 		cy.url().should('include', '/app/delivery-note/new-delivery-note');
 		cy.click_toolbar_button('Save');
 		cy.get_page_title().should('contain', 'Draft');
-		//cy.submit('To Bill');
+		//cy.submit_doc('To Bill');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
 		cy.get_page_title().should('contain', 'To Bill');

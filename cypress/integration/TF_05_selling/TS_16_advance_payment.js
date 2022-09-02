@@ -35,7 +35,7 @@ context('Advance Payment Check', () => {
 		).then((c)=>{
 			console.log(c);
 			cy.visit('app/sales-order/'+ c.name);
-			cy.submit('To Deliver and Bill');
+			cy.submit_doc('To Deliver and Bill');
 
 			cy.visit('app/sales-order');
 			cy.click_listview_row_item(0);

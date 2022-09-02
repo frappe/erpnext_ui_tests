@@ -176,7 +176,7 @@ Cypress.Commands.add('get_page_indicator', () => {
 	return cy.get('.page-head .indicator-pill:visible');
 });
 
-Cypress.Commands.add('submit', (indicator) => {
+Cypress.Commands.add('submit_doc', (indicator) => {
 	cy.intercept('/api/method/frappe.desk.form.save.savedocs').as('form-submit');
 	cy.get(`.standard-actions button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
 	cy.click_modal_primary_button('Yes');

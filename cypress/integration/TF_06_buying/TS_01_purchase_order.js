@@ -40,7 +40,7 @@ context('Create Purchase Order', () => {
 
 		cy.click_toolbar_button('Save');
 		cy.get_page_title().should('contain', 'Draft');
-		//cy.submit('To Receive and Bill');
+		//cy.submit_doc('To Receive and Bill');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
 		cy.get_page_title().should('contain', 'To Receive and Bill');

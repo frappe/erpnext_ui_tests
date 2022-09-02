@@ -58,7 +58,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.set_input('cheque_no', 'Ref-11');
 		cy.set_today('cheque_date');
 		cy.save();
-		cy.submit("Bank Entry");
+		cy.submit_doc("Bank Entry");
 
 
 		// Create PE having bank account linked to it, ref no saved as Ref-22
@@ -80,7 +80,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 	});
 
 	it('Create JE and PE bank transactions and other bank transaction with no entry in ERPNext', () => {
@@ -105,7 +105,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		).then((c)=>{
 			console.log(c);
 			cy.visit('/app/bank-transaction/'+ c.name);
-			cy.submit('Unreconciled');
+			cy.submit_doc('Unreconciled');
 		});
 
 		// Bank transaction with deposit amount for created PE with ref no Ref - 22
@@ -126,7 +126,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		).then((c)=>{
 			console.log(c);
 			cy.visit('/app/bank-transaction/'+ c.name);
-			cy.submit('Unreconciled');
+			cy.submit_doc('Unreconciled');
 		});
 
 		// Bank transaction with withdrawal amount with ref no Ref - 33 not having any entry in system
@@ -147,7 +147,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		).then((c)=>{
 			console.log(c);
 			cy.visit('/app/bank-transaction/'+ c.name);
-			cy.submit('Unreconciled');
+			cy.submit_doc('Unreconciled');
 		});
 
 		// Bank transaction with deposit amount with ref no Ref - 44 not having any entry in system
@@ -168,7 +168,7 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		).then((c)=>{
 			console.log(c);
 			cy.visit('/app/bank-transaction/'+ c.name);
-			cy.submit('Unreconciled');
+			cy.submit_doc('Unreconciled');
 		});
 	});
 
