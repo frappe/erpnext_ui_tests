@@ -23,7 +23,7 @@ context("Item", () => {
 		cy.get_input('qty', '11');
 		cy.close_grid_edit_modal();
 		cy.save();
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 		cy.click_dropdown_action('View', 'Stock Ledger');
 		cy.get('.dt-cell__content > span > div').should('contain', "-11.000");
 	});
@@ -49,7 +49,7 @@ context("Item", () => {
 		cy.get_input('qty', '11');
 		cy.close_grid_edit_modal();
 		cy.save();
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 		cy.click_dropdown_action('View', 'Stock Ledger');
 		cy.get('.dt-cell__content > span > div').should('contain', "5.000");
 	});

@@ -21,7 +21,7 @@ context('Sales Invoice Creation', () => {
 		cy.open_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Price List : Buying & Selling');
-		cy.submit('Unpaid');
+		cy.submit_doc('Unpaid');
 		cy.get_section('More Information');
 		cy.click_section('More Information');
 		cy.get_read_only('represents_company').should('contain', 'Bernhardt Furnitures');
@@ -40,7 +40,7 @@ context('Sales Invoice Creation', () => {
 		cy.get_input('qty').should('have.value', '1.000');
 		cy.close_grid_edit_modal();
 		cy.save();
-		cy.submit('Unpaid');
+		cy.submit_doc('Unpaid');
 		cy.get_section('More Information');
 		cy.click_section('More Information');
 		cy.get_read_only('represents_company').should('contain', 'Wind Power LLC');

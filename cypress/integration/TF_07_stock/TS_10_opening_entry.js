@@ -14,6 +14,6 @@ context('Opening Entry', () => {
 			cy.set_link('cost_center', 'Main - WP');
 			cy.save();
 			cy.wait(500);
-			cy.submit('Submitted');
+			cy.submit_doc('Submitted');
 		});
 });

@@ -21,7 +21,7 @@ context('Work Order', () => {
 			cy.set_input('items.qty', '1');
 			cy.save();
 			cy.wait(500);
-			cy.submit('Default');
+			cy.submit_doc('Default');
 			cy.wait(500);
 			cy.get_page_title().should('contain', 'Default');
 		});
@@ -46,7 +46,7 @@ context('Work Order', () => {
 			cy.close_grid_edit_modal();
 			cy.save();
 			cy.wait(500);
-			cy.submit('Not Started');
+			cy.submit_doc('Not Started');
 			cy.get_page_title().should('contain', 'Not Started');
 
 			//View Job Cards created and verify they're in draft state

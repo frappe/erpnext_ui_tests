@@ -23,12 +23,12 @@ context('Accounts Settings', () => {
 		).then((a)=>{
 			console.log(a);
 			cy.visit('app/sales-invoice/'+ a.name);
-			cy.submit('Unpaid');
+			cy.submit_doc('Unpaid');
 			cy.click_dropdown_action('Create', 'Payment');
 			cy.set_input('reference_no', 'ABC-1234');
 			cy.set_today('reference_date');
 			cy.save();
-			cy.submit();
+			cy.submit_doc();
 
 			cy.visit('app/sales-invoice');
 			cy.click_listview_row_item(0);

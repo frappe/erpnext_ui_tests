@@ -60,7 +60,7 @@ context("Journal Entry Types", () => {
 		cy.set_input('cheque_no', '12345');
 		cy.set_today('cheque_date');
 		cy.save();
-		cy.submit();
+		cy.submit_doc();
 		cy.click_toolbar_button('Cancel');
 		cy.click_modal_primary_button('Yes');
 	});
@@ -98,7 +98,7 @@ context("Journal Entry Types", () => {
 
         //Saving, Submitting and Cancelling the doc
         cy.save();
-        cy.submit();
+        cy.submit_doc();
         cy.click_toolbar_button('Cancel');
         cy.click_modal_primary_button('Yes');
     });
