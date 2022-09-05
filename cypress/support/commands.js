@@ -168,6 +168,7 @@ Cypress.Commands.add('click_modal_primary_button', (btn_name) => {
 
 Cypress.Commands.add('save', () => {
 	cy.intercept('api/method/frappe.desk.form.save.savedocs').as('form-save');
+	cy.scrollTo('top', {ensureScrollable: false});
 	cy.get(`button[data-label="Save"]:visible`).click({scrollBehavior: false, force:true});
 	cy.wait('@form-save');
 });
@@ -523,4 +524,9 @@ Cypress.Commands.add("click_grid_action_button", (fieldname, row_no) => {
 Cypress.Commands.add("click_grid_checkbox", (fieldname, row_no) => {
     cy.get(`[data-fieldname="${fieldname}"] .datatable .dt-row[data-row-index="${row_no}"] input:visible`)
         .click({force: true});
+});
+
+Cypress.Commands.add("click_section_head", (fieldname) => {
+    cy.get(`[data-fieldname="${fieldname}"] .section-head:visible`)
+        .click({force: true, scrollBehavior: false});
 });
