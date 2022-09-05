@@ -24,7 +24,6 @@ context('HTML Editor Control', () => {
 		
 		//Checking for the title and indicator is correct
 		cy.get_page_title().should('contain','New Test HTML Editor Control');
-		cy.get_page_indicator().should('have.text','Not Saved');
 
 		//Typing the code for creating radio buttons in the html editor field
 		cy.set_input_html_editor('<input id="html" name="fav_language" type="radio" value="HTML">');

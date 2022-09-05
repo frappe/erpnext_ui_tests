@@ -25,6 +25,7 @@ context('Role Profile', () => {
 		cy.save();
 
 		//Checking if the roles selected in role profile is also checked in the user
+		cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get_input('role_profile_name').should('have.value', 'Test RoleProfile');
 		cy.get_input('roles').should('be.checked');

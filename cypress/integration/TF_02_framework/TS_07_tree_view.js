@@ -81,16 +81,15 @@ context('Tree View', () => {
 		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Rename').click({force: true});
 		cy.get('.msgprint').should('contain', 'No changes made because old and new name are the same.');
 		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
-		cy.get('#navbar-search').type('test location list', {delay: 200});
-		cy.get('#navbar-search').type('{enter}');
+		// cy.get('#navbar-search').type('test location list', {delay: 200});
+		// cy.get('#navbar-search').type('{enter}');
+		cy.go_to_list('Test Location');
 		cy.click_custom_toolbar_button('List View');
 		cy.click_toolbar_dropdown('Tree');
 		cy.get('.tree-children .tree-link').click();
 		cy.findByRole('button', {name: 'Rename'}).click();
 		cy.set_input('new_name', 'LOCATION23456');
-		//cy.intercept('/api**').as('api');
 		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Rename').click({force: true});
-		//cy.wait('@api');
 		cy.get('.tree-children .tree-link').should('contain', 'LOCATION23456');
 
 		//Deleting the children node
