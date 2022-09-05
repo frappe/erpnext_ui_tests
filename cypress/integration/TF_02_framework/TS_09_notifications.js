@@ -82,9 +82,10 @@ context('Notifications', () => {
     it('Deleting user and todo', () => {
         cy.logout('Test Notification User');
         cy.user_login('administrator', 'admin');
-
+		cy.wait(2000);
+		
         //Deleting the user
-		cy.go_to_list('User');
+		cy.visit('/app/user');
         cy.click_listview_checkbox(0);
         cy.click_action_button('Actions');
         cy.click_toolbar_dropdown('Delete');
