@@ -85,6 +85,7 @@ context('Pricing Rule Check on Quotation', () => {
 		cy.grid_open_row('pricing_rules', '1');
 		cy.get_read_only('pricing_rule').should('not.have.value', 0);
 		cy.get_read_only('item_code').should('contain', 'Apple iPhone 13 Pro Max');  // name
+		cy.findByText('ESC').click({force: true});
 
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
