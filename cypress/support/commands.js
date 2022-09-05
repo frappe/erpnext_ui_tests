@@ -338,16 +338,16 @@ Cypress.Commands.add('user_login', (email, password) => {
 	cy.get('.navbar .nav-item .nav-link[href="/login"]').click({force: true});
 	cy.get('#login_email').type(`${email}`);
 	cy.get('#login_password').type(`${password}`);
-	cy.intercept('/api**').as('api');
+	//cy.intercept('/api**').as('api');
 	cy.get('.btn-login').contains('Login').click({force: true});
-	cy.wait('@api');
+	//cy.wait('@api');
 });
 
 Cypress.Commands.add('logout', (user_name) => {
 	cy.click_navbar_icon(`${user_name}`);
-	cy.intercept('/api**').as('api');
+	//cy.intercept('/api**').as('api');
 	cy.click_navbar_dropdown('Log out');
-	cy.wait('@api');
+	//cy.wait('@api');
 });
 
 Cypress.Commands.add('delete_first_record', (doctype_name) => {

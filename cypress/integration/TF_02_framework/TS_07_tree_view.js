@@ -88,9 +88,9 @@ context('Tree View', () => {
 		cy.get('.tree-children .tree-link').click();
 		cy.findByRole('button', {name: 'Rename'}).click();
 		cy.set_input('new_name', 'LOCATION23456');
-		cy.intercept('/api**').as('api');
+		//cy.intercept('/api**').as('api');
 		cy.get('.modal-footer > .standard-actions > button.btn-primary:visible').contains('Rename').click({force: true});
-		cy.wait('@api');
+		//cy.wait('@api');
 		cy.get('.tree-children .tree-link').should('contain', 'LOCATION23456');
 
 		//Deleting the children node
