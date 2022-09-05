@@ -84,10 +84,14 @@ context('Notifications', () => {
         cy.user_login('administrator', 'admin');
 
         //Deleting the user
-		cy.delete_doc('User', 'test_notif_user@example.com');
+		cy.go_to_list('User');
+        cy.click_listview_checkbox(0);
+        cy.click_action_button('Actions');
+        cy.click_toolbar_dropdown('Delete');
+        cy.click_modal_primary_button('Yes');
 
         //Deleting todo
-        cy.set_input_awesomebar('todo');
+        cy.go_to_list('ToDo');
 		cy.get_input('allocated_to').clear();
 		cy.get_input('name').click();
         cy.click_listview_checkbox(0);

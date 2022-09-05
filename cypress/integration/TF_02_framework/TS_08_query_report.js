@@ -8,7 +8,7 @@ context('Query report', () => {
 		cy.new_doc('Report');
 		cy.set_input('report_name', 'Test item query report');
 		cy.set_link('ref_doctype', 'item');
-		cy.wait(500);
+		cy.wait(2000);
 		cy.set_select('report_type', 'Query Report');
 		cy.save();
 		cy.wait(500);
