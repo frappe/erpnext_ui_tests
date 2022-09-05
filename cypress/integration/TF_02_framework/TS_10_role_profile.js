@@ -17,15 +17,14 @@ context('Role Profile', () => {
 		cy.get('.form-dashboard-section .form-documents .document-link').should('contain', 'User');
 		cy.get('.form-dashboard-section .form-documents .document-link button')
 			.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
-		cy.get('.modal-footer:visible > .custom-actions > .btn-secondary').click();
+		cy.findByRole('button', {name: 'Edit Full Form'}).scrollIntoView().click();
+		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 		cy.fill_field('email', 'test_role_user@exapmle.com', 'Data');
 		cy.fill_field('first_name', 'Test Role User', 'Data');
-		cy.get_field('send_welcome_email', 'Check').uncheck();
+		cy.get_field('send_welcome_email', 'Check').uncheck({force: true});
 		cy.save();
-		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
 
 		//Checking if the roles selected in role profile is also checked in the user
-		cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get_input('role_profile_name').should('have.value', 'Test RoleProfile');
 		cy.get_input('roles').should('be.checked');
