@@ -61,6 +61,7 @@ context('Gantt View', () => {
 		});
 
 		//Checking if the correct bar for the todo shows up in the gantt when the status and priority is set
+		cy.reload();
 		cy.set_select('status', '');
 		cy.set_select('priority', '');
 		cy.get('.bar > .bar-wrapper').should('have.class', 'color-CB2929');

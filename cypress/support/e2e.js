@@ -32,6 +32,9 @@ Cypress.on('window:before:load', (win) => {
   cy.spy(win.console, 'warn');
 });
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+});
 
 // taken from https://github.com/cypress-io/cypress/issues/5302#issuecomment-543959807
 let timeout_id;
