@@ -84,7 +84,7 @@ context('Notifications', () => {
         cy.user_login('administrator', 'admin');
 
         //Deleting the user
-		cy.remove_doc('User', 'test_notif_user@example.com');
+		cy.delete_doc('User', 'test_notif_user@example.com');
 
         //Deleting todo
         cy.set_input_awesomebar('todo');

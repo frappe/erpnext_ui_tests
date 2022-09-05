@@ -23,9 +23,10 @@ context('Role Profile', () => {
 		cy.fill_field('first_name', 'Test Role User', 'Data');
 		cy.get_field('send_welcome_email', 'Check').uncheck({force: true});
 		cy.save();
+		cy.get('.modal').type('{esc}');
 
 		//Checking if the roles selected in role profile is also checked in the user
-		cy.reload();
+		//cy.reload();
 		cy.findByRole("tab", { name: "Roles & Permissions" }).click();
 		cy.get_input('role_profile_name').should('have.value', 'Test RoleProfile');
 		cy.get_input('roles').should('be.checked');
