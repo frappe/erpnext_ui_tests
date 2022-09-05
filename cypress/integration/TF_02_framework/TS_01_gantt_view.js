@@ -15,7 +15,7 @@ context('Gantt View', () => {
 		cy.get_input('name').click();
 		cy.click_listview_row_item(0);
 		cy.findByPlaceholderText('Choose a color').click();
-		cy.get('.swatches > [style="background-color: rgb(203, 41, 41);"]:visible').click();
+		cy.get('.swatches > [style="background-color: rgb(203, 41, 41);"]:visible').click({force: true});
 		cy.save();
 		cy.go_to_list('ToDo');
 
