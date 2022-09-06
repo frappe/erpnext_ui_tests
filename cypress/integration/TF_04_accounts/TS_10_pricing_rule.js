@@ -88,6 +88,7 @@ context('Pricing Rule Check on Quotation', () => {
 
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
+		cy.scrollTo('top', {ensureScrollable: false});
 		cy.get_page_title().should('contain', 'Open');
 	});
 });
