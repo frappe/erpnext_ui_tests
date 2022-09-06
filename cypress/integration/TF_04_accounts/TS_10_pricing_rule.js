@@ -76,7 +76,6 @@ context('Pricing Rule Check on Quotation', () => {
 		cy.get_read_only('total').should('contain', "₹ 5,00,000.00");
 		cy.get_read_only('grand_total').should('contain', "₹ 5,00,000.00");
 		cy.get_read_only('rounded_total').should('contain', "₹ 5,00,000.00");
-
 		cy.click_toolbar_button('Save');
 		cy.get_page_title().should('contain', 'Draft');
 		cy.wait(500);
