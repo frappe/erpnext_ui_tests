@@ -79,7 +79,8 @@ context('Address', () => {
 		cy.set_link('links.link_doctype', 'Customer');
 		cy.set_link('links.link_name', 'Test Customer Address');
 		cy.save();
-
+		cy.wait(500);
+		
 		//Going into the sales order doc and checking if the billing and shipping address are automatically fetched
 		cy.new_doc('Sales Order');
 		cy.set_link('customer', 'Test Customer Address');
@@ -94,7 +95,7 @@ context('Address', () => {
 		cy.wait(3000);
 		cy.get('.title-text:visible').click({force: true, scrollBehaviour: false});
 		cy.set_input('name', 'Test Billing');
-		cy.intercept('/api**').as('api');
+		cy.intercept('/api/method/frappe.model.rename_doc.update_document_title').as('api');
 		cy.click_modal_primary_button('Rename');
 		cy.wait('@api');
 		cy.wait(8000);
