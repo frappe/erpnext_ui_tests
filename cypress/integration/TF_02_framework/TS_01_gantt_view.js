@@ -15,7 +15,7 @@ context('Gantt View', () => {
 		cy.get_input('name').click();
 		cy.click_listview_row_item(0);
 		cy.findByPlaceholderText('Choose a color').click();
-		cy.get('.swatches > [style="background-color: rgb(203, 41, 41);"]:visible').click();
+		cy.get('.swatches > [style="background-color: rgb(203, 41, 41);"]:visible').click({force: true});
 		cy.save();
 		cy.go_to_list('ToDo');
 
@@ -61,6 +61,7 @@ context('Gantt View', () => {
 		});
 
 		//Checking if the correct bar for the todo shows up in the gantt when the status and priority is set
+		cy.reload();
 		cy.set_select('status', '');
 		cy.set_select('priority', '');
 		cy.get('.bar > .bar-wrapper').should('have.class', 'color-CB2929');
