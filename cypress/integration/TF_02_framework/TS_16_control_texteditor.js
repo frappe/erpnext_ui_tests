@@ -23,7 +23,6 @@ context('Text Editor Control', () => {
 		
 		//Checking for the title and indicator is correct
 		cy.get_page_title().should('contain','New Test Text Editor Control');
-		cy.get_page_indicator().should('have.text','Not Saved');
 
 		//Checking various heading options available in the text editor
 		cy.fill_field('inptext','Test text editor control','Text Editor');
