@@ -38,6 +38,7 @@ context('Tags', () => {
 		cy.visit('/app/doctype');
 
 		//Clicking on the sidebar tags dropdown
+		cy.wait(500);
 		cy.get('.list-tags').click();
 
 		//Checking if the newly created tag is visible in the dropdown
@@ -72,7 +73,7 @@ context('Tags', () => {
 
 		//Removing the tag
 		cy.get('.btn-modal-close').click({force: true});
-		cy.get('.remove-btn > .icon').click();
+		cy.get('.remove-btn > .icon:visible').click({force: true, multiple: true});
 		cy.visit('/app/doctype');
 
 		//Checking if the tag is being removed from the dropdown item
