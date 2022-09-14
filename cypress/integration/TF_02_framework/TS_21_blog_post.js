@@ -81,9 +81,13 @@ context('Blog Post', () => {
 		cy.save();
 
 		//Checking if the published date is today's and the indicator shows published
-		const todaysDate = Cypress.moment().format('DD-MM-YYYY');
-		cy.get_input('published_on').should('have.value', todaysDate);
-		cy.get_page_indicator().should('have.text','Published');
+		cy.window()
+			.its("moment")
+			.then((moment) => {
+				const todaysDate = moment().format('DD-MM-YYYY');
+				cy.get_input('published_on').should('have.value', todaysDate);
+		});
+		cy.get_page_title().should('have.text','Published');
 		cy.visit('/blog/environment/my-plastic-free-life');
 
 		//Removing the created docs

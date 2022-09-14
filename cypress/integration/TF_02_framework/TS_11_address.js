@@ -56,6 +56,7 @@ context('Address', () => {
 		cy.get_page_title().should('contain', 'Test Address Shipping-Shipping');
 		cy.get('.indicator-pill').should('contain', 'Enabled');
     });
+
 	it('Creating a customer and checking if the billing and shipping address is fetched', () => {
 		//Creating customer
 		cy.new_doc('Customer');
@@ -83,6 +84,7 @@ context('Address', () => {
 		
 		//Going into the sales order doc and checking if the billing and shipping address are automatically fetched
 		cy.new_doc('Sales Order');
+		cy.get_input('customer').click({force: true});
 		cy.set_link('customer', 'Test Customer Address');
 		cy.click_section('Address and Contact');
 		cy.get_field('customer_address', 'Link').should('have.value', 'Test Address Billing-Billing');
