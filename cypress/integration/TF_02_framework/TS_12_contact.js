@@ -58,6 +58,7 @@ context('Contact', () => {
 
 		//Creating a new sales order with the customer and checking if the contact is fetched automatically
 		cy.new_doc('Sales Order');
+		cy.get_input('customer').click({force: true});
 		cy.set_link('customer', 'Test Customer Contact');
 		cy.click_section('Address and Contact');
 		cy.get_field('contact_person', 'Link').should('have.value', 'Jenny Holmes');

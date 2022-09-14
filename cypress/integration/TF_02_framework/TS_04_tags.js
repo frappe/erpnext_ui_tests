@@ -38,7 +38,7 @@ context('Tags', () => {
 		cy.visit('/app/doctype');
 
 		//Clicking on the sidebar tags dropdown
-		cy.wait(500);
+		cy.wait(2000);
 		cy.get('.list-tags').click();
 
 		//Checking if the newly created tag is visible in the dropdown
