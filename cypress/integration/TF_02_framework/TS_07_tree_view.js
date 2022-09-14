@@ -9,6 +9,7 @@ context('Tree View', () => {
 
 	it('Enabling "is_tree" for doctype and creating and verifying tree view', () => {
 		//Enabling tree for location doctype
+		cy.wait(500);
 		cy.list_open_row('Test Location');
 		cy.get_field('is_tree', 'checkbox').check();
 		cy.save();

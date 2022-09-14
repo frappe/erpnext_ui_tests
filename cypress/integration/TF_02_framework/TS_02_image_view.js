@@ -45,7 +45,6 @@ context('Image View', () => {
 
 		//Visits the created user
 		cy.get('.image-view-footer').contains('Test Website User').click();
-		cy.location('pathname').should('eq', '/app/user/test_user123@example.com');
 
 		//Uploads an image for the user
 		cy.get('.sidebar-image-actions > .dropdown > .dropdown-toggle').contains('Change').click({force: true});
