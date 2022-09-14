@@ -179,11 +179,13 @@ Cypress.Commands.add('get_page_indicator', () => {
 
 Cypress.Commands.add('submit_doc', (indicator) => {
 	cy.intercept('/api/method/frappe.desk.form.save.savedocs').as('form-submit');
+	cy.scrollTo('top', {ensureScrollable: false});
 	cy.get(`.standard-actions button[data-label="Submit"]:visible`).click({scrollBehavior: false, force:true});
 	cy.click_modal_primary_button('Yes');
 	cy.wait('@form-submit');
+	cy.reload();
 	if (indicator) {
-		cy.get_page_indicator().contains(indicator);
+		cy.get_page_title().contains(indicator);
 	}
 });
 
@@ -192,8 +194,9 @@ Cypress.Commands.add('cancel', (indicator) => {
 	cy.get(`.standard-actions button[data-label="Cancel"]:visible`).click({scrollBehavior: false, force:true});
 	cy.click_modal_primary_button('Yes');
 	cy.wait('@form-cancel');
+	cy.reload();
 	if (indicator) {
-		cy.get_page_indicator().contains(indicator);
+		cy.get_page_title().contains(indicator);
 	}
 });
 
