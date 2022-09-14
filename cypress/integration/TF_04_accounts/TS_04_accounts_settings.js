@@ -34,6 +34,7 @@ context('Accounts Settings', () => {
 			cy.click_listview_row_item(0);
 			cy.click_toolbar_button('Cancel');
 			cy.click_modal_primary_button('Yes');
+			cy.click_modal_close_button();
 			//cy.cancel();
 
 			cy.get_open_dialog().should('contain', 'Message');

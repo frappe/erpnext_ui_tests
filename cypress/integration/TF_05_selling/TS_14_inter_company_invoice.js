@@ -17,8 +17,9 @@ context('Sales Invoice Creation', () => {
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.wait(500);
-		cy.click_section('Currency and Price List');
-		cy.open_section('Currency and Price List');
+		cy.get_section('Currency and Price List').click();
+		//cy.click_section('Currency and Price List');
+		//cy.open_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Price List : Buying & Selling');
 		cy.submit_doc('Unpaid');
