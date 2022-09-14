@@ -15,8 +15,12 @@ context("Journal Entry Types", () => {
 		cy.get_select('naming_series').should('contain', 'ACC-JV-.YYYY.-');
 		cy.get_input('company').should('not.have.value', '');
 		cy.get_input('posting_date').should('not.have.value', '');
-		const todaysDate = Cypress.moment().format('DD-MM-YYYY');
-		cy.get_input('posting_date').should('have.value', todaysDate);
+		cy.window()
+			.its("moment")
+			.then((moment) => {
+				const todaysDate = moment().format('DD-MM-YYYY');
+				cy.get_input('posting_date').should('have.value', todaysDate);
+		});
 
 		//Setting bank account and entertainment expenses in accounting entries table
 		cy.scrollTo('top', {ensureScrollable: false});
@@ -76,8 +80,12 @@ context("Journal Entry Types", () => {
         cy.get_select('naming_series').should('contain', 'ACC-JV-.YYYY.-');
         cy.get_input('company').should('not.have.value', '');
         cy.get_input('posting_date').should('not.have.value', '');
-        const todaysDate = Cypress.moment().format('DD-MM-YYYY');
-        cy.get_input('posting_date').should('have.value', todaysDate);
+		cy.window()
+			.its("moment")
+			.then((moment) => {
+				const todaysDate = moment().format('DD-MM-YYYY');
+				cy.get_input('posting_date').should('have.value', todaysDate);
+		});
 
         //Adding credit and debit entries
         cy.grid_add_row('accounts');
