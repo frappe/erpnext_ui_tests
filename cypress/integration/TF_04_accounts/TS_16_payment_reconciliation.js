@@ -70,6 +70,7 @@ context('Payment Reconciliation', () => {
 				cy.set_link('party', "Jennifer Robinson");
 				cy.get_input('receivable_payable_account').should('have.value', 'Debtors - WP');  // NAME
 
+				cy.get_input('from_invoice_date').focus();
 				cy.set_today('from_invoice_date');
 				cy.set_today('to_invoice_date');
 				cy.set_today('from_payment_date');
