@@ -4,8 +4,6 @@ context('Accounts Receivable', () => {
 		cy.visit('/app');
 	});
 
-	const todaysDate = Cypress.moment().format('DD-MM-YYYY');
-
 	it('Verifying Accounts Receivable report', () => {
 		//Creating a new Customer
 		cy.insert_doc(
@@ -55,11 +53,17 @@ context('Accounts Receivable', () => {
 				.and('contain','Outstanding Amount')
 				.and('contain','Territory')
 				.and('contain','Customer Group');
-			cy.get_report_cell().should('contain', 'Jacob Williams')
-				.and('contain', 'Sales Invoice')
-				.and('contain', 'Debtors - WP')
-				.and('contain', '₹ 1,10,000.00')
-				.and('contain', todaysDate);
+
+			cy.window()
+				.its("moment")
+				.then((moment) => {
+					const todaysDate = moment().format('DD-MM-YYYY');
+					cy.get_report_cell().should('contain', 'Jacob Williams')
+					.and('contain', 'Sales Invoice')
+					.and('contain', 'Debtors - WP')
+					.and('contain', '₹ 1,10,000.00')
+					.and('contain', todaysDate);			
+			});
 
 			//Creating a payment entry against the sales invoice
 			cy.visit('app/sales-invoice/'+ a.name);
@@ -80,7 +84,12 @@ context('Accounts Receivable', () => {
 		cy.visit('/app/query-report/Accounts%20Receivable');
 		cy.get_input('company').should('not.be.empty');
 		cy.get_input('report_date').should('not.be.empty');
-		cy.get_input('report_date').should('have.value', todaysDate);
+		cy.window()
+				.its("moment")
+				.then((moment) => {
+					const todaysDate = moment().format('DD-MM-YYYY');
+					cy.get_input('report_date').should('have.value', todaysDate);			
+		});
 		cy.get_select('ageing_based_on').should('not.be.empty')
 			.and('contain', 'Posting Date');
 		cy.get_input('range1').should('have.value', '30');
