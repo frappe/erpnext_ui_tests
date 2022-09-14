@@ -13,7 +13,7 @@ context('Production Plan', () => {
 		cy.grid_open_row('items', 1);
 		cy.save();
 		cy.wait(500);
-		cy.submit('To Deliver and Bill');
+		cy.submit_doc('To Deliver and Bill');
 		});
 
 	it('Create Production Plan', () => {
@@ -39,7 +39,7 @@ context('Production Plan', () => {
 		cy.findByRole('button', {name: 'Get Raw Materials For Production'}).click();
 		cy.save();
 		cy.wait(500);
-		cy.submit('Not Started');
+		cy.submit_doc('Not Started');
 		cy.get_page_title().should('contain', 'Not Started');
 	});
 });

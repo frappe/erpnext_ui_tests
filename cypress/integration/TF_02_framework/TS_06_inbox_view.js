@@ -9,7 +9,7 @@ context('Inbox View', () => {
 		cy.list_open_row('Administrator');
 		cy.wait(500);
 		cy.click_tab('Settings');
-		cy.open_section('Email');
+		cy.click_section_head('email_settings');
 		cy.grid_add_row('user_emails');
 		cy.set_link('user_emails.email_account','Notifications');
 		cy.save();
@@ -61,9 +61,7 @@ context('Inbox View', () => {
 	it('Deleting the mail and reseting the email account configurations', () => {
 		cy.click_custom_toolbar_button('Inbox View');
 		cy.click_toolbar_dropdown('List');
-		cy.intercept('/api').as('api');
 		cy.location('pathname').should('eq', '/app/communication/view/list');
-		cy.wait('@api');
 		cy.click_listview_checkbox(0);
 		cy.click_action_button('Actions');
 		cy.click_toolbar_dropdown('Delete');

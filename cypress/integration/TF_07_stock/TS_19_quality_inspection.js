@@ -62,7 +62,7 @@ context("Quality Inspection", () => {
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.wait(500);
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 
 		//Now try submitting DN
 		cy.visit('app/delivery-note');

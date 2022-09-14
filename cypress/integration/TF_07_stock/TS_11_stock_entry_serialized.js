@@ -36,7 +36,7 @@ context('Create Stock Entry', () => {
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.wait(500);
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 		cy.wait(500);
 
 		//Check if a pop appears indicating creation of serial numbers and batch numbers

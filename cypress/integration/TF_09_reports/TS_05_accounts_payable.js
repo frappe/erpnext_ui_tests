@@ -36,7 +36,7 @@ context('Accounts Payable', () => {
 		).then((a)=>{
 			console.log(a);
 			cy.visit('app/purchase-invoice/'+ a.name);
-			cy.submit('Unpaid');
+			cy.submit_doc('Unpaid');
 
 			cy.visit('/app/query-report/Accounts%20Payable');
 			cy.location('pathname').should('eq', '/app/query-report/Accounts%20Payable');
@@ -66,7 +66,7 @@ context('Accounts Payable', () => {
 			cy.set_input('reference_no', 'ABC-1234');
 			cy.set_today('reference_date');
 			cy.save();
-			cy.submit();
+			cy.submit_doc();
 
 			//Checking that the report should not contain the customer entry as payment has been done
 			cy.visit('/app/query-report/Accounts%20Payable');

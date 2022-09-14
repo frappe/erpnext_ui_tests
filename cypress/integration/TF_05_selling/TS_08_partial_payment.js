@@ -19,7 +19,7 @@ context('Partial Payment', () => {
 			true
 		).then((d)=>{
 			cy.visit('app/sales-invoice/'+ d.name);
-			cy.submit()
+			cy.submit_doc()
 			cy.get_page_title().should('contain', 'Unpaid');
 			cy.get_read_only('outstanding_amount').invoke('text').should('match', /₹ 1,10,000.00/);
 		});

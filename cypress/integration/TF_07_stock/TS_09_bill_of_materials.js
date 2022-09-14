@@ -39,7 +39,7 @@ context("Bill of Materials", () => {
 		cy.set_input('items.qty', '1');
 		cy.save();
 		cy.wait(500);
-		cy.submit('Default');
+		cy.submit_doc('Default');
 		cy.wait(500);
 		cy.get_page_title().should('contain', 'Default');
 	});

@@ -36,6 +36,6 @@ context('Create Sales Order', () => {
 		cy.get_read_only('total').should('contain', "₹ 40,000.00");
 		cy.get_read_only('grand_total').should('contain', "₹ 40,000.00");
 		cy.get_read_only('rounded_total').should('contain', "₹ 40,000.00");
-		cy.submit('To Deliver and Bill');
+		cy.submit_doc('To Deliver and Bill');
 	});
 });

@@ -27,7 +27,7 @@ context('Create Sales Order', () => {
 		cy.get_read_only('total').should('contain', "₹ 22,300.00");
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
-		cy.submit('To Deliver and Bill');
+		cy.submit_doc('To Deliver and Bill');
 		cy.click_toolbar_button('Update Items');
 		cy.set_input('trans_items.qty', '2');
 		cy.grid_add_row('trans_items');

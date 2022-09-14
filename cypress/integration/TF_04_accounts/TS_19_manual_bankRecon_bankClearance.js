@@ -54,7 +54,7 @@ context('Manual Bank Reconciliation via Bank Clearance', () => {
 
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
-		cy.submit('Submitted');
+		cy.submit_doc('Submitted');
 
 		//Checking Bank Reconciliation Statement
 		//cy.set_input_awesomebar(' Bank Reconciliation Statement');
