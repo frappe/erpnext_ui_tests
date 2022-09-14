@@ -4,8 +4,6 @@ context('Accounts Payable', () => {
 		cy.visit('/app');
 	});
 
-	const todaysDate = Cypress.moment().format('DD-MM-YYYY');
-
 	it('Verifying Accounts Payable report', () => {
 		//Creating a new Supplier
 		cy.insert_doc(
@@ -54,11 +52,16 @@ context('Accounts Payable', () => {
 				.and('contain','Outstanding Amount')
 				.and('contain', 'Currency')
 				.and('contain','Supplier Group');
-			cy.get_report_cell().should('contain', 'Jacob Williams')
-				.and('contain', 'Purchase Invoice')
-				.and('contain', 'Creditors - WP')
-				.and('contain', '₹ 1,10,000.00')
-				.and('contain', todaysDate);
+			cy.window()
+				.its("moment")
+				.then((moment) => {
+					const todaysDate = moment().format('DD-MM-YYYY');
+					cy.get_report_cell().should('contain', 'Jacob Williams')
+					.and('contain', 'Purchase Invoice')
+					.and('contain', 'Creditors - WP')
+					.and('contain', '₹ 1,10,000.00')
+					.and('contain', todaysDate);
+			});
 
 			//Creating a payment entry against the purchase invoice
 			cy.visit('app/purchase-invoice/'+ a.name);
@@ -79,7 +82,12 @@ context('Accounts Payable', () => {
 		cy.visit('/app/query-report/Accounts%20Payable');
 		cy.get_input('company').should('not.be.empty');
 		cy.get_input('report_date').should('not.be.empty');
-		cy.get_input('report_date').should('have.value', todaysDate);
+		cy.window()
+				.its("moment")
+				.then((moment) => {
+					const todaysDate = moment().format('DD-MM-YYYY');
+					cy.get_input('report_date').should('have.value', todaysDate);
+		});
 		cy.get_select('ageing_based_on').should('not.be.empty')
 			.and('contain', 'Posting Date');
 		cy.get_input('range1').should('have.value', '30');
