@@ -11,9 +11,9 @@ context('Internal Customer', () => {
 		cy.get_field('selling', 'Check').check();
 		cy.get_field('selling', 'checkbox').should('be.checked');
 		cy.grid_add_row('countries');
-		cy.grid_open_row('countries', '1');
-		cy.set_link('country', 'India');
-		cy.close_grid_edit_modal();
+		// cy.grid_open_row('countries', '1');
+		// cy.set_link('country', 'India');
+		// cy.close_grid_edit_modal();
 		cy.save();
 	});
 

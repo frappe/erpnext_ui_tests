@@ -11,7 +11,7 @@ context('Bulk Update', () => {
 				cy.create_records({
 					doctype: 'ToDo',
 					priority: 'High',
-					description: 'This is a test todo' 
+					description: 'This is a test todo for testing bulk update' 
 					+index
 				}).as('todos');
 		});
@@ -21,7 +21,7 @@ context('Bulk Update', () => {
 		cy.add_filter();
 		cy.get('.fieldname-select-area').type('Description{enter}');
 		cy.get('.condition').select('Like');
-		cy.get('.filter-field').type('%This is a test todo%');
+		cy.get('.filter-field').type('%This is a test todo for testing bulk update%');
 		cy.get('button.btn-primary').contains('Apply Filters').click();
 
 		//Checking if 10 todos have been created
@@ -54,7 +54,7 @@ context('Bulk Update', () => {
 		//Checking if the status for all the created todos has been updated from Open to Closed 
 		cy.go_to_list('ToDo');
 		cy.set_select('status', 'Closed');
-		cy.get_input('description').should('have.value', '%This is a test todo%');
+		cy.get_input('description').should('have.value', '%This is a test todo for testing bulk update%');
 		cy.get('.list-count').should('contain', '10 of 10');
 
 		//Deleting the bulk update doc

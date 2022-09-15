@@ -76,7 +76,6 @@ context('Pricing Rule Check on Quotation', () => {
 		cy.get_read_only('total').should('contain', "₹ 5,00,000.00");
 		cy.get_read_only('grand_total').should('contain', "₹ 5,00,000.00");
 		cy.get_read_only('rounded_total').should('contain', "₹ 5,00,000.00");
-
 		cy.click_toolbar_button('Save');
 		cy.get_page_title().should('contain', 'Draft');
 		cy.wait(500);
@@ -85,9 +84,11 @@ context('Pricing Rule Check on Quotation', () => {
 		cy.grid_open_row('pricing_rules', '1');
 		cy.get_read_only('pricing_rule').should('not.have.value', 0);
 		cy.get_read_only('item_code').should('contain', 'Apple iPhone 13 Pro Max');  // name
+		cy.findByText('ESC').click({force: true});
 
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');
+		cy.scrollTo('top', {ensureScrollable: false});
 		cy.get_page_title().should('contain', 'Open');
 	});
 });
