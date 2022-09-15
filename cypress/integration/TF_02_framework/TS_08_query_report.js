@@ -10,6 +10,7 @@ context('Query report', () => {
 		cy.get_input('ref_doctype').click({force: true});
 		cy.set_link('ref_doctype', 'item');
 		cy.get_field('report_type', 'Select').select('Query Report', {force: true});
+		cy.wait(1000);
 		cy.save();
 		cy.wait(500);
 
