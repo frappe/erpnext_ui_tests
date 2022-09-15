@@ -87,7 +87,6 @@ context('Blog Post', () => {
 				const todaysDate = moment().format('DD-MM-YYYY');
 				cy.get_input('published_on').should('have.value', todaysDate);
 		});
-		cy.get_page_title().should('have.text','Published');
 		cy.visit('/blog/environment/my-plastic-free-life');
 
 		//Removing the created docs
