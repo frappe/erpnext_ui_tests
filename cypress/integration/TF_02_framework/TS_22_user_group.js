@@ -92,8 +92,8 @@ context('User Group', () => {
 		cy.user_login('Administrator', 'admin');
 
 		//Deleting the user group and created users
-		cy.remove_doc('User Group', 'Test User Group');
-		cy.remove_doc('User', 'beth_keil@test.com');
-		cy.remove_doc('User', 'beth_ketty@test.com');
+		cy.delete_doc('User Group', 'Test User Group');
+		cy.delete_doc('User', 'beth_keil@test.com');
+		cy.delete_doc('User', 'beth_ketty@test.com');
 	});
 }); 
