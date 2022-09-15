@@ -30,8 +30,9 @@ context('Quotation Creation', () => {
 		cy.get_read_only('shipping_address_name').should('contain', "William's Address-Billing");
 		cy.get_read_only('territory').should('contain', 'All Territories');
 
-		cy.click_section('Currency and Price List');
-		cy.open_section('Currency and Price List');
+		cy.get_section('Currency and Price List').click();
+		//cy.click_section('Currency and Price List');
+		//cy.open_section('Currency and Price List');
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Selling');
 
