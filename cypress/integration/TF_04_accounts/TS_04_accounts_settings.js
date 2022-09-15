@@ -32,7 +32,10 @@ context('Accounts Settings', () => {
 
 			cy.visit('app/sales-invoice');
 			cy.click_listview_row_item(0);
-			cy.cancel();
+			cy.click_toolbar_button('Cancel');
+			cy.click_modal_primary_button('Yes');
+			cy.click_modal_close_button();
+			//cy.cancel();
 
 			cy.get_open_dialog().should('contain', 'Message');
 			cy.get('.msgprint').invoke('text').should('match', /Payment Entries ACC-PAY-.+ are un-linked/);
