@@ -56,9 +56,10 @@ context('Accounts Payable', () => {
 				.its("moment")
 				.then((moment) => {
 					const todaysDate = moment().format('DD-MM-YYYY');
+					cy.get('.datatable').scrollIntoView();
 					cy.get_report_cell().should('contain', 'Jacob Williams')
 					.and('contain', 'Purchase Invoice')
-					.and('contain', 'Creditors - WP')
+					.and('contain', 'Creditors - U')
 					.and('contain', '₹ 1,10,000.00')
 					.and('contain', todaysDate);
 			});
