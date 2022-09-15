@@ -14,11 +14,12 @@ context('Role Profile', () => {
 		cy.save();
 
 		//Creating a new user using the created role profile
-		cy.get('.form-dashboard-section .form-documents .document-link').should('contain', 'User');
-		cy.get('.form-dashboard-section .form-documents .document-link button')
-			.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
-		cy.findByRole('button', {name: 'Edit Full Form'}).scrollIntoView().click();
-		cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
+		// cy.get('.form-dashboard-section .form-documents .document-link').should('contain', 'User');
+		// cy.get('.form-dashboard-section .form-documents .document-link button')
+		// 	.should('have.class', 'icon-btn').click({force: true, scrollBehavior: false});
+		// cy.findByRole('button', {name: 'Edit Full Form'}).scrollIntoView().click();
+		// cy.get('.modal-actions button.btn-modal-close').click({force: true, multiple: true});
+		cy.new_form('User');
 		cy.fill_field('email', 'test_role_user@exapmle.com', 'Data');
 		cy.fill_field('first_name', 'Test Role User', 'Data');
 		cy.get_field('send_welcome_email', 'Check').uncheck({force: true});
