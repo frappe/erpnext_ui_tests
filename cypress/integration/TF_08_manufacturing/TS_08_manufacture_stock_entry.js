@@ -25,6 +25,7 @@ context('Finish work order', () => {
     });
 
     it('Check status for work order', () => {
+		cy.visit('/app/work-order');
         cy.click_listview_row_item(0);
         cy.get_page_title().should('contain', 'Completed');
         cy.get_read_only('produced_qty').should('contain','1');
