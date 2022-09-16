@@ -59,14 +59,18 @@ context('Create Sales Order', () => {
 		cy.click_dropdown_action('Status', 'Hold');
 		cy.set_textarea('reason_for_hold', 'Closed');
 		cy.click_modal_primary_button('Submit');
+		cy.scrollTo('top', {ensureScrollable: false});
 		cy.get_page_title().should('contain', 'On Hold');
 		cy.click_dropdown_action('Status', 'Resume');
+		cy.scrollTo('top', {ensureScrollable: false});
 		cy.get_page_title().should('contain', 'To Deliver and Bill');
 		cy.click_dropdown_action('Status', 'Close');
+		cy.scrollTo('top', {ensureScrollable: false});
 		cy.get_page_title().should('contain', 'Closed');
 		//cy.visit('app/sales-order');
 		//cy.click_listview_row_item(0);
 		cy.click_dropdown_action('Status', 'Re-open');
+		cy.scrollTo('top', {ensureScrollable: false});
 		cy.get_page_title().should('contain', 'To Deliver and Bill');
 	});
 });
