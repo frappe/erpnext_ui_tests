@@ -59,7 +59,7 @@ context('Accounts Payable', () => {
 					cy.get('.datatable').scrollIntoView();
 					cy.get_report_cell().should('contain', 'Jacob Williams')
 					.and('contain', 'Purchase Invoice')
-					.and('contain', 'Creditors - U')
+					.and('contain', 'Creditors - WP')
 					.and('contain', '₹ 1,10,000.00')
 					.and('contain', todaysDate);
 			});
