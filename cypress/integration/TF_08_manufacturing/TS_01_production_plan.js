@@ -10,7 +10,7 @@ context('Production Plan', () => {
 		cy.set_today('delivery_date');
 		cy.set_link('items.item_code', 'Classic Dining Table-ACACIA');
 		cy.set_input('items.qty', '1');
-		cy.grid_open_row('items', 1);
+		//cy.grid_open_row('items', 1);
 		cy.save();
 		cy.wait(500);
 		cy.submit_doc('To Deliver and Bill');

@@ -29,9 +29,9 @@ context("Quality Inspection", () => {
 		cy.set_link('warehouse', 'Stores - WP');
 		cy.close_grid_edit_modal();
 		cy.save();
-		cy.wait(500);
-		cy.click_toolbar_button('Submit');
-		cy.click_modal_primary_button('Yes');
+		//cy.wait(500);
+		//cy.click_toolbar_button('Submit');
+		//cy.click_modal_primary_button('Yes');
 		cy.on('window:alert',  (str) =>  {
             expect(str).to.equal(`Inspection Required`)});
  		cy.get('.msgprint').invoke('text').should('contain', 'Row #1: Quality Inspection is required for Item Study Table');
