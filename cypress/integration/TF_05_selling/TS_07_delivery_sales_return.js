@@ -70,7 +70,8 @@ context('Delivery Return Check', () => {
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
 		cy.click_toolbar_button('Submit');
-		cy.click_modal_primary_button('Yes');
+		//cy.click_modal_primary_button('Yes');
+		cy.findByRole('button', {name: 'Yes'}).click();
 		cy.reload();
 		cy.get_page_title().should('contain', 'Return');
 

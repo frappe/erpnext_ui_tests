@@ -17,7 +17,7 @@ context('Accounts Settings', () => {
 					posting_date: date,
 					customer: "William Harris",
 					due_date: date,
-					items: [{"item_code": "Apple iPhone 13 Pro Max", "qty": 1, "rate": 110000, "amount": 110000}]
+					items: [{"item_code": "Apple iPhone 13 Pro Max1", "qty": 1, "rate": 110000, "amount": 110000}]
 			},
 			true
 		).then((a)=>{
@@ -33,7 +33,8 @@ context('Accounts Settings', () => {
 			cy.visit('app/sales-invoice');
 			cy.click_listview_row_item(0);
 			cy.click_toolbar_button('Cancel');
-			cy.click_modal_primary_button('Yes');
+			//cy.click_modal_primary_button('Yes');
+			cy.findByRole('button', {name: 'Yes'}).click();
 			cy.click_modal_close_button();
 			//cy.cancel();
 
