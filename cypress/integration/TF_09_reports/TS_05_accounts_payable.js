@@ -17,6 +17,22 @@ context('Accounts Payable', () => {
 			true
 		)
 
+		cy.insert_doc(
+			"Purchase Invoice",
+			{
+				naming_series: "PINV-.YY.-",
+				posting_date: date,
+				supplier: "Lisa Davis",
+				due_date: date,
+				items: [{"item_code": "Apple iPhone 13 Pro Max", "qty": 1, "rate": 110000, "amount": 110000}]
+			},
+			true
+		).then((a)=>{
+			console.log(a);
+			cy.visit('app/purchase-invoice/'+ a.name);
+			cy.submit_doc('Unpaid');
+		});
+
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
@@ -113,4 +129,4 @@ context('Accounts Payable', () => {
 		cy.get_read_only('is_standard').should('contain', 'Yes');
 		cy.get_read_only('ref_doctype').should('contain', 'Purchase Invoice');
 	});
-});  
+});
