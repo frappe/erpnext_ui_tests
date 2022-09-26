@@ -81,12 +81,13 @@ context('Address', () => {
 		cy.set_link('links.link_name', 'Test Customer Address');
 		cy.save();
 		cy.wait(500);
-		
+
 		//Going into the sales order doc and checking if the billing and shipping address are automatically fetched
 		cy.new_doc('Sales Order');
 		cy.get_input('customer').click({force: true});
 		cy.set_link('customer', 'Test Customer Address');
-		cy.click_section('Address and Contact');
+		//cy.click_section('Address and Contact');
+		cy.get_section('Address and Contact').click();
 		cy.get_field('customer_address', 'Link').should('have.value', 'Test Address Billing-Billing');
 		cy.get_field('shipping_address_name', 'Link').should('have.value', 'Test Address Shipping-Shipping');
 	});

@@ -86,7 +86,7 @@ context('Exchange Rate Creation Check', () => {
 		cy.set_today('date');
 		cy.set_link('from_currency', 'USD');
 		cy.set_link('to_currency', 'INR');
-		cy.set_input('exchange_rate', '80');
+		cy.set_input('exchange_rate', '84');
 		cy.get_input('for_buying', 'checkbox').should('be.checked');
 		cy.get_input('for_selling', 'checkbox').should('be.checked');
 		cy.save();
@@ -98,7 +98,7 @@ context('Exchange Rate Creation Check', () => {
 		cy.findByRole('button', {name: 'Get Entries'}).click();
 
 		cy.get_table_field('accounts', 1, 'account', 'Link').contains('Bank of America');
-		cy.get_input('accounts.new_exchange_rate').should('have.value', '80');
+		cy.get_input('accounts.new_exchange_rate').should('have.value', '84');
 		cy.get_input('gain_loss')
  			.invoke('val')
 			.then(val => {
