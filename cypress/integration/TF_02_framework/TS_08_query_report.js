@@ -5,14 +5,14 @@ context('Query report', () => {
 	});
 
 	it('Creating a new report', () => {
-		cy.new_doc('Report');
-		cy.set_input('report_name', 'Test item query report');
-		cy.get_input('ref_doctype').click({force: true});
-		cy.set_link('ref_doctype', 'item');
-		cy.get_field('report_type', 'Select').select('Query Report', {force: true});
-		cy.wait(1000);
-		cy.save();
-		cy.wait(500);
+		cy.create_records({
+			doctype: 'Report',
+            report_name: 'Test item query report',
+            ref_doctype: 'item',
+            report_type: 'Query Report'
+        });
+		cy.go_to_list('Report');
+		cy.list_open_row('Test item query report');
 
 		//Checking if "Show Report" gives error when no query has been specified
 		cy.click_toolbar_button('Show Report');
