@@ -37,7 +37,7 @@ context('Create Customer', () => {
 
 		cy.create_records({
 			doctype: 'Address',
-			address_title: 'Williams Address',
+			address_title: "William's Address",
 			address_type: 'Billing',
 			address_line1: '18th Floor, ',
 			address_line2: 'Prabhat Bldg Off Sitladevi Temple Road, Vile Parle West, ',
@@ -49,7 +49,7 @@ context('Create Customer', () => {
 			is_shipping_address: '1'
 		});
 		cy.go_to_list('Address');
-		cy.list_open_row('Williams Address-Billing');
+		cy.list_open_row("William's Address-Billing");
 		cy.grid_add_row('links');
 		cy.set_link('links.link_doctype', 'Customer');
 		cy.set_link('links.link_name', 'William Harris');
