@@ -1,72 +1,56 @@
 context("Product Bundle", () => {
 	before(() => {
 		cy.login();
+		cy.visit('/app');
 	});
 
 	it("Create Parent Item", () => {
 		let item_code = 'Single Seater Sofa Set With Table Set of 3'
-		cy.new_doc("Item");
-		cy.set_input('item_code', item_code);
-		cy.set_link('item_group','All Item Groups');
-		cy.get_field('is_stock_item').uncheck();
-		cy.set_input('standard_rate', '40000');
-		cy.set_link('stock_uom', 'Nos');
-		cy.save();
+		cy.create_records({
+            doctype: 'Item',
+            item_code: item_code,
+            item_group: 'All Item Groups',
+			is_stock_item: 0,
+			standard_rate: '40000',
+			stock_uom: 'Nos'
+        });
+		cy.go_to_list('Item');
+		cy.list_open_row(item_code);
 		cy.get_page_title().should('contain', item_code);
 		cy.get_page_title().should('contain',  'Enabled');
 	});
 
 	it("Create child item 1", () => {
 		let item_code = 'Pristine White Single Seater Sofa Set'
-		cy.new_doc("Item");
-		cy.set_input('item_code', item_code);
-		cy.set_link('item_group', 'All Item Groups');
-		cy.set_input('opening_stock', '1000');
-		cy.set_input('valuation_rate', '20000');
-		cy.set_input('standard_rate', '20000');
-		cy.set_link('stock_uom', 'Nos');
-		cy.click_tab('Inventory');
-		cy.get_section('Units of Measure');
-		cy.click_section('Units of Measure');
-		cy.grid_add_row('uoms');
-		cy.grid_open_row('uoms', 1);
-		cy.set_link('uom', 'Set');
-		cy.set_input('conversion_factor', '2');
-		cy.close_grid_edit_modal();
-		cy.save();
+		cy.call(
+			"erpnext_ui_tests.test_utils.product_bundle.create_child_item"
+		);
+		cy.go_to_list('Item');
+		cy.list_open_row(item_code);
 		cy.get_page_title().should('contain', item_code);
 		cy.get_page_title().should('contain',  'Enabled');
 	});
 
 	it("Create child item 2", () => {
 		let item_code = 'Coffee Table'
-		cy.new_doc("Item");
-		cy.set_input('item_code', item_code);
-		cy.set_link('item_group','All Item Groups');
-		cy.set_input('opening_stock', '1000');
-		cy.set_input('valuation_rate', '20000');
-		cy.set_input('standard_rate', '20000');
-		cy.set_link('stock_uom', 'Nos');
-		cy.save();
+		cy.create_records({
+            doctype: 'Item',
+            item_code: item_code,
+            item_group: 'All Item Groups',
+			opening_stock: '1000',
+			valuation_rate: '20000',
+			standard_rate: '20000',
+			stock_uom: 'Nos'
+        });
+		cy.go_to_list('Item');
+		cy.list_open_row(item_code);
 		cy.get_page_title().should('contain', item_code);
 		cy.get_page_title().should('contain',  'Enabled');
 	});
 
 	it("Create Product Bundle", () => {
-		cy.new_doc("Product Bundle");
-		cy.set_link('new_item_code','Single Seater Sofa Set With Table Set of 3');
-		cy.set_input('description', 'Set of Coffee Table and Single Seater Sofa')
-		cy.grid_add_row('items');
-		cy.grid_open_row('items', 1);
-		cy.set_link('item_code', 'Pristine White Single Seater Sofa Set');
-		cy.set_input('qty', '2');
-		cy.close_grid_edit_modal();
-		cy.grid_add_row('items');
-		cy.grid_open_row('items', 2);
-		cy.set_link('item_code', 'Coffee Table');
-		cy.set_input('qty', '1');
-		cy.close_grid_edit_modal();
-		cy.save();
+			cy.call(
+				"erpnext_ui_tests.test_utils.product_bundle.create_product_bundle1"
+			);
 	});
-
 });
