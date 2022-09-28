@@ -15,7 +15,7 @@ context('Routing', () => {
 		cy.grid_add_row('operations');
 		cy.grid_open_row('operations', '2');
 		cy.set_input('sequence_id', '2');
-		cy.set_link('operation', 'Sanding  the table');
+		cy.set_link('operation', 'Sanding the table');
 		cy.set_input('time_in_mins', '2880');
 		cy.close_grid_edit_modal();
 		cy.grid_add_row('operations');

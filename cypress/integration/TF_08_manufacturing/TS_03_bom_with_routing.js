@@ -17,7 +17,7 @@ context("Routing-based BOM", () => {
         cy.get_field('workstation').should('have.value', 'WB-0001');
 		cy.close_grid_edit_modal();
 		cy.grid_open_row('operations', '2');
-		cy.get_field('operation').should('have.value', 'Sanding  the table');
+		cy.get_field('operation').should('have.value', 'Sanding the table');
         cy.get_field('workstation').should('have.value', 'WB-0002');
 		cy.close_grid_edit_modal();
 		cy.grid_open_row('operations', '3');
