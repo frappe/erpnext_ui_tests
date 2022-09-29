@@ -12,7 +12,7 @@ context('Stock Entry', () => {
 		cy.set_link('stock_entry_type', 'Material Receipt')
 
 		//Set company
-		cy.set_link('company', 'Wind Power LLC');
+		//cy.set_link('company', 'Wind Power LLC');
 
 		//Set warehouse
 		cy.set_link('to_warehouse', 'Finished Goods - WP');

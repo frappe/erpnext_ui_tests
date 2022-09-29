@@ -60,7 +60,8 @@ context('Contact', () => {
 		cy.new_doc('Sales Order');
 		cy.get_input('customer').click({force: true});
 		cy.set_link('customer', 'Test Customer Contact');
-		cy.click_section('Address and Contact');
+		//cy.click_section('Address and Contact');
+		cy.get_section('Address and Contact').click();
 		cy.get_field('contact_person', 'Link').should('have.value', 'Jenny Holmes');
 		cy.get_read_only('contact_display').should('contain', 'Jenny Holmes');
 	});

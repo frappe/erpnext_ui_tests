@@ -1,17 +1,21 @@
 context("Item", () => {
 	before(() => {
 		cy.login();
+		cy.visit('/app');
 	});
 
 	it("Create an item", () => {
-		let item_code = 'Birch Ply'
-		cy.new_doc("Item");
-		cy.set_input('item_code', item_code);
-		cy.set_link('item_group','Raw Material');
-		cy.set_input('valuation_rate', '1000');
-		cy.set_link('stock_uom', 'Nos');
-		cy.save();
+		let item_code = 'Birch Ply';
 
+		cy.create_records({
+            doctype: 'Item',
+            item_code: item_code,
+            item_group: 'Raw Material',
+			valuation_rate: '1000',
+			stock_uom: 'Nos'
+        });
+		cy.go_to_list('Item');
+		cy.list_open_row('Birch Ply');
 		cy.get_page_title().should('contain', item_code);
 		cy.get_page_title().should('contain',  'Enabled');
 
@@ -26,24 +30,29 @@ context("Item", () => {
 	});
 
 	it('Create another item', () => {
-		let item_code = 'WB-001'
-		cy.new_doc("Item");
-		cy.set_input('item_code', item_code);
-		cy.set_input('item_name', 'Wooden Bar 2in x 2in x 20in');
-		cy.set_link('item_group','Raw Material');
-		cy.set_input('valuation_rate', '400');
-		cy.set_link('stock_uom', 'Nos');
-		cy.save();
+		let item_code = 'WB-001';
+		
+		cy.create_records({
+            doctype: 'Item',
+            item_code: item_code,
+			item_name: 'Wooden Bar 2in x 2in x 20in',
+            item_group: 'Raw Material',
+			valuation_rate: '400',
+			stock_uom: 'Nos'
+        });
 	});
 
 	it('Create stock item', () => {
-		cy.new_doc("Item");
-		cy.set_input('item_code', 'Apple iPhone 13 Pro Max');
+		cy.create_records({
+            doctype: 'Item',
+            item_code: 'Apple iPhone 13 Pro Max',
+			item_group: 'All Item Groups',
+			opening_stock: '10',
+			valuation_rate: '110000',
+			stock_uom: 'Nos'
+        });
+		cy.go_to_list('Item');
+		cy.list_open_row('Apple iPhone 13 Pro Max');
 		cy.get_input('item_name').should('have.value', 'Apple iPhone 13 Pro Max');
-		cy.set_link('item_group','All Item Groups');
-		cy.set_input('opening_stock', '10')
-		cy.set_input('valuation_rate', '110000');
-		cy.set_link('stock_uom', 'Nos');
-		cy.save();
 	})
 });

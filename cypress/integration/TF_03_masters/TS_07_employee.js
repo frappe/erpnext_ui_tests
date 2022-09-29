@@ -1,20 +1,28 @@
 context('Employee', () => {
 	before(() => {
 		cy.login();
+		cy.visit('/app');
 	});
 
 	it('Create Employee', () => {
-		cy.new_form('Employee');
-		cy.set_input('first_name', 'John');
-		cy.set_input('last_name', 'Mayer');
-		cy.get_field('date_of_birth', 'Data').focus().type("11-05-1985", {delay: 800});
-		cy.set_link('company', 'Wind Power LLC');
-		cy.set_select('status', 'Active');
-		cy.get_select('status', 'Active');
-		cy.set_link('gender', 'Male');
-		cy.set_today('date_of_joining');
-		cy.save();
-		cy.wait(500);
+		let dob = "1985-05-11"
+		cy.window()
+			.its("moment")
+			.then((moment) => {
+				const todaysDate = moment().format('YYYY-MM-DD');
+				cy.create_records({
+					doctype: "Employee",
+					first_name: "John",
+					last_name: "Mayer",
+					date_of_birth: dob,
+					date_of_joining: todaysDate,
+					company: "Wind Power LLC",
+					status: "Active",
+					gender: "Male"
+				});
+			});	
+		cy.go_to_list('Employee');
+		cy.list_open_row('John Mayer');
 		cy.get_page_title().should('contain', 'Active');
 	});
 });
