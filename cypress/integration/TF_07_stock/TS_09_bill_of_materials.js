@@ -15,7 +15,7 @@ context("Bill of Materials", () => {
 		cy.set_link('operations.operation', 'Attaching the table top with legs');
 		cy.set_input('operations.time_in_mins', '1440');
 		cy.grid_add_row('operations');
-		cy.set_link('operations.operation', 'Sanding  the table');
+		cy.set_link('operations.operation', 'Sanding the table');
 		cy.set_input('operations.time_in_mins', '2880');
 		cy.grid_add_row('operations');
 		cy.set_link('operations.operation', 'Staining the table');

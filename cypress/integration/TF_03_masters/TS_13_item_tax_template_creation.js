@@ -1,44 +1,18 @@
 context('Item Tax Template Creation', () => {
 	before(() => {
 		cy.login();
+		cy.visit('/app');
 	});
 
 	it('Create a test item tax template - GST 12%', () => {
-		cy.visit('/app/item-tax-template');
-		cy.new_doc("Item Tax Template");
-		cy.set_input('title','test GST 12%');
-		cy.set_link('taxes.tax_type', 'test Output Tax CGST - ');
-		cy.set_input('tax_rate', '6');
-		cy.grid_add_row('taxes');
-		cy.set_link('taxes.tax_type', 'test Output Tax SGST - ');
-		cy.set_input('tax_rate', '6');
-		cy.grid_add_row('taxes');
-		cy.set_link('taxes.tax_type', 'test Output Tax IGST - ');
-		cy.set_input('tax_rate', '12');
-		cy.save();
+		cy.call(
+			"erpnext_ui_tests.test_utils.tax_template.create_item_tax_template1"
+		);
 	});
 
 	it('Create a test item tax template - GST 5%', () => {
-		cy.insert_doc(
-			"Item Tax Template",
-			{
-				"title": "test GST 5%",
-				"taxes": [
-					{
-						"tax_type": "test Output Tax SGST - WP",   // name
-						"tax_rate": 2.5
-					},
-					{
-						"tax_type": "test Output Tax CGST - WP",   // name
-						"tax_rate": 2.5
-					},
-					{
-						"tax_type": "test Output Tax IGST - WP",   // name
-						"tax_rate": 5
-					}
-				]
-			},
-			true
-		)
+		cy.call(
+			"erpnext_ui_tests.test_utils.tax_template.create_item_tax_template"
+		);
 	});
 });
