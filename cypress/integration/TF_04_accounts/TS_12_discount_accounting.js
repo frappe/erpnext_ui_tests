@@ -4,8 +4,7 @@ context('Discount Accounting', () => {
 		cy.visit('/app');
 	});
 
-	it('Discount accounting at entire invoice level', () => {
-		// Creating account head for discount accounting
+	it('Creating discount account head for discount accounting', () => {
 		cy.insert_doc(
 			"Account",
 			{
@@ -14,11 +13,13 @@ context('Discount Accounting', () => {
 				root_type: "Expense",
 				report_type: "Profit and Loss",
 				account_currency: "INR",
-				parent_account: "Direct Expenses - WP", // - TQ, WP", // name
+				parent_account: "Direct Expenses - WP", // - TQ, WP",
 			},
 			true
 		)
+	});
 
+	it('Discount accounting at entire invoice level', () => {
 		//Enabling option of discount accounting in selling settings
 		cy.visit('/app/selling-settings/');
 		cy.get_field('enable_discount_accounting', 'checkbox').check();
@@ -42,7 +43,8 @@ context('Discount Accounting', () => {
 		).then((a)=>{
 			console.log(a);
 			cy.visit('app/sales-invoice/'+ a.name);
-			//cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible').click();
+			cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible').click();
+			cy.set_link('cost_center', 'Main - ');
 
 			//cy.click_section('Additional Discount');
 			cy.findByText('Additional Discount').scrollIntoView().should('be.visible').click();
@@ -66,14 +68,16 @@ context('Discount Accounting', () => {
 
 			//Validating accounting ledger impact
 			cy.click_dropdown_action('View', 'Accounting Ledger');
-			//cy.get('.dt-row-3 > .dt-cell--col-2 > .dt-cell__content > a')
 			cy.get_report_cell().should('contain', 'Discount Account');
 			cy.get_report_cell().should('contain', '5,500.000');
 
 			//Disabling the discount accounting option again
 			cy.visit('/app/selling-settings/');
+			cy.get_field('enable_discount_accounting', 'checkbox').scrollIntoView().check();
+			cy.get_input('enable_discount_accounting','checkbox').should('be.checked');
 			cy.get_field('enable_discount_accounting', 'checkbox').uncheck();
-			cy.get_input('enable_discount_accounting','checkbox').should('be.unchecked');
+			cy.save();
+			cy.get_input('enable_discount_accounting','checkbox').should('not.be.checked');
 		});
 	});
 });
