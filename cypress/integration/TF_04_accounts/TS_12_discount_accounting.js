@@ -14,7 +14,7 @@ context('Discount Accounting', () => {
 				root_type: "Expense",
 				report_type: "Profit and Loss",
 				account_currency: "INR",
-				parent_account: "Direct Expenses - TQ", // - WP", // name
+				parent_account: "Direct Expenses - WP", // - TQ, WP", // name
 			},
 			true
 		)
@@ -36,7 +36,7 @@ context('Discount Accounting', () => {
 					posting_date: date,
 					customer: "William Harris",
 					due_date: date,
-					items: [{"item_code": "Apple iPhone 13 Pro Max1", "qty": 1, "rate": 110000, "amount": 110000}]
+					items: [{"item_code": "Apple iPhone 13 Pro Max", "qty": 1, "rate": 110000, "amount": 110000}]
 			},
 			true
 		).then((a)=>{
