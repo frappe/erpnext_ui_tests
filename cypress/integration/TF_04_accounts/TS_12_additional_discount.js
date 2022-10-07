@@ -108,7 +108,7 @@ context('Additional Discount', () => {
 		cy.get_read_only('grand_total').should('contain', "₹ 118.00");
 		cy.get_read_only('rounded_total').should('contain', "₹ 118.00");
 
-		// Applying additional discount on net total
+		// Applying additional discount on grand total
 		cy.click_section('Additional Discount');
 		cy.wait(500);
 		cy.open_section('Additional Discount');
