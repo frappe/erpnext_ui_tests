@@ -43,7 +43,10 @@ context('Discount Accounting', () => {
 		).then((a)=>{
 			console.log(a);
 			cy.visit('app/sales-invoice/'+ a.name);
-			cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible').click();
+			//cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible').click();
+			//cy.click_section_head('accounting_dimensions_section');
+			cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible');
+			cy.open_section('Accounting Dimensions');
 			cy.set_link('cost_center', 'Main - ');
 
 			//cy.click_section('Additional Discount');
