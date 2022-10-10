@@ -19,13 +19,14 @@ context('Discount Accounting', () => {
 		)
 	});
 
-	it('Discount accounting at entire invoice level', () => {
-		//Enabling option of discount accounting in selling settings
+	it('Enabling option of discount accounting in selling settings', () => {
 		cy.visit('/app/selling-settings/');
 		cy.get_field('enable_discount_accounting', 'checkbox').check();
 		cy.get_input('enable_discount_accounting','checkbox').should('be.checked');
 		cy.save();
+	});
 
+	it('Discount accounting at entire invoice level', () => {
 		//Creating invoice with discount at invoice level
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -43,9 +44,15 @@ context('Discount Accounting', () => {
 		).then((a)=>{
 			console.log(a);
 			cy.visit('app/sales-invoice/'+ a.name);
-			//cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible').click();
+
+			cy.url().should('include', '/app/sales-invoice/');
+			cy.get_input('customer').should('have.value', 'William Harris');
+			cy.get_read_only('posting_date').should('not.have.value', 0);
+			cy.get_input('due_date').should('not.have.value', 0);
+			cy.wait(200);
+
 			//cy.click_section_head('accounting_dimensions_section');
-			cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible');
+			cy.findByText('Accounting Dimensions').scrollIntoView().should('be.visible').click();
 			cy.open_section('Accounting Dimensions');
 			cy.set_link('cost_center', 'Main - ');
 
