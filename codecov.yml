@@ -5,8 +5,8 @@ coverage:
   status:
     project:
       default:
-        target: auto
-        threshold: 0.5%
+        target: 0.0%
+        threshold: 100%
 
 comment:
   layout: "diff"
