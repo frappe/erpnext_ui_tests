@@ -37,7 +37,7 @@ context('Brand', () => {
 		cy.save();
 	});
 
-	it.only('Validating brand defaults in Sales Invoice', () => {
+	it('Validating brand defaults in Sales Invoice', () => {
 		var today = new Date();
 		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
