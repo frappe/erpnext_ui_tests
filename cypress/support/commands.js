@@ -533,3 +533,8 @@ Cypress.Commands.add("click_section_head", (fieldname) => {
     cy.get(`[data-fieldname="${fieldname}"] .section-head:visible`)
         .click({force: true, scrollBehavior: false});
 });
+
+Cypress.Commands.add('click_modal_section', (fieldname) => {
+	cy.get(`.grid-form-body .form-page [data-fieldname=${fieldname}] .section-head`)
+		.click({force: true, scrollBehavior: "center"});
+});
