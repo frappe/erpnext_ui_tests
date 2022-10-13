@@ -62,10 +62,9 @@ context('Brand', () => {
 			cy.get_section('Stock Details').click();
 			cy.get_input('warehouse').should('have.value', 'Stores - WP'); // WP
 
-			//cy.get_section('Accounting Dimensions').click();
-			//cy.open_section('Accounting Dimensions');
-			//cy.get_section('Accounting Dimensions').scrollIntoView().should('be.visible').click();
-			cy.findByText('Accounting Dimensions').should('be.visible').click();
+			//cy.findByText('Accounting Dimensions').should('be.visible').click({force:true});
+			//cy.get('.grid-form-body .form-page [data-fieldname="accounting_dimensions_section"] .section-head').click({force:true});
+			cy.click_modal_section("accounting_dimensions_section");
 			cy.get_input('cost_center').should('have.value', 'Main - WP'); // WP
 
 			cy.close_grid_edit_modal();
