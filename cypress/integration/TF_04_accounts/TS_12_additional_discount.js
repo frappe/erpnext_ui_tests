@@ -50,16 +50,14 @@ context('Additional Discount', () => {
 		cy.get_read_only('rounded_total').should('contain', "₹ 118.00");
 
 		// Applying additional discount on net total
-		cy.click_section('Additional Discount and Coupon Code');
+		cy.click_section('Additional Discount');
 		cy.wait(500);
-		cy.open_section('Additional Discount and Coupon Code');
-		cy.wait(500);
-		cy.open_section('Additional Discount and Coupon Code');
+		cy.open_section('Additional Discount');
 		cy.set_select('apply_discount_on', 'Net Total');
-		cy.open_section('Additional Discount and Coupon Code');
+		cy.open_section('Additional Discount');
 		cy.set_input('additional_discount_percentage', '5');
 		cy.get_input('additional_discount_percentage').blur();
-		cy.open_section('Additional Discount and Coupon Code');
+		cy.click_section('Additional Discount');
 		cy.get_input('discount_amount').should('have.value', '5.00');
 
 		// Validating values after applying additional discount
@@ -112,11 +110,10 @@ context('Additional Discount', () => {
 		cy.click_section('Additional Discount');
 		cy.wait(500);
 		cy.open_section('Additional Discount');
-		cy.wait(500);
-		cy.open_section('Additional Discount');
 		cy.get_select('apply_discount_on').should('have.value', "Grand Total");
 		cy.set_input('additional_discount_percentage', '5');
 		cy.get_input('additional_discount_percentage').blur();
+		cy.click_section('Additional Discount');
 		cy.get_input('discount_amount').should('have.value', '5.90');
 
 		// Validating values after applying additional discount

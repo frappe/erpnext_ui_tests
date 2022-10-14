@@ -25,11 +25,17 @@ context('Quotation Creation', () => {
 		cy.get_select('order_type').should('have.value', 'Sales');
 		cy.get_read_only('customer_name').should('contain', 'William Harris');
 
-		cy.open_section('Address and Contact');
+		//cy.click_tab("address_and_contact_tab");
+		//cy.open_section('Address and Contact');
+		cy.findByRole("tab", { name: "Address & Contact" }).click();
 		cy.get_read_only('customer_address').should('contain', "William's Address-Billing");
 		cy.get_read_only('shipping_address_name').should('contain', "William's Address-Billing");
+		//cy.click_tab('More Info');
+		cy.findByRole("tab", { name: "More Info" }).click();
+		cy.click_section_head('additional_info_section');
 		cy.get_read_only('territory').should('contain', 'All Territories');
 
+		cy.click_tab('Details');
 		cy.get_section('Currency and Price List').click();
 		//cy.click_section('Currency and Price List');
 		//cy.open_section('Currency and Price List');
