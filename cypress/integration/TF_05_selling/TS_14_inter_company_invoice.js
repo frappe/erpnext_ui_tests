@@ -7,7 +7,8 @@ context('Sales Invoice Creation', () => {
 		cy.new_doc("Sales Invoice");
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
-		cy.set_input('customer', 'Bernhardt Furnitures');
+		cy.set_link('customer', 'Bernhardt Furnitures');
+		cy.get_input('due_date').should('not.have.value', 0);
 		cy.get_field('company').should('have.value', 'Wind Power LLC');
 		cy.grid_open_row('items', '1');
 		cy.set_link('item_code', 'Marcel Coffee Table');
@@ -23,8 +24,10 @@ context('Sales Invoice Creation', () => {
 		cy.get_input('currency').should('have.value', 'INR');
 		cy.get_input('selling_price_list').should('have.value', 'Standard Price List : Buying & Selling');
 		cy.submit_doc('Unpaid');
-		cy.get_section('More Information');
-		cy.click_section('More Information');
+		// cy.get_section('More Information');
+		// cy.click_section('More Information');
+		cy.findByRole("tab", { name: "More Info" }).click();
+		cy.click_section_head('more_information');
 		cy.get_read_only('represents_company').should('contain', 'Bernhardt Furnitures');
 
 		//Create Inter Company Purchase Invoice
@@ -42,8 +45,10 @@ context('Sales Invoice Creation', () => {
 		cy.close_grid_edit_modal();
 		cy.save();
 		cy.submit_doc('Unpaid');
-		cy.get_section('More Information');
-		cy.click_section('More Information');
+		// cy.get_section('More Information');
+		// cy.click_section('More Information');
+		cy.findByRole("tab", { name: "More Info" }).click();
+		cy.click_section_head('additional_info_section');
 		cy.get_read_only('represents_company').should('contain', 'Wind Power LLC');
 	});
 });
