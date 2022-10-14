@@ -85,11 +85,13 @@ context('Multi Currency Accounting', () => {
 				cy.get_read_only('base_rounded_total').should('contain', totalInCurrency);
 				cy.get_read_only('rounded_total').should('contain', rateInCurrency);
 
-				cy.click_section('Write Off');
+				cy.click_tab('Payments');
+				cy.click_section_head('write_off_section');
 
+				cy.findByRole("tab", { name: "More Info" }).click();
 				cy.findByText('Accounting Details').scrollIntoView().should('be.visible');
-				cy.wait(400);
-				cy.click_section('Accounting Details');
+				// cy.wait(400);
+				// cy.click_section('Accounting Details');
 				cy.open_section('Accounting Details');
 				cy.get_input('debit_to').should('have.value', "Debtor-EUR - WP");  // - name change
 
