@@ -90,8 +90,6 @@ context('Multi Currency Accounting', () => {
 
 				cy.findByRole("tab", { name: "More Info" }).click();
 				cy.findByText('Accounting Details').scrollIntoView().should('be.visible');
-				// cy.wait(400);
-				// cy.click_section('Accounting Details');
 				cy.open_section('Accounting Details');
 				cy.get_input('debit_to').should('have.value', "Debtor-EUR - WP");  // - name change
 
