@@ -58,6 +58,7 @@ context('Additional Discount', () => {
 		cy.set_input('additional_discount_percentage', '5');
 		cy.get_input('additional_discount_percentage').blur();
 		cy.click_section('Additional Discount');
+		cy.open_section('Additional Discount');
 		cy.get_input('discount_amount').should('have.value', '5.00');
 
 		// Validating values after applying additional discount
@@ -114,6 +115,7 @@ context('Additional Discount', () => {
 		cy.set_input('additional_discount_percentage', '5');
 		cy.get_input('additional_discount_percentage').blur();
 		cy.click_section('Additional Discount');
+		cy.open_section('Additional Discount');
 		cy.get_input('discount_amount').should('have.value', '5.90');
 
 		// Validating values after applying additional discount

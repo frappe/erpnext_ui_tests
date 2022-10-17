@@ -102,7 +102,9 @@ context('Advance Payment Check', () => {
 		cy.get_read_only('amount').should('contain', "1,10,000.00");
 		cy.wait(500);
 
-		cy.get_section('Write Off');
+		cy.click_tab('Payments');
+		cy.click_section_head('write_off_section');
+		//cy.get_section('Write Off');
 		cy.findByText('Advance Payments').scrollIntoView().should('be.visible');
 		cy.get_section('Advance Payments');
 		cy.open_section('Advance Payments');
