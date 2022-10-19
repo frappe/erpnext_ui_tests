@@ -72,6 +72,7 @@ context('Currency and Exchange Rate Check', () => {
 				});
 
 			cy.click_toolbar_button('Save');
+			cy.visit('app/quotation/'+ c.name);
 			cy.get_page_title().should('contain', 'Draft');
 			cy.click_toolbar_button('Submit');
 			cy.click_modal_primary_button('Yes');
