@@ -65,6 +65,7 @@ context('Exchange Rate Creation Check', () => {
 			cy.get_read_only('rounded_total').should('contain', '$ 1,375.00');
 
 			cy.click_toolbar_button('Save');
+			cy.visit('app/quotation/'+ c.name);
 			cy.get_page_title().should('contain', 'Draft');
 			cy.click_toolbar_button('Submit');
 			cy.click_modal_primary_button('Yes');
