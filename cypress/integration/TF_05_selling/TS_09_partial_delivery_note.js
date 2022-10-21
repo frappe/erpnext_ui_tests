@@ -54,6 +54,7 @@ context('Partial Delivery Creation Check', () => {
 
 		cy.get_input('items.item_code').should('have.value', 'WP 7 ltr Water Purifier');
 		cy.get_input('qty').should('have.value', "5.000");
+		cy.get_input('qty').focus().click({force: true});
 		cy.set_input('qty', '3');
 		cy.get_input('qty').blur();
 		cy.get_input('rate').should('have.value', "20,000.00");
