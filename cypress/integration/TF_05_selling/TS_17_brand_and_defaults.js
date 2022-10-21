@@ -14,7 +14,8 @@ context('Brand', () => {
 		cy.get_input('default_warehouse').should('have.value', "Stores - WP"); //WP
 		cy.get_input('selling_cost_center').scrollIntoView().click();
 		cy.set_link('selling_cost_center', 'Main - WP'); //WP
-		cy.set_link('income_account', 'Cash - WP'); //WP
+		cy.get_input('income_account').type(' ');
+		cy.set_link('income_account', 'Cash -'); //WP
 		cy.close_grid_edit_modal();
 		cy.save();
 	});
