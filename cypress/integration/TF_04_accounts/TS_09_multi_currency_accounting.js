@@ -155,7 +155,11 @@ context('Multi Currency Accounting', () => {
 						}
 					});
 
-				cy.get_input('reference_no').scrollIntoView().click({force: true});
+				cy.click_toolbar_button('Save');
+				cy.get_open_dialog().should('contain', 'Message');
+				cy.get('.msgprint').invoke('text').should('contain', 'Reference No and Reference Date is mandatory');
+				cy.hide_dialog();
+
 				cy.set_input('reference_no', 'AB-01');
 				cy.set_today('reference_date');
 
