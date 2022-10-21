@@ -40,6 +40,8 @@ context('Sales Invoice Creation', () => {
 		cy.get_read_only('rounded_total').should('contain', "₹ 1,10,000.00");
 
 		cy.click_listview_primary_button('Save');
+		cy.visit('/app/sales-invoice');
+		cy.click_listview_row_item(0);
 		cy.get_page_title().should('contain', 'Draft');
 		cy.click_toolbar_button('Submit');
 		cy.click_modal_primary_button('Yes');

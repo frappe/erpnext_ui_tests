@@ -155,6 +155,7 @@ context('Multi Currency Accounting', () => {
 						}
 					});
 
+				cy.get_input('reference_no').scrollIntoView().click({force: true});
 				cy.set_input('reference_no', 'AB-01');
 				cy.set_today('reference_date');
 
