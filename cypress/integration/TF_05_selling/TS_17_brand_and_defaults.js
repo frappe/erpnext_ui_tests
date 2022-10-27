@@ -14,10 +14,10 @@ context('Brand', () => {
 		cy.get_input('default_warehouse').should('have.value', "Stores - WP"); //WP
 		cy.get_input('selling_cost_center').scrollIntoView().click();
 		cy.set_link('selling_cost_center', 'Main - WP'); //WP
-		cy.get_input('income_account').click();
-		cy.get_select('income_account').should('contain', 'Account Receivable')
-			.and('contain', 'Bank Accounts');
-		//cy.set_link('income_account', 'Cash -'); //WP
+		//cy.get_input('income_account').click();
+		//cy.get_select('income_account').should('contain', 'Account Receivable')
+		//	.and('contain', 'Bank Accounts');
+		cy.set_link('income_account', 'Administrative Expenses - WP'); //WP
 		cy.close_grid_edit_modal();
 		cy.save();
 	});
@@ -60,7 +60,7 @@ context('Brand', () => {
 			cy.get_input('item_code').should('have.value', 'Samsung Galaxy Z Fold4');
 			cy.get_section('Accounting Details').scrollIntoView().should('be.visible');
 			cy.open_section('Accounting Details');
-			cy.get_input('income_account').should('have.value', 'Cash - WP'); // WP
+			cy.get_input('income_account').should('have.value', 'Administrative Expenses - WP'); // WP
 
 			cy.get_section('Stock Details').click();
 			cy.get_input('warehouse').should('have.value', 'Stores - WP'); // WP
