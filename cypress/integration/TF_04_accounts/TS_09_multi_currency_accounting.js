@@ -155,7 +155,8 @@ context('Multi Currency Accounting', () => {
 						}
 					});
 
-				cy.click_toolbar_button('Save');
+				cy.findByRole('button', {name: 'Save'}).click();
+				//cy.click_toolbar_button('Save');
 				cy.get_open_dialog().should('contain', 'Message');
 				cy.get('.msgprint').invoke('text').should('contain', 'Reference No and Reference Date is mandatory');
 				cy.hide_dialog();
