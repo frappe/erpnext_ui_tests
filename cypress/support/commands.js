@@ -93,7 +93,7 @@ Cypress.Commands.add('set_input_multiselect', (fieldname, value) => {
 Cypress.Commands.add("_set_input", (fieldname, value) => {
 	cy.get_input(fieldname)
 		.clear({scrollBehavior: 'center'})
-		//.clear({scrollBehavior: 'center'}) // hack to make sure number fields are properly cleared
+		.clear({scrollBehavior: 'center'}) // hack to make sure number fields are properly cleared
 		.type(value, {delay: 100, scrollBehavior: false})
 });
 
