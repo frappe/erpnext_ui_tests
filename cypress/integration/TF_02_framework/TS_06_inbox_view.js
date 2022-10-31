@@ -26,13 +26,7 @@ context('Inbox View', () => {
 
 	it('Checking if the Inbox view has been enabled and sending one email using the email account', () => {
 		//Verifying if the Inbox view has been enabled
-		cy.go_to_list('Communication');
-		cy.location('pathname').should('eq', '/app/communication');
-		cy.reload();
-		cy.get_page_title().should('contain', 'Communication');
-		cy.click_custom_toolbar_button('List View');
-		cy.click_toolbar_dropdown('Inbox');
-		cy.location('pathname').should('eq', '/app/communication/view/inbox/Notifications');
+		cy.visit('/app/communication');
 		cy.get_page_title().should('contain', 'Notifications');
 		cy.get('.views-section:visible').should('contain', 'Inbox');
 		cy.get('.views-section .selected-view:visible').should('contain', 'Notifications');
