@@ -31,15 +31,11 @@ context('Tree View', () => {
 		//Adding child to the parent node
 		cy.get('.tree-link').should('contain', 'LOCATION00001');
 		cy.get('.tree-link[data-label="LOCATION00001"]').click();
-		cy.get('.tree-toolbar-button').contains('Edit').click();
-		cy.get_field('is_group', 'Check').check();
-		cy.save();
-		cy.visit('/app/test-location/view/tree');
-		cy.get('.tree-link[data-label="LOCATION00001"]').click();
 		cy.get('.tree-toolbar-button').should('contain', 'Add Child');
-		cy.get('.tree-toolbar-button:visible').contains('Add Child').click();
+		cy.get('.tree-toolbar-button').contains('Add Child').click();
 		cy.get_field('is_group', 'Check').check();
 		cy.click_modal_primary_button('Create New');
+		cy.get('.tree-children').find('li').should('have.length', 1);
 		cy.get('.tree-children .tree-link').contains(/LOCATION/);
 		cy.get('.tree-children .tree-link').click();
 
