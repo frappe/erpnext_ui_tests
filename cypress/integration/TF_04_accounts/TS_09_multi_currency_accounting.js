@@ -155,6 +155,8 @@ context('Multi Currency Accounting', () => {
 						}
 					});
 
+				cy.wait(200);
+				cy.scrollTo('top', {ensureScrollable: false});
 				cy.findByRole('button', {name: 'Save'}).click();
 				//cy.click_toolbar_button('Save');
 				cy.get_open_dialog().should('contain', 'Message');
