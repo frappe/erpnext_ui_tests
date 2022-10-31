@@ -42,7 +42,9 @@ context('Sales Invoice Payment', () => {
 				}
 			});
 
-		cy.set_input('reference_no', 'ABC-123');
+		cy.get_input('reference_no').scrollIntoView().click({force: true});
+		cy.get_field('reference_no', 'Data').type('ABC-123');
+		//cy.set_input('reference_no', 'ABC-123');
 		cy.set_today('reference_date');
 
 		cy.save();

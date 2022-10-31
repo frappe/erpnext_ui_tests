@@ -98,7 +98,7 @@ context('Exchange Rate Creation Check', () => {
 		cy.findByRole('button', {name: 'Get Entries'}).click();
 
 		cy.get_table_field('accounts', 1, 'account', 'Link').contains('Bank of America');
-		cy.get_input('accounts.new_exchange_rate').should('have.value', '84');
+		cy.get_input('accounts.new_exchange_rate').should('have.value', '84.000');
 		cy.get_input('gain_loss')
  			.invoke('val')
 			.then(val => {
