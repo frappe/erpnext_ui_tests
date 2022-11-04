@@ -12,8 +12,8 @@ context('Brand', () => {
 		cy.grid_open_row('brand_defaults', '1');
 		cy.get_input('company').focus();
 		cy.get_input('default_warehouse').should('have.value', "Stores - WP"); //WP
-		cy.findByText('ESC').scrollIntoView().focus;
 		cy.scrollTo('bottom', {ensureScrollable: false});
+		cy.findByText('ESC').scrollIntoView();
 
 		cy.get_input('selling_cost_center').scrollIntoView().click();
 		cy.set_link('selling_cost_center', 'Main - WP'); //WP

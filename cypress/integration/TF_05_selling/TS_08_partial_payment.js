@@ -34,7 +34,7 @@ context('Partial Payment', () => {
 		cy.get_input('party').should('have.value', 'William Harris');
 		cy.get_input('paid_amount').should('have.value', '1,10,000.00');
 		cy.set_input('paid_amount', '50000');
-		cy.get_input('paid_amount').blur();
+		//cy.get_input('paid_amount').blur();
 		cy.get_input('references.reference_doctype').should('have.value', 'Sales Invoice');
 		cy.get_input('allocated_amount').should('have.value', '50,000.000');
 
