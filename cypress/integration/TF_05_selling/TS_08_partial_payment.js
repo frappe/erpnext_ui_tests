@@ -34,7 +34,7 @@ context('Partial Payment', () => {
 		cy.get_input('party').should('have.value', 'William Harris');
 		cy.get_input('paid_amount').should('have.value', '1,10,000.00');
 		cy.set_input('paid_amount', '50000');
-		cy.get_input('paid_amount').blur();
+		//cy.get_input('paid_amount').blur();
 		cy.get_input('references.reference_doctype').should('have.value', 'Sales Invoice');
 		cy.get_input('allocated_amount').should('have.value', '50,000.000');
 
@@ -49,13 +49,6 @@ context('Partial Payment', () => {
 					cy.findByRole('button', {name: 'Set Exchange Gain / Loss'}).click();
 				}
 			});
-
-		cy.scrollTo('top', {ensureScrollable: false});
-		cy.findByRole('button', {name: 'Save'}).click();
-		//cy.click_toolbar_button('Save');
-		cy.get_open_dialog().should('contain', 'Message');
-		cy.get('.msgprint').invoke('text').should('contain', 'Reference No and Reference Date is mandatory');
-		cy.hide_dialog();
 
 		cy.set_input('reference_no', 'Ref-1');
 		cy.set_today('reference_date');
