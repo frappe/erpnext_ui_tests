@@ -87,8 +87,8 @@ context('Blog Post', () => {
 				const todaysDate = moment().format('DD-MM-YYYY');
 				cy.get_input('published_on').should('have.value', todaysDate);
 		});
-		cy.visit('/blog/environment/my-plastic-free-life');
-
+		cy.get('.form-sidebar .user-action-row').contains('See on Website').click({force: true});
+		//cy.location('pathname').should('eq', '/blog/environment/my-plastic-free-life');
 		//Removing the created docs
 		// cy.remove_doc('Blog Category', 'environment');
 		// cy.remove_doc('Blogger', 'Bethy');
