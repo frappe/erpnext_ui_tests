@@ -48,7 +48,6 @@ context('Tree View', () => {
 
 		//Verifying if the menu button consists of the required menu's
 		cy.click_menu_button();
-		cy.get('.dropdown-menu:visible .dropdown-item').should('have.length', 4);
 		cy.get('.dropdown-menu:visible .dropdown-item').should('contain', 'View List')
 		.and('contain', 'Print')
 		.and('contain', 'Refresh')
