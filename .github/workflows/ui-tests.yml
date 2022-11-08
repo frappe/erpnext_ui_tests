@@ -43,7 +43,7 @@ jobs:
       fail-fast: false
       matrix:
        # Make sure you modify cypress config files accordingly!
-       container: [1, 2, 3]
+       container: [1, 2, 3, 4]
 
     name: UI Tests (Cypress)
 
