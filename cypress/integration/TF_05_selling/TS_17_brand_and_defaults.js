@@ -13,6 +13,8 @@ context('Brand', () => {
 		cy.get_input('company').focus();
 		cy.get_input('default_warehouse').should('have.value', "Stores - WP"); //WP
 		cy.scrollTo('bottom', {ensureScrollable: false});
+		cy.wait(100);
+		cy.scrollTo('bottom', {ensureScrollable: false});
 		cy.findByText('ESC').scrollIntoView();
 
 		cy.get_input('selling_cost_center').scrollIntoView().click();

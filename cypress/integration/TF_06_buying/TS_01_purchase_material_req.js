@@ -1,9 +1,9 @@
-context('Material Request', () => {
+context('Material Request Creation', () => {
 	before(() => {
 		cy.login();
 	});
 
-	it('Create Material Request', () => {
+	it('Create Material Request of type Purchase', () => {
 		cy.new_doc('Material Request');
 
 		cy.url().should('include', '/app/material-request/new-material-request');
@@ -12,9 +12,9 @@ context('Material Request', () => {
 		cy.set_select('material_request_type', 'Purchase');
 		cy.set_today('schedule_date');
 
-		cy.set_link('set_warehouse', 'Stores - WP');
+		cy.set_link('set_warehouse', 'Stores - TQ');
 
-		cy.set_link('items.item_code', 'Apple iPhone 13 Pro Max');
+		cy.set_link('items.item_code', 'Apple iPhone 13 Pro Max1');
 		cy.get_input('qty').focus().clear();
 		cy.set_input('items.qty', 10);
 		cy.get_input('uom').should('have.value', "Nos");
@@ -23,7 +23,7 @@ context('Material Request', () => {
 
 		cy.compare_document({
 			material_request_type: 'Purchase',
-			items: [{ item_code: "Apple iPhone 13 Pro Max", item_name: 'Apple iPhone 13 Pro Max'}],
+			items: [{ item_code: "Apple iPhone 13 Pro Max1", item_name: 'Apple iPhone 13 Pro Max1'}],
 		});
 
 		cy.submit_doc('Pending');
