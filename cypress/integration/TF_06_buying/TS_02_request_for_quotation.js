@@ -16,11 +16,11 @@ context('Request for Quotation', () => {
 		cy.grid_add_row('suppliers');
 		cy.set_link('suppliers.supplier', 'Lisa Davis');
 
-		cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max1');
+		cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
 		cy.get_input('schedule_date').should('not.have.value', 0);
 		cy.get_input('qty').should('have.value', "10.000");
 		cy.get_input('uom').should('have.value', "Nos");
-		cy.get_input('warehouse').should('have.value', "Stores - TQ");
+		cy.get_input('warehouse').should('have.value', "Stores - WP");
 
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
