@@ -31,7 +31,7 @@ context("Item", () => {
 
 	it('Create another item', () => {
 		let item_code = 'WB-001';
-		
+
 		cy.create_records({
             doctype: 'Item',
             item_code: item_code,
@@ -44,15 +44,36 @@ context("Item", () => {
 
 	it('Create stock item', () => {
 		cy.create_records({
-            doctype: 'Item',
-            item_code: 'Apple iPhone 13 Pro Max',
+			doctype: 'Item',
+			item_code: 'Apple iPhone 13 Pro Max',
 			item_group: 'All Item Groups',
 			opening_stock: '10',
 			valuation_rate: '110000',
 			stock_uom: 'Nos'
-        });
+		});
 		cy.go_to_list('Item');
 		cy.list_open_row('Apple iPhone 13 Pro Max');
 		cy.get_input('item_name').should('have.value', 'Apple iPhone 13 Pro Max');
+	})
+
+	it('Create stock item and add price', () => {
+		cy.create_records({
+			doctype: 'Item',
+			item_code: 'Apple Macbook Pro 16 inch',
+			item_group: 'All Item Groups',
+			opening_stock: '10',
+			valuation_rate: '250000',
+			stock_uom: 'Nos'
+		});
+		cy.go_to_list('Item');
+		cy.list_open_row('Apple Macbook Pro 16 inch');
+		cy.get_input('item_name').should('have.value', 'Apple Macbook Pro 16 inch');
+
+		cy.new_doc('Item Price');
+		cy.url().should('include', '/app/item-price/new-item-price');
+		cy.set_link('item_code', 'Apple Macbook Pro 16 inch');
+		cy.set_link('price_list', 'Standard Buying');
+		cy.set_input('price_list_rate', '250000');
+		cy.save();
 	})
 });
