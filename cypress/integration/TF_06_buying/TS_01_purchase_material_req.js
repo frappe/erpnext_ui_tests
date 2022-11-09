@@ -1,9 +1,9 @@
-context('Material Request', () => {
+context('Material Request Creation', () => {
 	before(() => {
 		cy.login();
 	});
 
-	it('Create Material Request', () => {
+	it('Create Material Request of type Purchase', () => {
 		cy.new_doc('Material Request');
 
 		cy.url().should('include', '/app/material-request/new-material-request');

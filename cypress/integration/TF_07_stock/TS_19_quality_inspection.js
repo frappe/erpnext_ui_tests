@@ -33,7 +33,8 @@ context("Quality Inspection", () => {
 		//cy.click_toolbar_button('Submit');
 		//cy.click_modal_primary_button('Yes');
 		cy.on('window:alert',  (str) =>  {
-            expect(str).to.equal(`Inspection Required`)});
+			expect(str).to.equal(`Inspection Required`)
+		});
  		cy.get('.msgprint').invoke('text').should('contain', 'Row #1: Quality Inspection is required for Item Study Table');
 	});
 
@@ -49,15 +50,23 @@ context("Quality Inspection", () => {
 
 		//Setting Readings for QI
 		cy.grid_open_row('readings', 1);
+		cy.get_input('specification').should('have.value', 'Weight check');
+		cy.get_select('status').should('contain', 'Accepted');
 		cy.set_input('reading_1', '330');
 		cy.close_grid_edit_modal();
 		cy.grid_open_row('readings', 2);
+		cy.get_input('specification').should('have.value', 'Loading test with 80 kg force');
+		cy.get_select('status').should('contain', 'Accepted');
 		cy.set_input('reading_1', '310');
 		cy.close_grid_edit_modal();
 		cy.grid_open_row('readings', 3);
+		cy.get_input('specification').should('have.value', 'Bending strength');
+		cy.get_select('status').should('contain', 'Accepted');
 		cy.set_input('reading_1', '12000');
 		cy.close_grid_edit_modal();
 		cy.grid_open_row('readings', 4);
+		cy.get_input('specification').should('have.value', 'Compressive strength');
+		cy.get_select('status').should('contain', 'Accepted');
 		cy.set_input('reading_1', '7830');
 		cy.close_grid_edit_modal();
 		cy.save();
