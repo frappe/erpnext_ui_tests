@@ -13,7 +13,10 @@ context('Brand', () => {
 		cy.get_input('company').focus();
 		cy.get_input('default_warehouse').should('have.value', "Stores - WP"); //WP
 		cy.scrollTo('bottom', {ensureScrollable: false});
-		cy.get('.grid-footer-toolbar > .btn').scrollIntoView();
+		cy.wait(400);
+		cy.scrollTo('bottom', {ensureScrollable: false});
+		cy.findByText('ESC').scrollIntoView();
+		cy.get('.grid-footer-toolbar > .btn').scrollIntoView().should('be.visible');
 
 		cy.get_input('selling_cost_center').scrollIntoView().click();
 		cy.set_link('selling_cost_center', 'Main - WP'); //WP
