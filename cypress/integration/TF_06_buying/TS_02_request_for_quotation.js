@@ -16,7 +16,7 @@ context('Request for Quotation', () => {
 		cy.grid_add_row('suppliers');
 		cy.set_link('suppliers.supplier', 'Lisa Davis');
 
-		cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
+		cy.get_input('items.item_code').should('have.value', 'Apple Macbook Pro 16 inch');
 		cy.get_input('schedule_date').should('not.have.value', 0);
 		cy.get_input('qty').should('have.value', "10.000");
 		cy.get_input('uom').should('have.value', "Nos");
