@@ -186,6 +186,8 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.save();
 
 		cy.click_grid_action_button('reconciliation_tool_dt', 1);
+		cy.click_modal_close_button();
+		cy.click_grid_action_button('reconciliation_tool_dt', 1);
 		cy.get_select('action').should('contain','Match Against Voucher');
 		cy.get_input('payment_entry', 'checkbox').should('be.checked');
 		cy.click_grid_checkbox('payment_proposals', 0);
