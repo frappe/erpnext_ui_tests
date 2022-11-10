@@ -13,13 +13,13 @@ context('Brand', () => {
 		cy.get_input('company').focus();
 		cy.get_input('default_warehouse').should('have.value', "Stores - WP"); //WP
 		cy.scrollTo('bottom', {ensureScrollable: false});
-		cy.wait(100);
+		cy.wait(400);
 		cy.scrollTo('bottom', {ensureScrollable: false});
 		cy.findByText('ESC').scrollIntoView();
+		cy.get('.grid-footer-toolbar > .btn').scrollIntoView().should('be.visible');
 
 		cy.get_input('selling_cost_center').scrollIntoView().click();
 		cy.set_link('selling_cost_center', 'Main - WP'); //WP
-		//cy.get_input('income_account').click();
 		//cy.get_select('income_account').should('contain', 'Account Receivable')
 		//	.and('contain', 'Bank Accounts');
 		cy.set_link('income_account', 'Administrative Expenses - WP'); //WP

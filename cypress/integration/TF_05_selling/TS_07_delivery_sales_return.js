@@ -48,6 +48,7 @@ context('Delivery Return Check', () => {
 		cy.get_page_title().should('contain', 'Draft');
 		//cy.submit_doc('To Bill');
 		cy.click_toolbar_button('Submit');
+		cy.wait(200);
 		cy.click_modal_primary_button('Yes');
 		cy.get_page_title().should('contain', 'To Bill');
 

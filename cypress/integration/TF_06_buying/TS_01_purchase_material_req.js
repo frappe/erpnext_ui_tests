@@ -14,7 +14,7 @@ context('Material Request Creation', () => {
 
 		cy.set_link('set_warehouse', 'Stores - WP');
 
-		cy.set_link('items.item_code', 'Apple iPhone 13 Pro Max');
+		cy.set_link('items.item_code', 'Apple Macbook Pro 16 inch');
 		cy.get_input('qty').focus().clear();
 		cy.set_input('items.qty', 10);
 		cy.get_input('uom').should('have.value', "Nos");
@@ -23,7 +23,7 @@ context('Material Request Creation', () => {
 
 		cy.compare_document({
 			material_request_type: 'Purchase',
-			items: [{ item_code: "Apple iPhone 13 Pro Max", item_name: 'Apple iPhone 13 Pro Max'}],
+			items: [{ item_code: "Apple Macbook Pro 16 inch", item_name: 'Apple Macbook Pro 16 inch'}],
 		});
 
 		cy.submit_doc('Pending');
