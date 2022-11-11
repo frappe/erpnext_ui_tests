@@ -28,11 +28,11 @@ context('Internal Customer', () => {
 		cy.get_field('is_internal_customer', 'check').check();
 		cy.set_link('represents_company', 'Bernhardt Furnitures');
 		cy.grid_add_row('companies');
-		cy.grid_open_row('companies', '1');
-		cy.set_link('company', 'Wind Power LLC');
-		cy.close_grid_edit_modal();
+		// cy.grid_open_row('companies', '1');
+		// cy.set_link('company', 'Wind Power LLC');
+		// cy.close_grid_edit_modal();
 
-		cy.click_section('Currency and Price List');
+		//cy.click_section('Currency and Price List');
 		cy.set_link('default_currency', 'INR');
 		cy.set_link('default_price_list', 'Standard Price List : Buying & Selling');
 		cy.save();

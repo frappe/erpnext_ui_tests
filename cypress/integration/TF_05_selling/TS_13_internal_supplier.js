@@ -13,11 +13,11 @@ context('Inter Company Stock Transfer', () => {
 		cy.get_field('is_internal_supplier', 'check').check();
 		cy.set_link('represents_company', 'Wind Power LLC');
 		cy.grid_add_row('companies');
-		cy.grid_open_row('companies', '1');
-		cy.set_link('company', 'Bernhardt Furnitures');
+		// cy.grid_open_row('companies', '1');
+		// cy.set_link('company', 'Bernhardt Furnitures');
 
-		cy.click_section('Currency and Price List');
-		cy.close_grid_edit_modal();
+		//cy.click_section('Currency and Price List');
+		//cy.close_grid_edit_modal();
 		cy.set_link('default_currency', 'INR');
 		cy.set_link('default_price_list', 'Standard Price List : Buying & Selling');
 		cy.save();
