@@ -26,6 +26,7 @@ context('Inter Company Stock Transfer', () => {
 		cy.get_page_title().should('contain', 'Enabled');
 		cy.get_field('supplier_name', 'Data').should('have.value', 'Wind Power LLC');
 		cy.get_field('supplier_group', 'Link').should('have.value', 'Distributor');
+		cy.click_section('Internal Supplier');
 		cy.get_field('is_internal_supplier', 'checkbox').should('be.checked');
 		cy.location("pathname").should("not.be","/app/supplier/new");
 	});
