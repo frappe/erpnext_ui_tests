@@ -87,6 +87,7 @@ context('Partial Delivery Creation Check', () => {
 		cy.click_toolbar_button('Save');
 		cy.get_page_title().should('contain', 'Draft');
 		cy.click_toolbar_button('Submit');
+		cy.wait(200);
 		cy.click_modal_primary_button('Yes');
 		cy.get_page_title().should('contain', 'To Bill');
 
