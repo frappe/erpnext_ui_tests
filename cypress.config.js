@@ -13,7 +13,6 @@ const spec_patterns = {
 	"3": [
 		"./cypress/integration/TF_03_masters/*",
 		"./cypress/integration/TF_05_selling/*",
-		"./cypress/integration/TF_09_reports/*",
 	],
 	"4": [
 		"./cypress/integration/TF_03_masters/*",

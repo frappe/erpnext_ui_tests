@@ -14,7 +14,7 @@ context('Inter Company Stock Transfer', () => {
 		cy.set_link('represents_company', 'Wind Power LLC');
 		cy.grid_add_row('companies');
 		// cy.grid_open_row('companies', '1');
-		// cy.set_link('company', 'Bernhardt Furnitures');
+		// cy.set_link('company', 'Windermere Furnitures');
 
 		//cy.click_section('Currency and Price List');
 		//cy.close_grid_edit_modal();
