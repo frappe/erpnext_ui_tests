@@ -7,7 +7,7 @@ context('Sales Invoice Creation', () => {
 		cy.new_doc("Sales Invoice");
 		cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
 		cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
-		cy.set_link('customer', 'Bernhardt Furnitures');
+		cy.set_link('customer', 'Windermere Furnitures');
 		cy.get_input('due_date').should('not.have.value', 0);
 		cy.get_field('company').should('have.value', 'Wind Power LLC');
 		cy.grid_open_row('items', '1');
@@ -28,12 +28,12 @@ context('Sales Invoice Creation', () => {
 		// cy.click_section('More Information');
 		cy.findByRole("tab", { name: "More Info" }).click();
 		cy.click_section_head('more_information');
-		cy.get_read_only('represents_company').should('contain', 'Bernhardt Furnitures');
+		cy.get_read_only('represents_company').should('contain', 'Windermere Furnitures');
 
 		//Create Inter Company Purchase Invoice
 		cy.click_dropdown_action('Create', 'Inter Company Purchase Invoice')
 		cy.url().should('include', '/app/purchase-invoice/new-purchase-invoice');
-		cy.get_field('company').should('have.value','Bernhardt Furnitures');
+		cy.get_field('company').should('have.value','Windermere Furnitures');
 		cy.get_field('supplier').should('have.value', 'Wind Power LLC');
 		cy.click_section('Currency and Price List');
 		cy.open_section('Currency and Price List');
