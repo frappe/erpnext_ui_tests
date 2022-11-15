@@ -86,7 +86,7 @@ context('Multi Currency Accounting', () => {
 				cy.get_read_only('rounded_total').should('contain', rateInCurrency);
 
 				cy.click_tab('Payments');
-				cy.click_section_head('write_off_section');
+				//cy.click_section_head('write_off_section');  //should only be visible for pos
 
 				cy.findByRole("tab", { name: "More Info" }).click();
 				cy.findByText('Accounting Details').scrollIntoView().should('be.visible');
