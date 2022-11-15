@@ -11,7 +11,7 @@ context('Purchase Invoice from Purchase Order', () => {
 
 		cy.url().should('include', '/app/purchase-invoice/new-purchase-invoice');
 
-		cy.get_select('naming_series').should('have.value', 'PINV-.YY.-');
+		cy.get_select('naming_series').should('have.value', 'ACC-PINV-.YYYY.-');
 		cy.get_input('supplier').should('have.value', 'Lisa Davis');
 		cy.get_field('set_posting_time', 'Check').check();
 		cy.get_input('posting_date').should('not.have.value', 0);
