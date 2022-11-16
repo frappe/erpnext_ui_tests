@@ -103,7 +103,7 @@ context('Advance Payment Check', () => {
 		cy.wait(500);
 
 		cy.click_tab('Payments');
-		cy.click_section_head('write_off_section');
+		//cy.click_section_head('write_off_section');  //should only be visible for pos
 		//cy.get_section('Write Off');
 		cy.findByText('Advance Payments').scrollIntoView().should('be.visible');
 		cy.get_section('Advance Payments');
