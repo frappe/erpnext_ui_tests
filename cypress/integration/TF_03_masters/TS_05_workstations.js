@@ -17,6 +17,7 @@ context("Workstation", () => {
         });
 		cy.go_to_list('Workstation');
 		cy.list_open_row(name);
+		cy.findByRole("tab", { name: "Operating Costs" }).click();
 		cy.get_read_only('hour_rate').should('contain','800');
 		cy.get_page_title().should('contain', name);
 
