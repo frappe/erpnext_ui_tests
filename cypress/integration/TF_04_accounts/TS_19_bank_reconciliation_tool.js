@@ -186,10 +186,16 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.set_input('bank_statement_closing_balance', x);
 		//cy.set_input('bank_statement_closing_balance', '1500');
 		cy.save();
-		cy.wait(500);
+		cy.click_grid_action_button('reconciliation_tool_dt', 1);
+		cy.get_select('action').should('contain','Match Against Voucher');
+		cy.reload();
+		cy.wait(400);
 
 		cy.click_grid_action_button('reconciliation_tool_dt', 1);
 		cy.get_select('action').should('contain','Match Against Voucher');
+		cy.get_input('payment_entry', 'checkbox').should('be.checked');
+		cy.get_field('journal_entry', 'Check').check();
+		cy.get_field('journal_entry', 'Check').uncheck();
 		cy.get_input('payment_entry', 'checkbox').should('be.checked');
 		cy.click_grid_checkbox('payment_proposals', 0);
 		cy.click_modal_primary_button('Submit');
