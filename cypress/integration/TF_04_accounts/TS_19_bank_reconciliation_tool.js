@@ -179,10 +179,12 @@ context('Semi-automatic Bank Reconciliation via Bank Reconciliation Tool', () =>
 		cy.save();
 		cy.set_today('bank_statement_from_date');
 		cy.set_today('bank_statement_to_date');
-		cy.save();
+		//cy.save();
 		cy.get_input('bank_statement_closing_balance').scrollIntoView().should('be.visible');
 		cy.get_input('bank_statement_closing_balance').click();
-		cy.set_input('bank_statement_closing_balance', '1500');
+		let x = Math.floor((Math.random() * 10000) + 1);
+		cy.set_input('bank_statement_closing_balance', x);
+		//cy.set_input('bank_statement_closing_balance', '1500');
 		cy.save();
 		cy.wait(500);
 

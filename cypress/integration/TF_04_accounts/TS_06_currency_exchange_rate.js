@@ -39,10 +39,11 @@ context('Currency and Exchange Rate Check', () => {
 				.then(val => {
 					const exRate = val;
 					cy.log("exchange rate " + exRate);
-					const roundedExchRate = Number(exRate).toFixed(2);
+					const roundedExchRate = Number(exRate).toFixed(3);  //set 3 as system setting shows precision of 3
 
-					const rate = (110000/exRate);
-					const roundedRate = Number(rate).toFixed(2);
+					//const rate = (110000/exRate);
+					const rate = (110000/roundedExchRate);
+					const roundedRate = Number(rate).toFixed(3);
 					cy.log("rounded rate " + roundedRate);
 					//const formattedRate = new Intl.NumberFormat().format(roundedRate);
 					const formattedRate = Number(roundedRate).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
@@ -54,8 +55,8 @@ context('Currency and Exchange Rate Check', () => {
 					cy.get_input('rate').should('have.value', formattedRate);
 					cy.get_input('amount').should('have.value', formattedRate);
 
-					const total = (roundedRate * exRate);
-					const roundedTotal = Number(total).toFixed(2);
+					const total = (roundedRate * roundedExchRate);
+					const roundedTotal = Number(total).toFixed(3);
 					const formattedTotal = Number(roundedTotal).toFixed(2).replace(/(\d)(?=(\d{2})+\d\.)/g, '$1,');
 					//const formattedTotal = Intl.NumberFormat('en-IN').format(roundedTotal);
 					cy.log("total " + formattedTotal);
