@@ -14,7 +14,6 @@ context('Puchase Invoice Payment', () => {
 		cy.get_select('naming_series').should('have.value', 'ACC-PAY-.YYYY.-');
 		cy.get_select('payment_type').should('have.value', 'Pay');
 		cy.get_input('posting_date').should('not.have.value', 0);
-		cy.get_input('company').should('not.have.value', 0);
 
 		cy.get_input('party_type').should('have.value', 'Supplier');
 		cy.get_input('party').should('have.value', 'Lisa Davis');
