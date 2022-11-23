@@ -56,7 +56,7 @@ context('Sales Invoice Payment', () => {
 		cy.get_page_title().should('contain', 'Draft');
 		cy.submit_doc('Submitted');
 
-		cy.visit('app/purchase-invoice');
+		cy.visit('app/sales-invoice');
 		cy.click_listview_row_item(0);
 		cy.get_page_title().should('contain', 'Paid');
 	});
