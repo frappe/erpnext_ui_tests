@@ -7,22 +7,26 @@ context('Puchase Invoice Payment', () => {
 		cy.visit('app/purchase-invoice');
 		cy.click_listview_row_item(0);
 		cy.get_page_title().should('contain', 'Unpaid');
-		cy.click_dropdown_action('Create', 'Payment');
+		cy.url().then((url) => {
+			const invoice_name = url.split('/').pop();
 
-		cy.url().should('include', '/app/payment-entry/new-payment-entry');
+			cy.click_dropdown_action('Create', 'Payment');
+			cy.url().should('include', '/app/payment-entry/new-payment-entry');
 
-		cy.get_select('naming_series').should('have.value', 'ACC-PAY-.YYYY.-');
-		cy.get_select('payment_type').should('have.value', 'Pay');
-		cy.get_input('posting_date').should('not.have.value', 0);
+			cy.get_select('naming_series').should('have.value', 'ACC-PAY-.YYYY.-');
+			cy.get_select('payment_type').should('have.value', 'Pay');
+			cy.get_input('posting_date').should('not.have.value', 0);
 
-		cy.get_input('party_type').should('have.value', 'Supplier');
-		cy.get_input('party').should('have.value', 'Lisa Davis');
-		cy.get_input('party_name').should('have.value', 'Lisa Davis');
+			cy.get_input('party_type').should('have.value', 'Supplier');
+			cy.get_input('party').should('have.value', 'Lisa Davis');
+			cy.get_input('party_name').should('have.value', 'Lisa Davis');
 
-		cy.get_input('paid_amount').should('have.value', '2,50,000.00');
+			cy.get_input('paid_amount').should('have.value', '2,50,000.00');
 
-		cy.get_input('references.reference_doctype').should('have.value', 'Purchase Invoice');
-		cy.get_input('allocated_amount').should('have.value', '2,50,000.000');
+			cy.get_input('references.reference_doctype').should('have.value', 'Purchase Invoice');
+			cy.get_input('allocated_amount').should('have.value', '2,50,000.000');
+			cy.get_input('reference_name').should('have.value', invoice_name);
+		});
 
 		cy.get_read_only('difference_amount')
 			.invoke('text')
