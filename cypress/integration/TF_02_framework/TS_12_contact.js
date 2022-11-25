@@ -9,11 +9,11 @@ context('Contact', () => {
 		cy.go_to_list('Contact');
 		cy.location('pathname').should('eq', '/app/contact');
 		cy.click_listview_primary_button('Add Contact');
-		cy.click_listview_primary_button('Save');
-		cy.get_open_dialog().should('contain', 'Missing Fields')
-			.and('contain', 'Mandatory fields required in Contact');
-		cy.get('.msgprint').find('li').should('contain', 'First Name');
-		cy.reload();
+		// cy.click_listview_primary_button('Save');
+		// cy.get_open_dialog().should('contain', 'Missing Fields')
+		// 	.and('contain', 'Mandatory fields required in Contact');
+		// cy.get('.msgprint').find('li').should('contain', 'First Name');
+		// cy.reload();
 		cy.set_input('first_name', 'Jenny Holmes');
 		cy.get_select('status').should('contain', 'Passive')
 			.and('contain', 'Open')

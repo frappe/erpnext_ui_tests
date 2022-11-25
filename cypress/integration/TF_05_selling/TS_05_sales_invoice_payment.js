@@ -16,19 +16,24 @@ context('Sales Invoice Payment', () => {
 		cy.visit('app/sales-invoice');
 		cy.click_listview_row_item(0);
 		cy.get_page_title().should('contain', 'Unpaid');
-		cy.click_dropdown_action('Create', 'Payment');
-		cy.url().should('include', '/app/payment-entry/new-payment-entry');
+		cy.url().then((url) => {
+			const invoice_name = url.split('/').pop();
 
-		cy.get_select('naming_series').should('have.value', 'ACC-PAY-.YYYY.-');
-		cy.get_select('payment_type').should('have.value', 'Receive');
-		cy.get_input('posting_date').should('have.value', today_date);
+			cy.click_dropdown_action('Create', 'Payment');
+			cy.url().should('include', '/app/payment-entry/new-payment-entry');
 
-		cy.get_input('party_type').should('have.value', 'Customer');
-		cy.get_input('party').should('have.value', 'William Harris');
-		cy.get_input('paid_amount').should('have.value', '1,10,000.00');
+			cy.get_select('naming_series').should('have.value', 'ACC-PAY-.YYYY.-');
+			cy.get_select('payment_type').should('have.value', 'Receive');
+			cy.get_input('posting_date').should('have.value', today_date);
 
-		cy.get_input('references.reference_doctype').should('have.value', 'Sales Invoice');
-		cy.get_input('allocated_amount').should('have.value', '1,10,000.000');
+			cy.get_input('party_type').should('have.value', 'Customer');
+			cy.get_input('party').should('have.value', 'William Harris');
+			cy.get_input('paid_amount').should('have.value', '1,10,000.00');
+
+			cy.get_input('references.reference_doctype').should('have.value', 'Sales Invoice');
+			cy.get_input('allocated_amount').should('have.value', '1,10,000.000');
+			cy.get_input('reference_name').should('have.value', invoice_name);
+		});
 
 		cy.get_read_only('difference_amount')
 			.invoke('text')
@@ -50,5 +55,9 @@ context('Sales Invoice Payment', () => {
 		cy.save();
 		cy.get_page_title().should('contain', 'Draft');
 		cy.submit_doc('Submitted');
+
+		cy.visit('app/sales-invoice');
+		cy.click_listview_row_item(0);
+		cy.get_page_title().should('contain', 'Paid');
 	});
 });
