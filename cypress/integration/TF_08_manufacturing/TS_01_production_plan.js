@@ -36,7 +36,8 @@ context('Production Plan', () => {
 		cy.get_field('ignore_existing_ordered_qty', 'checkbox').check();
 		cy.get_field('ignore_existing_ordered_qty', 'checkbox').should('be.checked');
 		cy.set_link('for_warehouse', 'Work in Progress - WP');
-		cy.findByRole('button', {name: 'Get Raw Materials For Production'}).click();
+		//cy.findByRole('button', {name: 'Get Raw Materials For Production'}).click();
+		cy.findByRole('button', {name: 'Get Raw Materials for Purchase'}).click();
 		cy.save();
 		cy.wait(500);
 		cy.submit_doc('Not Started');
