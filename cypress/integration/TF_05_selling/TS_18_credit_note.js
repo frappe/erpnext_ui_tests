@@ -27,9 +27,17 @@ context('Cretid Note Creation', () => {
 
 			cy.visit('app/sales-invoice/'+ d.name);
 			cy.click_dropdown_action('Create', 'Return / Credit Note');
+			cy.url().should('include', '/app/sales-invoice/new-sales-invoice');
+			cy.get_select('naming_series').should('have.value', 'ACC-SINV-.YYYY.-');
+			cy.get_input('customer').should('have.value', 'William Harris');
 			cy.get_input('is_return', 'checkbox').should('be.checked');
-			cy.set_today('due_date');
-			cy.click_modal_close_button();
+			cy.get_read_only('return_against').should('contain', d.name);
+
+			cy.get_field('set_posting_time', 'Check').check();
+			cy.get_input('posting_date').should('not.have.value', 0);
+			// cy.set_today('due_date');
+			// cy.wait(400);
+			// cy.click_modal_close_button();
 
 			cy.get_input('items.item_code').should('have.value', 'Apple iPhone 13 Pro Max');
 			cy.get_input('qty').should('have.value', "-1.000");
