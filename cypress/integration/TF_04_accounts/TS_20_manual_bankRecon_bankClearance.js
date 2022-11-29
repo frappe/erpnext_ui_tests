@@ -84,7 +84,8 @@ context('Manual Bank Reconciliation via Bank Clearance', () => {
 		cy.get_input('from_date').should('not.have.value', 0);
 		cy.get_input('to_date').should('not.have.value', 0);
 		cy.set_link('bank_account', 'Kotak Mahindra 123 -');
-		cy.findByRole('button', {name: 'Get Payment Entries'}).click();
+		//cy.findByRole('button', {name: 'Get Payment Entries'}).click();
+		cy.click_toolbar_button('Get Payment Entries');
 
 		cy.get_input('payment_entries.amount').should('have.value', "₹ 15,000.00 Dr");
 		cy.get_input('cheque_number').should('have.value', "Ref-1");
